@@ -6,27 +6,35 @@ Okay, so now that my rant is out of the way, let's actually do some mathematics.
 
 All of integration theory ultimately boils down to measure theory.  The definition of the integral itself is relatively easy.  In fact, the definition of abstract measure spaces is even easier.  There's really no question that writing down the definition of the lebesgue integral is \emph{significantly} easier than that of the riemann integral.  What is a bit tricky, however, is constructing specific measures.  In our case, we will primarily be concerned with constructing lebesgue measure (on $\R ^d$), and this is really the only part that is a bit tricky.  Before we get there though, we will present the theory of measure spaces, and then get to lebesgue measure in the next section.
 
-The intuition behind measure is actually quite easy---a measure is just an axiomatization of our intuition about notion of things like length, area, and volume.  
-
-\begin{dfn}[Measure]\label{measure}
-Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{measure}\index{measure} on $X$ is a function $\meas :2^X\rightarrow [0,\infty ]$ for which there exists a uniform base $\widetilde{\mathcal{B}}$ of borel covers of $X$ such that
+The intuition behind measure is actually quite easy---a measure is just an axiomatization of our intuition about notion of things like length, area, and volume.  Before we define a measure, it will be convenient to introduce a couple of terms.
+\begin{dfn}
+Let $X$ be a set, let $\meas :2^X\rightarrow [0,\infty ]$, and let $\mathcal{M}\subseteq 2^X$.  
 \begin{enumerate}
-\item \label{Measure.i}$\m (\emptyset )=0$;
-\item \label{Measure.ii}for every $\mathcal{B}\in \widetilde{\mathcal{B}}$, every element of $\mathcal{B}$ has the same measure, which we denote by $\meas (\mathcal{B})$\index[notation]{$\meas (\mathcal{B})$};
-\item (Subadditivity)\index{Subadditivity}\label{Measure.iii} for $\{ M_m:m\in \N \} \subseteq 2^X$,
+\item If $\mathcal{U}$ is a cover of $X$ on which $\meas$ is constant, then we say that $\mathcal{U}$ is \emph{uniformly-measurable}\index{Uniformly-measurable cover} with respect to $\meas$ and we denote by $\meas (\mathcal{U})$ its constant value on $\mathcal{U}$;
+\item $\meas$ is \emph{subadditive}\index{Subadditive} on $\mathcal{M}$ iff for $\{ M_m:m\in \N \} \subseteq \mathcal{M}$ we have
 \begin{equation}
-\m \left( \bigcup _{m\in \N}M_m\right) \leq \sum _{m\in \N}\m (M_m),
+\meas \left( \bigcup _{m\in \N}M_m\right) \leq \sum _{m\in \N}\meas (M_m);
 \end{equation}
-and furthermore, we have equality if the sets are disjoint and borel.
+\item $\meas$ is \emph{additive}\index{Additive (measure)} on $\mathcal{M}$ iff for $\{ M_m:m\in \N \} \subseteq \mathcal{M}$ a \emph{disjoint} collection we have
+\begin{equation}
+\meas \left( \bigcup _{m\in \N}M_m\right) =\sum _{m\in \N}\meas (M_m).
+\end{equation}
+\end{enumerate}
+$\meas$ is simply just subadditive (resp.~additive) if it is subadditive (resp.~additive) on all of $X$.
+\end{dfn}
+\begin{dfn}[Measure]\label{Measure}
+Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{measure}\index{measure} on $X$ is a function $\meas :2^X\rightarrow [0,\infty ]$ for which there exists a uniform base $\widetilde{\mathcal{B}}$ of $X$ consisting of uniformly-measurable covers (with respect to $\meas$) such that
+\begin{enumerate}
+\item \label{Measure.i}$\meas (\emptyset )=0$;
+\item (Nondecreasing)\label{Measure.Monotonicity} $\meas :\coord{2^X,\subseteq}\rightarrow [0,\infty ]$ is nondecreasing;\footnote{Concretely, this means that $\meas (S)\leq \meas (T)$ if $S\subseteq T$.}
+\item (Subadditivity) $\meas$ is subadditive;
+\item (Additivity on uniformly-measurable covers) $\meas$ is additive on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
 \end{enumerate}
 \begin{rmk}
-If a uniform base has the property in \ref{Measure.ii}, then we shall refer to it as a \emph{uniformly-measurable base}\index{Uniformly-measurable base} and it's elements as \emph{uniformly-measurable covers}\index{Uniformly-measurable covers}.
+Think about what having a uniform base of uniformly-measurable covers means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then this is saying that every $\varepsilon$-ball has to have the same measure.
 \end{rmk}
 \begin{rmk}
-Think about what \ref{Measure.ii} means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then \ref{Measure.ii} is saying that every $\varepsilon$-ball has to have the same measure.
-\end{rmk}
-\begin{rmk}
-Note that you definitely do not want to require \ref{Measure.ii} for \emph{all} uniform covers.  For example, in a metric space, by upward-closedness the collection of all $\varepsilon$-balls together with a single $2\varepsilon$-ball will also be a uniform-cover---we definitely do not want to require that a $2\varepsilon$ ball has the same measure as an $\varepsilon$-ball.
+Note that you definitely do not want to require \emph{every} uniform cover be uniformly-measurable.  For example, in a metric space, by upward-closedness the collection of all $\varepsilon$-balls together with a single $2\varepsilon$-ball will also be a uniform-cover---we definitely do not want to require that a $2\varepsilon$ ball has the same measure as an $\varepsilon$-ball.
 \end{rmk}
 \begin{rmk}
 Note that we allow the measure of sets to be infinite.  This is incredibly important---for example, we will want $\meas (\R )=\infty$ (for lebesgue measure anyways).
@@ -35,7 +43,7 @@ Note that we allow the measure of sets to be infinite.  This is incredibly impor
 As a consequence of this, we needn't worry about convergence in the third axiom.  As a matter of fact, we definitely want to allow this sum to diverge---think about what the measure of $\bigcup _{m\in \Z}(m,m+1)$ should be.
 \end{rmk}
 \begin{rmk}
-Warning:  This is completely nonstandard.  I have never seen this definition before.  Keep this in mind when consulting other references.
+Warning:  This is completely nonstandard.  I have never seen this definition before.  Keep this in mind when consulting other references.  That being said, a function that satisfies the first, second, and third axioms is usually referred to as an \emph{outer-measure}\index{Outer-measure}.
 \end{rmk}
 \end{dfn}
 \begin{displayquote}
@@ -56,49 +64,53 @@ This is actually incredibly important, as we shall see that sums are just integr
 \end{exm}
 Before we get to any examples more interesting than this, we will first have to develop a bit of theory.
 \begin{prp}
-Let $\meas$ be a measure on a uniform space $X$ and let $S\subseteq T\subseteq X$ be borel.  Then, $\meas (S)\leq \meas (T)$.
+Let $\meas$ be a measure on a uniform space $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}$ and let $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$.  Then, if $\mathcal{B}\preceq \mathcal{C}$ (and in particular if $\mathcal{B}\llcurly \mathcal{C}$), then $\meas (\mathcal{B})\leq \meas (\mathcal{C})$.
 \begin{proof}
-We have that $T=S\cup (T\setminus S)$, and so as all of these sets are borel, we have
+Let $B\in \mathcal{B}$.  Then, there is some $C\in \mathcal{C}$ be such that $B\subseteq C$.  Thus, we have
 \begin{equation}
-\meas (T)=\meas (S)+\meas (T\setminus S)\geq \meas (S).
+\meas (\mathcal{B})\coloneqq \meas (B)\leq \meas (C)\eqqcolon \meas (\mathcal{C}).
 \end{equation}
 \end{proof}
 \end{prp}
-\begin{prp}
-Let $\meas$ be a measure on a uniform space $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}$ and let $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$.  Then, if $\mathcal{B}\preceq \mathcal{C}$ (and in particular if $\mathcal{B}\llcurly \mathcal{C}$), then $\meas (\mathcal{B})\leq \meas (\mathcal{C})$.
-\begin{proof}
-Let $B\in \mathcal{B}$.  Then, there is some $C\in \mathcal{C}$ be such that $B\subseteq C$.  Then, $B$ and $C$ are both borel by definition (of a uniformly-measurable base), and so by the previous proposition, we have $\meas (\mathcal{B})\coloneqq \meas (B)\leq \meas (C)\eqqcolon \meas (\mathcal{C})$.
-\end{proof}
-\end{prp}
 Our first relatively significant result, which we shall use to define lebesgue measure on $\R ^d$, is that, to define a measure, it suffices to define a measure on just the sets in a given uniform base.
-\begin{prp}
+\begin{thm}[Carath\'{e}odory's Extension Theorem]\label{CaratheodorysExtensionTheorem}
 Let $X$ be a uniform space with uniform base $\widetilde{\mathcal{B}}$ and let $\meas :\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}\rightarrow [0,\infty ]$ be such that
 \begin{enumerate}
-\item $\meas (\emptyset )=0$; and
-\item for every $\mathcal{B}\in \widetilde{\mathcal{B}}$, every element of $\mathcal{B}$ has the same measure.
+\item $\meas (\emptyset )=0$;
+\item every $\mathcal{B}\in \widetilde{\mathcal{B}}$ is uniformly-measurable with respect to $\meas$; and
+\item $\meas$ is additive on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
 \end{enumerate}
-Then, there exists a unique measure on $X$ which agrees with $\meas$ for elements of $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
+Then, there exists a unique measure on $X$ which agrees with $\meas$ on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.  Furthermore, $\meas$ satisfies the property that, for $S,T\subseteq X$, if there exists a cover $\mathcal{B}\in \widetilde{\mathcal{B}}$ of which no element intersects both $S$ and $T$, then
+\begin{equation}
+\meas (S\cup T)=\meas (S)+\meas (T).
+\end{equation}
 \begin{rmk}
 These are just verbatim the two three axioms of a measure.  The point is that, to define a measure, it suffices to define them on sets coming from a given uniform base.  Furthermore, you also do not have to check subadditivity of your original definition.
+\end{rmk}
+\begin{rmk}
+Once again, to understand the last ``Furthermore, \textellipsis'', think about what this means for metric spaces.  This says that there is some $\varepsilon >0$ so that no $\varepsilon$-ball intersects both sets.  Thus, in this sense, the two sets are at least $\varepsilon >0$ distance apart.  Thus, the general statement is still to be interpreted as the statement that the two sets are `positively-separated'.
 \end{rmk}
 \begin{proof}
 \Step{Construct the measure}
 Let $S\subseteq X$ and define
 \begin{equation}
-\meas _{\mathcal{B}}(S)\coloneqq \inf \left\{ \sum _{m\in \N}\meas (B_m):S\subseteq \bigcup _{m\in \N}B_m\in \mathcal{B}\text{.}\right\} .
+\begin{split}
+\meas _{\mathcal{B}}(S) & \coloneqq \inf \left\{ \sum _{m\in \N}\meas (B_m):\right. \\
+& \qquad \left. S\subseteq \bigcup _{m\in \N}B_m\text{ and  each }B_m\in \mathcal{C}\text{ for some }\mathcal{C}\in \widetilde{\mathcal{B}}\text{ such that }\mathcal{C}\llcurly \mathcal{B}\right\} .
+\end{split}
 \end{equation}
 
 The statement that $\widetilde{\mathcal{B}}$ is a uniform base just means that it is downward-directed with respect to star-refinement.  In other words, it means that it is a \emph{directed set} with respect to \emph{reverse} star-refinement.  Thus,
 \begin{equation}
 \widetilde{\mathcal{B}}\ni \mathcal{B}\mapsto \meas _{\mathcal{B}}(S)\in [0,\infty ]
 \end{equation}
-is a net.  If it is always $\infty$, then obviously it converges to $\infty$.\footnote{$[0,\infty ]$ is a totally-ordered set and is equipped with the order topology, so that convergence to $\infty$ does make sense.}  Otherwise, it is eventually contained in $[0,\infty )\subseteq \R$, and we can apply the \nameref{MonotoneConvergenceTheorem} (\cref{MonotoneConvergenceTheorem})---it is bounded below by $0$ and nonicreasing, and therefore converges.  Thus, we define
+is a net.  Furthermore, it is nondecreasing, because as $\mathcal{B}$ becomes smaller, the set you are taking the infimum over becomes smaller (there will be less covers that star-refine it, and so the infimum itself becomes bigger.  Thus, by the \nameref{MonotoneConvergenceTheorem} (\cref{MonotoneConvergenceTheorem}),\footnote{If it is bounded above, it converges in $\R$.  It it's not bounded above, it converges to $\infty$.}  we can define
 \begin{equation}
 \breve{\meas}(S)\coloneqq \lim _{\mathcal{B}}\meas _{\mathcal{B}}(S).
 \end{equation}
 (The breve is there to distinguish it from what we started with.  Once we show they agree, we will drop it.)
 
 \Step{Show that this agrees with what we started with}
-Let $B\in \mathcal{B}$.  We must show that $\breve{\meas (B)}=\meas(\mathcal{B})$.
+Let $B\in \mathcal{B}$.  We must show that $\breve{\meas (B)}=\meas(\mathcal{B})$.  First of all, $B\in \mathcal{B}$ is a cover of itself, and therefore $\meas _{\mathcal{B}}(B)\leq \meas (B)$.
 \end{proof}
-\end{prp}
+\end{thm}
