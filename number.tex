@@ -1,0 +1,981 @@
+What is a number?  Of course, the answer is that the word ``number'' means whatever we declare it to mean, and indeed, what a mathematician means when he says the word ``number'' will vary from context to context.  There is no single universal type of number that will work in all contexts, so instead of coming up with a single answer to this question, we will instead define and develop several different `number systems', those being the natural numbers, the integers, the rational numbers, and the real numbers.  Being the most fundamental, we start with the natural numbers.
+
+\section{Cardinality of sets and the natural numbers}
+
+The motivation for introducing the natural numbers is that these are the things that allow us to \emph{count} things.  But what does it mean to count?  We will make sense of this by making sense of the notion of the \emph{cardinality} of a set, the cardinality being a sort of measure of how many elements the set contains.
+
+\subsection{The natural numbers as a set}
+
+The first step in defining the cardinality of sets is being able to decide when two sets have the same number of elements.  So, suppose we are given two sets $X$ and $Y$ and that we would like to determine whether $X$ and $Y$ have the same number of elements.  How would you do this?
+
+Intuitively, you could start by trying to label all the elements in $Y$ by elements of $X$, without repeating labels.  If either (i) you ran out of labels before you finished labeling all elements in $Y$ or (ii) you were forced to use a label more than once, then you could deduce that $X$ and $Y$ did \emph{not} have the same number of elements.  To make this precise, we think of this labeling as a function from $X$ to $Y$.  Then, the first case corresponds to this labeling function not being surjective and the second case corresponds to this labeling function not being injective.
+
+The more precise intuition is then that the two sets $X$ and $Y$ have the same number of elements, that is, the same cardinality, iff there is a bijection $f:X\rightarrow Y$ between them:  that $f$ is an injection says that we don't use a label more than once (or equivalently that $Y$ has at least as many elements as $X$) and that $f$ is a surjection says that we label everything at least once (or equivalently that $X$ has at least as many elements as $Y$).  In other words, according to \cref{exr2.1.3}, two sets should have the same cardinality iff they are isomorphic in $\Set$.\footnote{$\Set$ is the category of sets.  If you are reading this linearly and you see something you don't recognize, chances are it's in the appendix.  Use the index and index of notation at the end of the notes to find exactly where.}
+\begin{dfn}[Equinumerous]
+Let $X$ and $Y$ be sets.  Then, $X$ and $Y$ are \emph{equinumerous}\index{Equinumerous} iff $X\cong _{\Set}Y$.
+\end{dfn}
+
+So we've determined what it means for two sets to have the same cardinality, but what actually \emph{is} a cardinality?  The trick is to identify a cardinal with the collection of all sets which have that cardinality.
+\begin{dfn}[Cardinal number]\label{dfn1.1.2}
+A \emph{cardinal number}\index{Cardinal number} is an element of
+\begin{equation}
+\K \coloneqq \Set _0/\cong _{\Set}\coloneqq \left\{ [X]_{\cong _{\Set}}:X\in \Set _0\right\} .
+\end{equation}
+\begin{rmk}
+In other words, a cardinal is an equivalence class of sets, the equivalence relation being equinumerosity.\footnote{Recall that the relation of isomorphism is an equivalence relation in every category.  See \cref{exrA.2.11}.}  Furthermore, for $X$ a set, we write $\abs{X}\coloneqq [X]_{\cong _{\Set}}$\index[notation]{$\abs{X}$}.
+\end{rmk}
+\end{dfn}
+
+The idea then is that the natural numbers are precisely those cardinals which are finite.  But what does it mean to be finite?  This is actually a bit tricky.
+
+Obviously we don't have a precise definition yet, but everyone has an intuitive idea of what it means to be infinite.  Consider an infinite set $X$.  Now remove one element $x_0\in X$ to form the set $U\coloneqq X\setminus \{ x_0\}$.  For any reasonable definition of ``infinite'', removing a single element from an infinite set should not change the fact that it is infinite, and so $U$ should still be infinite.  In fact, more should be true.  Not only should $U$ still be infinite, but it should still have the same cardinality as $X$.\footnote{We will see in the next chapter that there are infinite sets which are not of the same cardinality.  That is, in this sense, there is more than one type of infinity.}  It is this idea that we take as the defining property of being infinite.
+\begin{dfn}[Infinite]
+Let $X$ be a set.  Then, $X$ is \emph{infinite}\index{Infinite} iff there is a bijection from $X$ to a \emph{proper} subset of $X$.
+\end{dfn}
+\begin{dfn}[Finite]
+Let $X$ be a set.  Then, $X$ is \emph{finite}\index{Finite} iff it is not infinite.
+\end{dfn}
+And now finally:
+\begin{dfn}[Natural numbers]
+The \emph{natural numbers}\index{Natural numbers}, $\N$, are defined as
+\begin{equation}
+\N \index[notation]{$\N$}\coloneqq \left\{ \abs{X}:X\in \Set _0\text{ is finite.}\right\} .
+\end{equation}
+In words, the natural numbers are precisely the cardinals of finite sets.
+\begin{rmk}
+Some people take the natural numbers to not include $0$.  This is a bit silly for a couple of reasons.  First of all, if you think of the natural numbers as cardinals, as we are doing here, then $0$ has to be a natural number as it is the cardinality of the empty set.  Furthermore, as we shall see in the next section, it makes the algebraic structure of $\N$ slightly nicer because $0$ acts as an additive identity.
+\end{rmk}
+\end{dfn}
+
+\subsection{The natural numbers as an integral crig}
+
+Great!  We now know what the natural numbers are.  Our next objective then is to be able to add and multiply natural numbers.  In fact, we will define not only what it means to add and multiply natural numbers, but instead we will define what it means to add and multiply \emph{any} cardinal numbers.  Then, we will just need to check that the sum and product of two finite cardinals is again finite, so the the operations restricted to $\N$ are closed.
+
+\begin{dfn}[Addition and multiplication]
+Let $m,n\in \N$ and let $M$ and $N$ be sets such that $m=\abs{M}$ and $n=\abs{N}$.  Then, we define
+\begin{equation}
+m+n\coloneqq \abs{M\sqcup N}\text{ and }mn\coloneqq \abs{M\times N}.
+\end{equation}
+\begin{rmk}
+Recall that $\abs{M}$ means the equivalence class of the set $M$ under the equivalence relation of equinumerosity (see the definition of a cardinal, \cref{dfn1.1.2}).  Whenever we define an operation on equivalence classes that makes reference to a specific representative of that equivalence class, we must check that our definition does not depend on this representative.  For example, perhaps if I take a different set $M'$ with $\abs{M'}=\abs{M}$, it will turn out that $\abs{M'\sqcup N}\neq \abs{M\sqcup N}$.  If this happens, then our definition doesn't make sense.  Of course, it doesn't happen, but we need to check that it doesn't happen.  This is what it means to be \emph{well-defined}\index{Well-defined}.
+\end{rmk}
+\begin{prp}
+Addition and multiplication are well-defined.
+\begin{proof}
+Let $M_1,M_2,N_1,N_2$ be sets with $\abs{M_1}=\abs{M_2}$ and $\abs{N_1}=\abs{N_2}$.  By definition, this means that there are bijections $f:M_1\rightarrow M_2$ and $g:N_1\rightarrow N_2$.  We would like to show that $\abs{M_1\sqcup N_1}=\abs{M_2\sqcup N_2}$.  To show this, by definition, we need to construction a bijection from $M_1\sqcup N_1$ to $M_2\sqcup N_2$.  We do this as follows.  Define $h:M_1\sqcup N_1\rightarrow M_2\sqcup N_2$ by
+\begin{equation}
+h(x)\coloneqq \begin{cases}f(x) & \text{if }x\in M_1 \\ g(x) & \text{if }x\in N_1\end{cases}.
+\end{equation}
+
+We now check that $h$ is a bijection.  Suppose that $h(x_1)=h(x_2)$.  This single element must be contained in either $M_2$ or $N_2$, so without loss of generality suppose that $h(x_1)=h(x_2)\in M_2$.  Then, from the definition of $h$, we have that $f(x_1)=h(x_1)=h(x_2)=f(x_2)$, and so because $f$ is injective, we have that $x_1=x_2$.  Thus, $h$ is injective.  To show that $h$ is surjective, let $y\in M_2\sqcup N_2$.  Without loss of generality, suppose that $y\in M_2$.  Then, because $f$ is surjective, there is some $x\in M_1$ such that $f(x)=y$, so that $h(x)=f(x)=y$.  Thus, $h$ is surjective, and hence bijective.
+
+Thus, we have shown that
+\begin{equation}
+\abs{M_1\sqcup N_1}=\abs{M_2\sqcup N_2},
+\end{equation}
+so that addition is well-defined.
+
+\begin{exr}
+Complete the proof by showing that multiplication is well-defined.
+\end{exr}
+\end{proof}
+\end{prp}
+\end{dfn}
+
+\begin{dfn}[$0$ and $1$]
+Define
+\begin{equation}
+0\coloneqq \abs{\emptyset},\qquad 1\coloneqq \abs{\{ \emptyset \}}\in \N .
+\end{equation}
+In words, $0$ is the cardinality of the empty set and $1$ is the cardinality of the set that contains the empty set and only the empty set.
+\end{dfn}
+\begin{prp}\label{prpA.1.16}
+\begin{savenotes}
+$(\K ,+,\cdot ,0,1)$ is an integral crig.\footnote{Of course, $\K$ is not actually a set, but we don't care about this.  See the remark in \cref{sbsA.1.1} \nameref{sbsA.1.1}.}
+\begin{proof}
+We simply need to verify the properties of the definition of a crig, \cref{dfnA.1.33} (and also check that it is integral, \cref{dfnA.1.69}).  We first check that $+$ is associative, so let $m,n,o\in \N$ and write $m=\abs{M},n=\abs{N},o=\abs{O}$ for sets $M$, $N$, and $O$.  Then,
+\begin{equation}
+\begin{split}
+(m+n)+o & =\left( \abs{M}+\abs{N}\right) +\abs{O}=\abs{M\sqcup N}+\abs{O}=\abs{(M\sqcup N)\sqcup O}=\abs{M\sqcup (N\sqcup O)} \\
+& =m+(n+o).
+\end{split}
+\end{equation}
+A similar argument shows that additive is commutative.  As for the additive identity, we have
+\begin{equation}
+m+0=\abs{M\sqcup \emptyset}=\abs{M}=m=0+m.
+\end{equation}
+Thus, $(\K ,+)$ is a commutative monoid.
+
+\begin{exr}
+Check that $(\K ,\cdot )$ is a commutative semigroup.
+\end{exr}
+\begin{exr}
+To show that $\K$ is a crig, there is one final property to check.  What is it?  Check it.
+\end{exr}
+
+To show that $\K$ is integral, suppose that $mn=0$.  Then, there must be a bijection between $M\times N$ and the empty-set, which implies that $M\times N$ is empty.  But if neither $M$ nor $N$ is empty, then $M\times N$ will be nonempty.  Thus, we must have that either $M$ or $N$ is empty, or equivalently, that either $m=0$ or $n=0$, so that $\K$ is integral.
+\end{proof}
+\end{savenotes}
+\end{prp}
+
+Now we must check that addition and multiplication restrict to operations on the collection of finitely cardinalities, namely, $\N$.  This amounts to showing that the sum and product of finite cardinalities are both finite.
+\begin{prp}
+If $M,N$ are finite sets, then $M\sqcup N$ and $M\times N$ are finite sets.
+\begin{proof}
+We first show that $M\sqcup \{ \ast \}$ is finite if $M$ is.  We proceed by contradiction:  suppose there is a proper subset $S\subset M\sqcup \{ \ast \}$ and a bijection $f:M\sqcup \{ \ast \} \rightarrow S$.  If $M$ is empty, then $\{ \ast \}$ is finite because its only proper subset is the empty set to which there can be no bijection (in fact, there is \emph{no} function from a nonempty set to the empty set; see \cref{exrA.1.23}).  Thus, we may without loss of generality assume that $M$ is nonempty.  So, let $x_0\in M$.  We know that either $S$ is of the form $S=M'$ for $M'\subseteq M$ or $S=M'\sqcup \{ \ast \}$ for $M'\subset M$.  By relabeling $\ast$ as $x_0$ and $x_0$ as $\ast$, we may as well assume that we are in the latter case, so that we have a bijection $f:M\sqcup \{ \ast \} \rightarrow M'\sqcup \{ \ast \}$ for $M'\subset M$.  (Forget the label $x_0$; we will want that notation later to refer to something else.)  If $\ast$ maps to $\ast$ under $f$, then the restriction of $f$ to $M$ yields a bijection from $M$ to $M'$ showing that $M$ is infinite:  a contradiction.  Thus, we may as well assume that $f(x_0 )=\ast$ for $x_0\in M$.  Let $g:M\sqcup \{ \ast \} \rightarrow M\sqcup \{ \ast \}$ be any bijection which sends $\ast$ to $x_0$ (such a bijection exists by \cref{exrA.1.27}).  Then, $f\circ g:M\sqcup \{ \ast \} \rightarrow M'\sqcup \{ \ast \}$ is a bijection such that the image of $M$ is $M'$.  Thus, the restriction of $f\circ g$ to $M$ yields a bijection of $M$ onto a proper subset, showing that $M$ is infinite:  a contradiction.  Thus, $M\sqcup \{ \ast \}$ is finite.
+
+Applying this result inductively shows that $M\sqcup N$ is finite if both $M$ and $N$ are.
+
+To see that $M\times N$ is finite, think of the product as (\cref{exrA.1.28})
+\begin{equation}
+M\times N=\sqcup _{y\in N}M.
+\end{equation}
+That $M\times N$ is finite now follows inductively from the fact that the disjoint union of two finite sets is finite.
+\end{proof}
+\end{prp}
+\begin{crl}
+$(\N ,+,\cdot ,0,1)$ is an integral crig.
+\end{crl}
+
+\subsection{The natural numbers as a well-ordered set}
+
+For the moment, we will set aside the algebraic structure we have just defined on $\N$ and equip $\N$ with a preorder (which turns out to be a well-order).  Then, in the next subsection, we will show that these two structures are compatible in a way that makes $\N$ into a well-ordered integral crig.  Once again, well will in fact define the preorder on all of $\K$ and show that it is a well-order on $\K$.  It will then follow automatically that it restricts to a well-order on $\N$.
+
+\begin{dfn}\label{dfn1.1.23}
+Let $m,n\in \K$ and let $M$ and $N$ be sets such that $m=\abs{M}$ and $n=\abs{N}$.  Then, we define $m\leq n$\index[notation]{$m\leq n$} iff there is an injective map from $M$ to $N$.
+\begin{exr}
+Check that $\leq$ is well-defined.
+\end{exr}
+\end{dfn}
+\begin{prp}
+$(\K ,\leq )$ is a preordered set.
+\begin{proof}
+Recall that being a preorder just means that $\leq$ is reflexive and transitive (see \cref{dfnA.1.19}).
+
+Let $m,n,o\in \N$ and let $M,N,O$ be sets such that $m=\abs{M}$, $n=\abs{N}$, $o=\abs{O}$.  The identity map from $M$ to $M$ is an injection (and, in fact, a bijection), which shows that $m=\abs{M}\leq \abs{M}=m$, so that $\leq$ is reflexive.
+
+To show transitivity, suppose that $m\leq n$ and $n\leq o$.  Then, there is an injection $f:M\rightarrow N$ and an injection from $g:N\rightarrow O$.  Then, $g\circ f:M\rightarrow O$ is an injection (this is part of \cref{exrA.1.10}), and so we have $m=\abs{M}\leq \abs{O}=o$, so that $\leq$ is transitive, and hence a preorder.
+\end{proof}
+\end{prp}
+
+The next result is perhaps the first theorem we have come to that has a nontrivial amount of content to it.
+\begin{thm}[Bernstein-Cantor-Schr\"{o}der Theorem]\index{Bernstein-Cantor-Schr\"{o}der Theorem}\label{thm1.1.26}
+$(\K ,\leq )$ is a partially-ordered set.
+\begin{rmk}
+This theorem is usually stated as ``If there is an injection from $X$ to $Y$ and there is an injection from $Y$ to $X$, then there is a bijection from $X$ to $Y$.''.
+\end{rmk}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~29]{Abbott}.}
+\Step{Recall what it means to be a partial-order}
+Recall that being a partial-order just means that $\leq$ is an antisymmetric preorder.  We have just shown that $\leq$ is a preorder (see \cref{dfnA.1.24}), so all that remains to be seen is that $\leq$ is antisymmetric.
+
+\Step{Determine what explicitly we need to show}
+Let $m,n\in \K$ and let $M,N$ be sets such that $m=\abs{M}$ and $n=\abs{N}$.  Suppose that $m\leq n$ and $n\leq m$.  By definition, this means that there is an injection $f:M\rightarrow N$ and an injection $g:N\rightarrow M$.  We would like to show that $m=n$.  By definition, this remains we must show that there is a bijection from $M$ to $N$.
+
+\Step{Note the existence of left-inverse to both $f$ and $g$}
+We use the result of \cref{exrA.1.9} which says that both $f$ and $g$ have left inverses.  Denote these inverses by $f^{-1}:N\rightarrow M$ and $g^{-1}:M\rightarrow N$ respectively, so that
+\begin{equation}
+f^{-1}\circ f=\id _M\text{ and }g^{-1}\circ g=\id _N.
+\end{equation}
+Note that it is \emph{not} necessarily the case that $f\circ f^{-1}=\id _N$ (and similarly for $g$).
+
+\Step{Define $C_x$}
+Fix an element $x\in M$ and define
+\begin{equation}\label{1.1.26}
+\begin{multlined}
+C_x\coloneqq \left\{ \ldots ,g^{-1}\left( f^{-1}\left( g^{-1}(x)\right) \right) ,f^{-1}\left( g^{-1}(x)\right) ,g^{-1}(x),x, \right. \\ \left. f(x),g\left( f(x)\right) ,f\left( g\left( f(x)\right) \right) ,\ldots \right\} \subseteq M\sqcup N.
+\end{multlined}
+\end{equation}
+(The ``$C$'' is for ``chain''.)
+
+\Step{Show that $\{ C_x:x\in M\}$ forms a partition of $M\sqcup N$}
+We now claim that the collection $\left\{ C_x:x\in M\right\}$ forms a partition of $M\sqcup N$ (recall that this means that any two given $C_x$s are either identical or disjoint; see \cref{dfnA.1.11}).  If $C_{x_1}$ is disjoint from $C_{x_2}$ we are done, so instead suppose that there is some element $x_0$ that is in both $C_{x_1}$ and $C_{x_2}$.  First, let us do the case in which $x_0\in M$.  From the definition of $C_x$ \eqref{1.1.26}, we then must have that
+\begin{equation}
+[g\circ f]^k(x_1)=x_0=[g\circ f]^l(x_2)
+\end{equation}
+for some $k,l\in \Z$.  Without loss of generality, suppose that $k\leq l$.  Then, applying $f^{-1}\circ g^{-1}$ to both sides of this equation $k$ times,\footnote{If $k$ happens to be negative, it is understood that we instead apply $g\circ f$ $-k$ times.} we find that
+\begin{equation}
+x_1=[g\circ f]^{l-k}(x_2).
+\end{equation}
+In other words, $x_1\in C_{x_2}$.  Not only this, but $f(x_1)\in C_{x_2}$ as well because $f(x_1)=f\left( [g\circ f]^{l-k}(x_2)\right)$.  Similarly, $g^{-1}(x_1)\in C_{x_2}$, and so on.  It follows that $C_{x_1}\subseteq C_{x_2}$.  Switching $1\leftrightarrow 2$ and applying the same arguments gives us $C_{x_2}\subseteq C_{x_1}$, and hence $C_{x_1}=C_{x_2}$.  Thus, indeed, $\left\{ C_x:x\in M\right\}$ forms a partition of $M\sqcup N$.  It follows that (because partitions determine equivalence relations; see \cref{exrA.1.41})
+\begin{equation}\label{1.1.29}
+C_x=C_{x'}\text{ for all }x'\in C_x.
+\end{equation}
+
+\Step{Define $X_1,X_2,Y_1,Y_2$}
+Now define
+\begin{equation}\label{1.1.30}
+A\coloneqq \bigcup _{\substack{x\in M\st \\ C_x\cap N\subseteq f(M)}}C_x
+\end{equation}
+as well as
+\begin{equation}
+X_1\coloneqq M\cap A,\qquad Y_1\coloneqq N\cap A,\qquad X_2\coloneqq M\cap A^{\comp},\qquad Y_2\coloneqq N\cap A^{\comp}
+\end{equation}
+
+\Step{Show that $\restr{f}{X_1}:X_1\rightarrow Y_1$ is a bijection}
+We claim that $\restr{f}{X_1}:X_1\rightarrow Y_1$ is a bijection.  Of course, it is injective because $f$ is.  To show surjectivity, let $y\in Y_1\coloneqq N\cap A$.  From the definition of $A$ \eqref{1.1.30}, we see that $y\in C_x\cap N$ for some $C_x$ with $C_x\cap N\subseteq f(M)$, so that $y=f(x')$ for some $x'\in M$.  We still need to show that $x'\in X_1$.  However, we have that $x'=f^{-1}(y)$, and so as $y\in C_x$, we have that $x'=f^{-1}(y)\in C_x$ as well.  We already had that $C_x\cap N\subseteq f(M)$, so that indeed $x'\in A$, and hence $x'\in X_1$.  Thus, $\restr{f}{X_1}:X_1\rightarrow Y_1$ is a bijection.
+
+\Step{Show that $\restr{g}{Y_2}:Y_2\rightarrow X_2$ is a bijection}
+We now show that $\restr{g}{Y_2}:Y_2\rightarrow X_2$ is a bijection.  Once again, all we must show is surjectivity, so let $x\in X_2=M\cap A^{\comp}$. It thus cannot be the case that $C_x\cap N$ is contained in $f(M)$, so that there is some $y\in C_x\cap N$ such that $y\notin f(M)$.  Then, by virtue of \eqref{1.1.29}, we have that $C_x=C_y$, and in particular $x\in C_y$.  From the definition of $C_y$ \eqref{1.1.26}, it follows that either (i) $x=y$, (ii) $x$ is in the image of $f^{-1}$, or (iii) $x$ is in the image of $g$.  Of course it cannot be the case that $x=y$ because $x\in M$ and $y\in N$.  Likewise, it cannot be the case that $x$ is in the image of $f^{-1}$ because $x\in A^{\comp}$.  Thus, we must have that $x=g(y')$ for some $y'\in N$.  Once again, we still must show that $y'\in Y_2$; however, we have that $y'=g^{-1}(x)$, so that $y'\in C_x\subseteq A^{\comp}$.  Thus, $y'\in A^{\comp}$, and so $y'\in Y_2$.  Thus, $\restr{g}{Y_2}:Y_2\rightarrow X_2$ is a bijection.
+
+\Step{Construct the bijection from $M$ to $N$}
+Finally, we can define the bijection from $M$ to $N$.  We define $h:M\rightarrow N$ by
+\begin{equation}
+h(x)\coloneqq \begin{cases}f(x) & \text{if }x\in X_1 \\ g^{-1}(x) & \text{if }x\in X_2\end{cases}.
+\end{equation}
+Note that $\{ X_1,X_2\}$ is a partition of $M$ and $\{ Y_1,Y_2\}$ is a partition of $N$.  To show injectivity, suppose that $h(x_1)=h(x_2)$.  If this element is in $Y_1$, then because $\restr{f}{X_1}:X_1\rightarrow Y_1$ is a bijection, it follows that both $x_1,x_2\in X_1$, so that $f(x_1)=h(x_1)=h(x_2)=f(x_2)$, and hence that $x_1=x_2$.  Similarly if this element is contained in $Y_2$.  To show surjectivity, let $y\in N$.  First assume that $y\in Y_1$.  Then, $f^{-1}(y)\in X_1$, so that $h\left( f^{-1}(y)\right) =y$.  Similarly, if $y\in Y_2$, then $h\left( g(y)\right) =y$.  Thus, $h$ is surjective, and hence bijective.
+\end{proof}
+\end{thm}
+
+\begin{thm}\label{thm1.1.34}
+$(\K ,\leq )$ is well-ordered.
+\begin{proof}\footnote{Proof adapted from \cite{Honig}.}
+\Step{Conclude that it suffices to show that every nonempty subset has a smallest element}
+By \cref{prpA.1.51}, we do not need to check totality explicitly, and so it suffices to show that every nonempty subset of $\K$ has a smallest element.
+
+\Step{Define $\mathcal{T}$ as a preordered set}
+So, let $S\subseteq \K$ be a nonempty collection of cardinals and for each $m\in S$ write $m=\abs{M_m}$ for some set $M_m$.  Define
+\begin{equation}
+M\coloneqq \prod _{m\in S}M_m
+\end{equation}
+and
+\begin{equation}\label{1.1.39}
+\begin{split}
+\mathcal{T} & \coloneqq \left\{ T\subseteq M:T\in \Set _0;\right. \\
+& \qquad \left.  \text{ for all }x,y\in T\text{, if }x\neq y\text{ it follows that }x_m\neq y_m\text{ for all }m\in S\text{.}\right\} .
+\end{split}
+\end{equation}
+Note that the statement that $T\in \Set _0$ is just the statement that $T$ is an \emph{actual} set, instead of just a set-like object (i.e.~a proper class).  Order $\mathcal{T}$ by inclusion.
+
+\Step{Verify that $\mathcal{T}$ satisfies  the hypotheses of Zorn's Lemma}
+We wish to apply Zorn's Lemma (\cref{ZornsLemma}) to $\mathcal{T}$.  To do that of course, we must first verify the hypotheses of Zorn's Lemma.  $\mathcal{T}$ is a partially-ordered set by \cref{exrA.1.26}.  Let $\mathcal{W}\subseteq \mathcal{T}$ be a well-ordered subset and define
+\begin{equation}
+W\coloneqq \bigcup _{T\in \mathcal{W}}T.
+\end{equation}
+It is certainly the case that $T\subseteq W$ for all $T\in \mathcal{W}$.  In order to verify that $W$ is indeed an upper-bound of $\mathcal{W}$ in $\mathcal{T}$, however, we need to check that $W$ is actually an element of $\mathcal{T}$.  So, let $x,y\in W$ be distinct.  Then, there are $T_1,T_2\in \mathcal{W}$ such that $x\in T_1$ and $y\in T_2$.  Because $\mathcal{W}$ is totally-ordered, we may without loss of generality assume that $T_1\subseteq T_2$.  In this case, both $x,y\in T_2$.  As $T_2\in \mathcal{T}$, it then follows that $x_m\neq x_m$ for all $m\in S$.  It then follows in turn that $W\in \mathcal{T}$.
+
+\Step{Conclude the existence of a maximal element}
+The hypotheses of Zorn's Lemma being verified, we deduce that there is a maximal element $T_0\in \mathcal{T}$.
+
+\Step{Show that there is some projection whose restriction to the maximal element is surjective}
+Let $\pi _m:M\rightarrow M_m$ be the canonical projection.  We claim that there is some $m_0\in S$ such that $\pi _{m_0}(T_0)=M_{m_0}$.  To show this, we proceed by contradiction:  suppose that for all $m\in M$ there is some element $x_m\in M_m\setminus \pi _m(T_0)$.  Then, $T_0\cup \{ x\}\in \mathcal{T}$ is strictly larger than $T_0$:  a contradiction of maximality.  Therefore, there is some $m_0\in S$ such that $\pi _{m_0}(T_0)=M_{m_0}$.
+
+\Step{Construct an injection from $M_{m_0}$ to $M_m$ for all $m\in S$}
+The defining condition of $\mathcal{T}$, \eqref{1.1.39}, is simply the statement that $\restr{\pi _m}{T}:T\rightarrow M_m$ is injective for all $T\in \mathcal{T}$.  In particular, by the previous step, $\restr{\pi _{m_0}}{T_0}:T_0\rightarrow M_{m_0}$ is a bijection.  And therefore, the composition $\pi _m\circ \restr{\pi _{m_0}}{T_0}:M_{m_0}\rightarrow M_m$ is an injection from $M_{m_0}$ to $M$.  Therefore,
+\begin{equation}
+m_0=\abs{M_{m_0}}\leq \abs{M_m}=m
+\end{equation}
+for all $m\in S$.  That is, $m_0$ is the smallest element of $S$, and so $\K$ is well-ordered.
+\end{proof}
+\end{thm}
+\begin{crl}
+$(\N ,\leq )$ is a well-ordered set.
+\end{crl}
+
+\subsection{The natural numbers as a well-ordered integral crig}
+
+We have shown that $(\N ,+,\cdot )$ is a crig and that $(\N ,\leq )$ is a well-ordered.  We now finally show how these two different structures, the algebraic structure and the order structure, are compatible.  But before we do that, of course, we have to make precise what we mean by the word ``compatible''.
+\begin{dfn}[Preordered rg]\label{dfn1.1.38}
+A \emph{preordered rg}\index{Preordered rg} is a set $X$ equipped with two binary operations $+$ and $\cdot$, and a relation $\leq$, so that
+\begin{enumerate}
+\item \label{enm1.1.38.1}$(X,+,0,\cdot )$ is a rg,
+\item \label{enm1.1.38.2}$(X,\leq )$ is a preordered set,
+\item \label{enm1.1.38.3}$x\leq y$ implies that $x+z\leq y+z$ for all $x,y,z\in X$,
+\item \label{enm1.1.38.4}$x\leq y$ and $0\leq z$ implies that $xz\leq yz$,
+\end{enumerate}
+and furthermore, in the case $(X,+,0,\cdot ,1)$ is a rig, that $0\leq 1$.
+\begin{rmk}
+If $X$ is a \emph{totally}-ordered ring, we automatically have $0\leq 1$.  By totality, we automatically have that either $0\leq 1$ or $1\leq 0$.  Do you see why the latter cannot happen (if $1\neq 0$)?
+
+In general, however, we do need to make the requirement that $0\leq 1$.
+\end{rmk}
+For $X$ a preordered rg, we write
+\begin{equation}
+X^+\index[notation]{$X^+$}\coloneqq \left\{ x\in X:x>0\right\} \text{ and }X_0^+\index[notation]{$X_0^+$}\coloneqq \left\{ x\in X:x\geq 0\right\} .
+\end{equation}
+\begin{rmk}
+A partially-ordered rg, totally-ordered rg, etc.~are just preordered rgs whose underlying preorder is respectively a partial-order, total-order, etc.
+\end{rmk}
+\begin{rmk}
+In a totally-ordered ring, we define $\sgn :X\rightarrow \{ 0,1,-1\} \subseteq X$ by
+\begin{equation}
+\sgn (x):=\begin{cases}1 & \text{if }x>0 \\ 0 & \text{if }x=0 \\ -1 & \text{if }x<0\end{cases}.
+\end{equation}\index[notation]{$\sgn$}
+\end{rmk}
+This is the \emph{signum function}\index{Signum function} and is meant merely to return the sign of an element.
+\end{dfn}
+One thing to note about preordered rngs is that, to define the order, it suffices only to be able to compare everything with $0$.
+\begin{exr}\label{exr1.1.41}
+Let $(X,+,0,-)$ be a rng and let $P$ be a subset of $X$ (thought of as the nonnegative elements) that is (i) closed under addition, (ii) closed under multiplication, and (iii) contains $0$.  Show that there is a unique preorder $\leq$ on $X$ such that (i) $(X,+,0,-,\leq )$ is a preordered rng and (ii) $P=\left\{ x\in X:x\geq 0\right\}$..  Furthermore, show that $\leq$ is a partial-order iff $x,-x\in P$ implies $x=0$, and furthermore show that $\leq$ is a total-order iff, in addition, either $x\in P$ or $-x\in P$ for all $x\in X$.
+\end{exr}
+\begin{dfn}[The category of preordered rgs]
+The category of preordered rgs is the category $\Pre \Rg$\index[notation]{$\Pre \Rg$} whose collection of objects $\Pre \Rg _0$ is the collection of all preordered rgs, for every preordered rg $X$ and every preordered rg $Y$ the collection of morphisms from $X$ to $Y$, $\Mor _{\Rg}(X,Y)$, is precisely the set of all nondecreasing homomorphisms from $X$ to $Y$, composition is given by ordinary function composition, and the identities of the category are the identity functions.
+\begin{rmk}
+We similarly have categories of preordered rigs $\Pre \Rig$\index[notation]{$\Pre \Rig$}, preordered rngs $\Pre \Rng$\index[notation]{$\Pre \Rng$}, and preordered rings$\Pre \Ring$\index[notation]{$\Pre \Ring$}.
+\end{rmk}
+\end{dfn}
+This should be pretty much what you expect:  a preordered rg has two different structures on it, namely the rg structure and the preorder structure, and so we require the morphisms in the category of preordered rgs to preserve \emph{both} of these structures.
+
+\begin{prp}
+$(\K ,+,\cdot ,0,1,\leq )$ is a well-ordered integral crig.
+\begin{proof}
+We just showed in the last two sections (\cref{prpA.1.16} and \cref{thm1.1.34}) that $(\K ,+,\cdot ,0,1)$ is an integral crig and that $(\K ,\leq )$ is well-ordered, so all that remains to be checked are properties \ref{enm1.1.38.3} and \ref{enm1.1.38.4} of \cref{dfn1.1.38}.
+
+We first check \ref{enm1.1.38.3} of \cref{dfn1.1.38}, so let $m,n,o\in \K$ and let $M,N,O$ be sets such that $m=\abs{M}$, $n=\abs{N}$, and $o=\abs{O}$.  Suppose that $m\leq n$.  This means that there is an injection $f:M\rightarrow N$.  We would like to show that $m+o\leq n+o$.  In other words, we want to show that there is an injection from $M\sqcup O$ to $N\sqcup O$.  Of course, the function $g:M\sqcup O\rightarrow N\sqcup O$ defined by
+\begin{equation}
+g(x)\coloneqq \begin{cases}f(x) & \text{if }x\in M \\ x & \text{if }x\in O\end{cases}
+\end{equation}
+is an injection because $f$ is, and so $m+o\leq n+o$.
+
+Now we show \ref{enm1.1.38.4}.  Suppose that $m\leq n$ and that $0\leq o$.\footnote{Of course we don't actually need to assume that $0\leq o$.  Every natural number is greater than or equal to $0$.}  Let $f:M\rightarrow N$ be the injection the same as before.  We wish to show that $mo\leq no$.  In other words, we wish to construct an injection from $M\times O$ into $N\times O$.  Of course, the function $g:M\times O\rightarrow N\times O$ defined by
+\begin{equation}
+g\left( \coord{x,y}\right) \coloneqq \coord{f(x),y}
+\end{equation}
+is an injection because $f$ is, and so $mo\leq no$.
+
+Finally, $0\leq 1$ follows because $\emptyset \subseteq \{ \emptyset \}$ (the empty set is a subset of every set).
+
+Thus, $(\K ,+,0,1,\leq )$ is a well-ordered integral crig.
+\end{proof}
+\end{prp}
+\begin{crl}
+$(\N ,+,\cdot ,0,1,\leq )$ is a well-ordered integral crig.
+\end{crl}
+
+Before moving on, we summarize all the properties of $\N$ that we have shown.  This is nothing more than explicitly spelling out what it means for $(\N ,+,\cdot ,0,1,\leq )$ to be a well-ordered integral crig.
+\begin{enumerate}
+\item $+$ is associative,
+\item $+$ is commutative,
+\item $0$ is an additive identity,
+\item $\cdot$ is associative,
+\item $\cdot$ is commutative,
+\item $1$ is a multiplicative identity,
+\item multiplication distributes over addition,
+\item $mn=0$ implies either $m=0$ or $n=0$,
+\item $\leq$ is reflexive,
+\item $\leq$ is transitive,
+\item $\leq$ is antisymmetric,
+\item $\leq$ is total,
+\item every nonempty subset has a smallest element,
+\item $m\leq n$ implies $m+o\leq n+o$, and
+\item $m\leq n$ and $0\leq o$ implies $mo\leq no$.
+\end{enumerate}
+
+Finally, we prove one more property of the natural numbers that we will need when discussing the integers.
+\begin{prp}\label{prp1.1.50}
+Let $m,n,o\in \N$.  Then, if $m+o\leq n+o$, then $m\leq n$.  In particular, because this is a partial order, if $m+o=n+o$, then $m=n$.
+\begin{rmk}
+Note that this is \emph{false} in $\K$.  For example, $0+\aleph _0=1+\aleph _0$, but $0\neq 1$.  ($\aleph _0\coloneqq \abs{\N}$.  See \cref{dfn2.2}.)
+\end{rmk}
+\begin{proof}
+Suppose that $m+o\leq n+o$.  Let $M,N,O$ be finite sets such that $m=\abs{M}$, $n=\abs{N}$, and $o=\abs{O}$.  Because $m+o\leq n+o$, there is an injection $\phi :M\sqcup O\rightarrow N\sqcup O$.  Define
+\begin{equation}
+P\coloneqq \left\{ x\in M:\phi (x)\in O\right\} .
+\end{equation}
+(``P'' is for ``problematic''.)  We prove the result by induction on the cardinality of $P$.
+
+If $P$ is empty, then we must have that $\phi (M)\subseteq N$, so that $\restr{\phi}{M}:M\rightarrow N$ is an injection, and hence $m\leq n$.
+\begin{comment}
+If $\phi (M)=N$, then $\restr{\phi}{M}:M\rightarrow N$ is a bijection, and we will be done.   Thus, we wish to show that $N\setminus \phi (M)$ is empty.  Suppose not.  Then, because $\phi$ is a bijection, it must the case that $\phi ^{-1}\left( N\setminus \phi (M)\right) \subseteq O$ is nonempty, and so
+\begin{equation}\label{1.1.52}
+O\setminus \left( \phi ^{-1}\left( N\setminus \phi (M)\right) \right) 
+\end{equation}
+is a \emph{proper} subset.  The image of $\phi$ is all of $N\sqcup O$, and so as the image of both $M$ and $\phi ^{-1}\left( N\setminus \phi (M)\right)$ lie in $N$, it must be the case that the image of \eqref{1.1.52} must be all of $O$.  But then, $\phi$ restricted to this proper subset of $O$ is a bijection onto $O$, and so $O$ is infinite:  a contradiction.  Therefore, it must have been the case from the beginning that $\phi (M)=N$.
+\end{comment}
+
+Now suppose the result is true if $\abs{P}=k$ for $k\geq 1$.  We show that it must also be true for $\abs{P}=k+1$.  We first show that $N\setminus \phi (M)$ is nonempty.  If it were empty, then we must have that $\phi (O)\subseteq O$, and hence, as $O$ is finite and $\phi$ is an injection, we must have that $\phi (O)=O$ (injections are bijections onto their image).  But then it cannot be the case that $P$ is nonempty:  a contradiction of the fact that $\abs{P}=k\geq 1$.  Thus, it must be the case that $N\setminus \phi (M)$ is nonempty.  Let $n_0\in N\setminus \phi (M)$.  Let $p_0\in P$, so that, by the definition of $P$, $\phi (p_0)\in O$.  Let $\psi :N\sqcup O\rightarrow N\sqcup O$ be the map that exchanges $\phi (p_0)$ and $n_0$ and leaves everything else fixed.  This is a bijection, and so $\psi \circ \phi :M\sqcup O\rightarrow N\sqcup O$ is an injection.  Furthermore, now the image of $p_0$ is contained in $N$ (and there is no new point in $M$ that gets mapped into $O$), so that now there are only $k$ elements of $M$ which map into $O$ via the injection $\psi \circ \phi$.  By the induction hypothesis, there is then a injection from $M$ to $N$, and we are done.
+\end{proof}
+\end{prp}
+
+\subsubsection{The Peano axioms}
+
+It is not uncommon for textbooks to introduce the natural numbers via the Peano axioms.  We included this material not because it is essential to the development of the real numbers, but rather for the sake of completeness:  even though it is not strictly necessary, people will expect every mathematician to know of the Peano axioms.
+
+People who do use the Peano axioms to introduce the natural numbers, instead of constructing the natural numbers and proving they have the desired properties, will simply assume that a structure which satisfies the Peano axioms exists.  We, however, will instead \emph{prove} the Peano axioms are true; for us, they are theorems.  Before you try to go off and prove them, however, I had probably better tell you what they are.
+\begin{thm}[The Peano axioms]\index{Peano axioms}
+There exists a set $\N '$ which contains an element $0'\in \N'$ and a function $s:\N '\rightarrow \N '$ (called the \emph{successor function}\index{Successor function}), such that
+\begin{enumerate}
+\item \label{enm1.1.23.i}$m\in \N '$ is in the image of $S$ iff $m\neq 0'$;
+\item \label{enm1.1.23.ii}$s$ is injective, and
+\item \label{enm1.1.23.iii} a subset $S\subseteq \N '$ such that (iii.a) $0'\in S$ and (iii.b) $m\in S$ implies $s(m)\in S$ is equal to all of $\N '$.
+\end{enumerate}
+\begin{rmk}
+The prime mark on $\N '$ simply to distinguish the set in this theorem from `our' natural numbers, namely the set that is the collection of cardinalities of finite sets  Similarly for $0'$.
+\end{rmk}
+\begin{rmk}
+The successor of an element is of course `supposed' to be that element plus one.
+\end{rmk}
+\begin{rmk}
+(iii) is of course thought of as \emph{induction}.
+\end{rmk}
+\begin{proof}
+\Step{Define everything}
+Define $\N '\coloneqq \N$, $s(m)\coloneqq m+1$, and $0'\coloneqq 0$.
+
+\Step{Prove \ref{enm1.1.23.i}}
+\begin{exr}
+Prove that there is no $m\in \N$ such that $m+1=0$.
+\end{exr}
+\begin{exr}
+Prove that if $m\neq 0$, then there is some $n\in \N$ such that $s(n)=m$.
+\end{exr}
+
+\Step{Prove \ref{enm1.1.23.ii}}
+\begin{exr}
+Prove that if $m+1=n+1$, then $m=n$.
+\end{exr}
+
+\Step{Prove \ref{enm1.1.23.iii}}
+Let $S\subseteq \N$ have the properties that (iii.a) $0\in S$ and (iii.b) $m\in S$ implies $m+1\in S$.  We wish to show that $S=\N$.  We proceed by contradiction:  suppose that $S\neq \N$.  Then, $S^{\comp}$ is nonempty, and as $\N$ is well-ordered, $S^{\comp}$ has a least element $m_0\in S^{\comp}$.  As $0\in S$, it cannot be the case that $m_0=0$.  Then, by \ref{enm1.1.23.i}, there is some $n_0\in \N$ such that $s(n_0)=m_0$.  As we have defined $s(n_0)\coloneqq n_0+1$, we in particular have that $n_0<m_0$.  As $n_0$ is less than $m_0$ and $m_0$ is the \emph{least} element of $S^{\comp}$, we cannot have $n_0\in S^{\comp}$.  Therefore, $n_0\in S$.  But then, by hypothesis, $m_0=s(n_0)\in S$:  a contradiction (as $m_0\in S^{\comp}$).  Hence, we must have that $S=\N$.
+\end{proof}
+\end{thm}
+
+\section{Additive inverses and the integers}
+
+Suppose we have a simple algebraic equation involving three natural numbers, $m+n=o$, we are given $n$ and $o$, and we would like to find $m$.  Of course, we know what the answer \emph{should} be, namely $m=o-n$, but currently this is nonsensical as we have not defined what this crazy new symbol ``$-$'' means.  The job of the integers is to make sense out of this.
+
+We thus would like to find a set with algebraic structure (which will turn out to be an integral cring whose elements are thought of as a new more general type of ``number'') that allows us to solve simple equations like $m+n=o$.  More precisely, we seek a cring (that is a crig with \emph{additive inverses}) which contains $\N$ and, in some sense, is the `simplest' cring that will do so.
+
+To understand what it means to be a cring $Z$ that contains $\N$ is quite easy, but how does one make sense of the statement that $Z$ is the `simplest' cring with this property?  The precise sense in which $Z$ should be the simplest cring which contains $\N$ is, if $Z'$ is any other cring which contains $\N$, then $Z'$ contains $Z$ as well.  That is, $Z$ is contained in every cring which contains $\N$.
+
+\begin{thm}[Integers]\label{Integers}
+\begin{savenotes}
+There exists a totally-ordered integral cring $\Z$\index[notation]{$\Z$}, the \emph{integers}\index{Integers}, such that
+\begin{enumerate}
+\item \label{enm1.2.1.1}$\Z$ contains $\N$ as a subpreordered rig;\footnote{When we say that $\Z$ contains $\N$ as a subpreordered rig, what we \emph{actually} mean is that there is an injective morphism of preordered-rigs $\N \hookrightarrow \Z$.  In particular, it need not literally be the case that $\N$ is a subset of $\Z$ (just an isomorphic copy of $\N$).} and
+\item \label{enm1.2.1.2}if $Z'$ is any other totally-ordered integral cring which satisfies this property, then $Z'$ contains a unique copy of $\Z$ as a subpreordered ring.
+\end{enumerate}
+Furthermore, $\Z$ is unique up to isomorphism\index{Unique up to isomorphism} of preordered rings in the sense that, if $Z$ is any other totally-ordered integral cring which satisfies \emph{both} of these properties, then $\Z \cong _{\Pre \Ring}Z$.
+\begin{rmk}
+The order itself doesn't really play a role here.  The significance is in going from a crig to a cring; the order just `comes along for the ride', so to speak.
+\end{rmk}
+\begin{rmk}
+This is actually a special case of a more general construction, the construction of the \emph{Grothendieck Group}\index{Grothendieck Group} of a commutative monoid.  We don't need this general construction and we are already pushing the envelope for level of abstraction in an introductory analysis course, so we don't present it in this level of generality.
+\end{rmk}
+\begin{rmk}
+Integral crings are usually called \emph{integral domains}\index{Integral domain}.  In fact, this term is the origin of our use of the word ``integral''.
+\end{rmk}
+\begin{proof}
+\Step{Define an equivalence relation on $\N \times \N$}
+The idea being constructing the integers is to think of a pair of \emph{natural} numbers $\coord{m,n}$ as representing what should be $m-n$.  One issue with this, however, is that, if we do this, then it should be the case that $\coord{m+1,n+1}$ and $\coord{m,n}$ both represent the same number.  Thus, we put an equivalence relation on $\N \times \N$.
+
+Define $\coord{m_1,n_1}\sim \coord{m_2,n_2}$ iff $m_1+n_2=m_2+n_1$.  We came up with this of course because the statement $\coord{m_1,n_1}\sim \coord{m_2,n_2}$ \emph{should} be $m_1-n_1=m_2-n_2$.  Of course, this itself doesn't make sense, and so we write this same thing as something that does make sense given what we have already defined, namely $m_1+n_2=m_2+n_1$.
+
+\Step{Check that $\sim$ is an equivalence relation}
+\begin{exr}
+Show that $\sim$ is reflexive and symmetric.
+\end{exr}
+To show that it is transitive, suppose that $\coord{m_1,n_1}\sim \coord{m_2,n_2}$ and $\coord{m_2,n_2}\sim \coord{m_3,n_3}$.  Then, $m_1+n_2=m_2+n_1$ and $m_2+n_3=m_3+n_2$, and so
+\begin{equation}
+m_1+n_2+m_2+n_3=m_2+n_1+m_3+n_2.
+\end{equation}
+It follows from \cref{prp1.1.50} that $m_1+n_3=n_1+m_3$, and so $(m_1,n_1)\sim (m_3,n_3)$, so that $\sim$ is transitive.
+
+\Step{Define $\Z$ as a set}
+We define
+\begin{equation}
+\Z \coloneqq \N \times \N /\sim .
+\end{equation}
+Recall (see \cref{dfnA.1.42}) that this is the quotient set with respect to $\sim$, the set of equivalence classes.
+
+\Step{Define addition and multiplication on $\Z$}
+We define
+\begin{equation}
+[\coord{m_1,n_1}]+[\coord{m_2,n_2}]\coloneqq [\coord{m_1+m_2,n_1+n_2}]
+\end{equation}
+and
+\begin{equation}
+[\coord{m_1,n_1}]\cdot [\coord{m_2,n_2}]\coloneqq [\coord{m_1m_2+n_1n_2,m_1n_2+n_1m_2}].
+\end{equation}
+\begin{exr}
+Show that $+$ and $\cdot$ are both well-defined.
+\end{exr}
+
+\Step{Define the identities}
+We define
+\begin{equation}
+0\coloneqq [\coord{0,0}]\text{ and }1\coloneqq [\coord{1,0}].
+\end{equation}
+
+\Step{Show that $\Z$ is an integral cring}
+\begin{exr}
+Show that $\Z$ is an integral cring.
+\end{exr}
+
+\Step{Define a preorder on $\Z$}
+We define
+\begin{equation}
+[\coord{m_1,n_1}]\leq [\coord{m_2,n_2}]\text{ iff }m_1+n_2\leq m_2+n_1.
+\end{equation}
+\begin{exr}
+Show that $\leq$ is well-defined.
+\end{exr}
+\begin{exr}
+Show that $\leq$ is a preorder.
+\end{exr}
+
+\Step{Show that $\leq$ is a total-order}
+\begin{exr}
+Show that $\leq$ is a total-order.
+\end{exr}
+
+\Step{Show that $(\Z ,+,\cdot ,0,1,-,\leq )$ is a totally-ordered integral cring}
+\begin{exr}
+Show that $(\Z ,+,\cdot ,0,1,-,\leq )$ is a totally-ordered integral cring.
+\end{exr}
+
+\Step{Show that $\Z$ contains $\N$ as a preordered-rig}
+\begin{exr}
+Define a function $\iota :\N \rightarrow \Z$.  Show that it is (i) injective and (ii) a morphism of preordered rigs.
+\end{exr}
+
+\Step{Show that every totally-ordered integral cring which contains $\N$ contains a unique copy of $\Z$}
+Let $Z'$ be a totally-ordered integral cring which contains $\N$.  As $Z'$ contains additive inverses, it must contain the additive inverse of every element of $\N$.  However, $\N$ together with the additive inverses of every element of $\N$ in $Z'$ is just a copy of $\Z$.  There can only be one such isomorphic copy of $\Z$ because, if there were another copy, they would have to share the same multiplicative identity (by uniqueness of identities, \cref{exrA.1.77}).  Both copies being rings, it would then follow that $2\coloneqq 1+1$, $3\coloneqq 1+1+1$, etc.~would have to be the same element in each, and hence that by uniqueness of inverses (\cref{exrA.1.79}), $-1$, $-2$, $,-3$, etc.~would have to be the same element in each, and hence the two copies would be the same.
+
+\Step{Show that $\Z$ is unique up to isomorphism}
+Let $Z$ be some other totally-ordered cring that satisfies the two properties \ref{enm1.2.1.1} and \ref{enm1.2.1.2}.  As $Z$ contains $\N$ and $\Z$ possesses property \ref{enm1.2.1.2}, it follows that $Z$ contains $\Z$.  On the other hand, as $\Z$ contains $\N$ and $Z$ possesses property \ref{enm1.2.1.2}, it likewise follows that $\Z$ contains $Z$.  As $\Z$ contains $Z$ and $Z$ contains $\Z$, and furthermore, because these copies are \emph{unique}, it must be the case that $\Z =Z$.\footnote{We say that $\Z$ is unique \emph{up to isomorphism} because in fact all we can say is that $Z$ contains an \emph{isomorphic copy} of $\Z$.  We abused language and said just ``$\Z$'' instead of ``isomorphic copy of $\Z$''.  This abuse of language is very common in mathematics.  Indeed, you should usually be thinking of two things which are isomorphic as, for all intents and purpose, the same exact thing.}
+\end{proof}
+\end{savenotes}
+\end{thm}
+
+You will notice a common theme through these notes, and indeed, throughout all of mathematics:  if ever we want something that isn't there, throw it in.  For example, we had the natural numbers, but wanted additive inverses, and so we came up with $\Z$ by just `adjoining' the additive inverses of all the elements of $\N$.  Similarly, we want multiplicative inverses, and so by throwing them in, we obtain $\Q$.  Doing the same with limits gives us $\R$, and in turn doing the same with roots of polynomials gives us $\C$.  If you've read the appendix, you may have seen already something vaguely similar (cf.~the paragraph containing \eqref{A.1.1} and what follows).  We wrote down the definition of a set-like thing, but then realized that it cannot be a set (this is Russel's Paradox).  To get around this, instead of working with things that are strictly sets, we work in a larger `universe' that contains proper classes as well:  you might say that we `throw in' the proper classes alongside sets.
+
+We now know that $\Z$ is a totally-ordered integral cring.  Of course, $\Z$ satisfies other properties as well (a lot of which follow from the fact that $\Z$ is a totally-ordered integral cring).\begin{exr}
+Let $X$ be a preordered ring and let $x_1,x_2\in X$.  Show the following statements.
+\begin{enumerate}
+\item $0\leq x_1$ implies $-x_1\leq 0$.
+\item $x_1,x_2\leq 0$ implies $0\leq x_1x_2$.
+\item If $X$ is totally-ordered, then $0\leq x_1^2$.
+\item If $X$ is totally-ordered, then $0\leq 1$.
+\item $x_1\leq 1$ and $0\leq x_2$ imply $x_1x_2\leq x_2$.
+\end{enumerate}
+\end{exr}
+\begin{exr}\label{exr1.2.14}
+Let $m\in \Z$ and suppose that $0\leq m\leq 1$.  Show that either $m=0$ or $m=1$.
+\end{exr}
+
+\section{Multiplicative inverses and the rational numbers}
+
+The motivation of the introduction to the rationals is essentially the same as the motivation for the introduction of the integers, just with multiplication instead of division.  That is, we would like to be able to solve equations of the form $mn=o$ for $m,n,o\in \Z$.  There is one significant difference however.  Unlike with addition, we cannot invert everything:  in particular, we cannot invert $0$.
+\begin{exr}
+Let $R$ be a ring.  Show that if $0$ is invertible in $R$, then $R=0\coloneqq \{ 0\}$.
+\end{exr}
+\begin{exm}[Tropical integers]\label{exm1.3.2}
+The tropical integers are an example of a nonzero crig in which $0$ is invertible.  Thus, you do indeed need additive inverses for the result of the previous exercise to hold.
+
+Define $R\coloneqq \N$, $m+_Rn\coloneqq \max \{ m,n\}$, $m\cdot _Rn\coloneqq m+n$, and $0_R\coloneqq 0\eqqcolon 1_R$.  Then, $(R,+_R,\cdot _R,0_R,1_R)$ are the \emph{tropical integers}\index{Tropical integers}.  The subscript $R$ is meant to distinguish `tropical' version from the usual version (e.g.~$+_R\coloneqq \max$ vs $+$).
+\begin{exr}
+Show that indeed $(R,+_R,\cdot _R,0_R,1_R)$ is a crig.  Furthermore, show that $0_R\cdot _R0_R=1_R$, so that indeed $0_R$ is invertible with multiplicative inverse $0_R^{-1}=0_R$.
+\end{exr}
+\end{exm}
+Besides $0$, however, we wind up being able to invert everything we would like.
+\begin{thm}[Rational numbers]\label{RationalNumbers}
+There exists a totally-ordered field $\Q$, the \emph{rational numbers}\index{Rational numbers}, such that
+\begin{enumerate}
+\item \label{enm1.3.2.i}$\Q$ contains $\Z$ as a subpreordered ring; and
+\item \label{enm1.3.2.ii}if $Q'$ is any other totally-ordered field which satisfies this property, then $Q'$ contains a unique copy of $\Q$ as a subpreordered field.
+\end{enumerate}
+Furthermore, $\Q$ is unique up to isomorphism of preordered-fields.
+\begin{rmk}
+This is also a special case of a more general construction known as the construction of \emph{fraction fields}\index{Fraction field}.  For the same reason as with the Grothendieck group construction, we do not present this in its full generality.
+\end{rmk}
+\begin{proof}
+\begin{exr}
+Try to do the entire proof yourself, using the proof of \cref{Integers} as guidance.
+\end{exr}
+\end{proof}
+\end{thm}
+\begin{prp}\label{prp1.3.4}
+For all $x\in \Q$, there exist unique $m\in \Z$ and $n\in \Z^+$ such that (i) $\gcd (m,n)=1$ and (ii) $x=\frac{m}{n}$.
+\begin{proof}
+By \ref{enm1.3.2.i} of the previous theorem, $\Q$ contains $\Z$.  As $\Q$ is a field, it thus must contain multiplicative inverses of every nonzero integer.  For $m\in \Z$ not zero, denote its multiplicative inverse in $\Q$ by $\frac{1}{m}$.  For $n\in \Z$, denote $\frac{n}{m}\coloneqq n\cdot \frac{1}{m}$, and define
+\begin{equation}
+Q\coloneqq \left\{ \tfrac{n}{m}\in \Q :m,n\in \Z ,m\neq 0\right\} .
+\end{equation}
+Note that $Q$ is a field which contains $\Z$ has a subpreordered ring.  By \ref{enm1.3.2.ii} of the previous theorem, we thus have that $\Q \subseteq Q$.  Of course we already knew that $Q\subseteq \Q$, and so we have that $Q=\Q$.
+
+Now for $x\in \Q$ arbitrary, we can write $x=\frac{n}{m}$ for some $m,n\in \Z$ with $m\neq 0$.  If $m<0$, then we can write $x=\frac{-n}{-m}$, so that now the denominator is positive.  Define $d\coloneqq \gcd (m,n)$ and write $m=m'd$ and $n=n'd$, so that $x=\frac{n'}{m'}$.
+\begin{exr}
+Show that $\gcd (m',n')=1$.
+\end{exr}
+This shows existence.
+
+We now prove uniqueness.  Suppose that $\frac{n_1}{m_1}=\frac{n_2}{m_2}$ for $m_1,n_1,m_2,n_2\in \Z$ with $m_1,m_2>0$, $\gcd (m_1,n_1)=1=\gcd (m_2,n_2)$.  Re-arranging, we have $m_2n_1=m_1n_2$, so that $m_2\mid m_1n_2$.  As $\gcd (m_2,n_2)=1$, it follows that $m_2\mid m_1$.  On the other hand, this same equation implies that $m_1\mid m_2n_1$, and therefore $m_1\mid m_2$.  That $m_1\mid m_2$ an $m_2\mid m_1$ implies that $m_1=\pm m_2$.  However, as they are both positive, we have that $m_1=m_2$.  It then follows that $n_1=n_2$ from the equation $m_2n_1=m_1n_2$.
+\end{proof}
+\end{prp}
+\begin{exr}
+Let $X$ be a totally-ordered field and let $x_1,x_2\in X$ be nonzero.  Show that the following statements are true.
+\begin{enumerate}
+\item $x_1^{-1}$ has the same sign as $x_1$.
+\item $0<x_1\leq x_2$ implies $0<x_2^{-1}\leq x_1^{-1}$.
+\end{enumerate}
+\end{exr}
+
+As a matter of fact, $\Q$ is not just he smallest totally-ordered field that contains $\Z$, is is the smallest totally-ordered field \emph{period}.
+\begin{exr}
+Let $F$ be a totally-ordered field.  Show that $\Char (F)=0$.
+\end{exr}
+\begin{prp}\label{prp1.4.52}
+Let $F$ be a totally-ordered field.  Then, there exists a subfield $Q\subseteq F$ and an isomorphism of totally-ordered fields from $\Q$ to $Q$.
+\begin{rmk}
+It is typical to identify $\Q$ with $Q$, so that $\Q$ can actually be regarded as a subfield of $F$.
+\end{rmk}
+\begin{rmk}
+In fact, we could define the rationals as follows.
+\begin{textequation}
+There exists a totally-ordered field $\Q$, the \emph{rational numbers}, such that, if $Q$ is another totally-ordered field, then $\Q \subseteq Q$.  Furthermore, $\Q$ is unique up to isomorphism of preordered fields.
+\end{textequation}
+In fact, this is arguably preferable to \cref{RationalNumbers}, but we as we actually make use of that result in the following proof, to do this, we would either have to rephrase things entirely or `redefine' $\Q$.
+\end{rmk}
+\begin{proof}
+As $\Char (F)=0$, $F$ contains a copy of $\N$, namely, $\left\{ 0,1,2,3,\ldots \right\}$.\footnote{We needed that $\Char (F)=0$ in order that this be a copy of $\N$.  For example, think of the integers modulo $m$ (\cref{exmA.1.117}; see also the sequence of examples starting with \cref{exmA.1.53}).  For example, in the case $m=3$, we have that $1+1+1=0$, and so this set $\left\{ 0,1,2\coloneqq 1+1,3\coloneqq 1+1+1,\ldots \right\}$ would just be $\{ 0,1,2\}$, certainly not a copy of the natural numbers.}  Recall that $\Z$ is the smallest totally-ordered integral cring which contains $\N$.  Thus, as $F$ is in particular now a totally-ordered integral cring which contains $\N$, we have that in fact $F$ contains $\Z$:  $\Z \subseteq \R$.  Similarly, as $\Q$ was the smallest totally-ordered field that contained $\Z$, and we have just showed that $F$ is a totally-ordered field that contains $\Z$, it follows that $\Q \subseteq F$.
+\end{proof}
+\end{prp}
+
+\section{Least upper-bounds and the real numbers}
+
+Finally we come to the first material that might be considered `the point' of this course.
+
+Just as the integers corrected the `deficiency' of the natural numbers that was the lack of additive inverses, and the rationals corrected the `deficiency' of the integers that was the lack of multiplicative inverses, the real numbers will correct a `deficiency' of the rational numbers.  But what is this ``deficiency''?  The answer turns out to be that this `deficiency' is a lack of what are called least upper-bounds.
+
+\subsection{Least upper-bounds and why you should care}
+
+\begin{dfn}[Suprema]
+Let $(X,\leq )$ be a preordered set, let $S\subseteq X$, and let $x\in X$.  Then, $x$ is a \emph{supremum}\index{Supremum} of $S$ iff
+\begin{enumerate}
+\item $x$ is an upper-bound of $S$, and
+\item if $x'$ is any other upper-bound of $S$, then $x\leq x'$.
+\end{enumerate}
+\begin{rmk}
+Supremum is synonymous with \emph{least upper-bounds} (because they are an upper-bound that is less than or equal to every other upper-bound).
+\end{rmk}
+\begin{rmk}
+If $S$ has a supremum $x$, then we write $x\coloneqq \sup (S)$.  This is justified by the following exercise.
+\end{rmk}
+\begin{exr}\label{exr1.4.4}
+Let $(X,\leq )$ be a partially-ordered set, let $S\subseteq X$, and let $x_1,x_2\in S$ be two suprema of $S$.  Show that $x_1=x_2$.
+\end{exr}
+We extend the definition of supremum as follows.
+\begin{equation}
+\sup (S)\coloneqq \begin{cases}\infty & \text{if }S\text{ is not bounded above} \\ -\infty & \text{if }S=\emptyset \end{cases}.
+\end{equation}
+\end{dfn}
+\begin{exr}
+Find an example of a preordered set $(X,\leq )$ an a subset $S\subseteq X$ with two distinct suprema.
+\begin{rmk}
+It is because of counter-examples like these that we shall primarily concern ourselves with partially-ordered sets in this section.
+\end{rmk}
+\end{exr}
+We similarly have a notion of infimum, which is just the same concept with inequalities reversed.
+\begin{dfn}[Infimum]
+Let $(X,\leq )$ be a preordered set, let $S\subseteq X$, and let $s\in X$.  Then, $x$ is a \emph{infimum}\index{Infimum} of $S$ iff
+\begin{enumerate}
+\item $x$ is a lower-bound of $S$, and
+\item if $x'$ is any other lower-bound of $S$, then $x'\leq x$.
+\end{enumerate}
+\begin{rmk}
+A you might have guessed, infima are also called \emph{greatest lower-bounds}\index{Greatest lower-bounds}.
+\end{rmk}
+\begin{rmk}
+Similarly, if $S$ has an infimum $x$, then we write $x\coloneqq \inf (S)$.
+\end{rmk}
+We extend the definition of infimum as follows.
+\begin{equation}
+\inf (S)\coloneqq \begin{cases}-\infty & \text{if }S\text{ is not bounded below} \\ \infty & \text{if }S=\emptyset \end{cases}.
+\end{equation}
+\end{dfn}
+
+So that's what suprema (and infima) are, but why should you care?  At least one reason is the following.  Consider the set
+\begin{equation}
+S\coloneqq \left\{ \left( 1+\tfrac{1}{n}\right) ^n:n\in \Z ^+\right\} \subseteq \Q .
+\end{equation}
+This set has two key properties (i) it is bounded above, and (ii) for every $x\in S$, there is some $x'\in S$ with $x<x'$.  Draw yourself a picture of what this must look like.  Though we don't know what a limit is yet, from the picture we see that pretty much any reasonable definition of a limit should have the property that
+\begin{equation}\label{1.4.7}
+\lim _n\left[ 1+\tfrac{1}{n}\right] ^n=\sup (S).
+\end{equation}
+Though we don't even have the definition to make sense of it yet, you'll recall that the answer to the left-hand side \emph{should} be $\e \coloneqq \exp (1)$, which of course is not rational.\footnote{Of course, we haven't proven that $\e$ is not rational, but right now, as we are only concerned with motivation, simply knowing that it is not rational is enough to justify the desire to have suprema.}  Thus, despite the fact that $S\subseteq \Q$, $\sup (S)\notin \Q$, and in fact, for us, $\sup (S)$ just doesn't make sense (yet).  Ultimately, because we want to do calculus, we want to be able to take limits.  In particular, because of things like \eqref{1.4.7}, we had better be able to take suprema as well.  It turns out that throwing in all least upper-bounds gives us all the limits we were missing.  This is really the motivation for demanding the existence of least upper-bounds:  we want to be able to take limits.
+
+Thus, the desired property which $\Q$ lacks is the following.
+\begin{dfn}[Least upper-bound property]
+A preordered set has the \emph{least upper-bound property}\index{Least upper-bound property} iff every nonempty subset that is bounded above has a least upper-bound.
+\end{dfn}
+Of course, we have the inequality-reversed notion as well.
+\begin{dfn}[Greatest lower-bound property]
+A preordered set has the \emph{greatest lower-bound property}\index{Greatest lower-bound property} iff every nonempty subset that is bounded below has a greatest lower-bound.
+\end{dfn}
+It turns out that it doesn't actually matter which property we require, but before we prove this, we require an important `lemma'.\footnote{``Lemma'' is in quotes because, while it is used to prove that a totally-ordered set has the least upper-bound property iff it has the greatest lower-bound property, it is useful in its own right.}
+\begin{prp}\label{prp1.4.11}
+Let $X$ be a totally-ordered set, let $S\subseteq X$ nonempty and bounded above, and let $x\in X$ be an upper-bound for $S$.  Then, $x=\sup (S)$ iff for every $x'\in X$ with $x'<x$, there is some $x''\in S$ with $x'<x''\leq x$.
+\begin{rmk}
+Note the hypothesis of \emph{totally}-ordered.
+\end{rmk}
+\begin{rmk}
+You should think of this as saying that, in particular, $S$ contains elements `arbitrarily close' to its supremum.
+\end{rmk}
+\begin{proof}
+$(\Rightarrow )$ Suppose that $x=\sup (S)$.  Let $x'\in X$ be such that $x'<x$.  We proceed by contradiction:  suppose that there is no $x''\in S$ such that $x'<x''\leq x$.  $x$ being an upper-bound of $S$, every $x''\in S$ is automatically less than or equal to $S$, so really this is just the same as saying that there is no $x''\in S$ with $x'<x''$.  \emph{By totality}, it thus follows that we must have $x''\leq x'$ for all $x''\in S$, in which case $x'$ is an upper-bound for $S$.  But $x'<x$, which contradicts the fact that $x$ is the \emph{least} upper-bound for $x$.  Thus, there must be some $x''\in S$ such that $x<x''\leq x$.
+
+\blankline
+\noindent
+$(\Leftarrow )$ Suppose that for every $x'\in S$ with $x'<x$, there is some $x''\in S$ with $x<x''\leq x$.  Let $x'\in X$ be any other upper-bound for $S$.  We would like to show that $x\leq x'$:  we proceed by contradiction:  suppose that it is not the case that $x\leq x'$.  By totality, this is equivalent to $x'<x$.  Then, by hypothesis, there must be some $x''\in S$ such that $x'<x''\leq x$, which contradicts the fact that $x'$ is an upper-bound of $S$.  Thus, it must be the case that $x=\sup (S)$.
+\end{proof}
+\end{prp}
+\begin{exr}
+Write down and prove the analogous version of the previous proposition for the infimum.
+\end{exr}
+\begin{prp}\label{prp1.4.12}
+Let $X$ be a totally-ordered set with the least upper-bound property and let $S\subseteq X$ be nonempty and bounded below.  Then, $T\coloneqq \left\{ x\in X:x\leq x'\text{ for all }x'\in S\right\}$ is nonempty and bounded above, and $\sup (T)=\inf (S)$.  In particular, $X$ has the greatest lower-bound property.
+\begin{rmk}
+Of course, switching inequalities around gives us the converse as well.
+\end{rmk}
+\begin{proof}
+As $S$ is nonempty, there is some $x_0\in S$.  From the definition of $T$, it follows that $x_0$ is an upper-bound of $T$, so that $T$ is bounded above.  $T$ is the set of all lower-bounds of $S$, and so as $S$ is bounded below, $T$ is nonempty.  Thus, because $X$ has the least upper-bound property, $T$ has a supremum $t\coloneqq \sup (T)$.
+
+We wish to show that $t$ is the infimum of $S$.  We must show two things:  (i) that it is a lower bound of $S$ and (ii) that it is at least as large as every other upper-bound.  To show the first, let $x\in S$.  We wish to show that $t\leq x$.  We proceed by contradiction:  suppose that $x<t$.  Then, by the previous proposition, because $t=\sup (T)$, there must be some $x'\in T$ such that $x<x'\leq t$.  But then it is not the case that $x'$ is less than or equal to every element of $S$:  a contradiction of the definition of $T$.  Thus, it must be the case that $t\leq x$, so that $t$ is a lower-bound of $S$.  Now let $t'\in X$ be some other lower-bound of $S$.  We would like to show that $t'\leq t$.  We proceed by contradiction:  suppose that $t<t'$.  Recall that $T$ itself is just the set of lower-bounds of $S$, so that both $t,t'\in T$.  But if this is true and also $t<t'$, then $t'$ is not a lower-bound of $T$:  a contradiction.  Thus, we must have that $t'\leq t$, so that $\sup (T)=t=\inf (S)$.
+\end{proof}
+\end{prp}
+\begin{rmk}
+Sometimes preordered sets which possess \emph{both} of these properties\footnote{Of course, in general the properties are not equivalent for partially-ordered sets which are not totally-ordered.} are called ``\emph{(dedekind) complete}''\index{Complete (preordered set)}\index{Dedekind complete}.  The term \emph{dedekind} complete is to contrast with the term ``\emph{cauchy} complete'', which we will meet in the \cref{chp5} \nameref{chp5}---see \cref{Completeness}.
+\end{rmk}
+
+\begin{rmk}
+It is not uncommon to see others using facts like ``$\sqrt{2}$ is not rational.'' as motivation for the introduction of the real numbers.  This is stupid.  If all we really cared about were numbers like $\sqrt{2}$, then we shouldn't be going from $\Q$ to $\R$, but rather from $\Q$ to $\A$, the \emph{algebraic numbers} (see \cref{dfn2.13}).  The point of $\R$ is not to be able to take square-roots; the point is to be able to take limits.
+\end{rmk}
+
+\subsection{Dedekind cuts and the real numbers}\label{sbs1.4.2}
+
+Everybody reading these notes probably already has some intuition about the real numbers, most likely gained from some sort of calculus course.  Let us suppose for a moment that we know what the real numbers are and that they make sense.  Given a real number $x_0\in \R$, how would you encode $x_0$ using only $\Q$?  The trick we use is to look at the set
+\begin{equation}\label{1.4.14}
+D_{x_0}\coloneqq \left\{ x\in \Q :x\leq x_0\right\} .
+\end{equation}
+This subset of $\Q$ uniquely determines $x_0$ because $\sup (D_{x_0})=x_0$.  The idea then is to use sets of the form \eqref{1.4.14} to define the real numbers.  The only thing we have to do for this to make sense in $\Q$ alone is to get rid of the reference to $x_0$.  We do that as follows.
+\begin{dfn}[Dedekind cut]
+Let $(X,\leq )$ be a preordered set and let $S\subseteq X$.  Then, $S$ is a \emph{Dedekind cut}\index{Dedekind cut} in $X$ iff
+\begin{enumerate}
+\item $S\neq \emptyset$, 
+\item $S\neq X$, and
+\item the set of all lower-bounds of the set of all upper-bounds of $S$ is equal to $S$ itself.
+\end{enumerate}
+\begin{rmk}
+The word \emph{cut} is used because, for example, $D_{x_0}$ of \eqref{1.4.14} is sort of thought as `cutting' $\Q$ at the point $x_0$.
+\end{rmk}
+\end{dfn}
+You'll note that $D_{x_0}$ of \eqref{1.4.14} is a Dedekind cut.  Indeed,
+\begin{prp}
+Let $(X,\leq )$ be a complete totally-ordered set and let $S\subseteq X$ be a Dedekind cut.  Then,
+\begin{equation}
+S=\left\{ x\in X:x\leq \sup (S)\right\} .
+\end{equation}
+\begin{proof}
+Let us write $S'\coloneqq \left\{ x\in X:x\leq \sup (S)\right\}$.  As $\sup (S)$ is in particular an upper-bound of $S$, we immediately have the inclusion $S\subseteq S'$.  On the other hand, suppose that $x\leq \sup (S)$.  We wish to show that $x\in S$.  As $S$ is a Dedekind cut, this is the same as showing that $x$ is less than or equal to every upper-bound of $S$, so, let $u\in X$ be an upper-bound of $S$.  We now wish to show that $x\leq u$.  We proceed by contradiction:  suppose that $u<x$ (this uses totality).  However, this of course contradicts the fact that $u$ is an upper-bound for $S$.  Thus, we must have that $x\leq u$, so that $S'\subseteq S$, so that $S=S'$.
+\end{proof}
+\end{prp}
+
+We will construct the real numbers as the set of all Dedekind cuts in $\Q$.\footnote{There is another construction of the reals that is commonly taught, namely, the ``cauchy sequence construction'' in which a real number is defined to be an equivalence class of cauchy sequences.  While this works, I find this more appropriate if one is thinking of the real numbers as a uniform space (in this case, a metric space), whereas we are currently thinking of everything as algebraic structures \emph{with order}.  Because of this, I find it more natural to complete the underlying partially-ordered set instead of the underlying uniform space (for one thing, we haven't actually put a uniform structure on $\Q$ yet).}
+\begin{thm}[Real numbers]\label{RealNumbers}
+There exists a nonzero complete totally-ordered field $\R$, the \emph{real numbers}\index{Real numbers}, which is unique up to isomorphism of preordered fields.
+\begin{rmk}
+Compare this with the analogous theorems for $\Z$ and $\Q$, \cref{Integers,RationalNumbers} respectively.  You'll note that, for uniqueness, we need not require that $\R$ be the `simplest' complete totally-ordered field which contains $\Q$, or even that $\R$ contain $\Q$ at all.  These will follow automatically from the fact that $\R$ is a complete totally-ordered field alone.  (In fact, we get that $\R$ obtains $\Q$ for free via \cref{prp1.4.52}.)
+\end{rmk}
+\begin{rmk}
+As you might have guessed, this is also a special case of a more general construction, which takes partially-ordered sets to \emph{complete} partially-ordered sets, known as the \emph{Dedekind-MacNeille completion}\index{Dedekind-MacNeille completion}.  Be careful, however:  in general the arithmetic operations do not extend to the Dedekind-MacNeille completion; see \cref{exm3.2.13}.
+\end{rmk}
+\begin{proof}
+\begin{savenotes}
+\Step{Define $\R$ as a set}
+Define
+\begin{equation}
+\R \coloneqq \left\{ D\in 2^{\Q}:D\text{ is a Dedekind cut}\right\} .
+\end{equation}
+
+\Step{Define a preorder on $\R$}
+We define
+\begin{equation}
+D\leq E\text{ iff }D\subseteq E.
+\end{equation}
+
+\Step{Show that $\leq$ is a total-order}
+$\leq$ is automatically a partial-order because set-inclusion is always a partial-order.  To show totality, let $D,E\in \R$.  If $D\leq E$, we are done, so suppose this is not the case.  We would like to show that $E\leq D$, i.e., that $E\subseteq D$, so let $e\in E$.  As $D$ is a Dedekind cut, it suffices to show that $e$ is a lower-bound of every upper-bound of $D$, so let $u\in \Q$ be an upper-bound of $D$.  We wish to show that $e\leq u$.  We proceed by contradiction:  suppose that $u<e$.  Now, $D$ is not a subset of $E$ (by hypothesis), there must be some $d\in D$ with $d\notin E$.  If we can show that $e\leq d$, then we will have $u<d$ (because $u<e$), a contradiction.  To show this itself (that $e\leq d$), we proceed by contradiction:  suppose that $d<e$.  Then, in particular, $d$ is less than every upper-bound of $E$, and so, as $E$ is a cut, we have $d\in E$:  a contradiction (recall that we have taken $d\notin E$).  Thus, we must that $e\leq d$, which completes the proof of totality.
+
+\Step{Show that $\leq$ is complete}
+As $\leq$ is a total-order, it suffices simply to show that $\leq$ has the least upper-bound property (by \cref{prp1.4.12}).  To show this, let $\mathcal{S}\subseteq \R$ be nonempty and bounded above.  Define
+\begin{equation}
+S\coloneqq \bigcup _{D\in \mathcal{S}}D.
+\end{equation}
+\begin{exr}
+Check that $S$ is in fact a Dedekind cut.
+\end{exr}
+We wish to show that $S=\sup \left( \mathcal{S}\right)$.  As $S$ is a superset of every element of $\mathcal{S}$, we certainly have that $S$ is an upper-bound for $\mathcal{S}$.  To show that it is a least upper-bound, let $S'$ be some other upper-bound of $\mathcal{S}$.  We wish to show that $S\leq S'$.  We proceed by contradiction:  suppose that $S\not \leq S'$.  Then, there is some $x\in S$ with $x\notin S'$.  As $x\in S$, there must be some $D\in \mathcal{S}$ with $x\in D$ (by the definition of $S$).  However, as $S'$ is an upper-bound of $\mathcal{S}$, we have that $D\subseteq S'$, which implies that $x\in S'$:  a contradiction.  Thus, we must have that $S\leq S'$, so that $S=\sup \left( \mathcal{S}\right)$.
+
+\Step{Define addition}
+Addition of elements of $\R$ is just set addition:\footnote{If ever you're wondering how to come up with these definitions, just think of what the answer should be for sets of the form \eqref{1.4.14}.}
+\begin{equation}
+D+E\coloneqq \left\{ d+e:d\in D,e\in E\right\} .
+\end{equation}
+\begin{exr}
+Check that $D+E$ is in fact a Dedekind cut.
+\end{exr}
+
+\Step{Show that $(\R ,+,0,-)$ is a commutative group}\label{stp1.4.18.6}
+Associativity and commutativity follow from the fact that set addition is associative and commutative.  The cut
+\begin{equation}
+0\coloneqq \left\{ x\in \Q :x\leq 0\right\}
+\end{equation}
+functions as an additive identity.\footnote{Of course this is abuse of notation.  It should not cause any confusion as one is a subset of $\Q$ and the other is an element of $\Q$.}
+\begin{exr}
+Check that $0$ is an additive identity.
+\end{exr}
+We define the additive inverse
+\begin{equation}
+-D\coloneqq \left\{ x-y:x\leq 0\text{ and }y\notin D\right\} .
+\end{equation}
+Note that we have
+\begin{equation}
+D+(-D)=\left\{ d+(x-y):d\in D,x\leq 0,y\notin D\right\} .
+\end{equation}
+As $y\notin D$, we have that $d<y$, and so $d-y<0$, and so $d+(x-y)<0$.  In the other direction, let $x\leq 0$.  Then,
+\begin{equation}
+x=d+\left( \left( x+(y-d)\right) -y\right) ,
+\end{equation}
+and so it suffices to show that we can choose $d\in D$ and $y\in D^{\comp}$ so that $x+(y-d)<0$.  To do this, let $\varepsilon >0$.  We wish to show that there is some $d\in D$ so that $d+\varepsilon \notin D$.  We proceed by contradiction:  suppose that $d+\varepsilon \in D$ for all $d\in D$.  Then, for $d_0\in D$ fixed, we have $d_0+\varepsilon \in D$, and so $d_0+2\varepsilon \in D$, and so $d_0+3\varepsilon \in D$, etc..  As $D$ is bounded (by any element in $D^{\comp}$), this is a contradiction.  Thus, there is some $d\in D$ such that $d+\varepsilon \notin D$.  Then, taking $\varepsilon =-x$, we have that $d-x\notin D$, and so we may take $y\coloneqq d-x$, so that $x+(y-d)=0\leq 0$ as desired.
+
+\Step{Show that $(\R ,+,0,\leq )$ is a totally-ordered commutative group}
+\begin{exr}
+Check that $D\leq E$ implies $D+F\leq E+F$.
+\end{exr}
+
+\Step{Define multiplication}
+Multiplication is more complicated.  For example, the product $0\cdot 0$ \emph{should} be $0\cdot 0=0$; however, the set product, $00\coloneqq \left\{ de:d\in 0,e\in 0\right\}$, isn't even bounded above.  We have to break-down the definition into cases.  To simplify things, let us temporarily use the notation
+\begin{equation}
+D_0^+\coloneqq \left\{ d\in D:0\leq d\right\} .
+\end{equation}Here, $\cdot$ will denote multiplication in $\R$ and juxtaposition will denote set multiplication.  We define
+\begin{equation}\label{1.4.31}
+D\cdot E\coloneqq \begin{cases}D_0^+E_0^+\cup 0 & \text{if }0\leq D,E  \\ -\left( (-D)\cdot E\right) & \text{if }D\leq 0,0\leq E \\ -\left( D\cdot (-E)\right) & \text{if }0\leq D,E\leq 0 \\ (-D)\cdot (-E) & \text{if }D,E\leq 0\end{cases}
+\end{equation}
+
+From the definition \eqref{1.4.31}, it suffices to show associativity and commutativity for the case $0\leq D,E$.  Then,
+\begin{equation}
+D\cdot (E\cdot F)=D\cdot \left( E_0^+F_0^+\cup 0\right) =D_0^+E_0^+F_0^+\cup 0=(D\cdot E)\cdot F,
+\end{equation}
+and similarly for commutativity.  The cut
+\begin{equation}
+1\coloneqq \left\{ x\in \Q :x\leq 1\right\}
+\end{equation}
+functions as a multiplicative identity.
+\begin{exr}
+Check that $1$ is a multiplicative identity.
+\end{exr}
+
+\Step{Show that the additive inverse distributes}\label{stp1.4.18.9}
+We wish to show that
+\begin{equation}\label{1.4.37}
+-(D+E)=(-D)+(-E).
+\end{equation}
+On one hand we have
+\begin{equation}
+-(D+E)=\left\{ x-y:x<0\text{ and }y\notin D+E\right\} .
+\end{equation}
+On the other hand,
+\begin{equation}
+\begin{split}
+(-D)+(-E) & =\left\{ a+b:a\in -D,b\in -E\right\} \\
+& =\left\{ (x_1-y_1)+(x_2-y_2):x_1,x_2<0;y_1\notin D;y_2\notin E\right\} \\
+& =\left\{ (x_1+x_2)-(y_1+y_2):x_1,x_2<0;y_1\notin D;y_2\notin E\right\} \\
+& =\left\{ x-(y_1+y_2):x<0,y_1\notin D,y_2\notin E\right\} .
+\end{split}
+\end{equation}
+Comparing this with \eqref{1.4.37} above, we see that it suffices to show that $y\notin D+E$ iff $y=y_1+y_2$ for $y_1\notin D$ and $y_2\notin E$.  To show this, let $y_1\in D^{\comp},y_2\in E^{\comp}$ and suppose that $y_1+y_2\in D+E$, so that $y_1+y_2=d+e$ for $d\in D,e\in E$.  Then, $y_2=e+(d-y_1)<e$, which implies that $y_2\in E$:  a contradiction.  Conversely, let $y\notin D+E$.  Let $\varepsilon >0$ and choose $d\in D$ such that $d+\varepsilon \notin D$.  Let $M\geq 2\varepsilon$ be such that $y-M\in D+E$ but $y-(M-\varepsilon )\notin D+E$.  Write $y-M=d'+e'$ for $d'\in D,e'\in E$.  Without loss of generality, assume that $d'\leq d$.  Then,
+\begin{equation}
+y-M=d'+e'=d+\left( e'-(d-d')\right) .
+\end{equation}
+As $d-d'\geq 0$, $e\coloneqq e'-(d-d')\in E$.  Then,
+\begin{equation}
+y-(M-\varepsilon )=d+(e+\varepsilon ).
+\end{equation}
+Therefore, as $y-(M-\varepsilon )\notin D+E$, it must be the case that $e+\varepsilon \notin E$.  Then,
+\begin{equation}
+y=\left( d+(M-\varepsilon )\right) +(e+\varepsilon ).
+\end{equation}
+As $d+(M-\varepsilon )\geq d+\varepsilon \notin D$, it follows that $d+(M-\varepsilon )\notin D$, so that indeed $y=y_1+y_2$ for $y_1\notin D$ and $y_2\notin E$.
+
+\Step{Show that $[E+F]_0^+=E_0^++F_0^+$ for $0\leq E,F$}
+If $e\in E,e\geq 0$ and $f\in F,f\geq 0$, then of course $e+f\in E+F,e+f\geq 0$.  Conversely, let $x\in E+F,x\geq 0$ and write $x=e+f$ for $e\in E,f\in F$.  As $x\geq 0$, we must have that either $e\geq 0$ or $f\geq 0$  Without loss of generality, assume the former.  If $f\geq 0$, we are done, so instead suppose that $f<0$.  Then, $x=(e+f)+0$.  As $e+f<e$, $e+f\in E$, and of course, as $x\geq 0$, $e+f\geq 0$, so that indeed $x\in E_0^++\{ 0\} \subseteq E_0^++F_0^+$.
+
+\Step{Show that $(\R ,+,0,-,\cdot ,1)$ is a cring}
+All that remains to be shown is distributivity.  Let $D,E,F\in \R$ and consider
+\begin{equation}
+D\cdot (E+F).
+\end{equation}
+Let us first do the case with $0\leq D,E,F$.  Then, by the previous step,
+\begin{equation}
+\begin{split}
+D\cdot (E+F) & =\left( D_0^+[E+F]_0^+\right) \cup 0=\left( D_0^+(E_0^++F_0^+)\right) \cup 0=\left( D_0^+E_0^++D_0^+F_0^+\right) \cup 0 \\
+& =D_0^+E_0^+\cup 0+D_0^+F_0^+\cup 0=D\cdot E+D\cdot F.
+\end{split}
+\end{equation}
+Because additive inverses distribute and the definition of multiplication, we may without loss of generality assume that $0\leq D,E+F$.  Thus, either $0\leq E$ or $0\leq F$.  Without loss of generality assume the former.  We have already done the case $0\leq F$, so let us instead assume that $F<0$.  Then,
+\begin{equation}
+\begin{split}
+D\cdot E+D\cdot F & =D\cdot \left( (E+F)+(-F)\right) +D\cdot F=D\cdot (E+F)+D\cdot F+D\cdot (-F) \\
+& =D\cdot (E+F)+D\cdot F+\left( -(D\cdot F)\right) =D\cdot (E+F),
+\end{split}
+\end{equation}
+where we have used distributivity of additive inverse in $D\cdot (-F)=D\cdot (-F+0)=-D\cdot F$.
+
+\Step{Show that $(\R ,+,0,-,\cdot ,1)$ is a field}
+All that remains to be shown is the existence of multiplicative inverses.  For $D\in \R$ not $0$, we define
+\begin{equation}
+D^{-1}\coloneqq \begin{cases}\left\{ y^{-1}:y\in D^{\comp}\right\} & \text{if }D>0 \\ -\left( (-D)^{-1}\right) & \text{if }D<0\end{cases}.
+\end{equation}
+To finish this step, it suffices to prove that $D\cdot D^{-1}=1$ for $D>0$.
+\begin{equation}
+D\cdot D^{-1}=D_0^+[D^{-1}]_0^+\cup 0.
+\end{equation}
+We would like to show that this is equal to $1\coloneqq \{ x\leq 1\}$.  Let $\varepsilon >0$ and choose $d\in D,d>0$ such that $d+\varepsilon \notin D$.  Thus, $D$ is bounded above by $d+\varepsilon$ and $D^{\comp}$ is bounded below by $d$.  It follows that $D^{-1}$ is bounded above by $d^{-1}$, so that $D_0^+[D^{-1}]_0^+$ is bounded above by $(d+\varepsilon )d^{-1}=1+\varepsilon d^{-1}$.  As $\varepsilon$ is arbitrary (and $d$ gets smaller as $\varepsilon$ gets smaller), it follows that in fact $D_0^+[D^{-1}]_0^+$ is bounded above by $1$, which shows that $D\cdot D^{-1}\subseteq 1$.  For the other inclusion, let $x\leq 1$.  Let $\varepsilon >0$ and choose $y\notin D$ so that $y-\varepsilon \in D$.  As $x<1$, $d\coloneqq x(y-\varepsilon )\in D$.  Thus,
+\begin{equation}
+D\cdot D^{-1}\ni \left( x(y-\varepsilon )\right) y^{-1}=x-\varepsilon xy^{-1}.
+\end{equation}
+As this is true for all $\varepsilon >0$, we must have that $x\in D\cdot D^{-1}$, which completes the proof of this step.
+
+\Step{Show that $(\R ,+,0,-,\cdot ,1)$ is a complete totally-ordered field}
+All that remains to be shown is that $0\leq D,E$ implies $0\leq D\cdot E$.  Of course, if $d\in D,d\geq 0$ and $e\in E,e\geq 0$, then $de\in D\cdot E$, so that $0\leq D\cdot E$.
+
+\Step{Show that $(\R ,+,0,-,\cdot ,1)$ is unique up to isomorphism of preordered fields}
+Let $R$ be another nonzero complete totally-ordered field.  By \cref{prp1.4.52}, $R$ contains a copy of $\Q \subseteq R$ (as well as $\R$ itself, $\Q \subseteq \R$.).  Let $x\in X$.  Thus, because both $R$ and $\R$ contain $\Q$, abusing notation, we may consider
+\begin{equation}
+D_x:=\left\{ q\in \Q :q\leq x\right\}
+\end{equation}
+both as a subset of $R$ and $\R$.\footnote{If you want to be pedantic about things, there is a subfield $Q\subseteq R$ together with an isomorphism of totally-ordered fields $\psi :Q\rightarrow \Q$, where $\Q \subseteq \R$.}  With this abuse, we define $\phi :R\rightarrow \R$ by
+\begin{equation}
+\phi (x):=\sup (D_x),
+\end{equation}
+where on the right-hande side, $D_x$ is regarded as a subset of $\R$ and the supremum is taken in $\R$.
+\begin{exr}
+Show that $\phi$ is an isomorphism of preordered fields.
+\end{exr}
+\end{savenotes}
+\end{proof}
+\end{thm}
+\begin{dfn}[Irrational numbers]
+An element $x\in \R$ is \emph{irrational}\index{Irrational numbers} iff $x\notin \Q$.
+\begin{rmk}
+In fact, it will be a little while before we can show that $\Q ^{\comp}$ is even nonempty.  For example, it is easy to show that there is no rational number whose square is $2$---but can you show that there \emph{is} a \emph{real} number whose square is $2$?  (See the subsubsection \textbf{Square-roots} in \cref{sbs3.3.3} \nameref{sbs3.3.3}.)
+\end{rmk}
+\end{dfn}
+
+\begin{exr}
+Let $A,B\subseteq \R$ be nonempty and bounded above.
+\begin{enumerate}
+\item Show that $\sup (A+B)=\sup (A)+\sup (B)$.
+\item Is it necessarily the case that $\sup (AB)=\sup (A)\sup (B)$?
+\end{enumerate}
+\end{exr}
+
+\section{Concluding remarks}
+
+There are a couple of themes that we started to see in this chapter that you should pay particular attention to.
+
+The first theme is that, if ever we want to have a certain object that just doesn't exist in the context in which we are working, enlarge the context in which you are working.  For example, when we wanted additive inverses but didn't have them, we went from $\N$ to $\Z$; when we wanted multiplicative inverses but didn't have them, we went from $\Z$ to $\Q$; and when we wanted limits but didn't have them, we went from $\Q$ to $\R$.
+
+The second theme you should take note of is the fact that we almost always defined an object by the properties that uniquely specify it.  The point is that it doesn't really matter at the end of the day whether $\R$ is a set of Dedekind cuts or equivalence classes of Cauchy sequences; all that matters is that it is a nonzero complete totally-ordered field.
+
+The third and final theme you should take note of (which is perhaps not quite as manifest as the other two) is that the morphisms matter just as much (if not more) than the objects themselves.  For example, in light of the second theme, we cannot even make sense of the idea of an object being unique without first talking about the morphisms.  More significantly is that if you keep an underlying set fixed, but change the relevant morphisms, you can completely different objects.  For example, if we consider $\Q$ and $\Z$ as crings, $(\Q ,+,0,\cdot ,1)$ and $(\Z ,+,0,\cdot ,1)$, $\Q$ and $\Z$ are totally different; on the other hand, if we forget the extra structure (or, to put it another way, change our morphisms from homomorphisms of rings to just ordinary functions) then $\Q$ and $\Z$ \emph{become the same object}, that is, $\Q \not \cong _{\Ring}\Z$ \emph{but} $\Q \cong \Z$.  The former is obvious (for example, $2$ has an inverse in $\Q$ but not in $\Z$).  As for the latter, we recommend to continue reading the following chapter\textellipsis

@@ -1,0 +1,104 @@
+So, first things first---fuck the riemann integral.  Seriously.  The only argument pro-riemann-integral is that it is easier.  What a ridiculous argument.  This is math, dude.  If you choose to do things because they're easy, you're in the wrong subject.  Moreover, I would argue that this is not even true---if you set things up right, you can literally \emph{define} the (lebesgue) integral to be the area (measure) under the curve.  Or, if you prefer, you can take a limit over the size of a partition of the sum of the areas of the rectangles corresponding to the subsets of the partition (the riemann integral).  Are you really going to sit here and try to argue that this is easier to teach?  I call bullshit.  And besides, if you're going to become a mathematician, you have to learn the lebesgue integral at some point anyways\textellipsis why learn something only to have to relearn it later?
+
+Okay, so now that my rant is out of the way, let's actually do some mathematics.
+
+\section{Measure theory}
+
+All of integration theory ultimately boils down to measure theory.  The definition of the integral itself is relatively easy.  In fact, the definition of abstract measure spaces is even easier.  There's really no question that writing down the definition of the lebesgue integral is \emph{significantly} easier than that of the riemann integral.  What is a bit tricky, however, is constructing specific measures.  In our case, we will primarily be concerned with constructing lebesgue measure (on $\R ^d$), and this is really the only part that is a bit tricky.  Before we get there though, we will present the theory of measure spaces, and then get to lebesgue measure in the next section.
+
+The intuition behind measure is actually quite easy---a measure is just an axiomatization of our intuition about notion of things like length, area, and volume.  
+
+\begin{dfn}[Measure]\label{measure}
+Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{measure}\index{measure} on $X$ is a function $\meas :2^X\rightarrow [0,\infty ]$ for which there exists a uniform base $\widetilde{\mathcal{B}}$ of borel covers of $X$ such that
+\begin{enumerate}
+\item \label{Measure.i}$\m (\emptyset )=0$;
+\item \label{Measure.ii}for every $\mathcal{B}\in \widetilde{\mathcal{B}}$, every element of $\mathcal{B}$ has the same measure, which we denote by $\meas (\mathcal{B})$\index[notation]{$\meas (\mathcal{B})$};
+\item (Subadditivity)\index{Subadditivity}\label{Measure.iii} for $\{ M_m:m\in \N \} \subseteq 2^X$,
+\begin{equation}
+\m \left( \bigcup _{m\in \N}M_m\right) \leq \sum _{m\in \N}\m (M_m),
+\end{equation}
+and furthermore, we have equality if the sets are disjoint and borel.
+\end{enumerate}
+\begin{rmk}
+If a uniform base has the property in \ref{Measure.ii}, then we shall refer to it as a \emph{uniformly-measurable base}\index{Uniformly-measurable base} and it's elements as \emph{uniformly-measurable covers}\index{Uniformly-measurable covers}.
+\end{rmk}
+\begin{rmk}
+Think about what \ref{Measure.ii} means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then \ref{Measure.ii} is saying that every $\varepsilon$-ball has to have the same measure.
+\end{rmk}
+\begin{rmk}
+Note that you definitely do not want to require \ref{Measure.ii} for \emph{all} uniform covers.  For example, in a metric space, by upward-closedness the collection of all $\varepsilon$-balls together with a single $2\varepsilon$-ball will also be a uniform-cover---we definitely do not want to require that a $2\varepsilon$ ball has the same measure as an $\varepsilon$-ball.
+\end{rmk}
+\begin{rmk}
+Note that we allow the measure of sets to be infinite.  This is incredibly important---for example, we will want $\meas (\R )=\infty$ (for lebesgue measure anyways).
+\end{rmk}
+\begin{rmk}
+As a consequence of this, we needn't worry about convergence in the third axiom.  As a matter of fact, we definitely want to allow this sum to diverge---think about what the measure of $\bigcup _{m\in \Z}(m,m+1)$ should be.
+\end{rmk}
+\begin{rmk}
+Warning:  This is completely nonstandard.  I have never seen this definition before.  Keep this in mind when consulting other references.
+\end{rmk}
+\end{dfn}
+\begin{displayquote}
+At some point in the near future, we will be doing arithmetic with $\infty$---for example, what should the measure of $\R \times \{ 0\}$ in $\R ^2$ be?  Of course, from our definition of product measures, this will turn out to be $\infty \cdot 0$.  We hence declare that
+\begin{equation}
+\infty \cdot 0\coloneqq 0\eqqcolon 0\cdot \infty .
+\end{equation}
+There are other arithmetic notions we have to technically define (e.g.~$x+\infty=\infty$), but this is the only nonobvious one.
+\end{displayquote}
+\begin{exm}[The zero measure]
+Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space and define $\meas :2^X\rightarrow [0,\infty ]$ by $\meas (S)\coloneqq 0$.  How terribly interesting.
+\end{exm}
+\begin{exm}[The counting measure]
+Let $\coord{X,\widetilde{\mathcal{U}}}$ be a discrete uniform space (so that the set which a single cover, the cover by singletons, forms a uniform base), and for $S\subseteq X$ define $\meas (S)\coloneqq \abs{S}$, that is, the cardinality of $S$.
+\begin{rmk}
+This is actually incredibly important, as we shall see that sums are just integrals with respect to the counting measure.
+\end{rmk}
+\end{exm}
+Before we get to any examples more interesting than this, we will first have to develop a bit of theory.
+\begin{prp}
+Let $\meas$ be a measure on a uniform space $X$ and let $S\subseteq T\subseteq X$ be borel.  Then, $\meas (S)\leq \meas (T)$.
+\begin{proof}
+We have that $T=S\cup (T\setminus S)$, and so as all of these sets are borel, we have
+\begin{equation}
+\meas (T)=\meas (S)+\meas (T\setminus S)\geq \meas (S).
+\end{equation}
+\end{proof}
+\end{prp}
+\begin{prp}
+Let $\meas$ be a measure on a uniform space $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}$ and let $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$.  Then, if $\mathcal{B}\preceq \mathcal{C}$ (and in particular if $\mathcal{B}\llcurly \mathcal{C}$), then $\meas (\mathcal{B})\leq \meas (\mathcal{C})$.
+\begin{proof}
+Let $B\in \mathcal{B}$.  Then, there is some $C\in \mathcal{C}$ be such that $B\subseteq C$.  Then, $B$ and $C$ are both borel by definition (of a uniformly-measurable base), and so by the previous proposition, we have $\meas (\mathcal{B})\coloneqq \meas (B)\leq \meas (C)\eqqcolon \meas (\mathcal{C})$.
+\end{proof}
+\end{prp}
+Our first relatively significant result, which we shall use to define lebesgue measure on $\R ^d$, is that, to define a measure, it suffices to define a measure on just the sets in a given uniform base.
+\begin{prp}
+Let $X$ be a uniform space with uniform base $\widetilde{\mathcal{B}}$ and let $\meas :\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}\rightarrow [0,\infty ]$ be such that
+\begin{enumerate}
+\item $\meas (\emptyset )=0$; and
+\item for every $\mathcal{B}\in \widetilde{\mathcal{B}}$, every element of $\mathcal{B}$ has the same measure.
+\end{enumerate}
+Then, there exists a unique measure on $X$ which agrees with $\meas$ for elements of $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
+\begin{rmk}
+These are just verbatim the two three axioms of a measure.  The point is that, to define a measure, it suffices to define them on sets coming from a given uniform base.  Furthermore, you also do not have to check subadditivity of your original definition.
+\end{rmk}
+\begin{proof}
+\Step{Construct the measure}
+Let $S\subseteq X$ and define
+\begin{equation}
+\meas _{\mathcal{B}}(S)\coloneqq \inf \left\{ \sum _{m\in \N}\meas (B_m):S\subseteq \bigcup _{m\in \N}B_m\in \mathcal{B}\text{.}\right\} .
+\end{equation}
+
+The statement that $\widetilde{\mathcal{B}}$ is a uniform base just means that it is downward-directed with respect to star-refinement.  In other words, it means that it is a \emph{directed set} with respect to \emph{reverse} star-refinement.  Thus,
+\begin{equation}
+\widetilde{\mathcal{B}}\ni \mathcal{B}\mapsto \meas _{\mathcal{B}}(S)\in [0,\infty ]
+\end{equation}
+is a net.  If it is always $\infty$, then obviously it converges to $\infty$.\footnote{$[0,\infty ]$ is a totally-ordered set and is equipped with the order topology, so that convergence to $\infty$ does make sense.}  Otherwise, it is eventually contained in $[0,\infty )\subseteq \R$, and we can apply the \nameref{MonotoneConvergenceTheorem} (\cref{MonotoneConvergenceTheorem})---it is bounded below by $0$ and nonicreasing, and therefore converges.  Thus, we define
+\begin{equation}
+\breve{\meas}(S)\coloneqq \lim _{\mathcal{B}}\meas _{\mathcal{B}}(S).
+\end{equation}
+(The breve is there to distinguish it from what we started with.  Once we show they agree, we will drop it.)
+
+\Step{Show that this agrees with what we started with}
+Let $B\in \mathcal{B}$.  We must show that $\breve{\meas (B)}=\meas(\mathcal{B})$.
+\end{proof}
+\end{prp}

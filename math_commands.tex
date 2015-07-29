@@ -1,0 +1,215 @@
+\usepackage{xparse}
+
+% 'Punctuation'
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand{\blank}{{-}}
+\newcommand{\blankdot}{{\cdot}}
+\newcommand{\comma}{{,}}
+\DeclarePairedDelimiter{\coord}{\langle}{\rangle}
+
+% Operations
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\CO}{CO}
+\newcommand{\Cech}{\check{\mathrm{C}}}
+\newcommand{\Cl}{\mathcal{C}\ell}
+\DeclareMathOperator{\Cls}{Cls}
+\DeclareMathOperator{\Cmp}{Cmp}
+\DeclareMathOperator{\co}{co}
+\renewcommand{\c}{\mathrm{c}}
+\newcommand{\comp}{\mathsf{c}}
+\DeclareMathOperator{\Char}{Char}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\csch}{csch}
+\newcommand{\Curl}{\vec{\nabla}\times}
+\newcommand{\Div}{\vec{\nabla}\cdot}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\diam}{diam}
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\EV}{E}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Erf}{Erf}
+\DeclareMathOperator{\Gal}{Gal}
+\newcommand{\Grad}{\vec{\nabla}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\Index}{Index}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\MaxSpec}{MaxSpec}
+\DeclareMathOperator{\Mor}{Mor}
+\newcommand{\m}{\mathrm{m}}
+\newcommand{\meas}{\m}
+\NewDocumentCommand{\metric}{o o}{\IfNoValueTF{#1}{\IfNoValueTF{#2}{\abs{\blankdot \comma \blankdot}}{\abs*{\blankdot \comma \, #2}}}{\IfNoValueTF{#2}{\abs*{#1\comma \blankdot}}{\abs*{#1\comma \, #2}}}}
+\newcommand{\mmod}[1]{\left( \mathrm{mod}\, #1\right)}
+\DeclareMathOperator{\Nil}{Nil}
+\NewDocumentCommand{\norm}{o}{\IfNoValueTF{#1}{\abs{\blankdot}}{\abs*{#1}}}
+\renewcommand{\o}{\mathrm{o}}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\q}{\mathrm{q}}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Res}{Res}
+\newcommand\restr[2]{{% we make restriction an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+%  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Star}{Star}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\T}{T}
+\DeclareMathOperator{\Tp}{Tp}
+\DeclareMathOperator{\TZero}{T0}
+\NewDocumentCommand{\tangent}{o o}{\T _{#2}(#1)}    % For tangent space
+\DeclareMathOperator{\tp}{tp}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\tr}{tr}
+
+\makeatletter
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\def\mathabx@undefine#1{\let#1=\undefined}%
+\mathabx@undefine{\prod}
+\DeclareMathSymbol{\prod}   {1}{mathx}{"B1}
+\mathabx@undefine{\coprod}
+\DeclareMathSymbol{\coprod} {1}{mathx}{"B2}
+\makeatother % The preceding lines are to use the symbols \prod and \coprod from mathabx package (mathptmx disallows \coprod by default for some reason, also use \prod from mathabx for consistency)
+
+% Relations
+\DeclareFontFamily{U}{mathb}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathb}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * mathb
+      <10.95> mathb10 <12> <14.4> <17.28> <20.74> <24.88> mathb12
+      }{}
+\DeclareSymbolFont{mathb}{U}{mathb}{m}{n}
+\DeclareMathSymbol{\llcurly}     {3}{mathb}{"CE} % The preceding lines are to use just the symbol \llcurly from mathabx package (which itself conflicts with amsmath)
+
+\newcommand*{\llcurlyeq}{\mathrel{\vbox{\offinterlineskip\hbox{\scalebox{.9}{$\llcurly$}}\vskip-.6ex\hbox{$-$}\vskip-.75ex}}}
+
+\newcommand{\st}{\ensuremath{\text{ s.t.~}}}
+
+% Constants
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\im}{\mathrm{i}\text{\hspace{1pt}}}
+
+% 'Sets'
+\newcommand{\A}{\mathbb{A}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Categories
+\newcommand{\Ab}{\mathsf{Ab}}
+\newcommand{\Alg}{\mathsf{Alg}}
+\newcommand{\Cat}{\mathsf{Cat}}
+\newcommand{\Com}{\mathsf{Com}}
+\newcommand{\Crng}{\mathsf{Crng}}
+\newcommand{\Grp}{\mathsf{Grp}}
+\newcommand{\Mag}{\mathsf{Mag}}
+\newcommand{\Met}{\mathsf{Met}}
+\newcommand{\Pre}{\mathsf{Pre}}
+\newcommand{\Rg}{\mathsf{Rg}}
+\newcommand{\Rig}{\mathsf{Rig}}
+\newcommand{\Ring}{\mathsf{Ring}}
+\newcommand{\Rng}{\mathsf{Rng}}
+\newcommand{\Semi}{\mathsf{Semi}}
+\newcommand{\Set}{\mathsf{Set}}
+\newcommand{\Simp}{\mathsf{Simp}}
+\newcommand{\SN}{\mathsf{SN}}
+\newcommand{\Top}{\mathsf{Top}}
+\newcommand{\Uni}{\mathsf{Uni}}
+\newcommand{\Vect}{\mathsf{Vect}}
+
+% Custom environments
+\NewDocumentEnvironment{textequation}{o}{
+    \IfNoValueTF{#1}{%
+        \ntextequation%
+    }%
+    {%
+        \ytextequation{#1}%
+    }
+}
+{
+    \IfNoValueTF{#1}{%
+        \endntextequation%
+    }%
+    {%
+        \endytextequation%
+    }%
+}
+\NewEnviron{ytextequation}[1]{%
+    \begin{equation}\label{#1}%
+        \pbox{.875\textwidth}{%
+            \BODY%
+        }%
+    \end{equation}
+}
+\NewEnviron{ntextequation}{%
+    \begin{equation}%
+        \pbox{.875\textwidth}{%
+            \BODY%
+        }%
+    \end{equation}
+}
+\NewEnviron{textequation*}{%
+    \begin{equation*}%
+    \pbox{.9\textwidth}{%
+    \BODY%
+    }%
+    \end{equation*}
+}
+
+\newenvironment{solution}
+    {\proof[Solution]}
+    {\endproof}
+    
+% Custom commands
+\newcommand{\blankline}{\vspace{\baselineskip}}
+
+\newcounter{step}
+\crefname{step}{Step}{Steps}
+\newcommand{\Step}[1]{%
+    \refstepcounter{step}%
+    %
+    \ifthenelse{\value{step}=1}{}{%
+        \par%
+        \blankline
+    }
+    \noindent
+    \textsc{Step  \thestep :  #1}
+    
+    \noindent
+}
+
+% Re-defines proof environment to reset step counter
+\makeatletter
+\let\oldproof\proof
+\def\proof{\setcounter{step}{0}\@ifnextchar[\proof@i \proof@ii}
+\def\proof@i[#1]{\proof[#1]}
+\def\proof@ii{\oldproof}
+\makeatother

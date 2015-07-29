@@ -1,0 +1,350 @@
+Finally we are ready to begin our study of calculus proper.  We could have started this awhile ago, but we really needed certain facts about continuity, uniform convergence, etc.~before we could address all the facts we care about related to differentiation.  This thus led us to a relatively broad study of the most general spaces\footnote{Meh, basically anyways} in which these notions makes sense.  For the time being, however, we return to $\R$.
+
+\section{Tensors and abstract index notation}
+
+\begin{displayquote}
+Throughout this chapter, all vector spaces will be finite-dimensional and \emph{real}.  For the remainder of this \emph{section}, $V$ and $W$ will always denote such vector spaces.  We omit proofs in this section under the assumption that you have either already seen the results or can prove them on your own if you so desired.
+\end{displayquote}
+
+We plan to do differentiation in $\R ^d$, and to do this (instead of just in $\R$), it will be useful to know some basic facts about linear algebra.  The real motivation for taking this small side route is that we want to use Penrose's \emph{abstract index notation}.\footnote{This is conceptually different, but mechanically very similar to Einstein's index notation.  You might say that abstract index notation is choice-free Einstein index notation (the choice of course being a choice of basis).}
+
+\begin{displayquote}
+If you don't understand the details of this section your first time through, that's fine.  Learn what you can, and then come back as you need to when the concepts come up in the actual differentiation part of the chapter.
+\end{displayquote}
+
+We first discuss the \emph{dual space} and \emph{tensor product}.
+\begin{dfn}[Dual space]\label{DualSpace}
+The \emph{dual space}\index{Dual space} of $V$, $V^{\dagger}$, is defined to be
+\begin{equation}
+V^{\dagger}\coloneqq \Mor _{\Vect _{\R}}(V,\R ).
+\end{equation}
+$V^{\dagger}$ has the structure of a vector space by defining addition and scalar multiplication pointwise.  The elements of $V^{\dagger}$ are \emph{linear functionals}\index{Linear functionals} or \emph{covectors}\index{Covector}.
+\begin{rmk}
+Though we have not precisely defined in yet, the category $\Vect _F$, for $F$ a field, is the category whose objects are vector fields over $F$ and whose morphisms are linear transformations.  Thus, $\Mor _{\Vect _{\R}}(V,\R )$ is our fancy-schmancy notation for the vector space of linear functions from $V$ into $\R$.
+\end{rmk}
+\begin{rmk}
+In other words, the elements of $V^{\dagger}$ take in elements of $V$ and spit out numbers.  This is actually not that foreign of a concept---for example, the derivative takes in a vector (the direction in which to differentiate) and spits out a number (the directional derivative in that direction).
+\end{rmk}
+\begin{rmk}
+We reserve the notation $V^*$ for the \emph{conjugate-dual} (something we won't see in these notes)---this is why we write $V^{\dagger}$ instead of $V^*$.
+\end{rmk}
+\begin{rmk}
+If $V$ comes with a topology, you're only going to want to look at the \emph{continuous} linear functionals.  Of course, you can look at all of them (including the discontinuous ones), but in comparison this space will be an ugly beast of a motherfucker.\footnote{Can you tell I write not much differently from how I speak?  ;-)}
+\end{rmk}
+\end{dfn}
+Of critical importance is that the dual of the dual is the original vector space.\footnote{Careful:  It will frequently be the case that $V^{\dagger}$ \emph{is} isomorphic to $V$, but in a noncanonical way.  On the other hand $(V^{\dagger})^{\dagger}$ and $V$ are \emph{canonically isomorphic}.  The way to make this intuition precise requires more category theory than is probably helpful.  Suffice it to say, the idea is to show that the `constructions' (read ``functors'') are isomorphic, not the objects themselves.}
+\begin{prp}\label{prp5.1.4}
+The map $V\ni v\mapsto \phi _v\in (V^\dagger )^\dagger$, where $\phi _v:V\rightarrow \R$ is defined by
+\begin{equation}
+\phi _v(\omega )\coloneqq \omega (v)
+\end{equation}
+is an isomorphism.
+\begin{rmk}
+Warning:  This is \emph{false} in infinite dimensions.  You will see that we show that this map is injective and linear, and so by the Rank-Nullity Theorem (something specific to finite-dimensions) is an isomorphism.
+\end{rmk}
+\end{prp}
+\begin{dfn}[Tensor product]\label{TensorProduct}
+Let $V$ and $W$ be finite-dimensional real vector spaces.  Then, the \emph{tensor product}\index{Tensor product (of vector spaces)} of $V$ and $W$, $V\otimes W$\index[notation]{$V\otimes W$} is defined to be the set of all functions $T:V^{\dagger}\times W^{\dagger}\rightarrow \R$ such that
+\begin{enumerate}
+\item for each fixed $\omega \in V^{\dagger}$, the map $\eta \mapsto T(\omega ,\eta )$ is linear; and
+\item for each fixed $\eta \in W^{\dagger}$, the map $\omega \mapsto T(\omega ,\eta )$ is linear.
+\end{enumerate}
+Let $v\in V$ and $w\in W$.  Then, the \emph{tensor product}\index{Tensor product (of tensors)}, $v\otimes w\in V\otimes W$\index[notation]{$v\otimes w$}, is defined by
+\begin{equation}
+[v\otimes w](\omega ,\eta )\coloneqq \omega (v)\eta (w).
+\end{equation}
+\begin{rmk}
+To clarify, there are tensor products of \emph{vector spaces}, and then there are tensor products of \emph{vectors themselves}.  The tensor product of two vectors `lives in' the tensor product of the corresponding vector spaces.  And in fact, \emph{everything} in $V\otimes W$, while \emph{not} of the form $v\otimes w$ itself necessarily, can be written as a finite sum of elements of this form---see \cref{prp5.1.8} below.  (Elements of the form $v\otimes w$ are sometimes called \emph{pure} or \emph{simple}, as opposed to, e.g.~, $v_1\otimes w_1+v_2\otimes w_2$).
+\end{rmk}
+\begin{rmk}
+In other words, $V\otimes W$ is the set of all \emph{bilinear}\index{Bilinear} maps on $V^{\dagger}\times W^{\dagger}$, where bilinear means that, if you fix all arguments except one, you obtain a linear map.
+\end{rmk}
+\begin{rmk}
+In practice, I find it easier to think of the tensor product as the vector space spanned by guys of the form $v\otimes w$ (as opposed to bilinear maps on the cartesian product of the duals---ick).
+\end{rmk}
+\begin{rmk}
+This is neither the most general nor the most elegant definition of the tensor product.  The `right' way to define the tensor product is, as usual, by finding the properties which uniquely characterize it.  Maybe I will update the notes at a later date to include this, but my personal feeling right now is that this would take us a bit too far astray (after all, we're not studying linear algebra or tensors for their own sake---for us, they're just a tool to do calculus).
+\end{rmk}
+\end{dfn}
+\begin{prp}\label{prp5.1.8}
+$V\otimes W=$ is the span of $\{ v\otimes w:v\in V,\ w\in W\}$.
+\end{prp}
+\begin{dfn}[Tensor]\label{Tensor}
+A \emph{tensor}\index{Tensor} of rank $\coord{k,l}$ over $V$ is an element of
+\begin{equation}
+\underbrace{V\otimes \cdots \otimes V}_k\otimes \underbrace{V^{\dagger}\otimes \cdots \otimes V^{\dagger}}_l
+\end{equation}
+$k$ is the \emph{contravariant rank}\index{Contravariant rank} and $l$ is the \emph{covariant rank}\index{Covariant rank}.  If $l=0$, then the tensor is \emph{contravariant}\index{Contravariant tensor}, and if $k=0$, then the tensor is \emph{covariant}\index{Covariant tensor}.  If $T$ is a tensor of rank $\coord{k,l}$, then we shall write
+\begin{equation}
+T\indices{^{a_1\cdots a_k}_{b_1\cdots b_l}}
+\end{equation}
+to help remind us what type of tensor this is.\footnote{Don't let the indices mislead you---there are no choices being made.  Everything is ``coordinate-free'', even later when we start manipulating the indices themselves---it's still all coordinate-free.}
+\begin{rmk}
+\emph{Do not be sloppy and not stagger your indices!}  If you do, you will eventually make a mistake.  For example, later we will be raising and lowering indices.  Suppose I start with $T^{ab}$, I lower to obtain $T_b^a$, and then I raise again to obtain $T^{ba}$---I should obtain the same thing, but in general $T^{ab}\neq T^{ba}$, and so I have an error.  It may seem obvious to the point of being silly when I point it out like this, but this is a mistake that is easy to make if there is a big long computation in between the raising and lowering (especially if it's more than just $a$ and $b$ floating around).  And of course, you will never have this problem if you stagger:  $T^{ab}$ goes to $T\indices{^a_b}$ goes back to $T^{ab}$.
+\end{rmk}
+\begin{rmk}
+I claim that this is likewise not that foreign of a concept.  In fact, there are so many examples you are familiar with that I don't even want to put them in a remark, so see the next example.for example, vectors (written $v^a$) themselves are tensors of type $\coord{1,0}$, covectors (or linear functionals) (written $\omega _a$) are of type $\coord{0,1}$, the dot product (written $g_{ab}$) is a tensor of type $\coord{0,2}$ (it takes in two vectors and spits out a number), linear transformations (written $T\indices{^a_b}$ are tensors of type $\coord{1,1}$,\footnote{It takes in a single vector an spits out a linear map from $V^{\dagger}$ to $\R$, that is, another vector (by \cref{prp5.1.4}).}
+\end{rmk}
+\end{dfn}
+\begin{exm}
+\begin{enumerate}
+Disclaimer:  While none of the examples themselves make use of things we haven't done yet, some of the notation does (e.g.~$v^a\omega _a$).  Read onwards and come back later if this really bothers you.
+\item Vectors (written $v^a$) themselves are tensors of type $\coord{1,0}$.
+\item Covectors (or linear functionals) (written $\omega _a$) are of type $\coord{0,1}$.  For $\omega$ a linear functional and $v$ a vector, $\omega (v)$ is written as $v^a\omega _a$.
+\item The dot product (written $g_{ab}$) is a tensor of type $\coord{0,2}$---it takes in two vectors and spits out a number, written $v\cdot w=v^aw^bg_{ab}$.
+\item Linear transformations (written $T\indices{^a_b}$) are tensors of type $\coord{1,1}$---it takes in a single vector and spits out another vector (written $v^a\mapsto T\indices{^a_b}v^b$).  Note that it is $T\indices{^a_b}$ and not $T\indices{^b_a}$---your convention could go either way, but in the convention we choose the indices that are contracted during composition are closer together.
+\end{enumerate}
+\end{exm}
+
+There are three key constructions involving tensors that we will need, the \emph{tensor product}, \emph{contraction}, and the \emph{dual vector}.  The tensor product we have already done in \cref{TensorProduct},\footnote{Well, I suppose we have to define the tensor products of \emph{arbitrary} tensors, as opposed to just vectors, but the definition in general is just an extension of the one we've already written down.} and so we simply explain the how to write the tensor product in index notation.
+\begin{displayquote}
+The tensor product of $[T_1]\indices{^{a_1\ldots a_{k_1}}_{b_1\ldots b_{l_1}}}$ and $[T_2]\indices{^{a_1\ldots a_{k_2}}_{b_1\ldots b_{l_2}}}$ is denoted
+\begin{equation}
+[T_1]\indices{^{a_1\ldots a_{k_1}}_{b_1\ldots b_{l_1}}}[T_2]\indices{^{a_1\ldots a_{k_2}}_{b_1\ldots b_{l_2}}}.
+\end{equation}
+That is, you literally just juxtapose them.
+\end{displayquote}
+We now turn to \emph{contraction}.
+\begin{dfn}[Contraction]\label{Contraction}
+Let $T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}\coloneqq [v_1]^{a_1}\cdots [v_k]^{a_k}[\omega _1]_{b_1}\cdots [\omega _l]_{b_l}$ be a tensor of rank $\coord{k,l}$ (recall (\cref{prp5.1.8}) that every tensor can be written as a sum of tensors of this form).  Then, the \emph{contraction}\index{Contraction} of $T$ along the $a_i$ and $b_j$ index is defined to be
+\begin{equation}
+\begin{multlined}
+T\indices{^{a_1\ldots a_{i-1}a_{i+1}\ldots a_k}_{b_1\ldots b_{j-1}b_{j+1}\ldots b_l}}\coloneqq \\ \omega _j(v_i)\cdot [v_1]^{a_1}\cdots [v_{i-1}]^{a_{i-1}}[v_{i+1}]^{a_{i+1}}\cdots [v_k]^{a_k}[\omega _1]_{b_1}\cdots [\omega _{j-1}]_{b_{j-1}}[\omega _{j+1}]_{b_{j+1}}\cdots [\omega _l]_{b_l}.
+\end{multlined}
+\end{equation}
+The contraction of tensor that is a sum of simple tensors is defined to be the sum of the contraction of those simple tensors.
+\begin{rmk}
+In general, the way one can `decompose' a general tensor as a sum of simple ones is not unique, so we must technically check that this is well-defined.
+\end{rmk}
+\begin{rmk}
+This might \emph{look} atrocious, but it's actually quite simple.  Covectors take in vectors and spit-out numbers, and so the contraction of a tensor product in its $a_i$ and $b_j$ index is formed by plugging in the $i^{\text{th}}$ vector into the $j^{\text{th}}$ covector.
+\end{rmk}
+\begin{rmk}
+Keep in mind that you can \emph{only} contract upper-indices (contravariant) with lower (covariant) ones.
+\end{rmk}
+\begin{rmk}
+A couple of examples:  The only possible contraction of the tensor $v^a\omega _b$ is written $v^a\omega _a$ and this of course is just $\omega (v)$.  If $T\indices{^a_b}$ is a linear transformation and $v^a$ is a vector, then the contraction $T\indices{^a_b}v^b$ is just $T(v)$, that is, the image of $v$ under the linear transformation $T$.
+\end{rmk}
+\begin{rmk}
+The index $k$ in $[v_k]^{a_k}$ is part of the name of the vector---the entire name is $v_k$, and then the notation $[v_k]^{a_k}$ reminds us that $v_k$ is a $\coord{1,0}$-tensor, i.e.~just a vector.
+\end{rmk}
+\end{dfn}
+We need one more ingredient before we can get to actual differentiation, namely that of a \emph{metric}.
+\begin{dfn}[Metric (on a vector space)]\label{MetricVectorSpace}
+A \emph{metric}\index{Metric (on a vector space)} $g$ on $V$ is a covariant tensor of rank $2$ such that
+\begin{enumerate}
+\item \label{MetricVectorSpace.Symmetry}(Symmetry) $g(v_1,v_2)=g(v_2,v_1)$; and
+\item \label{MetricVectorSpace.Nonsingularity}(Nonsingularity)\index{Nonsingular (metric)} the map from $V$ to $V^{\dagger}$ defined by $v\mapsto g(v,\blankdot )$, where $g(v,\blankdot )$ is the linear functional which sends $w$ to $g(v,w)$, is an isomorphism of vectors spaces.
+\end{enumerate}
+\begin{rmk}
+If $v^a$ is a vector, then we write $v_a\coloneqq g_{ab}v^b$.  $v_a$ is the \emph{dual vector}\index{Dual vector} (which itself is not a vector---it's a covector) of $v^a$.  \emph{Nonsingualirty} is key because it allows us to reverse this process.  If $\omega _a$ is a covector, then because the map $v^a\mapsto v_a$ is an \emph{isomorphism}, there is a unique vector, written $\omega ^a$, that is equal to $\omega _a$ under this map.
+\end{rmk}
+\begin{rmk}
+\ref{MetricVectorSpace.Symmetry} can be written $g_{ab}=g_{ba}$.  Also note that $g(v_1,v_2)=[v_1]^a[v_2]^bg_{ab}$.
+\end{rmk}
+\begin{rmk}
+The idea of a notion of a metric on a vector space and a metric on a set (in the context of uniform space theory) have little to nothing to do with each other.  It is merely a coincidence of terminology that is so ingrained that even I dare not go against it.
+\end{rmk}
+\begin{rmk}
+The term ``metric'' in this sense of the word should really not be thought of as a sort of distance, but rather as a sort of dot product.  Indeed, you can verify that the dot product is a metric, and furthermore, in a sense that we don't bother to make precise, every positive-definite metric (on a vector space) is equivalent to the usual euclidean dot product.  There is \emph{some} connection with the other notion of metric, however---positive-definite metrics give us norms (the square-root $g(v,v)$), which in turn gives us a metric (in the other sense).
+\end{rmk}
+\begin{rmk}
+Nonsingularity is usually replaced with the requirement that $g(v,w)=0$ for all $w$ implies that $v=0$ (called \emph{nondegeneracy}\index{Nondegenrate (metric)}.  In finite dimensions, this is equivalent to nonsingularity (by the Rank-Nullity Theorem).  In infinite dimensions, however, they are not equivalent, and it is nonsingularity that we want (so that we can raise and lower indices).
+\end{rmk}
+\end{dfn}
+It's worth nothing that, everything \emph{except} raising and lowering indices we can do without a metric.  To raise and lower indices, we do need that \emph{extra} structure.  In particular, if you pick a different metric, then your meaning of $v_a$ will change even though the metric does not appear explicitly in this notation.
+
+In summary:
+\begin{enumerate}
+\item The tensor product of two vectors $v^a$ and $w^a$, written $v^aw^b$, is defined to be the bilinear map that sends the pair of covectors $\coord{\omega _a,\eta _a}$ to $(\omega _av^a)(\eta _aw^a)$.  In practice, it's not particularly helpful to think of what this is\footnote{When you add $2$ to $3$ do you think about $2$ being an equivalence class of sets with respect to the equivalence relation of isomorphism in the category of sets?  Here, I'll help you out:  No, you do not.}---in practice what matters is can you manipulate them.
+\item A general tensor of rank $\coord{k,l}$is an element in the tensor product of $k$ copies of $V$ with $l$ copies of $V^{\dagger}$.
+\item The definition of the tensor product of vectors can be extended to the tensor product of any tensors.  In index notation, this is denoted simply by juxtaposition.
+\item We can contract indices.
+\item If we have a metric, we can also raise and lower indices.
+\end{enumerate}
+
+\section{The definition}
+
+One thing that I personally found conceptually confusing with differentiation in $\R ^d$ itself that was elucidated for me when passing to the study of more general manifolds was the distinction between a \emph{vector} and a \emph{point}.  The problem in $\R ^d$ of course is that the space of points and the space of factors are effectively the same thing, they are both given by a $d$-tuple of real numbers, when in fact, they are really playing quite different roles.  The points tell you ``where'' we are and the vectors tell you ``what direction'' to go in.  In a general manifold, the points that tell you ``where'' form the points of the space itself and the vectors do \emph{not} live in the entire space itself, but rather the tangent spaces.
+
+Thus, while we have no intention of doing manifold theory in general,\footnote{In contrast to topology, for example, you do have to prove essentially all of your results in $\R ^d$ first and \emph{then} extend them to arbitrary manifolds, whereas in principle you can prove all the results about topology you ever wanted without even mentioning $\R$.  This is one reason among others why we do general topology but not manifold theory.} we will make use of some suggestive notation that comes from the theory.
+\begin{displayquote}
+Throughout this chapter, the symbol $\R ^d$ will be used to denote $d$-dimensional euclidean space \emph{as a metric space}.  For each $x\in \R ^d$, we define $\tangent[\R ^d][x]$, the \emph{tangent space at $x$ in $\R ^d$}\index{Tangent space} to be the \emph{metric vector space} $\R ^d$ (with metric being the dot product).  Furthermore, we declare that $\tangent[\R ^d][x_1]\neq \tangent[\R ^d][x_2]$ for $x_1\neq x_2$.\footnote{There are many ways to do this, but one way, for example, is to take $\tangent[\R ^d][x]\coloneqq \R ^d\times \{ x\}$.}  We will often, but not always, use abstract index notation for vectors $v^a\in \tangent[\R ^d][x]$ to help remind us that they are to be thought of as vectors instead of points.  It will sometimes be useful to assign other vectors spaces to each point (for example, for a function $f:\R ^d\rightarrow \R ^m\coloneqq V$).  In general, the assignment of a vector space $V_x$ to each point of $\R ^d$ will be called a \emph{vector bundle}\index{Vector bundle} on $\R ^d$.  The assignment to each point of the tangent space is a specal vector bundle called the \emph{tangent bundle}\index{Tangent bundle}.
+\end{displayquote}
+In particular, as sets, we might have that $\R ^d=\tangent[\R ^d][x]$, but that's it---the two objects don't even live in the same category, and so it doesn't even make sense to ask whether there is some isomorphism between them (unless you forget some of the structure, in which case you're actually changing the object).  For example, $\R ^d$ is just a metric space---you cannot add any two of its elements.  Tangent vectors, elements of $\tangent[\R ^d][x]$, on the other hand, we can add just fine.
+
+To clarify, this is not actually how the definition goes in general.  The general definition of the tangent space requires us to first be able to talk about manifolds, which in turn requires us to know how differentiation in $\R ^d$ works, which of course we have not done yet.  Thus, we are making use of this notation only to help clarify the study of differentiation in $\R ^d$.  In principle, once enough of this theory has been developed so that we can talk about tangent spaces in general, we would replace the above with the `actual' definition.  Likewise, this is not the actual definition of vector bundles---for us, the term ``vector bundle'' is just a phrase in the English language that we are going to use to communicate mathematical ideas.  It requires basic manifold theory to define vector bundles properly.
+
+This speak of tangent spaces allows us to make an important definition.
+\begin{dfn}[Tensor field]\label{TensorField}
+A \emph{tensor field}\index{Tensor field} of rank $\coord{k,l}$ is a function on $\R ^d$ whose value at $x$ is a rank $\coord{k,l}$ tensor on $\tangent[\R ^d][x]$.
+\begin{rmk}
+It's just an assignment of a tensor to every point in $\R ^d$.  For example, a vector field is an assignment of a vector to every point.
+\end{rmk}
+\end{dfn}
+
+Finally, with this (hopefully elucidating) notation in hand, we can define the derivative.
+\begin{dfn}[Derivative (of a function)]\index{Derivative}
+\begin{savenotes}
+Let $f:\R ^d\rightarrow \R$, let $x\in \R ^d$, and let $v^a\in \tangent[\R ^d][x]$.  Then, the \emph{derivative}\index{Derivative} of $f$ at $x$ in the direction $v^a$, $v^a\nabla _af(x)$, is defined by
+\begin{equation}\label{DifferenceQuotient}
+v^a\nabla _af(x)\coloneqq \lim _{h\to 0}\frac{f(x+hv)-f(x)}{h}.
+\end{equation}
+If this limit exists, then $f$ is \emph{differentiable}\index{Differentiable} at $x$ in the direction $v^a$.  If $f$ is differentiable at $x$ for all $v^a$, then $f$ is differentiable at $x$.  If $f$ is differentiable at $x$ for all $x$, then $f$ is differentiable.  The expression on the right-hand side of \eqref{DifferenceQuotient} is the \emph{difference quotient}\index{Difference Quotient}.
+\begin{rmk}
+The notation $v^a\nabla _af$ is obviously suggestive.  For fixed $f$ and $x$, the map $v^a\mapsto [v^a\nabla _af](x)$ is linear in $v^a$, and so defines a \emph{linear functional}, that is to say, $\nabla _af(x)\in \tangent[\R ^d][x]^{\dagger}$, or equivalently, that $\nabla _af$ is a covector field on $\R ^d$.  This covector field is the \emph{gradient}\index{Gradient} of $f$ at $x$.
+\end{rmk}
+\begin{rmk}
+In one dimension, there is essentially only one choice of $v^a$---everything else is a scalar multiple.  Thus, in one dimension, we \emph{always} take $v^a=1\in \tangent[x][\R ]\cong _{\Vect _\R}\R$ and write
+\begin{equation}
+\frac{\dif}{\dif x}f(x)\coloneqq v^a\nabla _af(x).
+\end{equation}
+\end{rmk}
+\begin{rmk}
+Perhaps more accurate notation would have been $[v^a\nabla _af](x)$, that is, $v^a\nabla _af$ is a function (in the case that $f$ is differentiable anyways), and so $v^a\nabla _af(x)$ is the value of $v^a\nabla _af$ at $x$, as opposed to, the derivative of the function $f(x)$, which is just $0$ of course.\footnote{I know to some this may seem pedantic, but $f$ is the function, $f(x)$ is the value at $x$ of the function, so that $f(x)$ is just a number.}  The point is:  you must compute the derivative, and \emph{then} plug-in $x$.  It might seem silly in such a simple context, but in much more complicated contexts I myself have made this very mistake.  For example, suppose you are computing a functional derivative (to find a noether charge, say) of some action functional in physics, and you want to see that this quantity is conserved `on-shell' (i.e.~when the equations of motion hold)---you cannot use the equations of motion before you finish computing the noether charge `off-shell':  that's cheating (and more importantly, possibly just plain wrong)!\footnote{Once again, if the physics analogy is meaningless to you, just ignore it.}
+\end{rmk}
+\begin{rmk}
+Suppose that $f$ is differentiable.  Then, $v^a\nabla _af$ itself is a function on all of $\R ^d$, and so we may differentiate\footnote{If the limit exists, of course} this as well to obtain
+\begin{equation}
+w^b\nabla _b(v^a\nabla _af)=w^bw^a\nabla _b\nabla _af.
+\end{equation}
+(Warning:  This equality will not hold in general if $v^a$ is a nonconstant function of $x$.)  Just as $\nabla _af(x)$ defined a covector on $\tangent[\R ^d][x]$, so to does $\nabla _b\nabla _af(x)$ defines a covariant $2$-tensor on $\tangent[\R ^d][x]$.\footnote{Note that a covariant $2$-tensor is an element of $\tangent[\R ^d][x]^\dagger \otimes \tangent[\R ^d][x]^\dagger$.  When we say it is a ``covariant $2$-tensor \emph{on} $\tangent[\R ^d][x]$'', this is what we mean---it's neither a (real-valued) function nor an element of $\tangent[\R ^d][x]$.}
+\end{rmk}
+\begin{rmk}
+If all higher derivatives of $f$ exist, then $f$ is \emph{smooth}\index{Smooth}.
+\end{rmk}
+\begin{exr}
+Show that $v^a\mapsto v^a\nabla _af(x)$ is in fact linear.
+\end{exr}
+\end{savenotes}
+\end{dfn}
+We can use the definition of the derivative of a function to define the derivative for \emph{all} tensor fields.  The idea is that, by plugging-in enough vectors and covectors, all tensor fields reduce to just a function.
+\begin{dfn}[Derivative (of tensors)]\label{DerivativeTensor}
+Let $T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$ be a tensor field of rank $\coord{k,l}$ on $\R ^d$.  Then, the \emph{gradient}\index{Gradient (of a tensor field)}, $\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$, is defined by
+\begin{equation}
+\begin{multlined}
+v^a[\omega _1]_{a_1}\cdots [\omega _k]_{a_k}[v_1]^{b_1}\cdots [v_l]^{b_l}\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}= \\ v^a\nabla _a\left( [\omega _1]_{a_1}\cdots [\omega _k]_{a_k}[v_1]^{b_1}\cdots [v_l]^{b_l}\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}\right) 
+\end{multlined}
+\end{equation}
+for all covectors $\omega _1,\ldots ,\omega _k$ and vectors $v,v_1,\ldots ,v_l$.
+\begin{rmk}
+This makes sense because the thing inside the gradient on the right-hand side is just a function.
+\end{rmk}
+\begin{rmk}
+Among other things, we can how differentiate functions which take their values in $\R ^m$, as we just interpret such a function as a vector field on $\R ^d$.\footnote{We are cheating a bit.  $\R ^m$ is \emph{not} the tangent space of any point---you can tell because it might not even have the right dimension.  The appropriate way to deal with this is to attach a new vector space $V_x$ to each point, where $V_x\cong _{\Vect _{\R}}(\R ^e)$, and then interpret the value $f(x)$ as an element of $V_x$.  Fortunately, this has no effect on the above definition.  For such functions, I will write $f^\alpha$, to remind us that $f^\alpha$ lives in a different vector bundle than usual.}
+\end{rmk}
+\begin{rmk}
+Thus, the gradient in particular shifts the covariant rank of a tensor up by $1$ (for example, as functions are just $\coord{0,0}$ tensors, it takes functions to covector fields).
+\end{rmk}
+\end{dfn}
+
+\section{Basic facts}
+
+\begin{exr}[A function that is not differentiable]
+Find an example of a function that is not differentiable.
+\end{exr}
+\begin{exr}[A function differentiable in one but not all directions]
+Find a function $f:\R ^2\rightarrow \R$ that is differentiable along the $x$-axis at the origin, but not along the $y$-axis.
+\end{exr}
+\begin{exr}[A continuous function that is not differentiable]
+Find an example a function that is continuous but not differentiable.
+\end{exr}
+What you will not be able to do, however, is find an example of a differentiable function that is not continuous.
+\begin{prp}
+Let $f:\R ^d\rightarrow \R$ be a function and let $x\in \R ^d$.  Then, if $f$ is differentiable at $x_0$, then it is continuous at $x_0$.
+\begin{proof}
+Consider
+\begin{equation}
+f(x)-f(x_0)=\left( \frac{f(x)-f(x_0)}{x-x_0}\right) (x-x_0).
+\end{equation}
+Taking the limit of both sides as $x\to x_0$, because $\lim _{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=f'(x_0)$ exists (and is finite), we find that $\lim _{x\to x_0}(f(x)-f(x_0))=0$, so that $f$ is continuous at $x_0$.
+\end{proof}
+\end{prp}
+
+\begin{prp}[Algebraic Derivative Theorems]\index{Algebraic Derivative Theorems}\label{AlgebraicDerivativeTheorems}
+Let $f,g:\R ^d\rightarrow \R$ be differentiable.\footnote{Everything works just as well (with the same proof) if you just assume it is differentiable in some direction at some point, but the notation is more tedious.} and let $\alpha \in \R$.  Then,
+\begin{enumerate}
+\item \label{AlgebraicDerivativeTheorems.Linearity}(Linearity) $\nabla _a(f+g)=\nabla _a+\nabla _ag$;
+\item \label{AlgebraicDerivativeTheorems.Homogeneity}(Homogeneity) $\nabla _a(\alpha f)=\alpha \nabla _af$;
+\item \label{AlgebraicDerivativeTheorems.ProductRule}(Product Rule)\index{Product Rule}$\nabla _a(fg)=(\nabla _af)g+f(\nabla _ag)$;\footnote{I would get in the habit of not mixing-up the order of $f$ and $g$ (e.g.~by writing $(\nabla _af)g+(\nabla _ag)f$ or something of the like).  It won't matter for us, but it can and will latter when you're working with things that are not commutative (the cross-product of vectors is probably the most elementary example).} and
+\item \label{AlgebraicDerivativeTheorems.QuotientRule}(Quotient Rule)\index{Quotient Rule} $\nabla _a\left( \frac{f}{g}\right) =\frac{(\nabla _af)g-f(\nabla _ag)}{g^2}$ whenever $g\neq 0$.
+\end{enumerate}
+\begin{rmk}
+The first three are true just as well for $f$ and $g$ arbitrary tensor fields, with essentially the same exact proofs (the juxtaposition denotes the tensor product of course).  The Quotient Rule does not make sense, however, as in general you cannot invert tensors.
+\end{rmk}
+\begin{proof}
+\ref{AlgebraicDerivativeTheorems.Linearity} and \ref{AlgebraicDerivativeTheorems.Homogeneity} follows straight from the corresponding results above limits---see \cref{AlgebraicLimitTheorems}\ref{enmAlgebraicLimitTheorems.i} and \cref{AlgebraicLimitTheorems}\ref{enmAlgebraicLimitTheorems.ii}.
+
+As for \ref{AlgebraicDerivativeTheorems.ProductRule}, we have
+\begin{equation}
+\begin{multlined}
+\frac{f(x+hv)g(x+hv)-f(x)g(x)}{h}=\footnote{We added and subtracted $f(x)g(x+hv)$.} \\ \left( \frac{f(x+hv)-f(x)}{h}\right) g(x+hv)+f(x)\left( \frac{g(x+hv)-g(x)}{h}\right) ,
+\end{multlined}
+\end{equation}
+and so taking limits gives us the Product Rule.
+
+Similarly, the proof of the Quotient Rule amounts to just algebraic manipulation of the difference quotient:
+\begin{equation}
+\frac{\frac{f(x+hv)}{g(x+hv)}-\frac{f(x)}{g(x)}}{h}=\frac{\left( \frac{f(x+hv)-f(x)}{h}\right) g(x)-f(x)\left( \frac{g(x+hv)-g(x)}{h}\right)}{g(x+hv)g(x)}.
+\end{equation}
+\end{proof}
+\end{prp}
+\begin{prp}[Chain Rule]\index{Chain rule}\label{ChainRule}
+Let $f^\alpha :\R ^d\rightarrow \R ^m$ and $g^\mu :\R ^m\rightarrow \R ^n$ be differentiable.\footnote{The $\mu$ index is used to remind us that $g^\mu$ lives in a $\R ^n$ (as opposed to $\R ^m$ or $\R ^d$).}  Then,
+\begin{equation}
+\nabla _a[g\circ f]^\mu (x)=\nabla _\alpha g^\mu (f(x))\nabla _af^\alpha (x).
+\end{equation}
+\begin{rmk}
+One of the things I really love about index notation is that it almost dictates what the answer has to be.  How many ways can construct a tensor with one $\R ^d$ covariant index and one $\R ^n$ contravariant index using only $f^\alpha$, $g^\mu$, and their derivatives?
+\end{rmk}
+\begin{proof}
+To prove this, by the definition of the derivative of tensors, we need to show that
+\begin{equation}
+\omega _\mu \nabla _a[g\circ f]^\mu (x)=\omega _\mu \nabla _\alpha g^\mu (f(x))\nabla _af^\alpha (x)
+\end{equation}
+for all covectors (living in $\R ^n$) $\omega _\mu$.  In particular, it suffices to prove the result for $g:\R ^m\rightarrow \R$ (because now $\omega _\mu g^\mu :\R ^m\rightarrow \R$).
+
+Let $v^a$ be a constant vector field on $\R ^d$.  Then, what we actually want to show is
+\begin{equation}
+v^a\nabla _a[g\circ f](x)=\left( \nabla _\alpha g(f(x))\right) \left( v^a\nabla _af^\alpha (x)\right) ,
+\end{equation}
+as $v^a$ is arbitrary.  On one hand
+\begin{equation}\label{5.2.18}
+v^a\nabla _a[g\circ f](x)=\lim _{h\to 0}\frac{g\left( f(x+hv)\right) -g(f(x))}{h}
+\end{equation}
+and on the other hand
+\begin{equation}
+\left( \nabla _\alpha g(f(x))\right) \left( v^a\nabla _af^\alpha (x)\right) =\lim _{h\to 0}\frac{1}{h}\left[ g\left( f(x)+hv^a\nabla _af(x)\right) -g(f(x))\right]
+\end{equation}
+Thus, we want to show that
+\begin{equation}
+f(x+hv)=f(x)+hv^a\nabla _af(x)\text{ as }h\to 0,
+\end{equation}
+but of course this is just the very definition of the derivative.
+\end{proof}
+\end{prp}
+
+\section{The exponential function}
+
+So, we've proven several properties about how to manipulate derivatives, but what is there to differentiate?  Polynomials?  That's no fun.  Let's find a function even easier to differentiate.  In fact, let's see if we can find a function that is equal to its own derivative
+\begin{equation}
+\tfrac{\dif}{\dif x}f(x)=f(x).
+\end{equation}
+Don't be a smart-ass---zero doesn't count.  Of course, you already know the answer---or so you think you do.  Can you define $\exp (x)$?  For what it's worth, you do have the tools to do so at this point, but it's quite likely that someone told you once upon a time that $\e \approx 2.718\ldots $ and then $\exp (x)\coloneqq \e ^x$.  If it's not clear to you at this point that this is just complete and utter nonsense, then apparently I'm not very good at writing mathematical exposition.\footnote{Or maybe you're just stupid.  (Disclaimer:  That was a joke.)}  What you could do, however, is define $\exp$ by its power-series, $\exp (x)\coloneqq \sum _{m\in M}\frac{x^m}{m!}$, but where did that formula come from?  Your ass?  No.  The proper way to define the exponential function is that it is the unique function from $\R$ to $\R$ that (i) is equal to its own derivative and (ii) is $1$ at $0$.\footnote{The unique function that that is equal to its own derivative and is equal to $0$ at $0$ is the function that is everywhere $0$.  $1$ is the next most obvious choice, as opposed to, say $\sqrt{\uppi}$.}  Of course, as always, we can't just go around asserting things like this exist willy-nilly.  Who can even comprehend the chaos that might ensue?  We must \emph{prove} that such a thing exists, and that only one such thing exists.  The theorem that does this for us (and a whole lot more) is Picard's Existence Theorem.
+\begin{thm}[Picard's Existence Theorem]\index{Picard's Existence Theorem}\label{PicardsExistenceTheorem}
+Let $F:\R \times \R \rightarrow \R$ be a function such that
+\begin{enumerate}
+\item for each fixed $y\in \R$, the map $x\mapsto F(x,y)$ is continuous; and
+\item for each fixed $x\in \R$, the map $y\mapsto F(x,y)$ is lipschitz-continuous,\footnote{The definition is in \cref{BoundedMap} in case you've forgotten (or just plain missed it).}
+\end{enumerate}
+and let $\coord{x_0,y_0}\in \R \times \R$.  Then, for some $\varepsilon _0$, there is a unique function $f:(x_0-\varepsilon _0,x_0+\varepsilon _0)\rightarrow \R$ such that
+\begin{equation}
+\frac{\dif}{\dif x}f(x)=F\left( x,f(x)\right) \text{ and }f(x_0)=y_0.
+\end{equation}
+\begin{rmk}
+Picard's theorem is about the existence and uniqueness of solutions to \emph{differential equations}.  The $F$ is supposed to be thought of as the differential equation itself, or at least everything in the differential equation that does not contain a derivative.  For example, in our case of primary interest ($\frac{\dif}{\dif x}f(x)=f(x)$), $F$ will be just $F(x,y)\coloneqq y$.
+\end{rmk}
+\begin{rmk}
+The ``there exists some $\varepsilon _0$'' business is a result of the fact that we may not be able to find a solution to the differential equation on all of $\R$---in general, we can only do so on a neighborhood of where we started ($x=x_0$).  For example, consider the differential equation $\frac{\dif}{\dif x}f(x)=-f(x)^2$ (so for $F(x,y)\coloneqq -y^2$) with initial value $x_0=1=y_0$.  The unique solution will be $f(x)=\frac{1}{x}$, which you cannot extend past $0$ (so that $\varepsilon _0=1$ is the best we can do).
+\end{rmk}
+\end{thm}
