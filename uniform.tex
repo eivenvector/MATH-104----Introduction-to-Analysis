@@ -304,7 +304,7 @@ $(\Rightarrow )$ Suppose that there exists a uniformity for which $\widetilde{\m
 
 \blankline
 \noindent
-$(\Leftarrow )$ Suppose that $\widetilde{\mathcal{B}}$ is downward-directed with respect to $\llcurly$.  Define $\widetilde{\mathcal{U}}$ to be the collection of covers that are star-refined by some element of $\widetilde{\mathcal{B}}$.  By the definition of uniform bases, this was the only possibility.  As $\widetilde{\mathcal{B}}$ is nonempty and downward-directed with respect to $\llcurly$, it follows that $\widetilde{\mathcal{U}}$ contains $\widetilde{\mathcal{B}}$, and in particular is nonempty.  $\widetilde{\mathcal{U}}$ is upward-closed with respect to $\llcurly$ because if $\mathcal{U}$ is a uniform cover and star-refines $\mathcal{V}$, then there is some $\mathcal{B}\in \widetilde{\mathcal{B}}$ that star-refines $\mathcal{U}$, and hence in turn star-refines $\mathcal{V}$.  We now check that it is downward-directed with respect to $\llcurly$.  If $\mathcal{U}$ and $\mathcal{V}$ are covers, then there are $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$ that star-refine $\mathcal{U}$ and $\mathcal{V}$ respectively.  Because $\widetilde{\mathcal{B}}$ is downward-directed, there is then some $\mathcal{D}\in \widetilde{\mathcal{B}}$ which star-refines both $\mathcal{B}$ and $\mathcal{C}$, and hence both $\mathcal{U}$ and $\mathcal{V}$.
+$(\Leftarrow )$ Suppose that $\widetilde{\mathcal{B}}$ is downward-directed with respect to $\llcurly$.  Define $\widetilde{\mathcal{U}}$ to be the collection of covers that are star-refined by some element of $\widetilde{\mathcal{B}}$.  As $\widetilde{\mathcal{B}}$ is nonempty, so to is $\widetilde{\mathcal{U}}$ (it must contain $\{ X\}$).  By the definition of uniform bases, this was the only possibility.  As $\widetilde{\mathcal{B}}$ is nonempty and downward-directed with respect to $\llcurly$, it follows that $\widetilde{\mathcal{U}}$ contains $\widetilde{\mathcal{B}}$, and in particular is nonempty.  $\widetilde{\mathcal{U}}$ is upward-closed with respect to $\llcurly$ because if $\mathcal{U}$ is a uniform cover and star-refines $\mathcal{V}$, then there is some $\mathcal{B}\in \widetilde{\mathcal{B}}$ that star-refines $\mathcal{U}$, and hence in turn star-refines $\mathcal{V}$.  We now check that it is downward-directed with respect to $\llcurly$.  If $\mathcal{U}$ and $\mathcal{V}$ are covers, then there are $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$ that star-refine $\mathcal{U}$ and $\mathcal{V}$ respectively.  Because $\widetilde{\mathcal{B}}$ is downward-directed, there is then some $\mathcal{D}\in \widetilde{\mathcal{B}}$ which star-refines both $\mathcal{B}$ and $\mathcal{C}$, and hence both $\mathcal{U}$ and $\mathcal{V}$.
 \end{proof}
 \end{prp}
 As we mentioned above at the end of the proof of \cref{UniformTopology}, uniform bases define the uniform topology just as well as the entire uniformity.
@@ -691,7 +691,7 @@ Every semimetric space is canonically a uniform space---see \cref{dfnB.10}.  By 
 \begin{exm}[A lipschitz-continuous function]
 The function $x\mapsto x$ from $\R$ to $\R$.
 \end{exm}
-\begin{exm}[A uniformly-continuous function that is not lipschitz-continuous]
+\begin{exm}[A uniformly-continuous function that is not lipschitz-continuous]\label{exm4.3.34}
 Define $f:[0,1]\rightarrow \R$ by $f(x)\coloneqq \sqrt{x}$.  This function is continuous on $[0,1]$, and hence uniformly-continuous because $[0,1]$ is quasicompact by the \nameref{HeineBorelTheorem} (and by \cref{prp4.2.73}).  On the other hand, to show that it is \emph{not} lipschitz-continuous, we need to show that
 \begin{equation}
 \frac{\sqrt{x}-\sqrt{y}}{x-y}
@@ -780,7 +780,12 @@ Show $\widetilde{\mathcal{B}}_G$ is indeed a uniform base.
 Note that we could have equally well taken the covers $U_G$ for only $U\in \mathcal{N}$, $\mathcal{N}$ a fixed neighborhood base of the identity (by \cref{prp1.6}).
 \end{rmk}
 \end{dfn}
-We have a potential problem here---$\R$ is both a metric space and a topological group (with respect to $+$), so which uniformity should we use?  Fortunately, we needn't worry about this, because the two uniformities are the same.
+We have a potential problem here---$G$ started its life as a topological group, and in particular, as a topological space.  We then equipped it with a uniform structure, from which it obtains the uniform topology.  The question arises:  ``Are these topologies the same, and if not, which one should we use?''.  Fortunately, it turns out that they are the same.
+\begin{exr}
+Show that the topology on a topological group agrees with the uniform topology induced by the uniform base in \eqref{B.8}.
+\end{exr}
+
+We have yet another potential problem here---$\R$ is both a metric space and a topological group (with respect to $+$), so which uniformity should we use?  Fortunately, we needn't worry about this, because the two uniformities are the same.
 \begin{exr}
 Show that $\widetilde{\mathcal{B}}_{\coord{\R ,\metric}}$ and $\widetilde{\mathcal{B}}_{\coord{\R ,+}}$ define the same uniformity on $\R$.
 \end{exr}
@@ -861,19 +866,34 @@ Check that $\metric$ is indeed a semimetric.  Show that if $\norm$ is a norm the
 \begin{dfn}[Seminormed vector space and normed vector space]\label{SeminormedVectorSpace}
 A \emph{seminormed vector space}\index{Seminormed vector space} is a real vector space $V$ together with a collection of seminorms $\mathcal{D}$ such that $\coord{V,\mathcal{D}}$ is a semimetric space.  $\coord{V,\mathcal{D}}$ is a \emph{normed vector space}\index{Normed vector space} iff it is furthermore a metric space.
 \end{dfn}
+As by now you should have expected, the morphisms of seminormed vector spaces are the bounded (\cref{BoundedMap}) linear maps.
+\begin{exm}[The category of seminormed vector spaces]
+The category of seminormed vector spaces is the category $\Semi \Vect$ whose collection of objects $\Semi \Vect _0$ is the collection of all seminormed vector spaces and for every seminormed vector space $V$ and seminormed vector space $W$ the collection of all morphisms from $V$ to $W$, $\Mor _{\Semi \Vect}(V,W)$ is preicsely the set of all bounded linear maps from $V$ to $W$, composition is givne by ordinary function composition, and the identities of the category are the identity.
+\end{exm}
+\begin{exr}
+Let $f:\coord{V,\mathcal{D}}\rightarrow \coord{W,\mathcal{E}}$ be a linear map between seminormed vector spaces.  Show that $f$ is bounded iff for every $\norm _0\in \mathcal{E}$ there are \emph{finitely-many} $\norm _1,\ldots ,\norm _m\in \mathcal{D}$ and constants $K_1,\ldots ,K_m\geq 0$ such that
+\begin{equation}
+\norm[f(v)]_0\leq K_1\norm[v]_1+\cdots +K_m\norm[v]_m
+\end{equation}
+for all $v\in V$.
+\begin{rmk}
+Compare this with the definition of bounded maps of semimetric spaces (\cref{BoundedMap}).  Essentially this boils down to the statement that, to check that $f$ is bounded, it suffices to check for $x_2=0$ and $x_1\eqqcolon v$ arbitrary (in the notation of \cref{BoundedMap}).
+\end{rmk}
+\end{exr}
 Note that a priori a seminormed vector space is not a topological vector space.  However, being in metric a semimetric space, it is in fact a uniform space, and so in turn is equipped with its uniform topology.  The question is then whether it is a topological vector space with respect to the uniform topology.  Of course, the answer is in the affirmative.  Once we know that the seminormed vector space $V$ is likewise a topological vector space, we know in turn that its underlying topological group $\coord{V,+,0,-}$ induces in turn yet another uniform structure, and so a new question arises as to whether or not this uniform structures agrees with the one induced from the semimetric space structure.  Of course, the answer to this is likewise in the affirmative.
 \begin{exr}
-Let $V$ be a semimetric space.  Show that $\coord{V,+,0,-}$ is a topological group with respect to the uniform topology induced by the semimetric uniformity.
+Let $V$ be a seminormed vector space.  Show that $V$ is a topological vector space with respect to the uniform topology induced by the semimetric uniformity.
 \end{exr}
 \begin{exr}
-Let $V$ be a semimetric space.  Show that the uniformity induced by the topological group structure $\coord{V,+,0,-}$ is the same as the semimetric uniformity.
+Let $V$ be a seminormed vector space.  Show that the uniformity induced by the topological group structure $\coord{V,+,0,-}$ is the same as the semimetric uniformity.
+\end{exr}
+As a mater of fact, the morphisms don't care whether you're thinking of things as a semimetric space or as a topological group either.
+\begin{exr}\label{exr4.3.57}
+Let $f:\coord{V,\mathcal{D}}\rightarrow \coord{W,\mathcal{E}}$ be a \emph{linear} map between two seminormed vector spaces.  Show that it is continuous iff it is bounded.
 \end{exr}
 \begin{textequation}
 Unless otherwise stated, seminormed vector spaces are always equipped with the uniformity induced by the semimetric space structure (or, equivalently, the uniformity induced by the topological group structure).
 \end{textequation}
-\begin{exr}\label{exr4.3.57}
-Let $f:\coord{V,\mathcal{D}}\rightarrow \coord{W,\mathcal{E}}$ be \emph{linear} map between two semimetric spaces.  Show that it is continuous iff it is bounded.
-\end{exr}
 
 In fact, a lot of examples of seminormed vector spaces have \emph{even more} structure, namely, the structure of an algebra.
 \begin{dfn}[Algebra]\label{Algebra}
@@ -886,9 +906,18 @@ An \emph{algebra}\index{Algebra} is a set $A$ equipped with the structure of a v
 That is, an algebra is both a vector space and a ring subject to a couple of compatibility axioms.
 \end{rmk}
 \end{dfn}
+\begin{dfn}[Homomorphism (of algebras)]\label{HomomorphismOfAlgebras}
+Let $A$ and $B$ be algebras and let $f:A\rightarrow B$ be a function.  Then, $f$ is a \emph{homomorphism}\index{Homomorphism (of algebras)} iff $f$ is both a linear map of the underlying vectors spaces and a ring homomorphism of the underlying vector spaces.
+\end{dfn}
+\begin{exm}[The category of algebras over a field $F$]
+The category of algebras over a field $F$ is the category $\Alg _F$ whose collection of objects is the collection of all algebras over $F$, for every algebra $A$ and algebra $B$ over $F$ the collection of all morphisms from $X$ to $Y$, $\Mor _{\Alg _F}(A,B)$, is precisely the set of all homomorphisms from $A$ to $B$s, composition is given by ordinary function composition, and the identities of the categories are the identity functions.
+\end{exm}
 \begin{dfn}[Seminormed algebra]\label{SeminormedAlgebra}
 A \emph{seminormed algebra}\index{Seminormed algebra} is an algebra whose underlying vector space is a seminormed vector space such that $\norm[a_1a_2]\leq \norm[a_1]\norm[a_2]$ for $a_1,a_2\in A$.
 \end{dfn}
+\begin{exm}[The category of seminormed algebras]
+The category of seminormed algebras is the category $\Semi \Alg$ whose collection of objects $\Semi \Alg _0$ is the collection of all seminormed algebras, for every seminormed algebras $A$ and seminormed algebra $B$ the collection of all morphisms from $A$ to $B$, $\Mor _{\Semi \Alg}(A,B)$, is precisely the set of all bounded homomorphisms, composition is given by ordinary function composition, and the identities of the category are the identity functions.
+\end{exm}
 With these new definitions in hand, we now present an incredibly important example of a seminormed algebra, an example that was a large part of the motivation for introducing seminormed algebras at all.
 \begin{exm}[Uniform convergence on quasicompact subsets]\label{exm4.3.60}
 Let $X$ be a topological space and define
@@ -899,7 +928,19 @@ Pointwise addition and pointwise scalar multiplication gives $A$ the structure o
 \begin{equation}
 \norm[f]_K\coloneqq \sup _{x\in K}\{ \abs{f(x)}\} 
 \end{equation}
-then gives $A$ the structure of a seminormed algebra.  It is thus canonically a uniform space (and in turn a topological space).  If $X$ itself is quasicompact, convergence in $\Mor _{\Top}(X,\R )$ is called \emph{uniform convergence}\index{Uniform convergence}.\footnote{Despite the name and the context in which we're presenting it, uniform convergence actually has nothing to do with uniform spaces per se (in contrast to uniform continuity, for example).  $\Mor _{\Top}(X,\R )$ has a topology, and hence a notion of convergence, which we happen to call ``uniform convergence''.  In particular, we only needed to equip $\Mor _{\Top}(X,\R )$ with a topology to define uniform convergence.  The reason we waited until the chapter on uniform spaces, of course, is because $\Mor _{\Top}(X,\R )$ obtains is topology from a family of semimetrics (or in the case $X$ is quasicompact, just a single metric), not because of any connection with uniform convergence and uniform spaces.}  Thus, in the general case, people refer to convergence in the topological space $\Mor _{\Top}(X,\R )$ as \emph{uniform convergence on quasicompact subsets}.
+then gives $A$ the structure of a seminormed algebra.  It is thus canonically a uniform space (and in turn a topological space).  If $X$ itself is quasicompact, convergence in $\Mor _{\Top}(X,\R )$ is called \emph{uniform convergence}\index{Uniform convergence}.\footnote{Despite the name and the context in which we're presenting it, uniform convergence actually has nothing to do with uniform spaces per se (in contrast to uniform continuity, for example).  $\Mor _{\Top}(X,\R )$ has a topology, and hence a notion of convergence, which we happen to call ``uniform convergence''.  In particular, we only needed to equip $\Mor _{\Top}(X,\R )$ with a topology to define uniform convergence.  The reason we waited until the chapter on uniform spaces, of course, is because $\Mor _{\Top}(X,\R )$ obtains is topology from a family of semimetrics (or in the case $X$ is quasicompact, just a single metric), not because of any direct connection with uniform convergence and uniform spaces.}  Thus, in the general case, people refer to convergence in the topological space $\Mor _{\Top}(X,\R )$ as \emph{uniform convergence on quasicompact subsets}.
+
+The reason the case $X$ quasicompact is special is because, in this case, it is actually isomorphic (in the category of seminormed algebras) to a normed algebra.
+\begin{exr}
+Let $X$ be quasicompact.  Show that
+\begin{equation}
+\id _X:\coord{X,\{ \norm _X\}}\rightarrow \coord{X,\{ \norm _K:K\subseteq X\text{ quasicompact}\}} .
+\end{equation}
+is an isomorphism in the category of seminormed algebras.
+\begin{rmk}
+The point is that, if all we care about is the seminormed algebra structure, we may always assume without loss of generality that $\Mor _{\Top}(X,\R )$ is in fact a \emph{normed} algebra with the single norm being given by $\norm[f]_X\coloneqq \sup _{X\in X}\{ \abs{f(x)}\}$.
+\end{rmk}
+\end{exr}
 \begin{textequation}
 Unless otherwise stated, $\Mor _{\Top}(X,\R )$ is a always given the structure of a seminormed algebra, the algebra structure defined pointwise and the seminorms being $\norm _K$ for $K\subseteq X$ quasicompact.
 \end{textequation}

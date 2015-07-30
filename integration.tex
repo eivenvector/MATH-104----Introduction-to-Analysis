@@ -114,3 +114,16 @@ is a net.  Furthermore, it is nondecreasing, because as $\mathcal{B}$ becomes sm
 Let $B\in \mathcal{B}$.  We must show that $\breve{\meas (B)}=\meas(\mathcal{B})$.  First of all, $B\in \mathcal{B}$ is a cover of itself, and therefore $\meas _{\mathcal{B}}(B)\leq \meas (B)$.
 \end{proof}
 \end{thm}
+
+\begin{dfn}[Uniformly-bounded]\label{UniformlyBounded}
+Let $X$ be a uniform space, let $\mathcal{U}_0$ be a cover, and for every $U\in \mathcal{U}_0$ and uniform cover $\mathcal{U}$ let $(U:\mathcal{U})$ denote the cardinality of the smallest subcover of $U$ coming from $\mathcal{U}$.\footnote{In particular, if $\mathcal{U}_0$ is a cover of quasicompact sets, this number will always be finite.}  Then, $\mathcal{U}_0$ is \emph{uniformly-bounded}\index{Uniformly-bounded cover} iff $\sup _{U\in \mathcal{U}_0}\{ (U,\mathcal{U})\} <\infty$ for every uniform cover $\mathcal{U}$.
+\begin{rmk}
+As always, think about what this means in metric spaces---this is saying that a cover is uniformly-bounded iff for every $\varepsilon >0$ there is some number $m_0\in \Z ^+$ so that you can cover every element of $\mathcal{U}_0$ with at most $m_0$ $\varepsilon$-balls.  In particular, the diameter of every element of $\mathcal{U}_0$ has diameter less than $2\varepsilon m_0$.
+\end{rmk}
+\end{dfn}
+\begin{thm}
+Let $X$ be a uniform space and let $\widetilde{\mathcal{B}}$ be a uniform base for $X$.  Then, if $X$ admits a uniform cover of quasicompact sets that is uniformly-bounded with respect to $\widetilde{\mathcal{B}}$, then $X$ admits a measure for which every element of $\widetilde{\mathcal{B}}$ is a uniformly-measurable cover.
+\begin{rmk}
+If $G$ is a topological group and has a quasicompact neighborhood of the identity, then both the left and right translates of this neighborhood yield a uniform cover of quasicompact subsets that is uniformly-bounded with the standard uniform bases on $G$ of left and right translates of neighborhoods of the identity.  In this traditional case, the resulting measure is called a \emph{haar measure}\index{Haar measure}.
+\end{rmk}
+\end{thm}

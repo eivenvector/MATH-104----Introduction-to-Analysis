@@ -73,8 +73,8 @@ Generally speaking we put slashes through symbols to indicate that the statement
 \begin{exr}
 Let $X$ and $Y$ be sets.  Show that $X=Y$ iff $X\subseteq Y$ and $Y\subseteq X$.
 \end{exr}
-\begin{dfn}[Proper subset]
-Let $X$ be a subset of $Y$.  Then, we say that $X$ is \emph{proper}, and write $X\subset Y$, iff there is some $y\in Y$ that is not also in $X$.
+\begin{dfn}[Proper subset]\label{ProperSubset}
+Let $X$ be a subset of $Y$.  Then, $X$ is a\emph{proper}\index{Proper subset}, and write $X\subset Y$\index[notation]{$X\subset Y$}, iff there is some $y\in Y$ that is not also in $X$.
 \end{dfn}
 \begin{textequation}
 Let $X$ be a set, let $\mathcal{P}$ be a property that an element in $X$ may or may not satisfy, and let us write $\mathcal{P}(x)$ iff $x$ satisfies the property $\mathcal{P}$.  Then, the notation
@@ -366,7 +366,7 @@ Let $\sim$ be a relation on a set $X$.
 An \emph{equivalence relation}\index{Equivalence relation} on a set $X$ is a relation $\sim$ on $X$ that is reflexive, symmetric, and transitive.
 \end{dfn}
 \begin{exm}[Integers modulo $m$]\label{exmA.1.53}
-Let $m\in \Z ^+$ and let $x,y\in \Z$.  Then, we say that $x$ and $y$ are \emph{congruent modulo $m$}, and write $x\cong y\mmod{m}$, iff $x-y$ is divisible by $m$.
+Let $m\in \Z ^+$ and let $x,y\in \Z$.  Then, $x$ and $y$ are \emph{congruent modulo $m$}, and write $x\cong y\mmod{m}$, iff $x-y$ is divisible by $m$.
 \begin{exr}
 Check that $\cong \mmod{m}$ is an equivalence relation.
 \end{exr}
@@ -680,7 +680,7 @@ Thus, the converse to \cref{exrA.1.34} holds in the case of a group.
 \end{rmk}
 \end{exr}
 \begin{dfn}[Homomorphism (of magmas)]
-Let $X$ and $Y$ be magmas and let $f:X\rightarrow Y$ be a function.  Then, we say that $f$ is a \emph{homomorphism}\index{Homomorphism (of magmas)} iff $f(x_1\cdot x_2)=f(x_1)\cdot f(x_2)$ for all $x_1,x_2\in X$, and furthermore, in the case that both $X$ and $Y$ have identities, $f(1)=1$.
+Let $X$ and $Y$ be magmas and let $f:X\rightarrow Y$ be a function.  Then, $f$ is a \emph{homomorphism}\index{Homomorphism (of magmas)} iff $f(x_1\cdot x_2)=f(x_1)\cdot f(x_2)$ for all $x_1,x_2\in X$, and furthermore, in the case that both $X$ and $Y$ have identities, $f(1)=1$.
 \begin{rmk}
 Note that, once again, the $\cdot$ in $f(x_1\cdot x_2)$ is \emph{not} the same as the $\cdot$ in $f(x_1)\cdot f(x_2)$.  Confer the remark following the definition of a nondecreasing function, \cref{dfnA.1.21}.
 \end{rmk}
@@ -731,7 +731,7 @@ I believe it is more common to refer to rigs as \emph{semirings}.  I dislike thi
 \end{rmk}
 \end{dfn}
 \begin{dfn}[Characteristic]
-Let $(X,+,0,-,\cdot ,1)$ be a rig.  Then, either (i) there is some $m\in \Z ^+$ such that $m\cdot 1=0\in X$ or (ii) there is no such $m$.  In the former case, the smallest positive integer such that $m\cdot 1=0\in X$ is the \emph{characteristic}\index{Characteristic (of a rig)}, and in the latter case we say that the \emph{characteristic} is $0$.  We denote the characteristic by $\Char (X)$.
+Let $(X,+,0,-,\cdot ,1)$ be a rig.  Then, either (i) there is some $m\in \Z ^+$ such that $m\cdot 1=0\in X$ or (ii) there is no such $m$.  In the former case, the smallest positive integer such that $m\cdot 1=0\in X$ is the \emph{characteristic}\index{Characteristic (of a rig)}, and in the latter case the \emph{characteristic} is $0$.  We denote the characteristic by $\Char (X)$.
 \end{dfn}
 \begin{exm}[A rg that is not a rig]
 The even natural numbers $2\N$ with their usual addition and multiplication is a rg that is not a rig.
@@ -779,7 +779,7 @@ A \emph{field}\index{Field} is a commutative skew-field.
 Let $F$ be a field with positive characteristic $p$.  Show that $p$ is prime.
 \end{exr}
 \begin{dfn}[Homomorphisms (of rgs)]
-Let $(X,+,\cdot )$ and $(Y,+,\cdot )$ be rgs and let $f:X\rightarrow Y$ be a function.  Then, we say that $f$ is a \emph{homomorphism}\index{Homomorphism (of rgs)} iff $f$ is both a homomorphism (of magmas) from $(X,+)$ to $(Y,+)$ and from $(X,\cdot )$ to $(Y,\cdot )$.  Explicitly, this means that
+Let $(X,+,\cdot )$ and $(Y,+,\cdot )$ be rgs and let $f:X\rightarrow Y$ be a function.  Then,$f$ is a \emph{homomorphism}\index{Homomorphism (of rgs)} iff $f$ is both a homomorphism (of magmas) from $(X,+)$ to $(Y,+)$ and from $(X,\cdot )$ to $(Y,\cdot )$.  Explicitly, this means that
 \begin{equation}
 f(x+y)=f(x)+f(y),f(0)=0,\text{ and }f(xy)=f(x)f(y),
 \end{equation}
@@ -812,7 +812,7 @@ Let $G$ be a group, let $H\subseteq G$ be a subgroup, and let $g_1,g_2\in G$.  D
 \begin{equation}
 (g_1H)\cdot (g_2)\coloneqq (g_1g_2)H.
 \end{equation}
-We say that $H$ is an \emph{ideal}\index{Ideal} iff this is well-defined on the quotient set $G/H$.  In this case, $G/H$ is itself a group, the \emph{quotient group}\index{Quotient group} of $G$ modulo $H$.
+$H$ is an \emph{ideal}\index{Ideal} iff this is well-defined on the quotient set $G/H$.  In this case, $G/H$ is itself a group, the \emph{quotient group}\index{Quotient group} of $G$ modulo $H$.
 \begin{rmk}
 Recall that $gH$ represents the equivalent class of $g$ modulo $H$, and so, in particular, these definitions involve picking representatives of equivalence classes.  Thus, in order for these operations to make sense, they must be well-defined.  In general, they will not be well-defined, and we call $H$ an \emph{ideal} precisely in the ``good'' case where these operations to make sense.
 \end{rmk}
@@ -839,7 +839,7 @@ Let $R$ be a rng, let $S\subseteq R$ be a subrng, and let $r_1,r_2\in R$.  Defin
 \begin{equation}
 (r_1+S)+(r_2+S)\coloneqq (r_1+r_2)+S\text{ and }(r_1+S)\cdot (r_2+S)\coloneqq (r_1\cdot r_2)+S.
 \end{equation}
-We say that $S$ is an \emph{ideal}\index{Ideal} iff both of these operations are well-defined.  In this case, $R/S$ is the \emph{quotient rng}\index{Quotient rng} of $R$ modulo $S$.
+$S$ is an \emph{ideal}\index{Ideal} iff both of these operations are well-defined.  In this case, $R/S$ is the \emph{quotient rng}\index{Quotient rng} of $R$ modulo $S$.
 \end{dfn}
 Just as before, we have an easy way of checking of subsets are ideals.
 \begin{exr}
@@ -918,7 +918,7 @@ Let $\mathcal{C}$ be a category and let $A\in \mathcal{C}_0$.  Then, an \emph{en
 In other words, ``endomorphism'' is just a fancy name for a morphism with the same domain and co-domain.
 
 \begin{dfn}[Isomorphism]
-Let $f:A\rightarrow B$ be a morphism in a category.  Then, $f$ is an \emph{isomorphism}\index{Isomorphism} iff it is invertible, i.e., iff there is a morphism $g:B\rightarrow A$ such that $g\circ f=\id _A$ and $f\circ g=\id _B$.  In this case, we say that $g$ is an \emph{inverse} of $f$.  The collection of all isomorphisms from $A$ to $B$ is denoted by $\Iso _{\mathcal{C}}(A,B)$\index[notation]{$\Iso _{\mathcal{C}}(A,B)$}.
+Let $f:A\rightarrow B$ be a morphism in a category.  Then, $f$ is an \emph{isomorphism}\index{Isomorphism} iff it is invertible, i.e., iff there is a morphism $g:B\rightarrow A$ such that $g\circ f=\id _A$ and $f\circ g=\id _B$.  In this case, $g$ is an \emph{inverse} of $f$.  The collection of all isomorphisms from $A$ to $B$ is denoted by $\Iso _{\mathcal{C}}(A,B)$\index[notation]{$\Iso _{\mathcal{C}}(A,B)$}.
 \end{dfn}
 \begin{exr}[Inverses are unique]
 Let $f:A\rightarrow B$ be a morphism in a category and let $g,h:B\rightarrow A$ be two inverses of $f$.  Show that $g=h$.
