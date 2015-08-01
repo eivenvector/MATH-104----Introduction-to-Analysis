@@ -189,14 +189,17 @@ Let $S\subseteq \R ^d$, let $f:S\rightarrow \R$, let $x\in \Int (S)$, and let $v
 \begin{equation}\label{DifferenceQuotient}
 \D _vf(x)\coloneqq \lim _{\epsilon \to 0}\frac{f(x+\epsilon v)-f(x)}{\epsilon}.
 \end{equation}
+If this limit exists, then $f$ is \emph{differentiable at $x$ in the direction $v^a$}.
 \begin{rmk}
 The expression inside the limit on the right-hand side of \eqref{DifferenceQuotient} is the \emph{difference quotient}\index{Difference quotient}.
 \end{rmk}
 \begin{rmk}
 Note that we \emph{only} define the derivative at points on the interior of the domain.  The reason we do this is because otherwise we cannot guarantee that $x+\varepsilon v$ is in the domain of $f$ for even a single $\varepsilon >0$, so that $f(x+\epsilon v)$ does not make sense, in which case it is nonsensical to ask whether the limit of the difference quotient exists or not.
 \end{rmk}
+\begin{rmk}
+For some reason, people tend to write $\lim _{h\to 0}$ in this definition instead of $\lim _{\epsilon \to 0}$.  Not sure why.  $\epsilon$ is used for `small' numbers everywhere else in analysis.  Moreover, what happens if your function is called $h$ (not that uncommon of a name for a function)?  What are you doing to do?  Write $h(x+hv)$?  Ew.  Maybe you object ``But $\epsilon$ can't be negative!  That's against the rules!''.  No.  $\varepsilon$ is typically taken to be positive, but I am not writing that\textellipsis I am writing ``$\epsilon$''.  The distinction is deliberate---$\varepsilon$ is used to indicate a `small' positive number and $\epsilon$ is used to indicate a `small' (not-necessarily-positive) number.\footnote{I do not guarantee that I will never break this convention.}  If you think the difference between these symbols is hard to notice, I recommend you increase your \TeX nichal skills\footnote{Or get glasses.} (one is ``\texttt{\textbackslash varepsilon}'' and the other is ``\texttt{\textbackslash epsilon}'')\footnote{Actually, if you're really \TeX nichal, you might have noticed that this itself is a slight lie---because of font issues, I had to `steal' \texttt{\textbackslash epsilonup} from the \texttt{newpx} package.}.
+\end{rmk}
 \end{dfn}
-If this limit exists, then $f$ is \emph{differentiable at $x$ in the direction $v^a$}.
 \begin{dfn}[Derivative (of a function)]\label{Derivative}
 \begin{savenotes}
 Let $S\subseteq \R ^d$, let $f:S\rightarrow \R$ and let $x\in \Int (S)$.  Then, $f$ is \emph{differentiable}\index{Differentiable} at $x$ iff
@@ -213,7 +216,7 @@ v^a\nabla _af(x)\coloneqq \D _vf(x)
 Warning:  This is \emph{not} the universally accepted definition of differentiability.  This is (almost) what is referred to as \emph{g\^{a}teau differentiability}\index{G\^{a}teau differentiable} as opposed to a stronger definition called \emph{fr\'{e}chet differentiability}\index{Fr\'{e}chet differentiable}.  We say ``almost'' because we \emph{require that the map $v^a\mapsto \nabla _af(x)$ be linear}, whereas g\^{a}teaux differentiability merely requires the existence of $\D _vf(x)$ for all $v\in \tangent{\R ^d}{x}$.  (Thus, our definition is slightly stronger.)  We chose this definition because it is easier and, IMHO, more natural, than fr\'{e}chet differentiability.\footnote{We certainly need the map $v\mapsto \D _vf(x)$ to be linear if we are to do tensor calculus (otherwise the derivative itself won't be a tensor).}  That being said, it does have its pathologies.  Of particular note is that \emph{there are differentiable functions that are not continuous}---see \cref{exm6.2.15}.  Fortunately, this cannot happen in one-dimension---see \cref{prp6.5.1}.
 \end{rmk}
 \begin{rmk}
-Of course, there exist examples in which the directional derivative is \emph{not} linear (otherwise we would not have made this an assumption)---see the following example.  In particular, if we say that $f$ is differentiable at $x$, then \emph{we are assuming the directional derivative is linear}, not only that it exists.
+Of course, there exist examples in which the directional derivative is \emph{not} linear (otherwise we would not have made this an assumption)---see the following example (\cref{exm6.2.10}).  In particular, if we say that $f$ is differentiable at $x$, then \emph{we are assuming the directional derivative is linear}, not only that it exists.
 
 Despite this pathology, fortunately, the derivative is homogeneous, a fact particularly relevant in one-dimension.
 \end{rmk}
@@ -243,14 +246,11 @@ w^b\nabla _b(v^a\nabla _af)=w^bw^a\nabla _b\nabla _af.
 (Warning:  This equality will not hold in general if $v^a$ is a nonconstant function of $x$.)  Just as $\nabla _af(x)$ defined a covector on $\tangent{\R ^d}{x}$, so to does $\nabla _b\nabla _af(x)$ define a covariant $2$-tensor on $\tangent{\R ^d}{x}$.\footnote{Note that a covariant $2$-tensor is an element of $\tangent{\R ^d}{x}^\dagger \otimes \tangent{\R ^d}{x}^\dagger$.  When we say it is a ``covariant $2$-tensor \emph{on} $\tangent{\R ^d}{x}$'', this is what we mean---it's neither a (real-valued) function nor an element of $\tangent{\R ^d}{x}$.}
 \end{rmk}
 \begin{rmk}
-If all higher derivatives of $f$ exist, then $f$ is \emph{smooth}\index{Smooth}.
-\end{rmk}
-\begin{rmk}
-For some reason, people tend to write $\lim _{h\to 0}$ in this definition instead of $\lim _{\epsilon \to 0}$.  Not sure why.  $\epsilon$ is used for `small' numbers everywhere else in analysis.  Moreover, what happens if your function is called $h$ (not that uncommon of a name for a function)?  What are you doing to do?  Write $h(x+hv)$?  Ew.  Maybe you object ``But $\epsilon$ can't be negative!  That's against the rules!''.  No.  $\varepsilon$ is typically taken to be positive, but I am not writing that\textellipsis I am writing ``$\epsilon$''.  The distinction is deliberate---$\varepsilon$ is used to indicate a `small' positive number and $\epsilon$ is used to indicate a `small' (not-necessarily-positive) number.\footnote{I do not guarantee that I will never break this convention.}  If you think the difference between these symbols is hard to notice, I recommend you increase your \TeX nichal skills\footnote{Or get glasses.} (one is ``\texttt{\textbackslash varepsilon}'' and the other is ``\texttt{\textbackslash epsilon}'')\footnote{Actually, if you're really \TeX nichal, you might have noticed that this itself is a slight lie---because of font issues, I had to `steal' \texttt{\textbackslash epsilonup} from the \texttt{newpx} package.}.
+If all higher derivatives of $f$ exist, then $f$ is \emph{infinitely-differentiable}\index{Infinitely-differentiable}.  If all higher derivatives of $f$ exist \emph{and} they are continuous, then $f$ is \emph{smooth}\index{Smooth}.\footnote{Yes, there is a difference.  In fact, infinitely-differentiable functions need not even be continuous---see \cref{exm6.2.15}.}
 \end{rmk}
 \end{savenotes}
 \end{dfn}
-\begin{exm}[A function which is g\^{a}teaux differentiable but not differentiable]\footnote{This example comes from Ted Shifrin's \href{http://math.stackexchange.com/questions/694486/show-that-the-directional-derivative-is-linear-by-definition}{math.stackexchange answer}.}
+\begin{exm}[A function which is g\^{a}teaux differentiable but not differentiable]\footnote{This example comes from Ted Shifrin's \href{http://math.stackexchange.com/questions/694486/show-that-the-directional-derivative-is-linear-by-definition}{math.stackexchange answer}.}\label{exm6.2.10}
 In other words, we seek a function all of whose directional derivatives exist at a point, but for which the map $v\mapsto \D _vf(x)$ is not linear.
 
 Define $f:\R ^2\rightarrow \R$ by
