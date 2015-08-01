@@ -316,7 +316,7 @@ Let $\widetilde{\mathcal{B}}$ be a uniform base for the uniform space $X$.  Then
 is a neighborhood base at $x$ for the uniform topology.
 \end{crl}
 \begin{exr}
-Show that $\widetilde{\mathcal{U}}$ is a uniform base for the discrete uniformity.
+Show that $\widetilde{\mathcal{U}}\coloneqq \left\{ \{ x\} :x\in X\right\}$ is a uniform base for the discrete uniformity.
 \begin{rmk}
 That is, the collection consisting of just a \emph{single} open cover, which itself is just the collection of all singletons, forms a uniform base.  In other words, you need to check that $\mathcal{U}$ star-refines itself.\footnote{Of course, while $\llcurly$ in general is not reflexive, that doesn't mean we can't at least have $\mathcal{U}\llcurly \mathcal{U}$ \emph{some} of the time.}
 \end{rmk}
@@ -344,6 +344,30 @@ $(\Rightarrow )$ There is nothing to check (because every open cover in a unifor
 \blankline
 \noindent
 $(\Leftarrow )$ Suppose that $f^{-1}(\mathcal{C})\in \widetilde{\mathcal{U}}$ for each $\mathcal{C}\in \widetilde{\mathcal{C}}$.  We need to show that the preimave of \emph{every} uniform cover is a uniform cover.  So, let $\mathcal{V}\in \widetilde{\mathcal{V}}$.  Then, there is some $\mathcal{C}\in \widetilde{\mathcal{C}}$ such that $\mathcal{C}\llcurly \mathcal{V}$.  Then, by \cref{prpB.2.12}, it follows that $f^{-1}(\mathcal{C})\llcurly f^{-1}(\mathcal{V})$.  As $f^{-1}(\mathcal{C})\in \widetilde{\mathcal{U}}$ and $\widetilde{\mathcal{U}}$ is upward-closed with respect to $\llcurly$, it follows that $f^{-1}(\mathcal{V})\in \widetilde{\mathcal{U}}$, so that $f$ is uniformly-continuous.
+\end{proof}
+\end{prp}
+
+A uniform space does not start its life as a topological space---instead, it obtains a canonical topology from its uniformity.  In particular, it does not make sense a priori to just restrict to open covers.  On the other hand, once we specify the uniform covers, a topology is determined, and then, it turns out (as the following proposition shows), that it suffices to just look at \emph{open} uniform covers, more precisely, those uniform covers obtained by taking the interior of the covers in your uniform base.
+\begin{prp}\label{lma5.1.16}
+Let $\widetilde{\mathcal{B}}$ be a uniform base on a set $X$.  Then, (i) $\Int (\mathcal{B})\coloneqq \{ \Int (B):B\in \mathcal{B}\}$ is (still) a cover of $X$ and (ii) $\Int (\widetilde{\mathcal{B}})\coloneqq \left\{ \Int (\mathcal{B}):\mathcal{B}\in \widetilde{\mathcal{B}}\right\}$ is (still) a uniform base on $X$ that generates the same uniform base as $\widetilde{\mathcal{B}}$.
+\begin{proof}
+Let $\mathcal{B}\in \widetilde{\mathcal{B}}$ and let $x\in X$.  Let $\mathcal{C}$ be a star-refinement of $\mathcal{B}$.  Let $C\in \mathcal{C}$ contain $x$ and let $B\in \mathcal{B}$ be such that $\Star _{\mathcal{C}}(C)\subseteq B$.  Then,
+\begin{equation}
+x\in \Star _{\mathcal{C}}(x)\subseteq \Star _{\mathcal{C}}(C)\subseteq B,
+\end{equation}
+and so $x\in \Int (B)$, and so indeed $\Int (\mathcal{B})$ is a cover of $X$.
+
+Let $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$ and let $\mathcal{D}$ be a common star-refinement of $\mathcal{B}$ and $\mathcal{C}$.  We show that $\Int (\mathcal{D})$ is a common star-refinement of $\Int (\mathcal{B})$ and $\Int (\mathcal{C})$.  Because of $\mathcal{B}\leftrightarrow \mathcal{C}$ symmetry, it suffices to show that it is a star-refinement of $\Int (\mathcal{C})$.  So, let $\Int (D)\in \Int (\mathcal{D})$.  Then, there is some $C\in \mathcal{C}$ such that $\Star _{\mathcal{D}}(D)\subseteq C$, and so because union of the interiors is contained in the interior of the union (\cref{exr3.4.53}\ref{enm3.4.53.ii}), we have
+\begin{equation}
+\Star _{\Int (\mathcal{D})}(\Int (D))\subseteq \Star _{\Int (\mathcal{D})}(D)\subseteq \Int (C),
+\end{equation}
+and so indeed $\Int (\mathcal{D})$ star-refines $\Int (\mathcal{D})$.
+
+It remains to show that $\widetilde{\mathcal{B}}$ and $\Int (\widetilde{\mathcal{B}})$ induce the same uniform structure.  To show this, we apply \cref{prp1.6}.  Let $\mathcal{B}\in \widetilde{\mathcal{B}}$ and let $\mathcal{C}$ be a star-refinement of $\mathcal{B}$.  Then, $\Int (\mathcal{C})$ certainly star-refines $\mathcal{B}$.  For the other direction, let $\mathcal{D}$ be a star-refinement of $\mathcal{C}$.  We show that $\mathcal{D}$ star-refinement $\Int (\mathcal{B})$.  Let $D\in \mathcal{D}$ and let $C\in \mathcal{C}$ be such that $\Star _{\mathcal{D}}(D)\subseteq C$.  Let $B\in \mathcal{B}$ be such that $\Star _{\mathcal{C}}(C)\subseteq B$.  Let $x\in \Star _{\mathcal{D}}(D)$.  Then,
+\begin{equation}
+x\in C\subseteq \Star _{\mathcal{C}}(x)\subseteq \Star _{\mathcal{C}}(C)\subseteq B,
+\end{equation}
+and so indeed $x\in \Int (B)$.
 \end{proof}
 \end{prp}
 
@@ -654,7 +678,7 @@ Show that the uniformity defined by $\metric$ is the discrete uniformity.
 \end{exr}
 \end{exm}
 \begin{exr}
-Why does the indiscrete uniformity not come from a metric?
+Why does the indiscrete uniformity (on a set with at least two elements) not come from a metric?
 \end{exr}
 The following immediately follows from our result \cref{prpB.3.4} characterizing uniform-continuity in terms of uniform bases.
 \begin{prp}\label{prp4.8.54}
@@ -816,7 +840,7 @@ xx_0^{-1}f^{-1}\left( f(x_0)f(x)^{-1}V\right) \subseteq f^{-1}(V),
 so that $f^{-1}(V)$ is a neighborhood of $x$, so that $f$ is continuous at $x$.
 
 \Step{Show that $f$ is uniformly-continuous.}
-To show that $f$ is uniformly-continuous, we apply \cref{prpB.3.4}.  So, let $V\subseteq H$ be an open neighborhood of the identity and consider the cover $\mathcal{U}_V\coloneqq \left\{ hV:h\in H\right\}$.  As $f$ is continuous, we already know that $f^{-1}(\mathcal{U}_V)$ is an open cover of $G$.  To show that it is a uniform cover, it suffices to find an open neighborhood $U\subseteq G$ of the identity such that $\mathcal{U}_U\llcurly f^{-1}(\mathcal{U}_V)$.  Take $U'$ to be an open neighborhood of the identity such that $U'U'\subseteq f^{-1}(V)$, and then in turn take $U$ to be an open neighborhood of the identity such that (i) $UU\subseteq U'$ and (ii) $U=U^{-1}$ (which we may do by \cref{prp4.8.59}).  We wish to show that
+To show that $f$ is uniformly-continuous, we apply \cref{prpB.3.4}.  So, let $V\subseteq H$ be an open neighborhood of the identity and consider the cover $\mathcal{U}_V\coloneqq \left\{ hV:h\in H\right\}$.  To show that $f^{-1}(\mathcal{U}_V)$ is a uniform cover, it suffices to find an open neighborhood $U\subseteq G$ of the identity such that $\mathcal{U}_U\llcurly f^{-1}(\mathcal{U}_V)$.  Take $U'$ to be an open neighborhood of the identity such that $U'U'\subseteq f^{-1}(V)$, and then in turn take $U$ to be an open neighborhood of the identity such that (i) $UU\subseteq U'$ and (ii) $U=U^{-1}$ (which we may do by \cref{prp4.8.59}).  We wish to show that
 \begin{equation}\label{B.4.7}
 \Star _{\mathcal{U}_U}(U)=\bigcup _{x\in G\st xU\cap U\neq \emptyset}xU\subseteq f^{-1}(V).
 \end{equation}
@@ -862,6 +886,9 @@ Let $V$ be a real vector space, let $\norm$ be a seminorm on $V$, and let $v_1,v
 \begin{exr}
 Check that $\metric$ is indeed a semimetric.  Show that if $\norm$ is a norm then $\metric$ is a metric.
 \end{exr}
+\begin{rmk}
+Intuitively, the seminorm of something is like its `size' and semimetric is like `distance'---the `distance' between two vectors is the `size' of their difference.
+\end{rmk}
 \end{dfn}
 \begin{dfn}[Seminormed vector space and normed vector space]\label{SeminormedVectorSpace}
 A \emph{seminormed vector space}\index{Seminormed vector space} is a real vector space $V$ together with a collection of seminorms $\mathcal{D}$ such that $\coord{V,\mathcal{D}}$ is a semimetric space.  $\coord{V,\mathcal{D}}$ is a \emph{normed vector space}\index{Normed vector space} iff it is furthermore a metric space.
@@ -1211,7 +1238,7 @@ Of course, if we know what it means for nets to be cauchy, then we likewise have
 \begin{dfn}[Completeness]\label{Completeness}
 A uniform space is \emph{complete}\index{Complete (uniform space)} iff every cauchy net converges.
 \begin{rmk}
-In case there might be some confusion (e.g.~if the topology of the underlying uniform space comes from a totally-ordered set), then we shall say \emph{cauchy complete} in contrast to \emph{dedekind complete}.
+In case there might be some confusion (e.g.~if the topology of the underlying uniform space comes from a totally-ordered set), then we shall say \emph{cauchy-complete} in contrast to \emph{dedekind complete}.
 \end{rmk}
 \end{dfn}
 \begin{exr}
@@ -1441,6 +1468,7 @@ It follows from this exercise that $\Cls (\iota (X))=\Cmp (X)$, and so that $X$ 
 \end{thm}
 One thing that we will frequently want to do is extend a given function to its completion.  If the codomain is complete as well, we can do this, and in fact, we can do it whenever we have a continuous function defined on a dense subspace.
 \begin{prp}
+\begin{savenotes}
 Let $S\subseteq X$ be a dense subset of a topological space, let $Y$ be a complete $T_0$ uniform space, and let $f:S\rightarrow Y$ be uniformly-continuous.  Then, there exists a unique uniformly-continuous map $g:X\rightarrow Y$ such that $\restr{g}{S}=f$.
 \begin{rmk}
 Mere continuity does not suffice, even in the nicest of cases.  See the counter-example below (\cref{exm4.5.20x}).
@@ -1458,21 +1486,23 @@ This exercises established uniqueness.  Thus, the choice of net does not matter,
 Show that $g$ is uniformly-continuous.
 \end{exr}
 \end{proof}
+\end{savenotes}
 \end{prp}
 \begin{exm}[A real-valued continuous function on a dense subspace that does \emph{not} extend]\label{exm4.5.20x}
 In the notation of the previous proposition, take $S\coloneqq \R$, $X\coloneqq [-\infty ,+\infty]$, $Y\coloneqq \R$, and $f\coloneqq \id _{\R}$.  If this had an extension to all of $X$, then in particular the sequence $m\mapsto x_m\coloneqq m$ would have to converge in $\R$.
-
+\begin{rmk}
 In fact, if perhaps you thought you could make use of the fact that continuous functions restricted to quasicompact subsets are uniformly-continuous (\cref{prp4.2.73}) to prove the result in special cases, this even provides a counter-example in which every point of $X$ has a compact neighborhood.
+\end{rmk}
 \end{exm}
 Among other things, the significance of this result is that group operations of topological groups extend uniquely to their completions.
 
-Having shown that uniform spaces always have completions, finally, we may return to an unresolved issue all the way back from chapter 1.
-\begin{exm}[A nonzero totally-ordered cauchy complete field distinct from $\R$]
+Having shown that uniform spaces always have completions, finally, we may return to an unresolved issue all the way back from \cref{chp1}.
+\begin{exm}[A nonzero totally-ordered cauchy-complete field distinct from $\R$]
 Recall the field of rational functions with coefficients in the reals, $\R (x)$, from \cref{exm2.3.12}.  Being a totally-ordered field, it is in particular a topological group (\cref{exr4.8.58}) with respect to its underlying commutative group $\coord{\R (x),+,0,-}$, and so has a canonical uniform structure.  Thus, we may complete to form the complete topological field $\Cmp (\R (x))$.
 \begin{exr}
 Extend the order on $\R (x)$ to $\Cmp (\R (x))$ so that $\Cmp (\R (x))$ is a totally-ordered field containing $\R (x)$.
 \end{exr}
-By construction then, $\Cmp (\R (x))$ is a nonzero totally-ordered cauchy complete field.  Not only is it distinct from $\R$ it cannot even embed in $\R$ as, if it did, then so to $\R (x)$ would embed in $\R$ (as it embeds in $\Cmp (\R (x))$), and hence $\R (x)$ would be archimedean---a contradiction of \cref{exm2.3.12}.
+By construction then, $\Cmp (\R (x))$ is a nonzero totally-ordered cauchy-complete field.  Not only is it distinct from $\R$ it cannot even embed in $\R$ as, if it did, then so to $\R (x)$ would embed in $\R$ (as it embeds in $\Cmp (\R (x))$), and hence $\R (x)$ would be archimedean---a contradiction of \cref{exm2.3.12}.
 \end{exm}
 
 In conclusion:
@@ -1482,7 +1512,7 @@ If a space is quasicompactly-generated, then $\Mor _{\Top}(X,\R )$ is complete. 
 \end{textequation}
 \end{footnoteequation}
 
-\subsection{Complete Metric Spaces}
+\subsection{Complete metric spaces}
 
 We present here two important results that are specific to complete metric spaces.
 
@@ -1535,7 +1565,7 @@ We claim that $x\in U\cap V$.  As explained above, this will complete the proof.
 \end{proof}
 \end{thm}
 
-\begin{exm}[A complete uniform space which is not a baire space]\begin{savenotes}\footnote{A \emph{baire space}\index{Baire space} is a topological space in which the conclusion of the \nameref{BaireCategoryTheorem} holds.  This example was inspired by priel's answer on \href{http://mathoverflow.net/questions/212308/baire-category-theorem-for-complete-uniform-spaces}{mathoverflow.net}.  Thanks to Nate Eldredge for nudging me towards the correct proof.}\label{exm4.5.2x}
+\begin{exm}[A complete uniform space which is not a baire space]\begin{savenotes}\footnote{A \emph{baire space}\index{Baire space} is a topological space in which the conclusion of the \nameref{BaireCategoryTheorem} holds.  This example was inspired by \href{http://mathoverflow.net/questions/212308/baire-category-theorem-for-complete-uniform-spaces}{priel's answer} on mathoverflow.net.  Thanks to Nate Eldredge for nudging me towards the correct proof.}\label{exm4.5.2x}
 Define
 \begin{equation}
 X\coloneqq \{ f:\Z ^+ \rightarrow [0,1] :f(m)=0\text{ for all but finitely many }m\in \N \text{.}\} 

@@ -12,16 +12,22 @@ Let $X$ be a set, let $\meas :2^X\rightarrow [0,\infty ]$, and let $\mathcal{M}\
 \begin{enumerate}
 \item If $\mathcal{U}$ is a cover of $X$ on which $\meas$ is constant, then we say that $\mathcal{U}$ is \emph{uniformly-measurable}\index{Uniformly-measurable cover} with respect to $\meas$ and we denote by $\meas (\mathcal{U})$ its constant value on $\mathcal{U}$;
 \item $\meas$ is \emph{subadditive}\index{Subadditive} on $\mathcal{M}$ iff for $\{ M_m:m\in \N \} \subseteq \mathcal{M}$ we have
-\begin{equation}
+\begin{equation}\label{5.1.2}
 \meas \left( \bigcup _{m\in \N}M_m\right) \leq \sum _{m\in \N}\meas (M_m);
 \end{equation}
 \item $\meas$ is \emph{additive}\index{Additive (measure)} on $\mathcal{M}$ iff for $\{ M_m:m\in \N \} \subseteq \mathcal{M}$ a \emph{disjoint} collection we have
-\begin{equation}
+\begin{equation}\label{5.1.3}
 \meas \left( \bigcup _{m\in \N}M_m\right) =\sum _{m\in \N}\meas (M_m).
 \end{equation}
 \end{enumerate}
 $\meas$ is simply just subadditive (resp.~additive) if it is subadditive (resp.~additive) on all of $X$.
 \end{dfn}
+\begin{exr}\label{exr5.1.4}
+Show that if $\meas$ is additive on $\mathcal{M}$ then it is subadditive on $\mathcal{M}$.
+\begin{rmk}
+There is something to show here.  While \eqref{5.1.3} itself is obviously a stronger condition than \eqref{5.1.2}, it is also only assumed for \emph{disjoint} collections.  The problem then is to show that, if \eqref{5.1.3} holds for disjoint collections, then \eqref{5.1.2} holds for \emph{all} collections.
+\end{rmk}
+\end{exr}
 \begin{dfn}[Measure]\label{Measure}
 Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{measure}\index{measure} on $X$ is a function $\meas :2^X\rightarrow [0,\infty ]$ for which there exists a uniform base $\widetilde{\mathcal{B}}$ of $X$ consisting of uniformly-measurable covers (with respect to $\meas$) such that
 \begin{enumerate}
@@ -31,7 +37,7 @@ Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{measure}\in
 \item (Additivity on uniformly-measurable covers) $\meas$ is additive on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
 \end{enumerate}
 \begin{rmk}
-Think about what having a uniform base of uniformly-measurable covers means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then this is saying that every $\varepsilon$-ball has to have the same measure.
+Think about what having a uniform base of uniformly-measurable covers means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then this is just the statement that every $\varepsilon$-ball has to have the same measure.
 \end{rmk}
 \begin{rmk}
 Note that you definitely do not want to require \emph{every} uniform cover be uniformly-measurable.  For example, in a metric space, by upward-closedness the collection of all $\varepsilon$-balls together with a single $2\varepsilon$-ball will also be a uniform-cover---we definitely do not want to require that a $2\varepsilon$ ball has the same measure as an $\varepsilon$-ball.
@@ -40,7 +46,7 @@ Note that you definitely do not want to require \emph{every} uniform cover be un
 Note that we allow the measure of sets to be infinite.  This is incredibly important---for example, we will want $\meas (\R )=\infty$ (for lebesgue measure anyways).
 \end{rmk}
 \begin{rmk}
-As a consequence of this, we needn't worry about convergence in the third axiom.  As a matter of fact, we definitely want to allow this sum to diverge---think about what the measure of $\bigcup _{m\in \Z}(m,m+1)$ should be.
+As a consequence of this, we needn't worry about convergence in the third axiom (see \eqref{5.1.2}).  As a matter of fact, we definitely want to allow this sum to diverge---think about what the measure of $\bigcup _{m\in \Z}(m,m+1)$ should be.
 \end{rmk}
 \begin{rmk}
 Warning:  This is completely nonstandard.  I have never seen this definition before.  Keep this in mind when consulting other references.  That being said, a function that satisfies the first, second, and third axioms is usually referred to as an \emph{outer-measure}\index{Outer-measure}.
@@ -74,45 +80,113 @@ Let $B\in \mathcal{B}$.  Then, there is some $C\in \mathcal{C}$ be such that $B\
 \end{prp}
 Our first relatively significant result, which we shall use to define lebesgue measure on $\R ^d$, is that, to define a measure, it suffices to define a measure on just the sets in a given uniform base.
 \begin{thm}[Carath\'{e}odory's Extension Theorem]\label{CaratheodorysExtensionTheorem}
+\begin{savenotes}
 Let $X$ be a uniform space with uniform base $\widetilde{\mathcal{B}}$ and let $\meas :\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}\rightarrow [0,\infty ]$ be such that
 \begin{enumerate}
-\item $\meas (\emptyset )=0$;
-\item every $\mathcal{B}\in \widetilde{\mathcal{B}}$ is uniformly-measurable with respect to $\meas$; and
-\item $\meas$ is additive on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
+\item \label{CaratheodorysExtensionTheorem.i}$\meas (\emptyset )=0$;
+\item \label{CaratheodorysExtensionTheorem.ii}$\meas (B)=\meas (\Int (B))$ for all $B\in \bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$;
+\item \label{CaratheodorysExtensionTheorem.iii}every $\mathcal{B}\in \widetilde{\mathcal{B}}$ is uniformly-measurable with respect to $\meas$; and
+\item \label{CaratheodorysExtensionTheorem.iv}$\meas$ is additive on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.
 \end{enumerate}
-Then, there exists a unique measure on $X$ which agrees with $\meas$ on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.  Furthermore, $\meas$ satisfies the property that, for $S,T\subseteq X$, if there exists a cover $\mathcal{B}\in \widetilde{\mathcal{B}}$ of which no element intersects both $S$ and $T$, then
+Then,
+\begin{equation}
+\meas (S)\coloneqq \lim _{\mathcal{B}\in \coord{\widetilde{\mathcal{B}},\ggcurly}}\meas _{\mathcal{B}}(S),\footnote{The statement that $\widetilde{\mathcal{B}}$ is downward-directed with respect to $\llcurly$ is exactly the statement that it is a directed set with respect to $\ggcurly$, and so the map $\widetilde{\mathcal{B}}\ni \mathcal{B}\mapsto \meas _{\mathcal{B}}(S)\in [0,\infty ]$ is a net.  Note that this limit makes sense because it is nondecreasing, because as $\mathcal{B}$ becomes smaller, the set you are taking the infimum over becomes smaller (there will be less covers that star-refine it, and so the infimum itself becomes bigger.  Thus, by the \nameref{MonotoneConvergenceTheorem} (\cref{MonotoneConvergenceTheorem}),\footnote{If it is bounded above, it converges in $\R$.  If it's not bounded above, it converges to $\infty$.}}
+\end{equation}
+where
+\begin{equation}
+\begin{multlined}
+\meas _{\mathcal{B}}(S)\coloneqq \inf \left\{ \sum _{m\in \N}\meas (B_m):\right. \\ \left. S\subseteq \bigcup _{m\in \N}B_m\text{ and  each }B_m\in \mathcal{C}_m\text{ for some }\mathcal{C}_m\in \widetilde{\mathcal{B}}\text{ such that }\mathcal{C}_m\llcurlyeq \mathcal{B}\right. \\ \left. \text{(or }B_m=\emptyset \text{).}\right\} ,\footnote{The point of allowing each $B_m$ to be empty is to allow for finite unions as well.  $\llcurly$ means star-refines \emph{or} is equal to.  In particular, the elements of the covers are are allowed to come from $\mathcal{B}$ itself.}
+\end{multlined}
+\end{equation}
+is the unique measure on $X$ which agrees with $\meas$ on $\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}}\mathcal{B}$.  Furthermore, $\meas$ satisfies the property that, for $S,T\subseteq X$, if there exists a cover $\mathcal{B}\in \widetilde{\mathcal{B}}$ of which no element intersects both $S$ and $T$, then
 \begin{equation}
 \meas (S\cup T)=\meas (S)+\meas (T).
 \end{equation}
 \begin{rmk}
-These are just verbatim the two three axioms of a measure.  The point is that, to define a measure, it suffices to define them on sets coming from a given uniform base.  Furthermore, you also do not have to check subadditivity of your original definition.
+These are just verbatim three out of four of the axioms of a measure.  The point is that, to define a measure, it suffices to define them on sets coming from a given uniform base.  Furthermore, you also do not have to check subadditivity of your original definition.
 \end{rmk}
 \begin{rmk}
-Once again, to understand the last ``Furthermore, \textellipsis'', think about what this means for metric spaces.  This says that there is some $\varepsilon >0$ so that no $\varepsilon$-ball intersects both sets.  Thus, in this sense, the two sets are at least $\varepsilon >0$ distance apart.  Thus, the general statement is still to be interpreted as the statement that the two sets are `positively-separated'.
+Once again, to understand the last ``Furthermore, \textellipsis'', think about what this means for metric spaces.  The hypothesis here says that there is some $\varepsilon >0$ so that no $\varepsilon$-ball intersects both sets.  Thus, in this sense, the two sets are at least $\varepsilon >0$ distance apart.  Thus, the general statement should still be interpreted as the statement that, if two sets are `positively-separated', then the measure of the union is the sum of the measures
 \end{rmk}
 \begin{proof}
-\Step{Construct the measure}
-Let $S\subseteq X$ and define
-\begin{equation}
-\begin{split}
-\meas _{\mathcal{B}}(S) & \coloneqq \inf \left\{ \sum _{m\in \N}\meas (B_m):\right. \\
-& \qquad \left. S\subseteq \bigcup _{m\in \N}B_m\text{ and  each }B_m\in \mathcal{C}\text{ for some }\mathcal{C}\in \widetilde{\mathcal{B}}\text{ such that }\mathcal{C}\llcurly \mathcal{B}\right\} .
-\end{split}
-\end{equation}
+Before we begin the `'meat' of the proof, we first prove a couple of lemmas.
 
-The statement that $\widetilde{\mathcal{B}}$ is a uniform base just means that it is downward-directed with respect to star-refinement.  In other words, it means that it is a \emph{directed set} with respect to \emph{reverse} star-refinement.  Thus,
+On account of \ref{CaratheodorysExtensionTheorem.ii} and \cref{lma5.1.16}, by passing to the interior if necessary, we may without loss of generality assume that each $\mathcal{B}$ is an \emph{open} cover.
+\begin{lma}
+Let $\widetilde{\mathcal{B}}$ be a uniform base of open covers on a set $X$ and let $B\in \mathcal{B}\in \widetilde{\mathcal{B}}$.  Then, there exists $\widetilde{\mathcal{B}}\ni \mathcal{C}\llcurly \mathcal{B}$ and $C\in \mathcal{C}$ such that $\Star _{\mathcal{C}}(C)\subseteq B$.
+\begin{proof}
+Let $x\in B$.  As $B$ is open, there is some $\mathcal{D}\in \widetilde{\mathcal{B}}$ such that $\Star _{\mathcal{D}}(x)\subseteq B$.  Let $\mathcal{C}$ be a star-refinement of $\mathcal{D}$ and let $C\in \mathcal{C}$ contain $x$.  There is then some $D\in \mathcal{D}$ such that
 \begin{equation}
-\widetilde{\mathcal{B}}\ni \mathcal{B}\mapsto \meas _{\mathcal{B}}(S)\in [0,\infty ]
+\Star _{\mathcal{C}}(C)\subseteq D\subseteq \Star _{\mathcal{D}}(x)\subseteq B.
 \end{equation}
-is a net.  Furthermore, it is nondecreasing, because as $\mathcal{B}$ becomes smaller, the set you are taking the infimum over becomes smaller (there will be less covers that star-refine it, and so the infimum itself becomes bigger.  Thus, by the \nameref{MonotoneConvergenceTheorem} (\cref{MonotoneConvergenceTheorem}),\footnote{If it is bounded above, it converges in $\R$.  It it's not bounded above, it converges to $\infty$.}  we can define
+\end{proof}
+\end{lma}
+
+For the time being, let us write
 \begin{equation}
-\breve{\meas}(S)\coloneqq \lim _{\mathcal{B}}\meas _{\mathcal{B}}(S).
+\breve{\meas}(S)\coloneqq \lim _{\mathcal{B}}\meas _{\mathcal{B}}(S)
 \end{equation}
-(The breve is there to distinguish it from what we started with.  Once we show they agree, we will drop it.)
+with the breve to distinguish it from what we started with.  Once we show they agree, we will drop it.
+
+\Step{Show that $\breve{\meas}(S)=\lim _{\Int{\mathcal{B}}\in \coord{\Int \left( \widetilde{\mathcal{B}}\right) ,\ggcurly}}\meas _{\Int (\mathcal{B})}$}
+
+
+\Step{Show that if $\mathcal{C}\llcurly \mathcal{B}\ni B$, then $\meas _{\mathcal{C}}(B)=\meas (B)$}
+By applying the above lemma a couple of times, we obtain an element $\mathcal{D}\in \widetilde{\mathcal{B}}$ such that (i) $\mathcal{D}\llcurly \mathcal{C}$ and (ii) there is some $D\in \mathcal{D}$ such that $D\subseteq \Star _{\mathcal{D}}(D)\subseteq B$.  Write $B=D\cup (B\setminus D)$.  Then, as $\meas$ is additive on $\bigcup _{\mathcal{B}'\in \widetilde{\mathcal{B}}}\mathcal{B}'$, we have that $\meas (B)=\meas (D)+\meas (B\setminus D)$
 
 \Step{Show that this agrees with what we started with}
-Let $B\in \mathcal{B}$.  We must show that $\breve{\meas (B)}=\meas(\mathcal{B})$.  First of all, $B\in \mathcal{B}$ is a cover of itself, and therefore $\meas _{\mathcal{B}}(B)\leq \meas (B)$.
+Let $B\in \mathcal{B}$.  We must show that $\breve{\meas (B)}=\meas(\mathcal{B})$.  First of all, $B\in \mathcal{B}$ is a cover of itself, and therefore $\meas _{\mathcal{B}}(B)\leq \meas (B)$.  Therefore, in the limit, we likewise have that $\breve{\meas}(B)\leq \meas (B)$.
+
+For the other inequality, we first do the case in which $\breve{m}(B)=\infty$.  Then, for every $M>0$, there must be some $\mathcal{B}_M$ that star-refines $\mathcal{B}$ and such that
+\begin{equation}
+\meas _{\mathcal{B}_M}(B)>M.
+\end{equation}
+Start by taking $\varepsilon >0$, and choosing $\mathcal{B}_{\varepsilon}\llcurly \mathcal{B}$ and such that
+\begin{equation}
+\breve{m}(B)-\meas _{\mathcal{B}_{\varepsilon }}(B)<\varepsilon .
+\end{equation}
+Now let $B_m$ be e
+
+\Step{Show that $\meas _{\mathcal{B}}(S)\geq 0$}
+Let us write
+\begin{equation}
+\begin{split}
+M_{\mathcal{B}}(S) & \coloneqq \left\{ \sum _{m\in \N}\meas (B_m):\right. \\
+& \qquad \left. S\subseteq \bigcup _{m\in \N}B_m\text{ and  each }k_m\in \mathcal{C}_m\text{ for some }\mathcal{C}_m\in \widetilde{\mathcal{B}}\text{ such that }\mathcal{C}_m\llcurlyeq \mathcal{B}\right. \\
+& \qquad \left. \text{(or }B_m=\emptyset \text{).}\right\} ,
+\end{split}
+\end{equation}
+so that
+\begin{equation}
+\meas _{\mathcal{B}}(S)=\inf (M_{\mathcal{B}}(S)).
+\end{equation}
+Note that, as $M_{\mathcal{B}}(S)\subseteq [0,\infty ]$, we always have that $\meas _{\mathcal{B}}(S)\geq 0$.
+
+\Step{Show that $\meas _{\mathcal{B}}(\emptyset )=0$}
+The empty-set itself is a countable cover of $\emptyset$, so that $0\in M_{\mathcal{B}}(\emptyset )$, and hence $\meas _{\mathcal{B}}(\emptyset )\leq 0$.  Of course, we already know that $\meas _{\mathcal{B}})\emptyset \geq 0$, and so $\meas _{\mathcal{B}}(\emptyset )=0$.
+
+\Step{Show that $\meas _{\mathcal{B}}$ is nondecreasing}
+If $S\subseteq T$, then $M_{\mathcal{B}}(S)\supseteq M_{\mathcal{B}}(T)$, and so, taking the infimum, we have that $\meas _{\mathcal{B}}(S)\leq \meas _{\mathcal{B}}(T)$.
+
+\Step{Show that $\meas _{\mathcal{B}}$ is subadditive on $2^X$}
+Let $\{ M_m:m\in \N \} \subseteq 2^X$.  If $\meas _{\mathcal{B}}(M_m)=\infty$ for any $m\in \N$, then because $\meas _{\mathcal{B}}$ is nondecreasing, we would likewise have that
+\begin{equation}
+\meas _{\mathcal{B}}\left( \bigcup _{m\in \N}M_m\right) \geq \meas _{\mathcal{B}}(M_m)=\infty ,
+\end{equation}
+and so in this case we are done.  Thus, we may as well assume without loss of generality that each $\meas _{\mathcal{B}}(M_m)$ is finite.  Let $\varepsilon >0$.  Then,\footnote{This is why we needed finiteness.} there are $B_{m,n}$ elements of some star-refinement of $\mathcal{B}$ such that
+\begin{equation}
+\meas _{\mathcal{B}}(M_m)\leq \sum _{n\in \N}\meas (B_{m,n})<\meas _{\mathcal{B}}(M_m)+\tfrac{\varepsilon}{2^m}.
+\end{equation}
+As $\bigcup _{m\in \N}M_m\subseteq \bigcup _{m,n\in \N}B_{m,n}$, we thus have that
+\begin{equation}
+\meas _{\mathcal{B}}\left( \bigcup _{m\in \N}M_m\right) \leq \sum _{m,n\in \N}\meas (B_{m,n})<\sum _{m\in \N}\left[ \meas _{\mathcal{B}}(M_m)+\tfrac{\varepsilon}{2^m}\right] =\sum _{m\in \N}\meas _{\mathcal{B}}(M_m)+\varepsilon .
+\end{equation}
+Thus, indeed,
+\begin{equation}
+\meas _{\mathcal{B}}\left( \bigcup _{m\in \N}M_m\right) \leq \sum _{m\in \N}\meas _{\mathcal{B}}(M_m).
+\end{equation}
 \end{proof}
+\end{savenotes}
 \end{thm}
 
 \begin{dfn}[Uniformly-bounded]\label{UniformlyBounded}
