@@ -493,7 +493,7 @@ Find an example of
 \end{exr}
 The notion of an \emph{interval} is obviously important in mathematics and you almost have certainly encountered them before in calculus.  We give here the abstract definition (see \cref{prp3.3.70} to see that this agrees with what you are probably familiar with).
 \begin{dfn}[Interval]\label{Interval}
-Let $(X,\leq )$ be a preordered set and let $I\subseteq X$.  Then, $I$ is an \emph{interval}\index{Interval} iff for all $x_1,x_2\in I$ with $x_1\leq x_2$, whenever $x_1\leq x\leq x$, it follows that $x\in I$.
+Let $\coord{X,\leq}$ be a preordered set and let $I\subseteq X$.  Then, $I$ is an \emph{interval}\index{Interval} iff for all $x_1,x_2\in I$ with $x_1\leq x_2$, whenever $x_1\leq x\leq x$, it follows that $x\in I$.
 \begin{rmk}
 In other words, $I$ is an interval iff everything in-between two elements of $I$ is also in $I$.
 \end{rmk}
@@ -546,13 +546,13 @@ What is an example of a totally-ordered set that is not a well-ordered set?
 
 We end this subsection with an incredibly important result known as \emph{Zorn's Lemma}.  At the moment, it's importance might not seem obvious, and perhaps one must see it in action in order to appreciate its significance.  For the time being at least, let me say this:  if ever you are trying to produce something maximal by adding things to a set one-by-one (e.g.~if you are trying to construct a basis by picking linearly-independent vectors one-by-one), but you are running into trouble because, somehow, this process will never stop, not even if you `go on forever':  give Zorn's Lemma a try.
 \begin{dfn}[Upper-bound and lower-bound]
-Let $(X,\leq )$ be a preordered set, let $S\subseteq X$, and let $x\in X$.  Then, $x$ is an \emph{upper-bound}\index{Upper bound} iff $s\leq x$ for all $s\in S$.  $x$ is a \emph{lower-bound}\index{Lower-bound} iff $x\leq s$ for all $s\in S$.
+Let $\coord{X,\leq}$ be a preordered set, let $S\subseteq X$, and let $x\in X$.  Then, $x$ is an \emph{upper-bound}\index{Upper bound} iff $s\leq x$ for all $s\in S$.  $x$ is a \emph{lower-bound}\index{Lower-bound} iff $x\leq s$ for all $s\in S$.
 \end{dfn}
 \begin{dfn}[Maximum and minimum]
-Let $(X,\leq )$ be a preordered set and let $x\in X$.  Then, $x$ is a \emph{maximum}\index{Maximum} of $X$ iff $x$ is an upper-bound of all of $X$.  $x$ is a \emph{minimum}\index{Minimum} of $X$ iff $x$ is a lower-bound of all of $X$.
+Let $\coord{X,\leq}$ be a preordered set and let $x\in X$.  Then, $x$ is a \emph{maximum}\index{Maximum} of $X$ iff $x$ is an upper-bound of all of $X$.  $x$ is a \emph{minimum}\index{Minimum} of $X$ iff $x$ is a lower-bound of all of $X$.
 \end{dfn}
 \begin{dfn}[Maximal and minimal]
-Let $(X,\leq )$ be a preordered set, let $S\subseteq X$, and let $x\in S$.  Then, $x$ is \emph{maximal}\index{Maximal} in $S$ iff whenever $y\in S$ and $y\geq x$, it follows that $x=y$.  $x$ is \emph{minimal}\index{Minimal} in $S$ iff whenever $y\in S$ and $y\leq x$ it follows that $x=y$.
+Let $\coord{X,\leq}$ be a preordered set, let $S\subseteq X$, and let $x\in S$.  Then, $x$ is \emph{maximal}\index{Maximal} in $S$ iff whenever $y\in S$ and $y\geq x$, it follows that $x=y$.  $x$ is \emph{minimal}\index{Minimal} in $S$ iff whenever $y\in S$ and $y\leq x$ it follows that $x=y$.
 \begin{rmk}
 In other words, maximal means that there is no element in $S$ strictly greater than $x$ (and similarly for minimal).  Contrast this with maxi\emph{mum} and mini\emph{mum}:  if $x$ is a maximum of $S$ it means that $y\leq x$ for all $y\in S$ (and analogously for minimum).
 \end{rmk}
@@ -636,6 +636,8 @@ Let $\cdot$ be a binary relation on a set $X$.
 \begin{enumerate}
 \item (Associative) $\cdot$ is \emph{associative}\index{Associative} iff $(x_1\cdot x_2)\cdot x_3=x_1\cdot (x_2\cdot x_3)$ for all $x_1,x_2,x_3\in X$.
 \item (Commutative) $\cdot$ is \emph{commutative}\index{Commutative} if $x_1\cdot x_2=x_2\cdot x_1$ for all $x_1,x_2\in X$.
+\item (Identity) An \emph{identity} of $\cdot$ is an element $1\in X$ such that $1\cdot x=x=x\cdot 1$ for all $x\in X$.
+\item (Inverse) If $\cdot$ has an identity and $x\in X$, then an \emph{inverse} of $x$ is an element $x^{-1}\in X$ such that $x\cdot x^{-1}=1=x^{-1}\cdot x$.
 \end{enumerate}
 \end{dfn}
 
@@ -644,7 +646,7 @@ We first consider sets equipped just a single binary operation.
 A \emph{magma}\index{Magma} is a set equipped with a binary operation.
 \end{dfn}
 \begin{exr}\label{exrA.1.34}
-Let $(X,\cdot )$ be a magma and let $x_1,x_2,x_3\in X$.  Show that $x_1=x_2$ implies $x_1\cdot x_3=x_2\cdot x_3$.
+Let $\coord{X,\cdot }$ be a magma and let $x_1,x_2,x_3\in X$.  Show that $x_1=x_2$ implies $x_1\cdot x_3=x_2\cdot x_3$.
 \begin{rmk}
 My hint is that the solution is so trivial that it is easy to overlook.
 \end{rmk}
@@ -656,16 +658,16 @@ Note that the converse is not true in general.  That is, we can have $x_1\cdot x
 \end{rmk}
 \end{exr}
 \begin{dfn}[Semigroup]\label{Semigroup}
-A \emph{semigroup}\index{Semigroup} is a magma $(X,\cdot )$ such that $\cdot$ is associative.
+A \emph{semigroup}\index{Semigroup} is a magma $\coord{X,\cdot}$ such that $\cdot$ is associative.
 \end{dfn}
 \begin{dfn}[Monoid]\label{Monoid}
-A \emph{monoid}\index{Monoid} $(X,\cdot ,1)$ is a semigroup $(X,\cdot )$ equipped with an identity $1\in X$.
+A \emph{monoid}\index{Monoid} $\coord{X,\cdot ,1}$ is a semigroup $\coord{X,\cdot}$ equipped with an identity $1\in X$.
 \end{dfn}
 \begin{exr}[Identities are unique]\label{exrA.1.77}
-Let $X$ be a monoid and let $1,1'\in X$ be such that $1\cdot x=x=x\dot 1$ and $1'\cdot x=x=x\cdot 1'$ for all $x\in X$.  Show that $1=1'$.
+Let $X$ be a monoid and let $1,1'\in X$ be such that $1\cdot x=x=x\cdot 1$ and $1'\cdot x=x=x\cdot 1'$ for all $x\in X$.  Show that $1=1'$.
 \end{exr}
 \begin{dfn}[Group]\label{Group}
-A \emph{group}\index{Group} is a monoid $(X,\cdot ,1)$ equipped with a function $-^{-1}:X\rightarrow X$ so that $x^{-1}$ is an inverse of $x$ for all $x\in X$.
+A \emph{group}\index{Group} is a monoid $\coord{X,\cdot ,1}$ equipped with a function $-^{-1}:X\rightarrow X$ so that $x^{-1}$ is an inverse of $x$ for all $x\in X$.
 \begin{rmk}
 Usually this is just stated as ``$X$ has inverses.''.  This isn't wrong, but this way of thinking about things doesn't generalize to universal algebra or category theory quite as well.  The way to think about this is that, inverses, like the binary operation (as well as the identity) is \emph{additional structure}.  This is in contrast to the axiom of associativity which should be thought of as a \emph{property} satisfied by an \emph{already existing} structure (the binary operation).
 \end{rmk}
@@ -674,7 +676,7 @@ Usually this is just stated as ``$X$ has inverses.''.  This isn't wrong, but thi
 Let $X$ be a group, let $x\in X$, and let $y,z\in X$ both be inverses of $x$.  Show that $y=z$.
 \end{exr}
 \begin{exr}
-Let $(X,\cdot )$ be a group and let $x_1,x_2,x_3\in X$.  Show that if $x_1\cdot x_2=x_1\cdot x_3$, then $x_2=x_3$.
+Let $\coord{X,\cdot}$ be a group and let $x_1,x_2,x_3\in X$.  Show that if $x_1\cdot x_2=x_1\cdot x_3$, then $x_2=x_3$.
 \begin{rmk}
 Thus, the converse to \cref{exrA.1.34} holds in the case of a group.
 \end{rmk}
@@ -688,14 +690,14 @@ Note that, once again, the $\cdot$ in $f(x_1\cdot x_2)$ is \emph{not} the same a
 
 We now move on to the study of sets equipped with \emph{two} binary operations.
 \begin{dfn}[Rg]
-A \emph{rg}\index{Rg} is a set equipped with two binary operations $(X,+,\cdot )$ such that
+A \emph{rg}\index{Rg} is a set equipped with two binary operations $\coord{X,+,\cdot}$ such that
 \begin{enumerate}
-\item $(X,+)$ is a commutative monoid,
-\item $(X,\cdot )$ is a semigroup, and
+\item $\coord{X,+}$ is a commutative monoid,
+\item $\coord{X,\cdot}$ is a semigroup, and
 \item $\cdot$ distributes over $+$, that is, $x_1\cdot (x_2+x_3)=x_1\cdot x_2+x_1\cdot x_3$ for all $x_1,x_2,x_3\in X$.
 \end{enumerate}
 \begin{rmk}
-In other words, writing out what it means for $(X,+)$ to be a commutative monoid and for $(X,\cdot )$ to be a a semigroup, these three properties are equivalent to
+In other words, writing out what it means for $\coord{X,+}$ to be a commutative monoid and for $\coord{X,\cdot}$ to be a a semigroup, these three properties are equivalent to
 \begin{enumerate}
 \item $+$ is associative,
 \item $+$ is commutative,
@@ -712,10 +714,10 @@ I have actually never seen the term rg used before.  That being said, I haven't 
 \end{rmk}
 \end{dfn}
 \begin{dfn}[Rng]\label{dfnA.1.86}
-A \emph{rng}\index{Rng} is a rg such that $(X,+,0,-)$ is a commutative group, that is, a rg that has additive inverses.
+A \emph{rng}\index{Rng} is a rg such that $\coord{X,+,0,-}$ is a commutative group, that is, a rg that has additive inverses.
 \end{dfn}
 \begin{exr}\label{exrA.1.43}
-Let $(X,+,0-,\cdot )$ be a rng and let $x_1,x_2\in X$.  Show the following properties.
+Let $\coord{X,+,0-,\cdot}$ be a rng and let $x_1,x_2\in X$.  Show the following properties.
 \begin{enumerate}
 \item $0\cdot x_1=0$.
 \item $(-x_1)\cdot x_2=-(x_1\cdot x_2)$.
@@ -725,13 +727,13 @@ Let $(X,+,0-,\cdot )$ be a rng and let $x_1,x_2\in X$.  Show the following prope
 The even natural numbers $2\N$ with their usual addition and multiplication is also an example of a rg that is not a rng.
 \end{exm}
 \begin{dfn}[Rig]\label{dfnA.1.33}
-A \emph{rig}\index{Rig} is a rg such that $(X,\cdot ,1)$ is a monoid, that is, a rg that has a multiplicative identity
+A \emph{rig}\index{Rig} is a rg such that $\coord{X,\cdot ,1}$ is a monoid, that is, a rg that has a multiplicative identity
 \begin{rmk}
 I believe it is more common to refer to rigs as \emph{semirings}.  I dislike this terminology because it suggests an analogy with semigroups, of which there is none.  The term rig is also arguably more descriptive---even if you didn't know what the term meant, you might have a good chance of guessing, especially if you had seen the term rng before.
 \end{rmk}
 \end{dfn}
 \begin{dfn}[Characteristic]
-Let $(X,+,0,-,\cdot ,1)$ be a rig.  Then, either (i) there is some $m\in \Z ^+$ such that $m\cdot 1=0\in X$ or (ii) there is no such $m$.  In the former case, the smallest positive integer such that $m\cdot 1=0\in X$ is the \emph{characteristic}\index{Characteristic (of a rig)}, and in the latter case the \emph{characteristic} is $0$.  We denote the characteristic by $\Char (X)$.
+Let $\coord{X,+,0,-,\cdot ,1}$ be a rig.  Then, either (i) there is some $m\in \Z ^+$ such that $m\cdot 1=0\in X$ or (ii) there is no such $m$.  In the former case, the smallest positive integer such that $m\cdot 1=0\in X$ is the \emph{characteristic}\index{Characteristic (of a rig)}, and in the latter case the \emph{characteristic} is $0$.  We denote the characteristic by $\Char (X)$.
 \end{dfn}
 \begin{exm}[A rg that is not a rig]
 The even natural numbers $2\N$ with their usual addition and multiplication is a rg that is not a rig.
@@ -755,13 +757,13 @@ This is called the \emph{zero cring}\index{Zero cring}.
 \end{rmk}
 \end{exr}
 \begin{dfn}[Integral]\label{dfnA.1.69}
-A rg $(X,+,\cdot ,0)$ is \emph{integral}\index{Integral} iff it has the property that, whenever $x\cdot y=0$, it follows that either $x=0$ or $y=0$.
+A rg $\coord{X,+,\cdot ,0}$ is \emph{integral}\index{Integral} iff it has the property that, whenever $x\cdot y=0$, it follows that either $x=0$ or $y=0$.
 \begin{rmk}
 Usually the adjective ``integral'' is applied only to crings, in which case people refer to this as an \emph{integral domain}\index{Integral domain} instead of an integral cring.  As the natural numbers have this property (i.e.~$xy=0\Rightarrow x=0\vee y=0$) I wanted an adjective that would describe rgs with this property and ``integral'' was an obvious choice because of common use of the term ``integral domain''.  It is then just more systematic to refer to them as integral crings instead of integral domains.  This is usually not an issue because it is not very common to work with rigs or rgs (we of course need to because we construct the natural numbers from the ground up).
 \end{rmk}
 \end{dfn}
 \begin{dfn}[Skew-field]
-A \emph{Skew-field}\index{Skew-field} is a ring $(X,+,\cdot ,0,-,1$) such that $(X\setminus \{ 0\} ,\cdot ,1,^{-1})$ is a group.  That is, it is a ring such that every nonzero element has a multiplicative inverse.
+A \emph{Skew-field}\index{Skew-field} is a ring $\coord{X,+,\cdot ,0,-,1}$ such that $\coord{X\setminus \{ 0\} ,\cdot ,1,^{-1}}$ is a group.  That is, it is a ring such that every nonzero element has a multiplicative inverse.
 \begin{rmk}
 In other words, every nonzero element has a multiplicative inverse.
 \end{rmk}
@@ -779,7 +781,7 @@ A \emph{field}\index{Field} is a commutative skew-field.
 Let $F$ be a field with positive characteristic $p$.  Show that $p$ is prime.
 \end{exr}
 \begin{dfn}[Homomorphisms (of rgs)]
-Let $(X,+,\cdot )$ and $(Y,+,\cdot )$ be rgs and let $f:X\rightarrow Y$ be a function.  Then,$f$ is a \emph{homomorphism}\index{Homomorphism (of rgs)} iff $f$ is both a homomorphism (of magmas) from $(X,+)$ to $(Y,+)$ and from $(X,\cdot )$ to $(Y,\cdot )$.  Explicitly, this means that
+Let $\coord{X,+,\cdot}$ and $\coord{Y,+,\cdot}$ be rgs and let $f:X\rightarrow Y$ be a function.  Then,$f$ is a \emph{homomorphism}\index{Homomorphism (of rgs)} iff $f$ is both a homomorphism (of magmas) from $\coord{X,+}$ to $\coord{Y,+}$ and from $\coord{X,\cdot}$ to $\coord{Y,\cdot}$.  Explicitly, this means that
 \begin{equation}
 f(x+y)=f(x)+f(y),f(0)=0,\text{ and }f(xy)=f(x)f(y),
 \end{equation}
