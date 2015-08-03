@@ -96,7 +96,11 @@ As was explained in a remark, we need not show \ref{CaratheodorysTheorem.iii} it
 \Step{Prove \ref{CaratheodorysTheorem.ii} for finite unions}
 We first show that the union of finitely many measurable sets is measurable.  It suffices of course to then just show that the union of two measurable sets is measurable.  So, let $M_1,M_2\subseteq X$ be measurable and let $S\subseteq X$.  Then,
 \begin{equation}
-\meas (S)=\footnote{Because $M_2$ is measurable.}\meas (S\cap M_2)+\meas (S\cap M_2^{\comp})=\footnote{Because $M_1$ is measurable (applied twice).}\meas (S\cap M_2\cap M_1)+\meas (S\cap M_2\cap M_1^{\comp})+\meas (S\cap M_2^{\comp}\cap \meas _1)+\meas (S\cap M_2^{\comp}\cap M_1^{\comp})\geq \footnote{By subadditivity.}\meas (S\cap (M_1\cup M_2))+\meas (S\cap (M_1\cup M_2)^{\comp})
+\begin{split}
+\meas (S) & =\footnote{Because $M_2$ is measurable.}\meas (S\cap M_2)+\meas (S\cap M_2^{\comp}) \\
+& =\footnote{Because $M_1$ is measurable (applied twice).}\meas (S\cap M_2\cap M_1)+\meas (S\cap M_2\cap M_1^{\comp})+\meas (S\cap M_2^{\comp}\cap \meas _1)+\meas (S\cap M_2^{\comp}\cap M_1^{\comp}) \\
+& \geq \footnote{By subadditivity.}\meas (S\cap (M_1\cup M_2))+\meas (S\cap (M_1\cup M_2)^{\comp})
+\end{split}
 \end{equation}
 Thus, indeed, $M_1\cup M_2$ is measurable.
 
@@ -128,11 +132,17 @@ N_m\coloneqq \bigcup _{k=0}^mM_k\text{ and }N\coloneqq \bigcup _{k\in M}M_m.
 \end{equation}
 so that, by the previous step, we have that $N_m$ is measurable.  Thus, for $S\subseteq X$,
 \begin{equation}
-\meas (S\cap N_m)=\footnote{Because $E_m$ is measurable.}\meas (S\cap N_m\cap M_m)+\meas (S\cap N_m\cap M_m^{\comp})=\footnote{Because the collection $\{ M_m:m\in \N \}$ is disjoint.}\meas (S\cap M_m)+\meas (S\cap N_{m-1})=\footnote{Apply this trick inductively}\sum _{k=0}^m\meas (S\cap M_k).
+\begin{split}
+\meas (S\cap N_m) & =\footnote{Because $E_m$ is measurable.}\meas (S\cap N_m\cap M_m)+\meas (S\cap N_m\cap M_m^{\comp})=\footnote{Because the collection $\{ M_m:m\in \N \}$ is disjoint.}\meas (S\cap M_m)+\meas (S\cap N_{m-1}) \\
+& =\footnote{Apply this trick inductively}\sum _{k=0}^m\meas (S\cap M_k).
+\end{split}
 \end{equation}
 Thus,
 \begin{equation}
-\meas (S)=\meas (S\cap N_m)+\meas (S\cap N_m^{\comp})=\sum _{k=0}^m\meas (S\cap M_k)+\meas (S\cap N_m^{\comp})\geq \footnote{Because $N^{\comp}\subseteq N_m^{\comp}$.}\sum _{k=0}^m\meas (S\cap M_k)+\meas (S\cap N^{\comp}).
+\begin{split}
+\meas (S) & =\meas (S\cap N_m)+\meas (S\cap N_m^{\comp})=\sum _{k=0}^m\meas (S\cap M_k)+\meas (S\cap N_m^{\comp}) \\
+& \geq \footnote{Because $N^{\comp}\subseteq N_m^{\comp}$.}\sum _{k=0}^m\meas (S\cap M_k)+\meas (S\cap N^{\comp}).
+\end{split}
 \end{equation}
 Hence,
 \begin{equation}\label{5.1.16}
@@ -143,22 +153,55 @@ and so indeed $N$ is measurable.
 \Step{Prove \ref{CaratheodorysTheorem.i}}
 Let $N$ and $S$ be as in the previous step and take $S\coloneqq N$.  Then, by \eqref{5.1.16}, we have that
 \begin{equation}
-\meas \left( \bigcup _{m\in \N}\right) \sum _{m\in \N}\meas (M_m).
+\meas \left( \bigcup _{m\in \N}M_m\right) \geq \sum _{m\in \N}\meas (M_m).
 \end{equation}
 The other inequality is automatic from subadditivity, and so indeed, we have equality.
 \end{proof}
 \end{savenotes}
 \end{thm}
+\begin{exr}\label{exr5.1.21}
+Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer measure and let $S\subseteq X$ be measurable have finite measure.  Show that
+\begin{equation}
+\meas (S\setminus T)=\meas (S)-\meas (T).
+\end{equation}
+\begin{rmk}
+You need $S$ to have finite measure otherwise the right-hand side of this equation will be undefined if $T$ also have infinite measure.
+\end{rmk}
+for any measurable set $T\subseteq S$.
+\end{exr}
+
+\begin{displayquote}
+At some point in the near future, we will be doing arithmetic with $\infty$---for example, what should the measure of $\R \times \{ 0\}$ in $\R ^2$ be?  Of course, from our definition of product measures, this will turn out to be $\infty \cdot 0$.  We hence declare that
+\begin{equation}
+\infty \cdot 0\coloneqq 0\eqqcolon 0\cdot \infty .
+\end{equation}
+There are other arithmetic notions we have to technically define (e.g.~$x+\infty=\infty$), but this is the only nonobvious one.
+\end{displayquote}
 
 \subsection{Uniform measures}
 
 One can go ahead and develop the theory for outer measures on arbitrary sets, but in practice, we will only be working with measures defined on spaces with \emph{a lot} of extra structure.  This motivates us to investigate outer-measures on uniform spaces, in which case we are of course going to require our outer-measures to be compatible with this extra structure.
+\begin{dfn}[Regular measure]\label{RegularMeasure}
+Let $X$ be a topological space and let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure.  Then, $\meas$ is \emph{regular}\index{Regular measure}
+\begin{enumerate}
+\item $\meas$ is finite on quasicompact subsets;
+\item (Outer-regular) for $S\subseteq X$,
+\begin{equation}
+\meas (S)=\inf \{ \meas (U):S\subseteq U,\ U\text{ open.}\} ;\text{ and }
+\end{equation}
+\item (Inner-regular on open sets) for $U\subseteq X$ open,
+\begin{equation}
+\meas (U)=\sup \{ \meas (K):K\subseteq U,\ K\text{ quasicompact.}\} .
+\end{equation}
+\end{enumerate}
+\end{dfn}
 \begin{dfn}[Uniformly-measurable]\label{UniformlyMeasurable}
 Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure on a set $X$ and let $\mathcal{U}$ is a cover of $X$.  Then, $\mathcal{U}$ is \emph{uniformly-measurable}\index{Uniformly-measurable cover} iff $\meas$ is constant on $\mathcal{U}$.
 \end{dfn}
 \begin{dfn}[Uniform measure]\label{UniformMeasure}
-Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{uniform measure}\index{Uniform measure} on $X$ is an outer measure on $X$ such that
+Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{uniform measure}\index{Uniform measure} on $X$ is an outer measure $\meas$ on $X$ such that
 \begin{enumerate}
+\item $\meas$ is regular;
 \item \label{UniformMeasure.i}there exists a uniform base $\widetilde{\mathcal{B}}$ of $X$ consisting of uniformly-measurable covers; and
 \item \label{UniformMeasure.ii}if $S,T\subseteq X$ are uniformly-separated, then $\meas (S\cup T)=\meas (S)+\meas (T)$.
 \end{enumerate}
@@ -175,43 +218,6 @@ Note that you definitely do not want to require \emph{every} uniform cover be un
 The second condition is a generalization of the defining condition of what is called a \emph{metric outer-measure}\index{Metric outer-measure}.  In particular, if $X$ is a metric space, then any uniform meausre is (by definition) a metric outer-measure.
 \end{rmk}
 \end{dfn}
-\begin{prp}\label{prp5.1.25}
-Let $\meas$ be a uniform measure on a $T_0$ uniform space $X$.  Then, if $X$ has a countable uniform base, then open and closed sets are measurable.
-\begin{rmk}
-By \nameref{CaratheodorysTheorem}, it thus follows that the ``$\sigma$-algeba generated by the topology'', the \emph{borel sets}\index{Borel sets}, are measurable.  In particular, $F_\sigma$ and $G_\delta$ sets are measurable.
-\end{rmk}
-\begin{proof}As complements of measurable sets are measurable (\cref{CaratheodorysTheorem}\ref{CaratheodorysTheorem.iv}), it suffices to show that closed sets are measurable.
-
-So, let $C\subseteq X$ be closed and let $A\subseteq X$ have finite measure.  For $\mathcal{B}\in \widetilde{\mathcal{B}}$, define
-\begin{equation}
-A_{\mathcal{B}}\coloneqq \{ x\in A:\mathcal{B}\text{ uniformly separates }x\text{ from }C\text{.}\right\} .
-\end{equation}
-We wish to show that
-\begin{equation}\label{5.1.27}
-A\cap C^{\comp}=\bigcup _{\mathcal{B}\in \widetilde{\mathcal{B}}A_{\matchal{B}}.
-\end{equation}
-So, let $x\in A\cap C^{\comp}$.  As $C$ is closed, and $X$ is uniformly-$T_3$ (because it is uniformly-completely-$T_3$ because it is $T_0$---see \cref{crl44.15}), there is a uniform cover $\mathcal{B},\mathcal{C}\in \widetilde{\mathcal{B}}$ such that $\Star _{\mathcal{B}})(x)$ and $\Star _{\mathcal{B}}(C)$ are disjoint.  Then, $x\in A_{\mathcal{B}}$.  Thus, indeed, we have \eqref{5.1.27}.
-
-By construction, each $A_{\mathcal{B}}$ is uniformly-separated from $C$, and so we do have that
-\begin{equation}
-\meas (A)\geq \footnote{Because $A_{\mathcal{B}}\cup (C\cap A)\subseteq A$.}\meas (A_{\mathcal{B}}\cup (C\cap A))=\meas (A_{\mathcal{B}})+\meas (C\cap A).
-\end{equation}
-
-The statement that $\widetilde{\mathcal{B}}$ is downward-directed with respect to $\llcurlyeq$ is precisely the statement that it forms a directed set with respect to $\ggcurlyeq$, and so the map $\widetilde{\mathcal{B}}\mapsto \meas (A_{\mathcal{B}})$ is a net.  We claim that
-\begin{equation}
-\lim _{\mathcal{B}}\meas (A_{\mathcal{B}})=\meas (A\cap C^{\comp}).
-\end{equation}
-\end{proof}
-\end{prp}
-
-\begin{displayquote}
-At some point in the near future, we will be doing arithmetic with $\infty$---for example, what should the measure of $\R \times \{ 0\}$ in $\R ^2$ be?  Of course, from our definition of product measures, this will turn out to be $\infty \cdot 0$.  We hence declare that
-\begin{equation}
-\infty \cdot 0\coloneqq 0\eqqcolon 0\cdot \infty .
-\end{equation}
-There are other arithmetic notions we have to technically define (e.g.~$x+\infty=\infty$), but this is the only nonobvious one.
-\end{displayquote}
-
 \begin{exm}[The zero measure]
 Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space and define $\meas :2^X\rightarrow [0,\infty ]$ by $\meas (S)\coloneqq 0$.  How terribly interesting.
 \end{exm}
@@ -229,9 +235,76 @@ This is actually incredibly important, as we shall see that sums are just integr
 \end{rmk}
 \end{exm}
 
-\subsection{The Haar-Howe heorem}
+One important about uniform measures is that the open sets are automatically measurable.
+\begin{prp}\label{prp5.1.25}
+Let $\meas$ be a uniform measure on a $T_0$ uniform space $X$.  Then, open sets are measurable.
+\begin{rmk}
+By \nameref{CaratheodorysTheorem}, it thus follows that the ``$\sigma$-algebra generated by the topology'', the \emph{borel sets}\index{Borel sets}, are measurable.  In particular, $F_\sigma$ and $G_\delta$ sets are measurable.
+\end{rmk}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~194]{Cohn}.}
+Let $U\subseteq X$ be open and let $A\subseteq X$ be arbitrary.  We wish to show that
+\begin{equation}
+\meas (A)\geq \meas (A\cap U)+\meas (A\cap U^{\comp}).
+\end{equation}
+If $\meas (A)=\infty$, this is automatically satisfied, so we may as well assume that $\meas (A)<\infty$.
 
-It turns out that there is a theorem, \nameref{HaarHoweTheorem},\footnote{Warning:  This is the name I have chosen to call it, because I am unaware of another name for this result.  In particular, don't expect others to know what you're talking about if you reference this theorem by name.  (It is a generalization of the existence and essential uniqueness of haar measure, in case you are more familiar with that.)  While the proof of the result I cobbled together from other sources, the formulation of the result I found essentially in \cite{Howes}, in which he claims ``the author'' established essential uniqueness, as well as existence, which he and another mathematician (Izkowitz) estalbished independently.}  be that is quite general and will just spit out uniform measures for us.  This is how we will construct lebesgue measure.  That being said, it doesn't just work for any old uniform space.  We're going to need extra structure, as well as a couple new topological condition.
+Let $\varepsilon >0$.  Then, by outer-regularity, there is some open set $U_\varepsilon$ that contains $U$ and
+\begin{equation}
+\meas (A)\leq \meas (U_{\varepsilon})<\meas (A)+\varepsilon .
+\end{equation}
+Then, by inner-regularity on opens, there is some quasicompact $K_{\varepsilon}\subseteq U_{\varepsilon}\cap U$ such that
+\begin{equation}
+\meas (U\cap U_{\varepsilon})-\varepsilon <\meas (K_{\varepsilon})\leq \meas (U\cap U_{\varepsilon}).
+\end{equation}
+As $X$ is $T_0$ it is completely-uniformly-$T_3$ (\cref{crl4.4.16}), and in particular $T_2$, so that $K_{\varepsilon}$ is closed, so that $U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$ is open, and so there is some compact $L_{\varepsilon}\subseteq U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$ such that
+\begin{equation}
+\meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp})-\varepsilon <\meas (L_{\varepsilon})\leq \meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp}).
+\end{equation}
+Hence,
+\begin{equation}
+\begin{split}
+\meas (A) & >\meas (U_{\varepsilon})-\varepsilon \geq \footnote{Because $K_{\varepsilon}\cup L_{\varepsilon}\subseteq U_{\varepsilon}$.}\meas (K_{\varepsilon}\cup L_{\varepsilon})=\footnote{You can uniformly-separate disjoint compact subsets of uniformly-$T_2$ spaces.  Then we apply the fact that $\meas$ is a uniform measure.}\meas (K_\varepsilon )+\meas (L_{\varepsilon})-\varepsilon \\
+& >\meas (U\cap U_{\varepsilon})+\meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp})-3\varepsilon \geq \footnote{Because $U_{\varepsilon}\cap U^{\comp}\subseteq U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$.}\meas (U\cap U_{\varepsilon})+\meas (U_{\varepsilon}\cap U^{\comp})-3\varepsilon \\
+& \geq \footnote{Because $A\subseteq U_{\varepsilon}$.}\meas (A\cap U)+\meas (A\cap U^{\comp})
+\end{split}
+\end{equation}
+As $\varepsilon$ is arbitrary, we have that $\meas (A)\geq \meas (A\cap U)+\meas (A\cap ^{\comp})$, and so $U$ is measurable.
+\end{proof}
+\end{prp}
+\begin{prp}
+Let $\meas$ be a regular measure on a $\sigma$-quasicompact space and let $S\subseteq X$ be measurable.  Then, for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
+\begin{equation}
+C_{\varepsilon}\subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
+\end{equation}
+\begin{proof}
+Let $S\subseteq X$ be measurable and have finite measure.  Write $X=\bigcup _{m\in \N}K_m$ where $K_m\subseteq X$ is quasicompact and define $S_m\coloneqq S\cap K_m$.
+
+Let $\varepsilon >0$.  By outer-regularity, there is some open $U_m$ containing $S_m$ such that
+\begin{equation}
+\meas (S_m)\leq \meas (U_m)<\meas (S_m)+\frac{\varepsilon}{2^m}.
+\end{equation}
+Because $S$ is measurable, it in turn follows that\footnote{See \cref{exr5.1.21}.}
+\begin{equation}
+\meas (U_m-S_m)<\frac{\varepsilon}{2^m}.
+\end{equation}
+Define $U\coloneqq \bigcup _{m\in \N}U_m$.  Then,
+\begin{equation}
+\meas (U\setminus S)\leq \sum _{m\in \N}\meas (U_m-S_m)<2\varepsilon .
+\end{equation}
+Applying this same logic to $S^{\comp}$, we can find an open set $V$ containing $S^{\comp}$ such that
+\begin{equation}
+\meas (V\setminus S^{\comp })<2\varepsilon .
+\end{equation}
+Then, $V^{\comp}$ is of course a closed subset of $S$ and
+\begin{equation}
+\meas (U\setminus V^{\comp})=\meas (U\cap V)\leq \meas (U\cap V\cap S)+\meas (U\cap V\cap S^{\comp})\leq \meas (V\setminus S^{\comp})+\meas (U\setminus S)<4\varepsilon .
+\end{equation}
+\end{proof}
+\end{prp}
+
+\subsection{The Haar-Howe Theorem}
+
+It turns out that there is a theorem, \nameref{HaarHoweTheorem},\footnote{Warning:  This is the name I have chosen to call it, because I am unaware of another name for this result.  In particular, don't expect others to know what you're talking about if you reference this theorem by name.  (It is a generalization of the existence and essential uniqueness of haar measure, in case you are more familiar with that.)  While the proof of the result I cobbled together from other sources, the formulation of the result I found essentially in \cite{Howes}, in which he claims ``the author'' established essential uniqueness, as well as existence, which he and another mathematician (Izkowitz) established independently.}  be that is quite general and will just spit out uniform measures for us.  This is how we will construct lebesgue measure.  That being said, it doesn't just work for any old uniform space.  We're going to need extra structure, as well as a couple new topological conditions.
 \begin{dfn}[Locally quasicompact]\label{LocallyQuasicompact}
 A topological space is \emph{locally quasicompact}\index{Locally quasicompact} iff it has a neighborhood base consisting of quasicompact sets.
 \begin{rmk}
@@ -287,31 +360,6 @@ What do you think the morphisms of isogeneous spaces should be?
 \begin{exr}
 Let $G$ be a topological group and let $H\coloneqq \{ h_g:G\in G\}$, where $h_g:G\rightarrow G$ is defined by $h_g(x)\coloneqq gx$.  Show that $\coord{G,H}$ is an isogeneous space.
 \end{exr}
-
-It is perhaps unfortunate that \nameref{HaarHoweTheorem} does not work for all uniform spaces.  On the other hand, it doesn't just spit out any old uniform measure either---it spits out what are called \emph{regular measures}.
-\begin{dfn}[Regular measure]\label{RegularMeasure}
-Let $X$ be a topological space and let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure.  Then, $\meas$ is \emph{regular}\index{Regular measure}
-\begin{enumerate}
-\item $\meas$ is finite on quasicompact subsets;
-\item (Outer-regular) for $S\subseteq X$,
-\begin{equation}
-\meas (S)=\inf \{ \meas (U):S\subseteq U,\ U\text{ open.}\} ;\text{ and }
-\end{equation}
-\item (Inner-regular on open sets) for $U\subseteq X$ open,
-\begin{equation}
-\meas (U)=\sup \{ \meas (K):K\subseteq U,\ K\text{ quasicompact.}\} .
-\end{equation}
-\end{enumerate}
-\end{dfn}
-\begin{prp}
-Let $X$ be locally compact, $\sigma$-quasicompact space and let $\meas :2^X\rightarrow [0,\infty ]$ be a regular outer-measure.  Then, $X$ is inner-regular on sets of finite measure.
-\begin{rmk}
-Thus, it is inner-regular on two classes of sets:  the open sets \emph{and} the sets of finite measure (so in particular, on quasicompact sets as well).
-\end{rmk}
-\begin{proof}
-Let $S\subseteq X$ have finite measure.  Write $X=\bigcup _{m\in \N}K_m$ where $K_m\subseteq X$ is quasicompact and define $S_m\coloneqq S\cap K_m$.
-\end{proof}
-\end{prp}
 
 And finally now the key result that will allow us to define basically every measure we work with in these notes (and much more).
 \begin{thm}[The Haar-Howe Theorem]\index{The Haar-Howe Theorem}\label{HaarHoweTheorem}
@@ -494,7 +542,28 @@ Thus, $\meas$ is regular.
 First of all, from the definition, we have that $\mathrm{H}_U(K_0)=1$ for all $U\in \mathcal{U}$.  Perhaps we could try harder and that we already do have that $\meas (K_0)=1$; however, this enough is to show simply that $\meas (K_0)>0$, and so by simply dividing by $\meas (K_0)$ if necessary, we obtain a regular uniform measure with uniformly-measurable base $\widetilde{\mathcal{B}}_H$ and $\meas (K_0)=1$.
 
 \Step{Show that $\meas$ is unique}
-Let $\meas '$ be another regular uniform measure on $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}_H$ and $\meas (K_0)=1$.  As both $\meas$ and $\meas '$ are outer-regular, it suffices to show that they agree on open sets.  Then, because they are both inner-regular on open sets, it suffices to show that they both agree on quasicompact subsets.  However, on account of \cref{prp5.2.4} and outer-regularity, it in turn suffices to show that they agree on open sets with compact closure.
+Let $\meas '$ be another regular uniform measure on $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}_H$ and $\meas (K_0)=1$.  As both $\meas$ and $\meas '$ are outer-regular, it suffices to show that they agree on open sets.  Then, because they are both inner-regular on open sets, it suffices to show that they both agree on quasicompact subsets.  However, on account of \cref{prp5.2.4} and outer-regularity, it in turn suffices to show that they agree on open sets with compact closure.  So, let $\mathcal{G}$ denote the collection of all open sets with compact closures.  Furthermore, let us define
+\begin{equation}
+\begin{multlined}
+Z(\mathcal{G})\coloneqq \\ \left\{ S\in 2^X:\text{for every }\varepsilon >0\text{ there are }C_{\varepsilon}\text{ closed and }U_{\varepsilon}\in \mathcal{G}\text{ such that }\right. \\ \left. C_\varepsilon \subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon \right\} .
+\end{multlined}
+\end{equation}
+
+For the rest of this proof, let us write $S\Subset T$ iff there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_H$ for which $\Star _{\mathcal{B}}(S)\subseteq T$.
+
+To prove that they agree on $\mathcal{G}$, we will first show that they agree on $Z(\mathcal{G})\cap \mathcal{G}$.  To show that this is in fact sufficient, we prove that
+\begin{equation}
+\meas (U)=\sup \{ \meas (V):V\in \mathcal{G}\cap Z(\mathcal{G}),\ V\Subset U\} 
+\end{equation}
+for $U\in \mathcal{G}$ open (the exact same proof will work for $\meas '$).  As $\meas$ is inner-regular on open sets (and so in particular on elements of $\mathcal{G}$), it suffices to show that, for every $K\subseteq U$ quasicompact, there is some $V_K\in \mathcal{G}\cap Z(\mathcal{G})$ with $K\subseteq V_K\Subset U$.  We first show that we can find such a $V_K\in \mathcal{G}$.
+
+As $X$ is $T_0$, it is uniformly-completely-$T_3$, and so we may uniformly-separated quasicompact sets from closed sets, and so there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_H$ such that $\Star _{\mathcal{B}}(K)$ is disjoint from $\Star _{\mathcal{B}}(U^{\comp})$.  Because $X$ is a locally compact $T_2$ isogeneous space, by taking a star-refinement if necessary, we can without loss of generality assume that each element of $\mathcal{B}$ has compact closure (i.e.~is an element of $\mathcal{G}$).\footnote{Take any open set $U$ with compact closure (which exists by local compactness).  Then, $\mathcal{B}_U$ will be a cover whose elements are in $\mathcal{G}$.  Take a common star-refinement of this and $\mathcal{B}$.  The closures of elements of this new cover will be contained in the elements of $\mathcal{B}_U$, and so as $X$ is $T_2$, closed sets of compact sets are compact.}  Take a star-refinement $\mathcal{C}\in \widetilde{\mathcal{B}}_H$.  Once again, every element of $\mathcal{C}$ has compact closure.  By quasicompactness of $K$, there are finitely many $C_1,\ldots ,C_m\in \mathcal{C}$ that over $K$.  Define $C\coloneqq C_1\cup \cdots \cup C_m\in \mathcal{G}$.  Furthermore,
+\begin{equation}
+\Star _{\mathcal{C}}(C)\subseteq \Star _{\mathcal{B}}(K)\subseteq \Star _{\mathcal{B}}(U^{\comp})^{\comp}\subseteq U.
+\end{equation}
+Thus, we have shown that for $U\in \mathcal{G}$ and $K\subseteq U$ quasicompact, there is some $V_K\in \mathcal{G}$ with $K\subseteq V_K\Subset U$.  Thus, to finish the proof that it suffices to show that they agree on $Z(\mathcal{G})\cap \mathcal{G}$, it suffices to show that, for every $U,V\in \mathcal{G}$ with $U\Subset V$, there is some $W\in Z(\mathcal{G})\cap \mathcal{G}$ with $U\Subset W\Subset V$.
+
+So, let $U,V\in \mathcal{G}$ with $U\Subset V$.
 \end{proof}
 \end{savenotes}
 \end{thm}
