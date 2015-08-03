@@ -633,11 +633,11 @@ Of course $C\subseteq \dist _C^{-1}(0)$.  On the other hand, if $x\in \dist _C^{
 \end{proof}
 \end{prp}
 \begin{prp}\label{prp5.4.13}
-Metric spaces are perfectly-$T_4$.
+Metric spaces are uniformly-perfectly-$T_4$.
 \begin{proof}
 Let $X$ be a metric space and let $C_1,C_2\subseteq X$ be closed and disjoint.
 \begin{exr}
-Show that there is some $f_1:X\rightarrow [0,\frac{1}{2}]$ continuous, equal to $0$ precisely on $C_1$, and equal to $\frac{1}{2}$ on $C_2$.  Similarly, show that there is some $f_2:X\rightarrow [0,\frac{1}{2}]$ continuous, equal to $\frac{1}{2}$ precisely on $C_2$, and equal to $0$ on $C_1$.
+Show that there is some $f_1:X\rightarrow [0,\frac{1}{2}]$ uniformly-continuous, equal to $0$ precisely on $C_1$, and equal to $\frac{1}{2}$ on $C_2$.  Similarly, show that there is some $f_2:X\rightarrow [0,\frac{1}{2}]$ uniformly-continuous, equal to $\frac{1}{2}$ precisely on $C_2$, and equal to $0$ on $C_1$.
 \end{exr}
 Define $f\coloneqq f_1+f_2$.  Then, this is certainly $0$ on $C_1$ and $1$ on $C_2$.  Conversely, suppose that $f(x)=0$.  Then, in particular, $f_1(x)=0=f_2(x)=0$, and so in particular $x\in C_1$.  On the other hand, suppose that $f(x)=1$.  Then, we must have in particular that $f_2(x)=\frac{1}{2}$, which implies that $x\in C_2$.  Thus, $f^{-1}(0)=C_1$ and $f^{-1}(1)=C_2$, and hence $X$ is perfectly-$T_4$.
 \end{proof}
@@ -975,9 +975,66 @@ Unless otherwise stated, $\Mor _{\Top}(X,\R )$ is a always given the structure o
 Of \emph{incredible} importance is that this space is in fact complete (at least for so-called \emph{quasicompactly-generated} spaces).  Of course, we need to first actually define what we mean by complete, and so we postpone this result---see \cref{thm4.5.6}.
 \end{exm}
 
-\section{$T_0$ uniform spaces are completely-$T_3$}
+\section{$T_0$ uniform spaces are uniformly-completely-$T_3$}
 
-Our goal in this subsection is to show that all $T_0$ uniform spaces are completely-$T_3$.  We actually prove a stronger result which requires the notion of the \emph{diameter} of a set (in a metric space).
+Our goal in this subsection is to show that all $T_0$ uniform spaces are uniformly-$T_3$.  Of course, to prove this, we had better say what uniformly-completely-$T_3$ means.
+
+\subsection{Separation axioms in uniform spaces}
+
+Throughout this subsection, let $S_1,S_2\subseteq X$ be \emph{disjoint} subsets of a uniform space $X$.
+\begin{dfn}[Uniformly-distinguishable]\label{UniformlyDistinguishable}
+$S_1$ and $S_2$ are \emph{uniformly-distinguishable}\index{Uniformly-distinguishable} iff there is some uniform cover $\mathcal{U}$ for which $\Star _{\mathcal{U}}(S_1)\neq \Star _{\mathcal{U}}(S_2)$.
+\end{dfn}
+\begin{dfn}[Uniformly-separated]\label{UniformlySeparated}
+$S_1$ and $S_2$ are \emph{uniformly-separated}\index{Uniformly-separated} iff there is some uniform cover $\mathcal{U}$ for which $\star _{\mathcal{U}}(S_1)$ is disjoint from $\Star _{\mathcal{U}}(S_2)$.
+\begin{rmk}
+Note that this is analogous to the topological condition of being ``separated by neighborhoods'' (\cref{SeparatedByNeighborhoods})---there is not really any uniform analgoe of just being plain separated (\cref{Separated}).
+\end{rmk}
+\end{dfn}
+\begin{dfn}[Uniformly-completely-separated]\label{UniformlyCompletelySeparated}
+$S_1$ and $S_2$ are \emph{uniformly-completely-separated}\index{Uniformly-completely-separated} iff there is a uniformly-continuous function $f:X\rightarrow [0,1]$ such that $\restr{f}{S_1}=0$ and $\restr{f}{S_2}=1$.
+\end{dfn}
+\begin{exr}
+Show that if $S_1$ and $S_2$ are uniformly-completely-separated, then they are uniformly-separated.
+\end{exr}
+\begin{dfn}[Uniformly-perfectly-separated]\label{UniformlyPerfectlySeparated}
+$S_1$ and $S_2$ are \emph{uniformly-perfectly-separated}\index{Uniformly-perfectly-separated} iff there is a uniformly-continuous function $f:X\rightarrow [0,1]$ such that $S_1=f^{-1}(0)$ and $S_2=f^{-1}(1)$.
+\end{dfn}
+\begin{dfn}[Uniformly-$T_0$]\label{UniformlyT0}
+$X$ is \emph{uniformly-$T_0$}\index{Uniformly-$T_0$} iff any two distinct points are uniformly-distinguishable.
+\end{dfn}
+\begin{dfn}[Uniformly-$T_2$]\label{UniformlyT2}
+$X$ is \emph{uniformly-$T_2$}\index{Uniformly-$T_2$} iff any two distinct points can be uniformly-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-completely-$T_2$]\label{UniformlyCompletelyT2}
+$X$ is \emph{uniformly-completely-$T_2$}\index{uniformly-completely-$T_2$} iff any two distinct points can be uniformly-completely-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-perfectly-$T_2$]\label{UniformlyPerfectlyT2}
+$X$ is \emph{uniformly-perfectly-$T_2$}\index{uniformly-perfectly-$T_2$} iff any two distinct points can be uniformly-perfectly-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-$T_3$]\label{UniformlyT3}
+$X$ is \emph{uniformly-$T_3$}\index{Uniformly-$T_3$} iff it is $T_1$ and any closed set and a point not contained in it can be uniformly-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-completely-$T_3$]\label{UniformlyCompletelyT3}
+$X$ is \emph{uniformly-completely-$T_3$}\index{Uniformly-completely-$T_3$} iff it is $T_1$ and any closed set and a point not contained in it can be uniformly-completely-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-perfectly-$T_3$]\label{UniformlyPerfectlyT3}
+$X$ is \emph{uniformly-perfectly-$T_3$}\index{Uniformly-perfectly-$T_3$} iff it is $T_1$ and any closed set and a point not contained in it can be uniformly-perfectly-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-$T_4$]\label{UniformlyT4}
+$X$ is \emph{uniformly-$T_4$}\index{Uniformly-$T_4$} iff it is $T_1$ and any two disjoint closed subsets can be uniformly-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-completely-$T_4$]\label{UniformlyCompletelyT4}
+$X$ is \emph{uniformly-completely-$T_4$}\index{Uniformly-completely-$T_4$} iff it is $T_1$ and any two disjoint closed subsets can be uniformly-completely-separated.
+\end{dfn}
+\begin{dfn}[Uniformly-perfectly-$T_4$]\label{UniformlyPerfectlyT4}
+$X$ is \emph{uniformly-perfectly-$T_4$}\index{Uniformly-perfectly-$T_4$} iff it is $T_1$ and any closed set and any two disjoint closed subsets can be can be uniformly-perfectly-separated.
+\end{dfn}
+The goal of this section is to prove that all of the from uniformly-$T_0$ to uniformly-completely-$T-3$ (that is, $T_0$ implies uniformly-completely-$T_3$---see \cref{crl4.4.16}).  We also present counter-examples to show that all these equivalent axioms are strictly weaker than both uniformly-$T_4$ (see \cref{}) and uniformly-perfectly-$T_4$ (see \cref{}
+
+\subsection{The key result}
+
+We actually prove a stronger result which requires the notion of the \emph{diameter} of a set (in a metric space).
 \begin{dfn}[Diameter]\label{Diameter}
 Let $\coord{X,\metric}$ be a metric space and let $S\subseteq X$.  Then, the \emph{diameter}\index{Diameter} of $S$, $\diam (S)$, is defined by
 \begin{equation}
@@ -1080,13 +1137,13 @@ By the induction hypotheses, we then must have in particular that there are $U_1
 \end{proof}
 \end{savenotes}
 \end{thm}
-From this, that every uniform space is completely-$T_3$ follows relatively easily.
-\begin{crl}
-Every $T_0$ uniform space is completely-$T_3$.
+From this, that every uniform space is uniformly-completely-$T_3$ follows relatively easily.
+\begin{crl}\label{crl4.4.16}
+Let $X$ be a $T_0$ uniform space.  Then, $X$ is uniformly-completely-$T_3$.
 \begin{proof}\footnote{Proof adapted from \cite[pg.~8]{Isbell}.}
-Let $X$ be a uniform space.  We first show that $X$ is $T_1$.  We know that $X$ is $T_0$, and so by \cref{prp4.6.53}, $X$ is $T_2$, hence $T_1$, and hence completely $T_3$.
+Let $X$ be a uniform space.  We first show that $X$ is $T_1$.  We know that $X$ is $T_0$, and so by \cref{prp4.6.53} (regular $T_0$ spaces are $T_2$), $X$ is $T_2$, hence $T_1$.
 
-We now show that continuous functions on $X$ can separate closed sets from points.  So, let $C\subseteq X$ be closed, and let $x_0\in C^{\comp}$.  As $C$ is closed, there must be some neighborhood of $x_0$ that does not intersect $C$ (otherwise, $x_0$ would be an accumulation point of $C$).  Then, because stars for a basis for the topology (\cref{UniformTopology}), there is a uniform cover $\mathcal{U}$ such that
+We now show that uniformly-continuous functions on $X$ can separate closed sets from points.  So, let $C\subseteq X$ be closed, and let $x_0\in C^{\comp}$.  As $C$ is closed, there must be some neighborhood of $x_0$ that does not intersect $C$ (otherwise, $x_0$ would be an accumulation point of $C$).  Then, because stars for a basis for the topology (\cref{UniformTopology}), there is a uniform cover $\mathcal{U}$ such that
 \begin{equation}\label{4.8.90}
 \Star _{\mathcal{U}}(x_0)\subseteq C^{\comp}.
 \end{equation}
@@ -1099,11 +1156,14 @@ Define $f:X\rightarrow [0,1]$ by
 \begin{equation}
 f(x)\coloneqq \footnote{See \eqref{4.8.50} for the definition of $\dist _C$.}\max \{ \dist _C(x) ,1\} .
 \end{equation}
-This is continuous because $\dist _C$ is.  \eqref{4.8.97} implies that $\dist _C(x_0)\geq 1$, and so $f(x_0)=1$.  We showed in \cref{prp4.8.49} that $\dist _C(C)=0$.
+This is uniformly-continuous because $\dist _C$ is.  \eqref{4.8.97} implies that $\dist _C(x_0)\geq 1$, and so $f(x_0)=1$.  We showed in \cref{prp4.8.49} that $\dist _C(C)=0$.
 \end{proof}
 \end{crl}
+
+\subsection{The counter-examples}
+
 We know from the diagram \eqref{4.6.105}, that if we are to `do any better' in terms of separation axioms, we would be able to prove that every uniform space is either perfectly-$T_3$ or completely-$T_4$ (which is equivalent to $T_4$ by Urysohn's Lemma, \cref{UrysohnsLemma}).  Unfortunately, however, there exist counter-examples to both these separation axioms.
-\begin{exm}[A uniform space that is not perfectly-$T_3$]
+\begin{exm}[A uniform space that is not perfectly-$T_3$]\label{exm4.4.20}
 The Uncountable Fort Space $X$ of \cref{UncountableFortSpace} will do just fine yet again.  We already know that this space is not perfectly-$T_3$ from \cref{exm4.6.80}.  Thus, all that remains to be done is to equip $X$ with a uniformity that generates the Uncountable Fort Space Topology.
 
 Define
@@ -1114,7 +1174,7 @@ Define
 Show that $\widetilde{\mathcal{B}}$ is a uniform base for the Uncountable Fort Space Topology.
 \end{exr}
 \end{exm}
-\begin{exm}[A uniform space that is not $T_4$]
+\begin{exm}[A uniform space that is not $T_4$]\label{exm4.4.23}
 \begin{savenotes}
 We define a topology on $\Mor _{\Set}(\R ,\R )$,\footnote{$\Mor _{\Set}(\R ,\R )$ is our fancy-schmancy notation for the set of all functions from $\R$ to $\R$.} the \emph{topology of pointwise convergence}.  We use \nameref{KelleysConvergenceTheorem}, \cref{KelleysConvergenceTheorem}, to do it.
 
