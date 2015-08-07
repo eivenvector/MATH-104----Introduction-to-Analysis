@@ -267,6 +267,9 @@ It is very common that the specific directed set that is the domain is not so im
 \begin{rmk}
 In general, nets will take their values in topological spaces.  Of course, we haven't defined what a topological space is yet (we could, but it would probably seem like I just pulled some definition out of my ass), and so for the time being nets will take their values in $\R$.
 \end{rmk}
+\begin{rmk}
+For those of you born and raised in Sequence Land:  Nets are a bit like the iPhone---you don't think you need them, and then you find out they're a thing.\footnote{Disclaimer:  I'm not actually a fan of the iPhone.}
+\end{rmk}
 \end{dfn}
 And now we give our `official' definition of a sequence.
 \begin{dfn}[Sequence]\label{dfn3.3.4}
@@ -294,11 +297,20 @@ You'll recall that the third theme that we mentioned at the end of \cref{chp1} \
 
 \subsection{Limits}
 
-We now define what it means to be the \emph{limit} of a net.  To make the definition as clean and concise as possible, we introduce the concept of nets \emph{eventually} doing somethign.
+We now define what it means to be the \emph{limit} of a net.  To make the definition as clean and concise as possible, we introduce the concept of nets \emph{eventually} doing something.
 
 \subsubsection{Eventuality}
 
-We often use the word \emph{eventually}\index{Eventually\textellipsis (nets)} in the context of nets and sequences.  For example, we might say ``The net $\lambda \mapsto a_\lambda$ is eventually XYZ.''.  This means that there is some $\lambda _0$ such that if $\lambda \geq \lambda _0$ it follows that $\lambda \mapsto a_\lambda$ is XYZ.  For example, a fact that will come in handy is that convergent nets (and in fact, cauchy nets, once we define ``cauchy'') are eventually bounded (\cref{prp3.3.28}).
+We often use the word \emph{eventually} in the context of nets and sequences.  For example, we might say ``The net $\lambda \mapsto a_\lambda$ is eventually XYZ.''.  This means that there is some $\lambda _0$ such that if $\lambda \geq \lambda _0$ it follows that $\lambda \mapsto a_\lambda$ is XYZ.  For example, a fact that will come in handy is that convergent nets (and in fact, cauchy nets, once we define ``cauchy'') are eventually bounded (\cref{prp3.3.28}).  We make this formal.
+\begin{mdf}[Eventually XYZ]\label{EventuallyXYZ}
+Let $\Lambda \ni \lambda \mapsto a_\lambda \in \R$ be a net.  Then, $\lambda \mapsto a_\lambda$ is \emph{eventually XYZ}\index{Eventually XYZ} iff there is some $\lambda _0$ such that $\{ \lambda \in \Lambda :\lambda \geq \lambda _0\} \ni \lambda \mapsto x_\lambda$ is XYZ.
+\begin{rmk}
+In other words, once you `go past' $\lambda _0$, you have a net which is \emph{actually} XYZ.
+\end{rmk}
+\begin{rmk}
+We don't have this language yet, but nets of this form are called \emph{strict subnets} of the original net---see \cref{StrictSubnet}.
+\end{rmk}
+\end{mdf}
 
 If a net is eventually XYZ, it can be convenient to essentially just `throw away' the terms at the beginning which are not XYZ so as to obtain a net which is not just eventually XYZ, but is XYZ \emph{itself} (for example, you can `chop off' the beginning of a convergent net to obtain a bounded net).
 
@@ -324,6 +336,12 @@ In general topological spaces (though not for most `reasonable' ones), limits ne
 \end{exr}
 \begin{rmk}
 If $a_\infty$ is the limit of $\lambda \mapsto a_\lambda$, then we write $\lim _\lambda a_\lambda =a_\infty$\index[notation]{$\lim _\lambda x_\lambda$}.  Note that this is unambiguous by the previous exercise.
+\end{rmk}
+\begin{rmk}
+There are at least three directed sets that are commonly the domains of nets in calculus:  $\N$, $\coord{\R ^+,\leq}$, and $\coord{\R ^+,\geq}$, that is, the natural numbers with the usual ordering, the positive reals with the usual ordering, and the positive reals with the \emph{reverse} of the usual ordering.  We shall denote limits of nets with these respective domains as
+\begin{equation}
+\lim _mx_m,\qquad \lim _{t\to \infty}x_t,\qquad \lim _{t\to 0^+}x_t.
+\end{equation}\index[notation]{$\lim _mx_m$}\index[notation]{$\lim _{t\to \infty}x_t$}\index[notation]{$\lim _{t\to 0^+}x_t$}
 \end{rmk}
 \end{dfn}
 
@@ -1077,7 +1095,7 @@ There are at least two definitions in the literature that are distinct from this
 If $b:\Lambda '\rightarrow \R$ is a subnet of a net $a:\Lambda \rightarrow \R$, then, by \cref{enmSubnet.i}, it follows that there is some function $\iota :\Lambda '\rightarrow \Lambda$ such that $b=a\circ \iota$.  However, \emph{in general there will not be a unique such function}.  This almost never matters, and it is customary to write $b_{\mu}=a_{\iota (\mu)}\coloneqq a_{\lambda _\mu}$ for some noncanonically chosen $\iota$.
 \end{rmk}
 \begin{rmk}
-Our definition of \emph{subsequence} is slightly different than most authors (though our definition of subnet is the same).  The primary reason for this is because typically people do not introduce nets in a first analysis course, in which case the `naive' definition of subsequence, i.e., a subnet of the form $\restr{a}{S}$, works.  For them, subsequences are what we would call \emph{strict subnets} of a sequence (see \cref{dfnStrictSubnet}).  In particular, we allow for `repeats' whereas most authors will not.
+Our definition of \emph{subsequence} is slightly different than most authors (though our definition of subnet is the same).  The primary reason for this is because typically people do not introduce nets in a first analysis course, in which case the `naive' definition of subsequence, i.e., a subnet of the form $\restr{a}{S}$, works.  For them, subsequences are what we would call \emph{strict subnets} of a sequence (see \cref{StrictSubnet}).  In particular, we allow for `repeats' whereas most authors will not.
 \end{rmk}
 \end{dfn}
 As subnets of the more `naive type' are still quite important, we do given them a special name.
@@ -1088,7 +1106,7 @@ Of course, saying that a subset is cofinal is just our fancy-schmancy way of say
 \end{rmk}
 \end{dfn}
 One way to see that we need elements to grow arbitrarily large is because, in a directed set, the subset will itself be directed.
-\begin{dfn}[Strict subnet]\label{dfnStrictSubnet}
+\begin{dfn}[Strict subnet]\label{StrictSubnet}
 A \emph{strict subnet}\index{Strict subnet} of a net $a:\Lambda \rightarrow \R$ is a subnet of the form $\restr{a}{\Lambda '}:\Lambda '\rightarrow \R$ for $\Lambda '\subseteq \Lambda$ cofinal.
 \begin{exr}
 Let $a:\Lambda \rightarrow \R$ be a net and let $\Lambda '\subseteq \R$.  Then, if $\Lambda '$ is cofinal, show that $\restr{a}{\Lambda '}:\Lambda '\rightarrow \R$ is a subnet of $x:\Lambda \rightarrow \R$.
@@ -1235,18 +1253,15 @@ The motivation for the condition $0<\abs{x-a}$ is the same as the motivation for
 \begin{dfn}[Continuous (real) function]
 Let $f:\R \rightarrow \R$ be a function and let $a\in \R$.  Then, $f$ is \emph{continuous}\index{Continuous (at a point)} at $a$ iff $\lim _{x\to a}f(x)=f(a)$.  $f$ is \emph{continuous}\index{Continuous} iff it is continuous at $a$ for all $a\in \R$.
 \end{dfn}
-\begin{exm}[Dirichlet Function]\label{exmDirichletFunction}
+\begin{exm}[Dirichlet Function]\label{DirichletFunction}
 Define $f:\R \rightarrow \R$ by
 \begin{equation}
-f(x)\coloneqq \begin{cases}1 & \text{if }x\in \Q \\ -1 & \text{if }x\in \Q ^{\comp}\end{cases}.
+f(x)\coloneqq \begin{cases}1 & \text{if }x\in \Q \\ 0 & \text{if }x\in \Q ^{\comp}\end{cases}.
 \end{equation}
 This is the \emph{Dirichlet Function}\index{Dirichlet Function}.
 \begin{exr}
-Where is the Dirichlet Function continuous?  Where is $\abs{f}$ continuous?
+Where is the Dirichlet Function continuous?
 \end{exr}
-\begin{rmk}
-Sometimes people take $f(x)\coloneqq 0$ for $x\in \Q ^{\comp}$.
-\end{rmk}
 \end{exm}
 \begin{exm}[Thomae Function]
 Define $f:\R \rightarrow \R$ by

@@ -131,7 +131,7 @@ The index $k$ in $[v_k]^{a_k}$ is part of the name of the vector---the entire na
 \end{dfn}
 We need one more ingredient before we can get to actual differentiation, namely that of a \emph{metric}.
 \begin{dfn}[Metric (on a vector space)]\label{MetricVectorSpace}
-A \emph{metric}\index{Metric (on a vector space)} $g$ on $V$ is a covariant tensor of rank $2$ such that
+A \emph{metric}\index{Metric (on a vector space)} $g$\footnote{The ``g'' is for gravity (in general relativity, gravity is modeled as a metric on space-time).} on $V$ is a covariant tensor of rank $2$ such that
 \begin{enumerate}
 \item \label{MetricVectorSpace.Symmetry}(Symmetry) $g(v_1,v_2)=g(v_2,v_1)$; and
 \item \label{MetricVectorSpace.Nonsingularity}(Nonsingularity)\index{Nonsingular (metric)} the map from $V$ to $V^{\dagger}$ defined by $v\mapsto g(v,\blankdot )$, where $g(v,\blankdot )$ is the linear functional which sends $w$ to $g(v,w)$, is an isomorphism of vectors spaces.
@@ -152,7 +152,7 @@ The term ``metric'' in this sense of the word should really not be thought of as
 Nonsingularity is usually replaced with the requirement that $g(v,w)=0$ for all $w$ implies that $v=0$ (called \emph{nondegeneracy}\index{Nondegenrate (metric)}.  In finite dimensions, this is equivalent to nonsingularity (by the Rank-Nullity Theorem).  In infinite dimensions, however, they are not equivalent, and it is nonsingularity that we want (so that we can raise and lower indices).
 \end{rmk}
 \end{dfn}
-It's worth nothing that, everything \emph{except} raising and lowering indices we can do without a metric.  To raise and lower indices, we do need that \emph{extra} structure.  In particular, if you pick a different metric, then your meaning of $v_a$ will change even though the metric does not appear explicitly in this notation.
+It's worth noting that, everything \emph{except} raising and lowering indices we can do without a metric.  To raise and lower indices, we do need that \emph{extra} structure.  In particular, if you pick a different metric, then your meaning of $v_a$ will change even though the metric does not appear explicitly in this notation.
 
 In summary:
 \begin{enumerate}
@@ -177,7 +177,7 @@ To clarify, this is not actually how the definition goes in general.  The genera
 
 This speak of tangent spaces allows us to make an important definition.
 \begin{dfn}[Tensor field]\label{TensorField}
-A \emph{tensor field}\index{Tensor field} of rank $\coord{k,l}$ is a function on $\R ^d$ whose value at $x$ is a rank $\coord{k,l}$ tensor on $\tangent{\R ^d}{x}$.  A tensor field $T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$ is \emph{continuous}\index{Continuous (tensor)} iff $[v_1]^{b_1}\cdots [v_l]^{b_l}[\omega _1]_{a_1}\cdots [\omega _k]_{a_k}T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$ is continuous for all vectors $[v_1]^a,\ldots ,[v_k]^a$ and covectors $[\omega _1]_a,\ldots ,[\omega _l]_a$.
+A \emph{tensor field}\index{Tensor field} of rank $\coord{k,l}$ is a function on $\R ^d$ whose value at $x$ is a rank $\coord{k,l}$ tensor on $\tangent{\R ^d}{x}$.  A tensor field $T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$ is \emph{continuous}\index{Continuous (tensor)} iff $[v_1]^{b_1}\cdots [v_l]^{b_l}[\omega _1]_{a_1}\cdots [\omega _k]_{a_k}T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$ is continuous for all vectors $[v_1]^a,\ldots ,[v_l]^a$ and covectors $[\omega _1]_a,\ldots ,[\omega _k]_a$.
 \begin{rmk}
 It's just an assignment of a tensor to every point in $\R ^d$.  For example, a vector field is an assignment of a vector to every point.
 \end{rmk}
@@ -273,11 +273,11 @@ is certainly not linear.  For example,
 In fact, things that are arguably even worse than this can happen---it can happen that all directional derivatives exist \emph{and} furthermore the map that seconds a vector to the directional derivative in that direction is linear, but yet the function not even be continuous.  Unfortunately, we will have to postpone such a counter-example until after having defined the exponential function---see \cref{exm6.2.15}
 
 We can use the definition of the derivative of a function to define the derivative for \emph{all} tensor fields.  The idea is that, by plugging-in enough vectors and covectors, all tensor fields reduce to just a function.
-\begin{dfn}[Derivative (of tensors)]\label{DerivativeTensor}
+\begin{dfn}[Derivative (of a tensor)]\label{DerivativeTensor}
 Let $T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$ be a tensor field of rank $\coord{k,l}$ on $\R ^d$.  Then, the \emph{derivative}\index{Derivative (of a tensor field)}, $\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}$, is defined by
 \begin{equation}
 \begin{multlined}
-v^a[\omega _1]_{a_1}\cdots [\omega _k]_{a_k}[v_1]^{b_1}\cdots [v_l]^{b_l}\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}= \\ v^a\nabla _a\left( [\omega _1]_{a_1}\cdots [\omega _k]_{a_k}[v_1]^{b_1}\cdots [v_l]^{b_l}\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}\right) 
+v^a[\omega _1]_{a_1}\cdots [\omega _k]_{a_k}[v_1]^{b_1}\cdots [v_l]^{b_l}\nabla _aT\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}= \\ v^a\nabla _a\left( [\omega _1]_{a_1}\cdots [\omega _k]_{a_k}[v_1]^{b_1}\cdots [v_l]^{b_l}T\indices{^{a_1\ldots a_k}_{b_1\ldots b_l}}\right) 
 \end{multlined}
 \end{equation}
 for all covectors $\omega _1,\ldots ,\omega _k$ and vectors $v,v_1,\ldots ,v_l$.
@@ -404,6 +404,23 @@ The \emph{exponential function}\index{Exponential function}, $\exp$\index[notati
 Show that $\lim _{x\to \infty}\exp (x)=\infty$ and $\lim _{x\to -\infty}x^m\exp (x)=0$ for all $m\in \N$.
 \end{exr}
 
+Cool, so now we have a function that is its own derivative.  What about a function that is \emph{minus} its own derivative.  Well, now that we have $\exp$ in hand, this is actually really easy.
+\begin{exr}
+Show that $x\mapsto \exp (-x)$ is the unique function from $\R$ to $\R$ such that (i) is equal to minus its derivative and (ii) is equal to $0$ at $1$.
+\end{exr}
+
+What about second derivatives?  Well, of course, we $\exp$ is equal to its own second derivative.  That's easy.  But what about a function that is equal to \emph{minus} its own second derivative?  If we wanted to play the same trick as before, we would need to consider the function $x\mapsto \exp (\alpha x)$ for some number $\alpha$ with $\alpha ^2=-1$, but that's just craziness.  Only looney-toons would ever think about such nonsense.\footnote{But seriously:  why is there no \emph{real} number whose square is $-1$?}  Looks like we're just going to have to come up with a new name for such a function.  ``Cosine'' sounds rad.  Let's call it that.
+\begin{dfn}[Cosine and sine]
+The \emph{cosine function}\index{Cosine function}, $\cos$\index[notation]{$\cos$}, is the unique function $\cos :\R \rightarrow \R$ such that (i) $\frac{\dif ^2}{\dif x^2}\cos (x)=-\cos (x)$, (ii) $\cos (0)=1$, and (iii) $\frac{\dif}{\dif x}\cos (0)=0$.
+
+The \emph{sine function}\index{Sine function}, $\sin$\index[notation]{$\sin$}, is the unique function $\sin :\R \rightarrow \R$ such that (i) $\frac{\dif ^2}{\dif x^2}\sin (x)=-\sin (x)$, (ii) $\sin (0)=0$, and (iii) $\frac{\dif}{\dif x}\sin (0)=1$.
+\begin{rmk}
+In the case of $\exp$, because it was defined by a differential equation of \emph{first}-order, only one initial condition was required to uniquely specify it.  In contrast, however, there is \emph{more} than one function equal to minus its own second-derivative (and is $1$ at $0$).  To uniquely specify the function, you must also specify its first-derivative.  $\sin$ and $\cos$ are ``essentially everything'' in the sense that any other function that is equal to minus its own second derivative can be written as a linear combination of these (and furthermore, you can figure out what that linear combination should be by looking at initial conditions at $0$).
+\end{rmk}
+\end{dfn}
+
+In terms of finding functions that are equal to their own derivatives or minus their own derivatives, we are essentially done.  $\exp$ always works for finding functions equal to its own $n^{\text{th}}$ derivative, and if you want a function equal to \emph{minus} its own $n^{\text{th}}$ derivative, $x\mapsto \exp (-x)$ will work for $n$ odd, and $\cos$ and $\sin$ will work for $n$ even.
+
 \section{Differentiability and continuity}
 
 
@@ -413,9 +430,9 @@ Define $f:\R ^2\rightarrow \R$ by
 \begin{equation}
 f(\coord{x,y})\coloneqq \begin{cases}0 & \text{if }x=0 \\ \frac{\exp \left( -\tfrac{1}{x^2}\right) y}{\exp \left( -\tfrac{2}{x^2}\right) +y^2} & \text{otherwise}\end{cases}.
 \end{equation}
-Order $\R ^+$ by the usual order and consider the net $\R ^+\ni t\mapsto x_t\coloneqq \coord{t,\exp \left( -\frac{1}{t^2}\right) }\in \R ^2$.  Then, $\lim _tx_t=\coord{0,0}$, but
+Order $\R ^+$ by the usual order and consider the net $\R ^+\ni t\mapsto x_t\coloneqq \coord{t,\exp \left( -\frac{1}{t^2}\right) }\in \R ^2$.  Then, $\lim _{t\to 0^+}x_t=\coord{0,0}$, but
 \begin{equation}
-f(x_t)=f(\coord{t,\exp (-\tfrac{1}{t^2})})=\frac{\exp{-\tfrac{2}{t^2}}}{\exp (-\tfrac{2}{t^2})+\exp (-\tfrac{2}{t^2})}=\tfrac{1}{2}\neq 0=f(\coord{0,0}),
+f(x_t)=f(\coord{t,\exp (-\tfrac{1}{t^2})})=\frac{\exp (-\tfrac{2}{t^2})}{\exp (-\tfrac{2}{t^2})+\exp (-\tfrac{2}{t^2})}=\tfrac{1}{2}\neq 0=f(\coord{0,0}),
 \end{equation}
 and so $f$ is not continuous at $\coord{0,0}$.
 

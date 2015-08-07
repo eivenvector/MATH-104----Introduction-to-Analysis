@@ -4,13 +4,12 @@ Okay, so now that my rant is out of the way, let's actually do some mathematics.
 
 \section{Measure theory}
 
-All of integration theory ultimately boils down to measure theory.  The definition of the integral itself is relatively easy.  In fact, the definition of abstract measure spaces is even easier.  There's really no question that writing down the definition of the lebesgue integral is \emph{significantly} easier than that of the riemann integral.  What is a bit tricky, however, is constructing specific measures.  In our case, we will primarily be concerned with constructing lebesgue measure (on $\R ^d$), and this is really the only part that is a bit tricky.  Before we get there though, we will present the theory of measure spaces, and then get to lebesgue measure in the next section.
+All of integration theory ultimately boils down to measure theory.  The definition of the integral itself is relatively easy.  In fact, the definition of abstract measure spaces is even easier.  There's really no question that writing down the definition of the lebesgue integral is \emph{significantly} easier than that of the riemann integral.  What is a bit tricky, however, is constructing specific measures.  In our case, we will primarily be concerned with constructing lebesgue measure (on $\R ^d$), and this is really the only part that is a bit tricky.  Fortunately, there is a \emph{huge} theorem that will just spit out lebesgue measure for us, \emph{the \nameref{HaarHowesTheorem}}.
+
+\subsection{Outer-measures}
 
 The intuition behind measure is actually quite easy---a measure is just an axiomatization of our intuition about notion of things like length, area, and volume.  Before we define a measure, it will be convenient to introduce a couple of terms.
-
-\subsection{Outer measures}
-
-\begin{dfn}
+\begin{dfn}[Subadditivity and additivity]
 Let $X$ be a set, let $\meas :2^X\rightarrow [0,\infty ]$, and let $\mathcal{M}\subseteq 2^X$.  
 \begin{enumerate}
 \item $\meas$ is \emph{subadditive}\index{Subadditive} on $\mathcal{M}$ iff for $\{ M_m:m\in \N \} \subseteq \mathcal{M}$ we have
@@ -23,21 +22,25 @@ Let $X$ be a set, let $\meas :2^X\rightarrow [0,\infty ]$, and let $\mathcal{M}\
 \end{equation}
 \end{enumerate}
 $\meas$ is simply just subadditive (resp.~additive) if it is subadditive (resp.~additive) on all of $X$.
+\begin{rmk}
+You might think that we should always have additivity, or at the very least, we should have finite additivity:  if $S$ and $T$ are disjoint, then $\meas (S\cup T)=\meas (S)+\meas (T)$.  Unfortunately, this is \emph{false}---see \cref{exm5.2.56}.  We will have additivity on a very large class of sets, however, the so-called \emph{measurable sets}---see \cref{MeasurableSet}.
+\end{rmk}
 \end{dfn}
 \begin{exr}\label{exr5.1.4}
-Show that if $\meas$ is additive on $\mathcal{M}$ then it is subadditive on $\mathcal{M}$.
+Let $\mathcal{M}$ be a collection of sets that is closed under union, intersection, and complementation.  Show that if $\meas$ is additive on $\mathcal{M}$ then it is subadditive on $\mathcal{M}$.
 \begin{rmk}
 There is something to show here.  While \eqref{5.1.3} itself is obviously a stronger condition than \eqref{5.1.2}, it is also only assumed for \emph{disjoint} collections.  The problem then is to show that, if \eqref{5.1.3} holds for disjoint collections, then \eqref{5.1.2} holds for \emph{all} collections.
 \end{rmk}
 \end{exr}
 
-\begin{dfn}[Outer measure]\label{OuterMeasure}
-Let $X$ be a set.  An \emph{outer measure}\index{Outer measure} on $X$ is a function $\meas :2^X\rightarrow [0,\infty ]$ such that
+\begin{dfn}[Outer-measure]\label{OuterMeasure}
+Let $X$ be a set.  An \emph{outer-measure}\index{Outer-measure} on $X$ is a function $\meas :2^X\rightarrow [0,\infty ]$ such that
 \begin{enumerate}
 \item $\meas (\emptyset )=0$;
-\item (Nondecreasing)\label{Measure.Monotonicity} $\meas :\coord{2^X,\subseteq}\rightarrow [0,\infty ]$ is nondecreasing;\footnote{Concretely, this means that $\meas (S)\leq \meas (T)$ if $S\subseteq T$.}; and
+\item (Nondecreasing)\label{Measure.Monotonicity} $\meas :\coord{2^X,\subseteq}\rightarrow [0,\infty ]$ is nondecreasing;\footnote{Concretely, this means that $\meas (S)\leq \meas (T)$ if $S\subseteq T$.} and
 \item (Subadditivity) $\meas$ is subadditive.
 \end{enumerate}
+A set equipped with an outer-measure is an \emph{outer-measure space}\index{Outer-measure space}.
 \begin{rmk}
 Note that we allow the measure of sets to be infinite.  This is incredibly important---for example, we will want $\meas (\R )=\infty$ (for lebesgue measure anyways).
 \end{rmk}
@@ -45,9 +48,70 @@ Note that we allow the measure of sets to be infinite.  This is incredibly impor
 As a consequence of this, we needn't worry about convergence in the third axiom (see \eqref{5.1.2}).  As a matter of fact, we definitely want to allow this sum to diverge---think about what the measure of $\bigcup _{m\in \Z}(m,m+1)$ should be.
 \end{rmk}
 \end{dfn}
-While we will be assigning a measure to every set, not all of them we will considerable to be \emph{measurable}.  In general, we will \emph{not} have additivity; however, when we restrict our (outer) measures to the collection of measurable sets, we \emph{will} have additivity.
-\begin{dfn}[Measurable]\label{Measurable}
-Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure on a set $X$ and let $M\subseteq X$.  Then, $M$ is \emph{measurable}\index{Measurable} iff
+In measure theory, things almost always matter only `up to' sets of measure $0$.  This concept is so important that there is a term for it.
+\begin{mdf}[Almost-everywhere XYZ]\label{AlmostEverywhereXYZ}
+Let $f:\coord{X,\meas}\rightarrow Y$ be a function on an outer-measure space.  Then, $f$ is \emph{almost-everywhere XYZ}\index{Almost-everywhere XYZ} iff
+\begin{equation}
+\meas \left( \left\{ x\in X:f(x)\text{ is not XYZ.}\right\} \right) =0.
+\end{equation}
+\end{mdf}
+\begin{displayquote}
+Whenever $X$ is equipped with a measure, \emph{all relations on $\Mor _{\Set}(X,Y)$ are defined only up to measure zero}.  For example, if we write $f=g$, what we really mean is that $\meas \left( \{ x\in X:f(x)\neq g(x)\} \right) =0$.  Similarly, if we write $f\leq g$, what we really mean is that $\meas \left( \{ x\in X:f(x)\not \leq g(x)\} \right) =0$.  Etc..  A fancier way of putting this, is that we work in the \emph{almost-everywhere category}.
+\end{displayquote}
+\begin{exm}[The almost-everywhere category]\index{Almost-everywhere category}
+\begin{savenotes}
+The almost-everywhere category is the category $\AlE$ whose collection of objects $\AlE _0$ is the collection of all outer-measure spaces, for every outer-meausre space $X$ and outer-meausre space $Y$ the collection of morphisms from $X$ to $Y$, $\Mor _{\AlE}(X,Y)$, is the quotient set $\Mor _{\Set}(X,Y)/\sim$, where $f\sim g$ iff $f$ and $g$ are equal almost everywhere, composition is given by ordinary function composition\footnote{One must check well-definedness---see below}, and the identities of the category are the (equivalence classes) of the identity functions.
+\begin{exr}
+Check that $\sim$ is an equivalence relation.
+\end{exr}
+\begin{prp}
+Composition in $\AlE$ is well-defined.
+\begin{proof}
+Let $X,Y,Z$ be outer-measure spaces, let $f_1,g_1:X\rightarrow Y$ be equal almost-everywhere and let $f_2,g_2:Y\rightarrow Z$ be equal almost-everywhere.  We must show that $f_2\circ f_1$ is equal to $g_2\circ g_1$ almost everywhere.  However, of course, if $f_1(x)=g_1(x)$, then certainly $f_2(f_1(x))=g_2(g_1(x))$, and so
+\begin{equation}
+\left\{ x\in X:f_1(x)=g_1(x)\right\} \subseteq \left\{ x\in X:[f_2\circ f_1](x)=[g_2\circ g_1](x)\right\} ,
+\end{equation}
+and so
+\begin{equation}
+\left\{ x\in X:[f_2\circ f_1](x)\neq [g_2\circ g_1](x)\right\} \subseteq \left\{ x\in X:f_1(x)\neq g_1(x)\right\} .
+\end{equation}
+As the set on the right-hand side has measure zero, so too does the set on the left-hand side.
+\begin{rmk}
+Note that we didn't even need to make use of the fact that $f_2(x)=g_2(x)$ for almost-every $x$.
+\end{rmk}
+\end{proof}
+\end{prp}
+\end{savenotes}
+\end{exm}
+\begin{exm}[The zero measure]\label{ZeroMeasure}
+Let $X$ be a set and define $\meas :2^X\rightarrow [0,\infty ]$ by $\meas (S)\coloneqq 0$.  How terribly interesting.
+\end{exm}
+\begin{exm}[The infinite measure]\label{InfiniteMeasure}
+Let $X$ be a set and define $\meas :2^X\rightarrow [0,\infty ]$ by
+\begin{equation}
+\meas (S)\coloneqq \begin{cases}0 & \text{if }S=\emptyset \\ \infty & \text{otherwise}\end{cases}.
+\end{equation}
+Dear god, this example is even more interesting than the last one.
+\end{exm}
+\begin{exm}[The unit measure]\label{UnitMeasure}
+Let $X$ be a set and define $\meas :2^X\rightarrow [0,\infty ]$ by
+\begin{equation}
+\meas (S)\coloneqq \begin{cases}0 & \text{if }S=\emptyset \\ 1 & \text{otherwise}\end{cases}.
+\end{equation}
+\begin{rmk}
+Note that this is \emph{never} additive (unless of course $X$ is either empty or a single point).  This makes it useful for producing counter-examples (see \cref{exm5.1.42}), and not much else.
+\end{rmk}
+\end{exm}
+\begin{exm}[The counting measure]
+Let $X$ be a set and for $S\subseteq X$ define $\meas (S)\coloneqq \abs{S}$, that is, the cardinality of $S$.
+\begin{rmk}
+This is actually incredibly important, as we shall see that sums are just integrals with respect to the counting measure.
+\end{rmk}
+\end{exm}
+
+While we will be assigning a measure to every set, not all of them will be considered to be \emph{measurable}.  In general, we will \emph{not} have additivity; however, when we restrict our (outer) measures to the collection of measurable sets, we \emph{will} have additivity.  This is more or less the point of talking about measurable sets---additivity is a nice thing to have.
+\begin{dfn}[Measurable (set)]\label{MeasurableSet}
+Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure on a set $X$ and let $M\subseteq X$.  Then, $M$ is \emph{measurable}\index{Measurable (set)} iff
 \begin{equation}
 \meas (S)=\meas (S\cap M)+\meas (S\cap M^{\comp})
 \end{equation}
@@ -61,6 +125,12 @@ By subadditivity, we \emph{always} have that $\meas (S)\leq \meas (S\cap M)+\mea
 \meas (S)\geq \meas (S\cap M)+\meas (S\cap M^{\comp})
 \end{equation}
 for all $S\subseteq X$.
+\end{rmk}
+\begin{rmk}
+You might say that the motivation for the definition is that, for sets $S,T$ that satisfy this property, we should have at least finite additivity (i.e.~$S,T$ disjoint implies $\meas (S\cup T)=\meas (S)+\meas (T)$).  It turns-out that this is true, but in fact, perhaps surprisingly, we have much more than this---we actually have \emph{(countable) additivity}--see \cref{CaratheodorysTheorem}.  By asking for finite additivity, we get countable additivity for free!
+\end{rmk}
+\begin{rmk}
+Warning:  There definitely exist sets that are not measurable in general!  In fact, nonmeasurable sets are easy to find in `artificial' spaces---see \cref{exm5.1.42}.  But such pathologies exist even for the nicest of measures.  Indeed, see \cref{exm5.2.47} for a set that is not measurable with respect to lebesgue measure.
 \end{rmk}
 \begin{rmk}
 This is also what is sometimes referred to \emph{carath\'{e}odory measurable}.
@@ -88,7 +158,7 @@ Note that \nameref{DeMorgansLaws} (\cref{DeMorgansLaws}) imply that \ref{Carathe
 The definition of measurability is $S\leftrightarrow S^{\comp}$ symmetric, so \ref{CaratheodorysTheorem.iv} is automatically true.
 
 \Step{Show \ref{CaratheodorysTheorem.v}}
-The empty-set is measurable by the previous exercise, and hence by \ref{CaratheodorysTheorem.iv}, $X$ is measurable as well, which established \ref{CaratheodorysTheorem.v}.
+The empty-set is measurable by the previous exercise, and hence by \ref{CaratheodorysTheorem.iv}, $X$ is measurable as well, which establishes \ref{CaratheodorysTheorem.v}.
 
 \Step{Reduce the proof of \ref{CaratheodorysTheorem.iii} to the proof of \ref{CaratheodorysTheorem.ii}}
 As was explained in a remark, we need not show \ref{CaratheodorysTheorem.iii} itself---it will now follow if we can show \ref{CaratheodorysTheorem.ii}.
@@ -98,8 +168,8 @@ We first show that the union of finitely many measurable sets is measurable.  It
 \begin{equation}
 \begin{split}
 \meas (S) & =\footnote{Because $M_2$ is measurable.}\meas (S\cap M_2)+\meas (S\cap M_2^{\comp}) \\
-& =\footnote{Because $M_1$ is measurable (applied twice).}\meas (S\cap M_2\cap M_1)+\meas (S\cap M_2\cap M_1^{\comp})+\meas (S\cap M_2^{\comp}\cap \meas _1)+\meas (S\cap M_2^{\comp}\cap M_1^{\comp}) \\
-& \geq \footnote{By subadditivity.}\meas (S\cap (M_1\cup M_2))+\meas (S\cap (M_1\cup M_2)^{\comp})
+& =\footnote{Because $M_1$ is measurable (applied twice).}\meas (S\cap M_2\cap M_1)+\meas (S\cap M_2\cap M_1^{\comp})+\meas (S\cap M_2^{\comp}\cap M_1)+\meas (S\cap M_2^{\comp}\cap M_1^{\comp}) \\
+& \geq \footnote{By subadditivity and the fact that $M_1\cup M_2=(M_1\cap M_2)\cup (M_1\cap M_2^{\comp})\cup (M_1^{\comp}\cap M_2)$.}\meas (S\cap (M_1\cup M_2))+\meas (S\cap (M_1\cup M_2)^{\comp})
 \end{split}
 \end{equation}
 Thus, indeed, $M_1\cup M_2$ is measurable.
@@ -110,14 +180,14 @@ Let $\{ M_m:m\in \N \}$ be a countable collection of measurable sets.  We wish t
 \bigcup _{m\in \N}M_m
 \end{equation}
 is measurable.  First of all, define
-\begin{equation}
+\begin{equation}\label{5.1.13}
 M_m'\coloneqq M_m\setminus \bigcup _{k=0}^{m-1}M_k.
 \end{equation}
-Note that each $M_m'$ is measurable because we already know that finite unions, complements, and hence also finite interections, of measurable sets are measurable.
+Note that each $M_m'$ is measurable because we already know that finite unions, complements, and hence also finite intersections, of measurable sets are measurable.
 \begin{exr}
 Show that (i) $M_m'\subseteq M_m$, (ii) the collection $\{ M_m':m\in \N \}$ is disjoint, and (iii) $\bigcup _{m\in \N}M_m=\bigcup _{m\in \N}M_m'$.
 \begin{rmk}
-This trick is important.  Don't forget it.
+This trick (the one in \eqref{5.1.13}, that is) is important.  Don't forget it.
 \end{rmk}
 \end{exr}
 Thus, as
@@ -146,7 +216,7 @@ Thus,
 \end{equation}
 Hence,
 \begin{equation}\label{5.1.16}
-\meas (S)\geq \sum _{m\in \N}\meas (S\cap M_m)+\meas (S\cap N^{\comp})\geq \meas (S\cap N)+\meas (S\cap N^{\comp}),
+\meas (S)\geq \sum _{m\in \N}\meas (S\cap M_m)+\meas (S\cap N^{\comp})\geq \footnote{By subadditivity.}\meas (S\cap N)+\meas (S\cap N^{\comp}),
 \end{equation}
 and so indeed $N$ is measurable.
 
@@ -159,15 +229,34 @@ The other inequality is automatic from subadditivity, and so indeed, we have equ
 \end{proof}
 \end{savenotes}
 \end{thm}
+\begin{displayquote}
+I should probably mention at this point that the way I am presenting measure theory goes against the orthodoxy.  (You can skip this comment if you don't plan to look in other sources.)  Every other author I am aware of \emph{only works with measurable sets}.  For them, a \emph{measure space} is a set, together with a $\sigma$-algebra, the ``measurable sets'', along with a set function that is additive on the $\sigma$-algebra (and sends the empty-set to $0$).  For them, outer-measures are merely tools for constructing measures (a l\`{a} Mr.~Carath\'{e}odory).  Of course, their ``measure''\footnote{The quotes are to indicate that this is what they call it---I myself have not defined this term.} is just the restriction of the outer-measure to the collection of all measurable sets.  You might say they simply `forget' that they had ever assigned a measure to the nonmeasurable sets.  I find this unnecessarily complicated and messy.  For one thing, if you do things the way I have presented them, you don't have to worry about $\sigma$-algebras (at least not explicitly).  The disadvantage is that now I have to add the hypothesis ``These sets are measurable'' to a lot of my theorems.  Meh.  It's a trade-off, but I quite like not having to every worry about $\sigma$-algebras explicitly.
+\end{displayquote}
+
 \begin{exr}\label{exr5.1.21}
-Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer measure and let $S\subseteq X$ be measurable have finite measure.  Show that
+Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure and let $S\subseteq X$ be measurable have finite measure.  Show that
 \begin{equation}
 \meas (S\setminus T)=\meas (S)-\meas (T).
 \end{equation}
 \begin{rmk}
-You need $S$ to have finite measure otherwise the right-hand side of this equation will be undefined if $T$ also have infinite measure.
+You need $S$ to have finite measure otherwise the right-hand side of this equation will be undefined if $T$ also has infinite measure.
 \end{rmk}
 for any measurable set $T\subseteq S$.
+\end{exr}
+\begin{exr}\label{exr5.1.27}
+Let $M_0\subseteq M_1\subseteq \cdots$ be an nondecreasing countable collection of measurable sets.  Show that
+\begin{equation}
+\meas \left( \bigcup _{k=0}^\infty M_k\right) =\lim _m\meas \left( \bigcup _{k=0}^mM_k\right) =\lim _m\meas (M_k).
+\end{equation}
+\end{exr}
+\begin{exr}\label{exr5.1.29}
+Let $M_0\supseteq M_1\supseteq \cdots$ be a nonincreasing countable collection of measurable sets.  Show that, \emph{if at least one $M_k$ has finite measure},
+\begin{equation}
+\meas \left( \bigcap _{k=0}^\infty M_k\right) =\lim _m\meas \left( \bigcap _{k=0}^mM_k\right) =\lim _m\meas (M_k).
+\end{equation}
+\begin{rmk}
+Though we technically have not defined measure on $\R$ yet, it is easy to see intuitively why we would neither expect nor want this to hold if the measure of each $M_k$ were infinite.  For example, take $M_k\coloneqq (-\infty ,-kk)$.  Then, on one hand, $\meas (M_k)=\infty$ for all $k$, but yet $\meas (\bigcap _{k=0}^\infty M_k)=\meas (\emptyset )=0$.
+\end{rmk}
 \end{exr}
 
 \begin{displayquote}
@@ -178,11 +267,21 @@ At some point in the near future, we will be doing arithmetic with $\infty$---fo
 There are other arithmetic notions we have to technically define (e.g.~$x+\infty=\infty$), but this is the only nonobvious one.
 \end{displayquote}
 
-\subsection{Uniform measures}
+\subsection{Measures on topological and uniform spaces}
 
-One can go ahead and develop the theory for outer measures on arbitrary sets, but in practice, we will only be working with measures defined on spaces with \emph{a lot} of extra structure.  This motivates us to investigate outer-measures on uniform spaces, in which case we are of course going to require our outer-measures to be compatible with this extra structure.
+One can go ahead and develop the theory for outer-measures on arbitrary sets, but in practice, we will only be working with measures defined on spaces with \emph{a lot} of extra structure.  This motivates us to investigate outer-measures on topological and uniform spaces, in which case we are of course going to require our outer-measures to be compatible with this extra structure.
+
+\subsubsection{Measures on topological spaces}
+
+There are definitely outer-measures on topological spaces for which the open sets are not measurable---see \cref{exm5.1.42}---in fact, this can even be the case for regular measures (the example in \cref{exm5.1.42} is regular---see \cref{RegularMeasure} for the definition of a regular measure), but most outer-measures on topological spaces which are not cooked-up for the sole purpose of producing counter-examples have the property that open sets are measurable.  We have a name for such measures:  \emph{borel measures}.
+\begin{dfn}[Borel measure]\label{BorelMeasure}
+Let $X$ be a topological space and let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure.  Then, $\meas$ is \emph{borel}\index{Borel measure} iff every open set is measurable.  A topological space equipped with a borel measure is a \emph{borel measure space}\index{Borel measure space}.
+\begin{rmk}
+By \nameref{CaratheodorysTheorem}, it follows that the ``$\sigma$-algebra'' generated by the open sets likewise consists of measurable sets.  The term for the sets in this $\sigma$-algebra is \emph{borel set}, hence the term, \emph{borel measure}---a borel measure is a measure in which the borel sets are measurable (which is of course equivalent to the open sets being measurable).
+\end{rmk}
+\end{dfn}
 \begin{dfn}[Regular measure]\label{RegularMeasure}
-Let $X$ be a topological space and let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure.  Then, $\meas$ is \emph{regular}\index{Regular measure}
+Let $X$ be a topological space and let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure.  Then, $\meas$ is \emph{regular}\index{Regular measure} iff
 \begin{enumerate}
 \item $\meas$ is finite on quasicompact subsets;
 \item (Outer-regular) for $S\subseteq X$,
@@ -194,90 +293,31 @@ Let $X$ be a topological space and let $\meas :2^X\rightarrow [0,\infty ]$ be an
 \meas (U)=\sup \{ \meas (K):K\subseteq U,\ K\text{ quasicompact.}\} .
 \end{equation}
 \end{enumerate}
-\end{dfn}
-\begin{dfn}[Uniformly-measurable]\label{UniformlyMeasurable}
-Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure on a set $X$ and let $\mathcal{U}$ is a cover of $X$.  Then, $\mathcal{U}$ is \emph{uniformly-measurable}\index{Uniformly-measurable cover} iff $\meas$ is constant on $\mathcal{U}$.
-\end{dfn}
-\begin{dfn}[Uniform measure]\label{UniformMeasure}
-Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  A \emph{uniform measure}\index{Uniform measure} on $X$ is an outer measure $\meas$ on $X$ such that
-\begin{enumerate}
-\item $\meas$ is regular;
-\item \label{UniformMeasure.i}there exists a uniform base $\widetilde{\mathcal{B}}$ of $X$ consisting of uniformly-measurable covers; and
-\item \label{UniformMeasure.ii}if $S,T\subseteq X$ are uniformly-separated, then $\meas (S\cup T)=\meas (S)+\meas (T)$.
-\end{enumerate}
+A topological space equipped with regular measure is a \emph{regular measure space}\index{Regular measure space}.
 \begin{rmk}
-$\widetilde{\mathcal{B}}$ is a \emph{uniformly-measurable base} for $\coord{X,\meas}$.
-\end{rmk}
-\begin{rmk}
-Think about what having a uniform base of uniformly-measurable covers means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then this is just the statement that every $\varepsilon$-ball has to have the same measure.
-\end{rmk}
-\begin{rmk}
-Note that you definitely do not want to require \emph{every} uniform cover be uniformly-measurable.  For example, in a metric space, by upward-closedness the collection of all $\varepsilon$-balls together with a single $2\varepsilon$-ball will also be a uniform-cover---we definitely do not want to require that a $2\varepsilon$ ball has the same measure as an $\varepsilon$-ball.
-\end{rmk}
-\begin{rmk}
-The second condition is a generalization of the defining condition of what is called a \emph{metric outer-measure}\index{Metric outer-measure}.  In particular, if $X$ is a metric space, then any uniform meausre is (by definition) a metric outer-measure.
+Warning:  We will see below (\cref{prp5.1.25}) that open sets must be measurable in \emph{uniform} measure spaces; however, this need not be the case in \emph{regular} measure spaces---see the following example.
 \end{rmk}
 \end{dfn}
-\begin{exm}[The zero measure]
-Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space and define $\meas :2^X\rightarrow [0,\infty ]$ by $\meas (S)\coloneqq 0$.  How terribly interesting.
-\end{exm}
-\begin{exm}[The infinite measure]
-Let $\coord{X,\widetilde{\mathcal{U}}}$ be any uniform space, let $\widetilde{\mathcal{B}}$ be a uniform base no cover of which contains the empty-set, and define $\meas :2^X\rightarrow [0,\infty ]$ by
+\begin{exm}[A regular measure that is not borel]\label{exm5.1.42}
+Define $X\coloneqq \{ x_1,x_2\}$, and equip it with the discrete topology and the unit measure (see \cref{UnitMeasure}).  Of course the measure of every quasicompact subset is finite.  But furthermore, it is also inner-regular on open sets (and in fact on every set), because this is must the statement that $1=\sup \{ 1\}$ (the measure of a nonempty open set, $1$, is equal to the suprema of the set of all measures of quasicompact sets contained in it, namely, $1$).  Similarly, it is outer-regular, hence regular.  On the other hand,
 \begin{equation}
-\meas (S)\coloneqq \begin{cases}0 & \text{if }S=\emptyset \\ \infty & \text{otherwise}\end{cases}.
+\meas (\{ x_1,x_2\} )=1<1+1=\meas (\{ x_1\} )+\meas (\{ x_2\} ).
 \end{equation}
-Dear god, this example is even more interesting than the last one.
+Therefore, one of the open sets $\{ x_1\}$ or $\{ x_2\}$ must have been nonmeasurable.
 \end{exm}
-\begin{exm}[The counting measure]
-Let $\coord{X,\widetilde{\mathcal{U}}}$ be a discrete uniform space (so that the set which a single cover, the cover by singletons, forms a uniform base), and for $S\subseteq X$ define $\meas (S)\coloneqq \abs{S}$, that is, the cardinality of $S$.
-\begin{rmk}
-This is actually incredibly important, as we shall see that sums are just integrals with respect to the counting measure.
-\end{rmk}
+Of course, there is a counter-example to the other potential implication as well.
+\begin{exm}[A borel measure that is not regular]
+Consider the counting measure on $\R$.  The set $[0,1]$ is quasicompact, but has infinite measure.  Therefore, the counting measure on $\R$ is not regular.  On the other hand, the cardinality of the union of two disjoint sets is the sum of the cardinalities of those two sets,\footnote{This is how we defined addition of cardinals!} and so we always have $\meas (S)=\meas (S\cap M)+\meas (S\cap M^{\comp})$, that is to say, every set is measurable, and so certainly the open sets are measurable.
 \end{exm}
 
-One important about uniform measures is that the open sets are automatically measurable.
-\begin{prp}\label{prp5.1.25}
-Let $\meas$ be a uniform measure on a $T_0$ uniform space $X$.  Then, open sets are measurable.
-\begin{rmk}
-By \nameref{CaratheodorysTheorem}, it thus follows that the ``$\sigma$-algebra generated by the topology'', the \emph{borel sets}\index{Borel sets}, are measurable.  In particular, $F_\sigma$ and $G_\delta$ sets are measurable.
-\end{rmk}
-\begin{proof}\footnote{Proof adapted from \cite[pg.~194]{Cohn}.}
-Let $U\subseteq X$ be open and let $A\subseteq X$ be arbitrary.  We wish to show that
-\begin{equation}
-\meas (A)\geq \meas (A\cap U)+\meas (A\cap U^{\comp}).
-\end{equation}
-If $\meas (A)=\infty$, this is automatically satisfied, so we may as well assume that $\meas (A)<\infty$.
-
-Let $\varepsilon >0$.  Then, by outer-regularity, there is some open set $U_\varepsilon$ that contains $U$ and
-\begin{equation}
-\meas (A)\leq \meas (U_{\varepsilon})<\meas (A)+\varepsilon .
-\end{equation}
-Then, by inner-regularity on opens, there is some quasicompact $K_{\varepsilon}\subseteq U_{\varepsilon}\cap U$ such that
-\begin{equation}
-\meas (U\cap U_{\varepsilon})-\varepsilon <\meas (K_{\varepsilon})\leq \meas (U\cap U_{\varepsilon}).
-\end{equation}
-As $X$ is $T_0$ it is completely-uniformly-$T_3$ (\cref{crl4.4.16}), and in particular $T_2$, so that $K_{\varepsilon}$ is closed, so that $U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$ is open, and so there is some compact $L_{\varepsilon}\subseteq U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$ such that
-\begin{equation}
-\meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp})-\varepsilon <\meas (L_{\varepsilon})\leq \meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp}).
-\end{equation}
-Hence,
-\begin{equation}
-\begin{split}
-\meas (A) & >\meas (U_{\varepsilon})-\varepsilon \geq \footnote{Because $K_{\varepsilon}\cup L_{\varepsilon}\subseteq U_{\varepsilon}$.}\meas (K_{\varepsilon}\cup L_{\varepsilon})=\footnote{You can uniformly-separate disjoint compact subsets of uniformly-$T_2$ spaces.  Then we apply the fact that $\meas$ is a uniform measure.}\meas (K_\varepsilon )+\meas (L_{\varepsilon})-\varepsilon \\
-& >\meas (U\cap U_{\varepsilon})+\meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp})-3\varepsilon \geq \footnote{Because $U_{\varepsilon}\cap U^{\comp}\subseteq U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$.}\meas (U\cap U_{\varepsilon})+\meas (U_{\varepsilon}\cap U^{\comp})-3\varepsilon \\
-& \geq \footnote{Because $A\subseteq U_{\varepsilon}$.}\meas (A\cap U)+\meas (A\cap U^{\comp})
-\end{split}
-\end{equation}
-As $\varepsilon$ is arbitrary, we have that $\meas (A)\geq \meas (A\cap U)+\meas (A\cap ^{\comp})$, and so $U$ is measurable.
-\end{proof}
-\end{prp}
-\begin{prp}
-Let $\meas$ be a regular measure on a $\sigma$-quasicompact space and let $S\subseteq X$ be measurable.  Then, for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
+The following is quite a useful result about regular measures.
+\begin{prp}\label{prp5.1.39}
+Let $\meas$ be a regular measure and let $S\subseteq X$.  Then, if $S$ can be written as the union of countably many measurable sets each of finite measure, then, for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
 \begin{equation}
 C_{\varepsilon}\subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
 \end{equation}
 \begin{proof}
-Let $S\subseteq X$ be measurable and have finite measure.  Write $X=\bigcup _{m\in \N}K_m$ where $K_m\subseteq X$ is quasicompact and define $S_m\coloneqq S\cap K_m$.
+Suppose that $S=\bigcup _{m\in \N}S_m$, where $S_m\subseteq X$ is measurable and of finite measure.
 
 Let $\varepsilon >0$.  By outer-regularity, there is some open $U_m$ containing $S_m$ such that
 \begin{equation}
@@ -301,75 +341,247 @@ Then, $V^{\comp}$ is of course a closed subset of $S$ and
 \end{equation}
 \end{proof}
 \end{prp}
-
-\subsection{The Haar-Howe Theorem}
-
-It turns out that there is a theorem, \nameref{HaarHoweTheorem},\footnote{Warning:  This is the name I have chosen to call it, because I am unaware of another name for this result.  In particular, don't expect others to know what you're talking about if you reference this theorem by name.  (It is a generalization of the existence and essential uniqueness of haar measure, in case you are more familiar with that.)  While the proof of the result I cobbled together from other sources, the formulation of the result I found essentially in \cite{Howes}, in which he claims ``the author'' established essential uniqueness, as well as existence, which he and another mathematician (Izkowitz) established independently.}  be that is quite general and will just spit out uniform measures for us.  This is how we will construct lebesgue measure.  That being said, it doesn't just work for any old uniform space.  We're going to need extra structure, as well as a couple new topological conditions.
-\begin{dfn}[Locally quasicompact]\label{LocallyQuasicompact}
-A topological space is \emph{locally quasicompact}\index{Locally quasicompact} iff it has a neighborhood base consisting of quasicompact sets.
+Before moving onto discussion of measures on uniform spaces, we have one more adjective that is used to describe outer-measures on topological measures spaces.
+\begin{dfn}[Topological measure]\label{TopologicalMeasure}
+Let $X$ be a topological space.  A \emph{topological measure} on $X$ is an outer-measure $\meas$ on $X$ such that
+\begin{enumerate}
+\item $\meas$ is regular; and
+\item (Topologically-additive)\index{Topologically-additive} if $S,T\subseteq X$ are separated by neighborhoods, then $\meas (S\cup T)=\meas (S)+\meas (T)$.
+\end{enumerate}
+A topological space equipped with a topological measure is a \emph{topological measure space}\index{Topological measure space}.
 \begin{rmk}
-In fact, this is really a `metadefinition'---replace the term ``quasicompact'' with any topological property you like, and you have a new definition.  For example, a locally connected space is one which has a neighborhood base consisting of connected sets.
+Note that the unit measure on a two point space with the discrete topology (see \cref{exm5.1.42}) is an example of a regular measure that is not topologically-additive.  The point is, that we \emph{do} need to make this an additional assumption---we do not get it for free.  On the other hand, note that regular borel measures are automatically topologically-additive---see \cref{exr5.1.56}
+\end{rmk}
+\begin{rmk}
+In uniform spaces, there are substantially less levels of separation.\footnote{Well, a posteriori anyways---many of them wind up being equivalent, though this is nontrivial---see \cref{crl4.4.16}.}  Thus, in uniform spaces, there are not many ``additivity'' conditions one can place on the measure (see the definition of a uniform measure, \cref{UniformMeasure}, for the definition of \emph{uniform-additivity}).  On the other hand, the separation axioms in topological spaces do not collapse at all (see the diagram in \eqref{4.6.105}), and so there are many ``additivity'' conditions one might consider putting on measures on topological spaces.  We choose the one we do because it winds up being equivalent to uniform-additivity---see \cref{prp5.1.61}.
 \end{rmk}
 \end{dfn}
-\begin{exr}
-Show that if a space is $T_2$ then it is locally $T_2$.  Find a counter-example to show that converse is false.
+\begin{exr}\label{exr5.1.56}
+Show that every regular borel measure is a topological measure.
 \end{exr}
-\begin{exr}
-Show that if a space is locally quasicompact and $T_2$, then it is locally compact.  Find a counter-example to show the converse is false.
-\end{exr}
-The following is the result related to locally quasicompactness that will be used in the proof of \nameref{HaarHoweTheorem}.
-\begin{prp}\label{prp5.2.4}
-Let $X$ be a locally compact space, let $K\subseteq X$ be quasicompact, and let $U\subseteq X$ contain $X$.  Then, there is an open set $V\subseteq X$ with compact closure such that
+\begin{prp}\label{prp5.1.57}
+Let $\meas$ be topological measure on a $T_2$ space.  Then, $\meas$ is borel.
+\begin{rmk}
+Warning:  This will fail if the space is not $T_2$---see \cref{exm5.1.43}.
+\end{rmk}
+\begin{rmk}
+By \nameref{CaratheodorysTheorem}, it thus follows that the ``$\sigma$-algebra generated by the topology'', the \emph{borel sets}\index{Borel sets}, are measurable.  In particular, $F_\sigma$ and $G_\delta$ sets are measurable.
+\end{rmk}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~194]{Cohn}.}
+Let $U\subseteq X$ be open and let $A\subseteq X$ be arbitrary.  We wish to show that
 \begin{equation}
-K\subseteq V\subseteq \Cls (V)\subseteq U.
+\meas (A)\geq \meas (A\cap U)+\meas (A\cap U^{\comp}).
 \end{equation}
-\begin{proof}
-We leave this as an exercise.
-\begin{exr}
-Complete the proof yourself.
-\end{exr}
+If $\meas (A)=\infty$, this is automatically satisfied, so we may as well assume that $\meas (A)<\infty$.
+
+Let $\varepsilon >0$.  Then, by outer-regularity, there is some open set $U_\varepsilon$ that contains $U$ and
+\begin{equation}
+\meas (A)\leq \meas (U_{\varepsilon})<\meas (A)+\varepsilon .
+\end{equation}
+Then, by inner-regularity on opens, there is some quasicompact $K_{\varepsilon}\subseteq U_{\varepsilon}\cap U$ such that
+\begin{equation}
+\meas (U\cap U_{\varepsilon})-\varepsilon <\meas (K_{\varepsilon})\leq \meas (U\cap U_{\varepsilon}).
+\end{equation}
+As $X$ is $T_2$, so that $K_{\varepsilon}$ is closed, so that $U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$ is open, and so there is some compact $L_{\varepsilon}\subseteq U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$ such that
+\begin{equation}
+\meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp})-\varepsilon <\meas (L_{\varepsilon})\leq \meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp}).
+\end{equation}
+Hence,
+\begin{equation}
+\begin{split}
+\meas (A) & >\meas (U_{\varepsilon})-\varepsilon \geq \footnote{Because $K_{\varepsilon}\cup L_{\varepsilon}\subseteq U_{\varepsilon}$.}\meas (K_{\varepsilon}\cup L_{\varepsilon})-\varepsilon =\footnote{You can separate by neighborhoods disjoint compact subsets of $T_2$ spaces.  Then we apply the fact that $\meas$ is topologically-additive.}\meas (K_\varepsilon )+\meas (L_{\varepsilon})-\varepsilon \\
+& >\meas (U\cap U_{\varepsilon})+\meas (U_{\varepsilon}\cap K_{\varepsilon}^{\comp})-3\varepsilon \geq \footnote{Because $U_{\varepsilon}\cap U^{\comp}\subseteq U_{\varepsilon}\cap K_{\varepsilon}^{\comp}$.}\meas (U\cap U_{\varepsilon})+\meas (U_{\varepsilon}\cap U^{\comp})-3\varepsilon \\
+& \geq \footnote{Because $A\subseteq U_{\varepsilon}$.}\meas (A\cap U)+\meas (A\cap U^{\comp})-3\varepsilon .
+\end{split}
+\end{equation}
+As $\varepsilon$ is arbitrary, we have that $\meas (A)\geq \meas (A\cap U)+\meas (A\cap U^{\comp})$, and so $U$ is measurable.
 \end{proof}
 \end{prp}
-The other new topological condition we will need is \emph{$\sigma$-quasicompactness}.
-\begin{dfn}[$\sigma$-quasicompact]
-Let $X$ be a topological space.  Then, $X$ is \emph{$\sigma$-quasicompact} iff it can be written as a countable union of quasicompact sets.
+
+\subsubsection{Measures on uniform spaces}
+
+\begin{dfn}[Uniform measure]\label{UniformMeasure}
+Let $X$ be a uniform space.  A \emph{uniform measure}\index{Uniform measure} on $X$ is an outer-measure $\meas$ on $X$ such that
+\begin{enumerate}
+\item $\meas$ is regular; and
+\item \label{UniformMeasure.ii}(Uniformly-additive)\index{Uniformly-additive} if $S,T\subseteq X$ are uniformly-separated, then $\meas (S\cup T)=\meas (S)+\meas (T)$.
+\end{enumerate}
+A uniform space equipped with a uniform measure is a \emph{uniform measure space}\index{Uniform measure space}.
 \begin{rmk}
-In general topology, I tried to stay clear of `countability-conditions', mostly because they were unnecessary, and adding unnecessary conditions, even if they apply to all the examples that matter and make things considerably easier, make the results harder to remember---the more hypotheses, the more `cluttered' things get.  In measure theory, however, countability is pretty much unavoidable---it's built in to the very definition of an outer-measure.  In that regard, a condition like $\sigma$-quasicompact is sort of similar to the condition of $T_0$---you're free to assume it basically all the time if you like, because it will exclude little to no examples\footnote{Though, to be honest, this really isn't even close to the degree one can say about this with $T_0$.}, but constantly saying ``$\sigma$-quasicompact'' makes things more ``cluttered'', and so we only use it when strictly necessary.
+Warning:  The term ``uniform'' most of the time is something strictly-stronger than something only topological.  This is not the case here:  topological-additivity is superficially stronger than uniform-additivity because it is easier to be separated by neighborhoods than it is to be uniformly-separated.  In particular, topologically-additive measures on uniform spaces are automatically uniformly-additive.
+\end{rmk}
+\begin{rmk}
+The second condition is a generalization of the defining condition of what is called a \emph{metric outer-measure}\index{Metric outer-measure}.  In particular, if $X$ is a metric space, then any uniform meausre is (by definition) a metric outer-measure.
+\end{rmk}
+\begin{rmk}
+Note that the unit measure on a two point space with the discrete topology (see \cref{exm5.1.42}) is an example of a regular measure that is not topologically-additive.  The point is, that we \emph{do} need to make this an additional assumption---we do not get it for free.
 \end{rmk}
 \end{dfn}
 \begin{exr}
-Find an example of a locally quasicompact space that is not $\sigma$-quasicompact and an example of a $\sigma$-quasicompact spaces that is not locally quasicompact.
+Can you find an example of a regular measure $\meas$ on a uniform space $X$ with $S,T\subseteq X$ uniformly-separated, but $\meas (S\cup T)\neq \meas (S)+\meas (T)$.
+\begin{rmk}
+The point is:  do we really need to assume uniform-additivity, or can we get it for free?
+\end{rmk}
+\begin{rmk}
+Hint:  We have already encountered a counter-example that will do the trick.
+\end{rmk}
 \end{exr}
-And now for the extra structure that we references before.
+\begin{prp}\label{prp5.1.61}
+Let $\meas$ be a regular measure on a $T_0$ uniform space.  Then, $\meas$ is topologically-additive iff it is uniformly-additive.
+\begin{proof}
+Let $X$ be the $T_0$ uniform space that $\meas$ is a uniform measure on.
+
+\blankline
+\noindent
+$(\Rightarrow )$ Suppose that $\meas$ is topologically additive.  Let $S,T\subseteq X$ be uniformly-separated.  Then, $S$ and $T$ are separated by neighborhoods, and so $\meas (S\cup T)=\meas (S)+\meas (T)$.  Thus, $\meas$ is uniformly-additive.
+
+\blankline
+\noindent
+$(\Leftarrow )$ Suppose that $\meas$ is uniformly-additive.  Let $S,T\subseteq X$  be separated by neighborhoods.  By definition, we want to show that $\meas (S\cup T)=\meas (S)+\meas (T)$.  By subadditivity, it suffices to show that $\meas (S\cup T)\geq \meas (S)+\meas (T)$.  If either one of the sets has infinite measure, then this inequality reads $\infty \geq \infty$, and so is automatically satisfied.  Thus, we may as well without loss of generality assume that $\meas (S),\meas (T)$ is finite.  Then, by outer-regularity, for every $\varepsilon >0$, there is an open set $W_{\varepsilon}$ with $S\cup T\subseteq W_{\varepsilon}$ and
+\begin{equation}
+\meas (S\cup T)\leq \meas (W_{\varepsilon})<\meas (S\cup T)+\varepsilon .
+\end{equation}
+
+On the other hand, because $S$ and $T$ are separated by neighborhoods, we know that there are disjoint open sets $U$ and $V$ with $S\subseteq U$ and $T\subseteq V$.  Define $U_\varepsilon \coloneqq U\cap W_{\varepsilon}$ and $V_\varepsilon \coloneqq V\cap W_{\varepsilon}$, so that $U_{\varepsilon}$ and $V_{\varepsilon}$ are both disjoint and open.  By the previous result, $U_{\varepsilon}$ and $V_{\varepsilon}$ are measurable, and so we have
+\begin{equation}
+\meas (U_{\varepsilon}\cup V_{\varepsilon})=\meas (U_{\varepsilon})+\meas (V_{\varepsilon}).
+\end{equation}
+Thus,
+\begin{equation}
+\meas (S\cup T)>\meas (W_{\varepsilon})-\varepsilon \geq \footnote{Because $U_{\varepsilon}\cup V_{\varepsilon}\subseteq W_{\varepsilon}$.}\meas (U_{\varepsilon}\cup V_{\varepsilon})-\varepsilon =\meas (U_{\varepsilon})+\meas (V_{\varepsilon})-\varepsilon \geq \footnote{Because $S\subseteq U_{\varepsilon}$ and $T\subseteq V_{\varepsilon}$.}\meas (S)+\meas (T)-\varepsilon .
+\end{equation}
+It follows that $\meas (S\cup T)\geq \meas (S)+\meas (T)$, and we are done.
+\end{proof}
+\end{prp}
+One important fact about uniform measures is that the open sets are automatically measurable.
+\begin{prp}\label{prp5.1.25}
+Let $\meas$ be a uniform measure on a $T_0$ uniform space.  Then, $\meas$ is a borel measure.
+\begin{proof}
+By the previous result, $\meas$ is a topological measure.  A $T_0$ uniform space is $T_2$.  Therefore, by \cref{prp5.1.57} (topological measures on $T_2$ spaces are borel), $\meas$ is borel.
+\end{proof}
+\end{prp}
+\begin{exm}[A topological measure on a uniform space that is not borel]\footnote{Topological measures on uniform spaces are automatically uniform measures---see the remark in \cref{UniformMeasure}.}\label{exm5.1.43}
+Define $X\coloneqq \{ x_1,x_2,x_3\}$, and equip it uniform base with just one cover, $\mathcal{B}\coloneqq \{ \{ x_1,x_2\} ,\{ x_3\} \}$.  (This is a uniform base because this single cover star-refines itself.)  The neighborhood bases defined by this uniform base are
+\begin{equation}
+\begin{split}
+\mathcal{B}_{x_1} & =\{ \Star _{\mathcal{B}}(x_1)\} =\{ \{ x_1,x_2\} \} \\
+\mathcal{B}_{x_2} & =\{ \Star _{\mathcal{B}}(x_2)\} =\{ \{ x_1,x_2\} \} \\
+\mathcal{B}_{x_3} & =\{ \Star _{\mathcal{B}}(x_3)\} =\{ \{ x_3\} \} .
+\end{split}
+\end{equation}
+In particular, the open sets are\footnote{Recall that, for a topology defined by a neighborhood base (see \cref{NeighborhoodBase}, a set $U$ is open iff every point $x\in U$ has an element $B\in \mathcal{B}_x$ such that $x\in B\subseteq U$.  As our set only contains $3$ points, you can simply verify by hand that these are the only open sets.}
+\begin{equation}
+\emptyset ,X,\{ x_1,x_2\} ,\{ x_3\} .
+\end{equation}
+
+We define an outer-measure $\meas :2^X\rightarrow [0,\infty ]$ by
+\begin{equation}
+\meas (S)\coloneqq \begin{cases}0 & \text{if }S=\emptyset ,\{ x_3\} \\ 1 & \text{otherwise}\end{cases}.
+\end{equation}
+Every set has finite measure, and so certainly every quasicompact set does.  There are only four open sets to check, and you can simply check by hand that $\meas$ is inner-regular on each one of them.  Measures are outer-regular on open sets, and so we only need to check outer-regularity on the remaining $8-4=$ sets that are not open.  Once again, there are only four things to check, and so you can just do so by hand.
+
+We now check that this measure is uniformly-additive.  If $S$ and $T$ are uniformly-separated, then, without loss of generality, we have that $S\subseteq \{ x_1,x_2\}$ and $T\subseteq \{ x_3\}$.  We automatically have that $\meas (S\cup T)=\meas (S)+\meas (T)$ if either $S$ or $T$ is empty, so we may without loss of generality assume that $T=\{ x_3\}$ and $S\subseteq \{ x_1,x_2\}$ is nonempty.  Then,
+\begin{equation}
+\meas (S\cup T)=1=1+0=\meas (S)+\meas (T),
+\end{equation}
+and so the measure is uniformly-additive.
+
+On the other hand, it is not borel, because $U\coloneqq \{ x_1,x_2\}$ is not measurable, as we now check.  Take $S\coloneqq \{ x_1\}$.  Then,
+\begin{equation}
+\meas (S)=1\neq 1+1=\meas (S\cap U)+\meas (S\cap U^{\comp}).
+\end{equation}
+\end{exm}
+
+\subsubsection{A summary}
+
+Before finally moving on to the \nameref{HaarHowesTheorem}, let us briefly summarize.
+\begin{enumerate}
+\item Borel means that open sets are measurable---see \cref{BorelMeasure}.
+\item Regular means quasicompact sets have finite measure, inner-regularity on opens, and outer-regularity on everything---see \cref{RegularMeasure}.
+\item Topological-additivity means that the measure is additive on two sets which are separated by neighborhoods---see \cref{TopologicalMeasure}.
+\item Uniform-additivity means that the measure is additive on two sets which are uniformly-separated---see \cref{UniformMeasure}.
+\item A topological measure is a topologically-additive regular measure---see \cref{TopologicalMeasure}.
+\item A uniform measure is a uniformly-additive regular measure---see \cref{UniformMeasure}.
+\item Neither topological measures nor uniform measures need be borel (\cref{exm5.1.43}), but they both are borel if the space is $T_2$---see \cref{prp5.1.57,prp5.1.25}.
+\end{enumerate}
+
+\subsection{The Haar-Howes Theorem}
+
+It turns out that there is a theorem, the \nameref{HaarHowesTheorem},\footnote{Warning:  This is the name I have chosen to call it, because I am unaware of another name for this result.  In particular, don't expect others to know what you're talking about if you reference this theorem by name.  (It is a generalization of the existence and essential uniqueness of haar measure, in case you are more familiar with that.)  While the proof of the result I cobbled together from other sources, the formulation of the result I found essentially in \cite{Howes}, in which he claims ``the author'' established essential uniqueness, as well as existence, which he and another mathematician (Izkowitz) established independently.}  be that is quite general and will just spit out uniform measures for us.  This is how we will construct lebesgue measure.  That being said, it doesn't just work for any old uniform space.  We're going to need extra structure:
 \begin{dfn}[Isogeneous space]\label{IsogeneousSpace}
-An \emph{isogeneous space} is a uniform space $X$ equipped with a group of uniform-homeomorphisms $H$ such that
+An \emph{isogeneous space} is a uniform space $X$ equipped with a group of uniform-homeomorphisms $\Phi$ such that
 \begin{equation}\label{5.1.28}
-\widetilde{\mathcal{B}}_H\coloneqq \{ \mathcal{B}_U\} \text{ where }\mathcal{B}_U\coloneqq \{ h(U):h\in H\} \text{ and }U\subseteq X\text{ open}.
+\widetilde{\mathcal{B}}_\Phi \coloneqq \{ \mathcal{B}_U\} \text{ where }\mathcal{B}_U\coloneqq \{ \phi (U):\phi \in \Phi\} \text{ and }U\subseteq X\text{ open}.
 \end{equation}
 is a uniform base for $X$.
 \begin{rmk}
-$H$ is called the \emph{group of symmetries} of $X$.  It is a subgroup of $\Aut _{\Uni}(X)$.  $\widetilde{\mathcal{B}}_H$ is the \emph{isogeneous base}\index{Isogeneous base} and each $\mathcal{B}_U$ is an \emph{isogeneous cover}\index{Isogeneous cover}.
+$\Phi$ is called the \emph{group of symmetries} of $X$.  It is a subgroup of $\Aut _{\Uni}(X)$.  $\widetilde{\mathcal{B}}_{\Phi}$ is the \emph{isogeneous base}\index{Isogeneous base} and each $\mathcal{B}_U$ is an \emph{isogeneous cover}\index{Isogeneous cover}.
 \end{rmk}
 \begin{rmk}
-The example you should have in mind here is that of a topological group $G$.  In this case, the uniform base is the canonical one, $\widetilde{\mathcal{B}}\coloneqq \{ \mathcal{B}_U\}$ with $\mathcal{B}_U\coloneqq \{ gU:g\in U\}$ for $U$ an open neighborhood of the identity, and the set of all uniform homeomorphisms is the set of all left translations, $H\coloneqq \{ h_g:g\in G\}$ where $h_g(x)\coloneqq gx$.  Of course, you can also choose right-translations over left-translations (in both $\widetilde{\mathcal{B}}$ and $H$!) if you so desire.
+The example you should have in mind here is that of a topological group $G$.  In this case, the uniform base is the canonical one, $\widetilde{\mathcal{B}}\coloneqq \{ \mathcal{B}_U\}$ with $\mathcal{B}_U\coloneqq \{ gU:g\in U\}$ for $U$ an open neighborhood of the identity, and the set of all uniform homeomorphisms is the set of all left translations, $\Phi \coloneqq \{ \phi _g:g\in G\}$ where $\phi _g(x)\coloneqq gx$.  Of course, you can also choose right-translations over left-translations (in both $\widetilde{\mathcal{B}}$ and $\Phi$!) if you so desire.
 \end{rmk}
 \begin{rmk}
 What do you think the morphisms of isogeneous spaces should be?
 \end{rmk}
 \end{dfn}
+\begin{exr}\label{exr5.1.48}
+Let $X$ be a uniform space with uniform topology $\mathcal{U}$, let $\mathcal{B}$ be a base for the topology, and let $\Phi$ be a subgroup of $\Aut _{\Uni}(X)$.  Show that
+\begin{equation}\label{5.1.49}
+\left\{ \mathcal{B}_B:B\in \mathcal{B}\right\}
+\end{equation}
+is a uniform base iff $\widetilde{\mathcal{B}}_\Phi$ is.
+\begin{rmk}
+The point is that, in order to show that $\Phi$ makes $X$ into an isogeneous space, we only need to check that the smaller collection of covers in \eqref{5.1.49}, the covers coming from only elements of the base instead of \emph{all} open sets, form a uniform base.
+\end{rmk}
+\end{exr}
 \begin{exr}
-Let $G$ be a topological group and let $H\coloneqq \{ h_g:G\in G\}$, where $h_g:G\rightarrow G$ is defined by $h_g(x)\coloneqq gx$.  Show that $\coord{G,H}$ is an isogeneous space.
+Let $G$ be a topological group and let $\Phi \coloneqq \{ \phi _g:G\in G\}$, where $\phi _g:G\rightarrow G$ is defined by $\phi _g(x)\coloneqq gx$.  Show that $\coord{G,\Phi}$ is an isogeneous space.
+\end{exr}
+\begin{dfn}[Uniformly-measurable]\label{UniformlyMeasurable}
+Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure on a set $X$ and let $\mathcal{U}$ is a cover of $X$.  Then, $\mathcal{U}$ is \emph{uniformly-measurable}\index{Uniformly-measurable cover} iff $\meas$ is constant on $\mathcal{U}$.  A uniform base consisting of uniformly-measurable covers is a \emph{uniformly-measurable base}\index{Uniformly-measurable base}.
+\begin{rmk}
+Think about what having a uniform base of uniformly-measurable covers means for a metric space---if we take as a uniform base the collection of all covers by $\varepsilon$-balls, then this is just the statement that every $\varepsilon$-ball has to have the same measure.
+\end{rmk}
+\begin{rmk}
+Note that you definitely do not want to require \emph{every} uniform cover be uniformly-measurable.  For example, in a metric space, by upward-closedness the collection of all $\varepsilon$-balls together with a single $2\varepsilon$-ball will also be a uniform-cover---we definitely do not want to require that a $2\varepsilon$ ball has the same measure as an $\varepsilon$-ball.
+\end{rmk}
+\end{dfn}
+\begin{dfn}[Isogeneous measure]
+Let $\coord{X,\Phi}$ be an isogeneous space.  A \emph{isogeneous measure}\index{Isogeneous measure} is a uniform measure for which $\widetilde{\mathcal{B}}_\Phi$ is a uniformly-measurable base.
+\begin{rmk}
+Explicitly, this means that
+\begin{enumerate}
+\item $\meas$ is regular;
+\item $\meas$ is uniformly-additive; and
+\item $\meas (h(U))=\meas (U)$ for $h\in U$ and $U\subseteq X$ open.
+\end{enumerate}
+\end{rmk}
+\end{dfn}
+\begin{exr}
+Let $\meas$ be an isogeneous measure on an isogeneous space $\coord{X,\Phi}$.  Show that $\meas (\phi (S))=\meas (S)$ for all $\phi \in \Phi$ and $S\subseteq X$.
+\begin{rmk}
+In other words, this holds for \emph{all} $S$, not just open $S$.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Let $\meas$ be an isogeneous measure on an isogeneous space $\coord{X,\Phi}$, let $M\subseteq X$ be measurable, and let $\phi \in \Phi$.  Show that $\phi (M)$ is measurable.
+\begin{rmk}
+In other words, the symmetries of the isogeneous space preserve measurability (in particular, for lebesgue measure, we will have that isometries of $\R ^d$ preserve measurability---see \cref{LebesgueMeasure} (the definition of lebesgue measure)).
+\end{rmk}
 \end{exr}
 
 And finally now the key result that will allow us to define basically every measure we work with in these notes (and much more).
-\begin{thm}[The Haar-Howe Theorem]\index{The Haar-Howe Theorem}\label{HaarHoweTheorem}
+\begin{thm}[Haar-Howes Theorem]\index{The Haar-Howes Theorem}\label{HaarHowesTheorem}
 \begin{savenotes}
-Let $X$ be a $T_0$ locally quasicompact isogeneous space with symmetry group $H\subseteq \Aut _{\Uni}(X)$ and let $K\subseteq X$ be quasicompact with nonempty interior.. Then, there exists a unique regular uniform measure $\meas$ on $X$, the \emph{haar measure}\index{Haar meausre} with respect to $H$, with uniformly-measurable base $\widetilde{\mathcal{B}}_H$\footnote{See \eqref{5.1.28}.} such that $\meas (K)=1$.
+Let $\coord{X,\Phi}$ be a $T_0$ locally quasicompact\footnote{Hence locally compact as $T_0$ implies uniformly-completely-$T_3$ implies $T_2$ and subspaces of $T_2$ spaces are $T_2$.} isogeneous space and let $K\subseteq X$ be quasicompact with nonempty interior.. Then, there exists a unique isogeneous $\meas$ on $X$ such that $\meas (K)=1$.
 \begin{rmk}
 You should think of $K$ has a set with which we can `compare' all other sets to get a ``measure'' of `size'.  The condition that it be quasicompact you can think of the condition that the measure of $K$ be finite, and the condition that it have nonempty interior you can think of the condition that the measure of $K$ be positive.  If $\meas (K)$ is neither infinite nor zero, then we can `normalize' to get $\meas (K)=1$.
 \end{rmk}
 \begin{rmk}
-Classically, the term ``haar measure'' is reserved for $G$ a $T_0$ locally quasicompact group with $H$ the set of all left-translations.  In particular, \emph{lebesgue measure} will be the haar measure for the topological group $\coord{\R ,^d+,0,-}$.\footnote{If the group is commutative, the symmetries by left translation and right translations are the same, so left vs.~right does not matter.}
+Note that in fact, by \cref{prp5.1.61}, the resulting measure will actually turn-out to be topologically-additive.
+\end{rmk}
+\begin{rmk}
+Classically, the term ``haar measure'' is reserved for $G$ a $T_0$ locally quasicompact group with $\Phi$ the set of all left-translations.  In particular, \emph{lebesgue measure} will be the haar measure for the topological group $\coord{\R ,^d+,0,-}$.\footnote{If the group is commutative, the symmetries by left translation and right translations are the same, so left vs.~right does not matter.}
 \end{rmk}
 \begin{proof}
 \Step{Make hypotheses and introduce notation}
@@ -385,13 +597,13 @@ For $U\in \mathcal{U}$, define $\mathrm{H}_U:\mathcal{K}\rightarrow \R _0^+$ by
 \end{equation}
 
 \Step{Show that $\mathrm{H}_U(K)\leq (K:\Int (K_0))$}
-We now check that $\mathrm{H}_U(K)\leq (K:\Int (K_0))$, that is, $(K:U)\leq (K:\Int (K_0))(K_0:U)$.  Let us temporarily write $m\coloneqq (K:\Int (K_0))$ and $n\coloneqq (K_0:U)$.  There are thus $h_1,\ldots ,h_m\in H$ such that $\{ h_1(\Int (K_0)),\ldots ,h_m(\Int (K_0))\}$ covers $K$.  There are also $h_1',\ldots ,h_n'\in H$ such that $\{ h_1(U),\ldots ,h_n(U)\}$ covers $K$.  Therefore,
+We now check that $\mathrm{H}_U(K)\leq (K:\Int (K_0))$, that is, $(K:U)\leq (K:\Int (K_0))(K_0:U)$.  Let us temporarily write $m\coloneqq (K:\Int (K_0))$ and $n\coloneqq (K_0:U)$.  There are thus $\phi _1,\ldots ,\phi _m\in \Phi$ such that $\{ \phi _1(\Int (K_0)),\ldots ,\phi _m(\Int (K_0))\}$ covers $K$.  There are also $\phi _1',\ldots ,\phi _n'\in \Phi$ such that $\{ \phi _1'(U),\ldots ,\phi _n'(U)\}$ covers $K$.  Therefore,
 \begin{equation}
 K\subseteq \bigcup _{k=1}^mh_k(\Int (K_0))\subseteq \bigcup _{k=1}^mh_k(K_0)\subseteq \bigcup _{k=1}^mh_k\left( \bigcup _{l=1}^nh_l'(U)\right) =\bigcup _{k=1}^m\bigcup _{l=1}^n[h_k\circ h_l'](U)
 \end{equation}
-Hence, $K$ is covered by $mn$ elements of $\mathcal{B}_U$,\footnote{Here we are using the fact that $H$ is closed under composition, so that $h_k\circ h_l'\in h$.} and hence $(K:U)\leq mn\coloneqq (K:\Int (K_0))(K_0:U)$.
+Hence, $K$ is covered by $mn$ elements of $\mathcal{B}_U$,\footnote{Here we are using the fact that $\Phi$ is closed under composition, so that $\phi _k\circ \phi _l'\in \Phi$.} and hence $(K:U)\leq mn\coloneqq (K:\Int (K_0))(K_0:U)$.
 
-\Step{Define $\mathrm{H}:\mathcal{K}\rightarrow \R _0^+$}
+\Step{Define $\mathrm{H}:\mathcal{K}\rightarrow \R _0^+$}\label{Haar.4x}
 Define $\mathcal{H}\coloneqq \prod _{K\in \mathcal{K}}[0,(K:K_0)]$.  Each $\mathrm{H}_U$ may be thought of as a point in $\mathcal{H}$, whose component at $K\in \mathcal{K}$ is $\mathrm{H}_U(K)\in [0,(K:K_0)]$.\footnote{That was sort of the point of the previous step.}  Thus, for $U\in \mathcal{U}$, let us define
 \begin{equation}
 C_U\coloneqq \Cls \left( \left\{ \mathrm{H}_V:\mathcal{U}\ni V\subseteq U\right\} \right) 
@@ -422,7 +634,7 @@ Let $K_1,K_2\in \mathcal{K}$.  We first show that $\mathrm{H}_U(K_1\cup K_2)\leq
 Proceeding similarly as in \cref{Haar.4}, the map that sends $f\in T$ to $f(K_1)+f(K_2)-f(K_1\cup K_2)$ is continuous and nonnegative on each $C_U$, and hence is nonnegative for $\mathrm{H}\in T$.  Thus, $\mathrm{H}(K_1\cup K_2)\leq \mathrm{H}(K_1)+\mathrm{H}(K_2)$.
 
 \Step{Show that $\mathrm{H}_U(K_1\cup K_2)=\mathrm{H}_U(K_1)+\mathrm{H}_U(K_2)$ if $K_1$ and $K_2$ are uniformly-separated}\label{Haar.8}
-Let $K_1,K_2\in \mathcal{K}$ be uniformly-separated with respect to $\mathcal{B}_U$.  We have already shown that $\mathrm{H}_U(K_1\cup K_2)\leq \mathrm{H}_U(K_1)+\mathrm{H}_U(K_2)$, so it suffices to show that $\mathrm{H}_U(K_1)+\mathrm{H}_U(K_2)\leq \mathrm{H}_U(K_1\cup K_2)$.  In other words, it suffices to show that $(K_1:U)+(K_2:U)\leq (K_1\cup K_2:U)\eqqcolon m$.  Let $h_1(U),\ldots ,h_m(U)\in \mathcal{B}_U$ be a cover of $K_1\cup K_2$.  By hypothesis,\footnote{This is the definition of uniformly-separated---see \cref{UniformlySeparated}.} every single one of these can only intersect $U_1$ or $U_2$, but not both.  Thus, after relabeling if necessary, the first $k$ of these guys will form a cover of $K_1$ and the latter $m-k$ will form a cover of $K_2$.  Thus, $(K_1:U)\leq k$ and $(K_2:U)\leq m-k$, and so $(K_1:U)+(K_2:U)\leq k+(m-k)=m\coloneqq (K_1\cup K_2:U)$, which completes this step.
+Let $K_1,K_2\in \mathcal{K}$ be uniformly-separated with respect to $\mathcal{B}_U$.  We have already shown that $\mathrm{H}_U(K_1\cup K_2)\leq \mathrm{H}_U(K_1)+\mathrm{H}_U(K_2)$, so it suffices to show that $\mathrm{H}_U(K_1)+\mathrm{H}_U(K_2)\leq \mathrm{H}_U(K_1\cup K_2)$.  In other words, it suffices to show that $(K_1:U)+(K_2:U)\leq (K_1\cup K_2:U)\eqqcolon m$.  Let $\phi _1(U),\ldots ,\phi _m(U)\in \mathcal{B}_U$ be a cover of $K_1\cup K_2$.  By hypothesis,\footnote{This is the definition of uniformly-separated---see \cref{UniformlySeparated}.} every single one of these can only intersect $U_1$ or $U_2$, but not both.  Thus, after relabeling if necessary, the first $k$ of these guys will form a cover of $K_1$ and the latter $m-k$ will form a cover of $K_2$.  Thus, $(K_1:U)\leq k$ and $(K_2:U)\leq m-k$, and so $(K_1:U)+(K_2:U)\leq k+(m-k)=m\coloneqq (K_1\cup K_2:U)$, which completes this step.
 
 \Step{Define the measure $\meas$ on all open subsets of $X$}
 For $U\subseteq X$ open, define
@@ -474,14 +686,14 @@ Hence, as $\varepsilon >0$ was arbitrary, we have that
 Thus, $\meas$ is an outer-measure on $X$.
 
 \Step{Show that each $\mathcal{B}_U$ is uniformly-measurable with respect to $\meas$}
-Let $h\in H$.  We want to show that $\meas (h(U))=\meas (U)$.  Then, for any other $h'\in H$, we will have that $\meas (h(U))=\meas (U)=\meas (h'(U))$, so that indeed every element of $\mathcal{B}_U$ has the same measure.  However, $K$ is a quasicompact set contained in $U$ iff $h(K)$ is a quasicompact set contained in $h(U)$.\footnote{This implicitly uses the fact that $h^{-1}\in H$.}  Therefore, by the definition of $\meas (U)$ \eqref{5.1.46} it suffices to show that $\mathrm{H}(K)=\mathrm{H}(h(K))$.  To show this, we first show that $\mathrm{H}_U(K)=\mathrm{H}_U(h(K))$ for all $U\in \mathcal{U}$.  That is, we would like to show that $(K:U)=(h(K):U)$.  However, every cover of $K$ by elements of $\mathcal{B}_U$, $h_1(U),\ldots ,h_m(U)$, gives a cover of $h(K)$ by elements of $\mathcal{B}_U$ of the same cardinality, $h(h_1(U)),\ldots ,h(h_m(U))$.  It thus follows that $\mathrm{H}_U(K)=\mathrm{H}_U(h(K))$.
+Let $\phi \in \Phi$.  We want to show that $\meas (\phi (U))=\meas (U)$.  Then, for any other $\phi '\in \Phi$, we will have that $\meas (\phi (U))=\meas (U)=\meas (\phi '(U))$, so that indeed every element of $\mathcal{B}_U$ has the same measure.  However, $K$ is a quasicompact set contained in $U$ iff $\phi (K)$ is a quasicompact set contained in $\phi (U)$.\footnote{This implicitly uses the fact that $\phi ^{-1}\in \Phi$.}  Therefore, by the definition of $\meas (U)$ \eqref{5.1.46} it suffices to show that $\mathrm{H}(K)=\mathrm{H}(h(K))$.  To show this, we first show that $\mathrm{H}_U(K)=\mathrm{H}_U(h(K))$ for all $U\in \mathcal{U}$.  That is, we would like to show that $(K:U)=(\phi (K):U)$.  However, every cover of $K$ by elements of $\mathcal{B}_U$, $\phi _1(U),\ldots ,\phi _m(U)$, gives a cover of $\phi (K)$ by elements of $\mathcal{B}_U$ of the same cardinality, $\phi (\phi _1(U)),\ldots ,\phi (\phi _m(U))$.  It thus follows that $\mathrm{H}_U(K)=\mathrm{H}_U(h(K))$.
 
-For $h\in H$ fixed, consider the map from $\mathcal{H}$ to $\R$ that sends $f$ to $f(h(K))-f(K)$.  We just showed that this is $0$ on each $\mathrm{H}_U\in T$, and so it is $0$ on $C_U$, and so it is $0$ on $\mathrm{H}$, that is, $\mathrm{H}(K)=\mathrm{H}(h(K))$.
+For $\phi \in \Phi$ fixed, consider the map from $\mathcal{H}$ to $\R$ that sends $f$ to $f(\phi (K))-f(K)$.  We just showed that this is $0$ on each $\mathrm{H}_U\in T$, and so it is $0$ on $C_U$, and so it is $0$ on $\mathrm{H}$, that is, $\mathrm{H}(K)=\mathrm{H}(h(K))$.
 
 \Step{Show that if $S$ and $T$ are uniformly-separated, then $\meas (S\cup T)=\meas (S)+\meas (T)$}
 Note that we always have that $\meas (S\cup T)\leq \meas (S)+\meas (T)$, and so it suffices to show that $\meas (S\cup T)\geq \meas (S)+\meas (T)$.
 
-We first prove this for open sets.  So, let $U,V\in \mathcal{U}$.  If either $U$ or $V$ s has infinite measure, then this equation just reads $\infty =\infty$, and is so automatically satisfied.  Thus, without loss of generality, assume that $\meas (U),\meas (V)<\infty$.  Let $\varepsilon >0$.  Then, there is are some $K,L\in \mathcal{K}$ such that $K\subseteq U$, $L\subseteq V$, and
+We first prove this for open sets.  So, let $U,V\in \mathcal{U}$.  If either $U$ or $V$ s has infinite measure, then this inequality just reads $\infty \geq \infty$, and is so automatically satisfied.  Thus, without loss of generality, assume that $\meas (U),\meas (V)<\infty$.  Let $\varepsilon >0$.  Then, there is are some $K,L\in \mathcal{K}$ such that $K\subseteq U$, $L\subseteq V$, and
 \begin{equation}
 \meas (U)-\varepsilon <\mathrm{H}(K)\leq \meas (U)\text{ and }\meas (V)-\varepsilon <\mathrm{H}(L)\leq \meas (V).
 \end{equation}
@@ -518,7 +730,7 @@ Thus, we do indeed have that
 \meas (S\cup V)=\meas (S)+\meas (T).
 \end{equation}
 
-In particular, we have now shown that $\widetilde{\mathcal{B}}_H$ is a uniformly-measurable base for $\meas$ and that $\meas$ is additive for uniformly-separated sets, so that indeed $\meas$ us a uniform measure on $X$.
+In particular, we have now shown that $\widetilde{\mathcal{B}}_\Phi$ is a uniformly-measurable base for $\meas$ and that $\meas$ is additive for uniformly-separated sets, so that indeed $\meas$ us a uniform measure on $X$.
 
 It remains to show that $\meas$ is regular.
 
@@ -539,31 +751,549 @@ We now turn to inner-regular on open subsets.  This is \emph{almost} true by the
 Thus, $\meas$ is regular.
 
 \Step{Show that $\meas (K_0)=1$}
-First of all, from the definition, we have that $\mathrm{H}_U(K_0)=1$ for all $U\in \mathcal{U}$.  Perhaps we could try harder and that we already do have that $\meas (K_0)=1$; however, this enough is to show simply that $\meas (K_0)>0$, and so by simply dividing by $\meas (K_0)$ if necessary, we obtain a regular uniform measure with uniformly-measurable base $\widetilde{\mathcal{B}}_H$ and $\meas (K_0)=1$.
+First of all, from the definition, we have that $\mathrm{H}_U(K_0)=1$ for all $U\in \mathcal{U}$.  Perhaps we could try harder and show that we already do have that $\meas (K_0)=1$; however, this enough is to show simply that $\meas (K_0)>0$, and so by simply dividing by $\meas (K_0)$ if necessary, we obtain a regular uniform measure with uniformly-measurable base $\widetilde{\mathcal{B}}_\Phi$ and $\meas (K_0)=1$.
 
 \Step{Show that $\meas$ is unique}
-Let $\meas '$ be another regular uniform measure on $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}_H$ and $\meas (K_0)=1$.  As both $\meas$ and $\meas '$ are outer-regular, it suffices to show that they agree on open sets.  Then, because they are both inner-regular on open sets, it suffices to show that they both agree on quasicompact subsets.  However, on account of \cref{prp5.2.4} and outer-regularity, it in turn suffices to show that they agree on open sets with compact closure.  So, let $\mathcal{G}$ denote the collection of all open sets with compact closures.  Furthermore, let us define
+Let $\meas '$ be another regular uniform measure on $X$ with uniformly-measurable base $\widetilde{\mathcal{B}}_\Phi$ and $\meas (K_0)=1$.  As both $\meas$ and $\meas '$ are outer-regular, it suffices to show that they agree on open sets.  Then, because they are both inner-regular on open sets, it suffices to show that they both agree on quasicompact subsets.  However, on account of \cref{prp5.2.4} and outer-regularity, it in turn suffices to show that they agree on open sets with compact closure.  So, let $\mathcal{G}$ denote the collection of all open sets with compact closures.  Furthermore, let us define
 \begin{equation}
 \begin{multlined}
-Z(\mathcal{G})\coloneqq \\ \left\{ S\in 2^X:\text{for every }\varepsilon >0\text{ there are }C_{\varepsilon}\text{ closed and }U_{\varepsilon}\in \mathcal{G}\text{ such that }\right. \\ \left. C_\varepsilon \subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon \right\} .
+Z(\mathcal{G})\coloneqq \\ \left\{ S\in 2^X:\text{for every }\varepsilon >0\text{ there are }C_{\varepsilon}\text{ closed and }U_{\varepsilon}\in \mathcal{G}\text{ such that }\right. \\ \left. C_\varepsilon \subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon}),\meas '(U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon \right\} .
 \end{multlined}
 \end{equation}
 
-For the rest of this proof, let us write $S\Subset T$ iff there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_H$ for which $\Star _{\mathcal{B}}(S)\subseteq T$.
+For the rest of this proof, let us write $S\Subset T$ iff there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_\Phi$ for which $\Star _{\mathcal{B}}(S)\subseteq T$.  The first thing to note is that, if $S\Subset T$, then $\Cls (S)\subseteq \Int (T)$.  Suppose that $S\Subset T$ and let $x\in X$ be an accumulation point of $S$.  By definition, there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}$ such that $\Star _{\mathcal{B}}(S)\subseteq T$.  Because $x$ is an accumulation point of $S$ and every element of $\mathcal{B}$ is open, every element of $\mathcal{B}$ that contains $x$ (of which there must be at least one, say $B\in \mathcal{B}$), must intersect $S$, and so we have that $x\in B\subseteq \Star _{\mathcal{B}}(S)\subseteq T$, which implies that $x\in \Int (T)$.
 
 To prove that they agree on $\mathcal{G}$, we will first show that they agree on $Z(\mathcal{G})\cap \mathcal{G}$.  To show that this is in fact sufficient, we prove that
-\begin{equation}
+\begin{equation}\label{5.1.75}
 \meas (U)=\sup \{ \meas (V):V\in \mathcal{G}\cap Z(\mathcal{G}),\ V\Subset U\} 
 \end{equation}
 for $U\in \mathcal{G}$ open (the exact same proof will work for $\meas '$).  As $\meas$ is inner-regular on open sets (and so in particular on elements of $\mathcal{G}$), it suffices to show that, for every $K\subseteq U$ quasicompact, there is some $V_K\in \mathcal{G}\cap Z(\mathcal{G})$ with $K\subseteq V_K\Subset U$.  We first show that we can find such a $V_K\in \mathcal{G}$.
 
-As $X$ is $T_0$, it is uniformly-completely-$T_3$, and so we may uniformly-separated quasicompact sets from closed sets, and so there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_H$ such that $\Star _{\mathcal{B}}(K)$ is disjoint from $\Star _{\mathcal{B}}(U^{\comp})$.  Because $X$ is a locally compact $T_2$ isogeneous space, by taking a star-refinement if necessary, we can without loss of generality assume that each element of $\mathcal{B}$ has compact closure (i.e.~is an element of $\mathcal{G}$).\footnote{Take any open set $U$ with compact closure (which exists by local compactness).  Then, $\mathcal{B}_U$ will be a cover whose elements are in $\mathcal{G}$.  Take a common star-refinement of this and $\mathcal{B}$.  The closures of elements of this new cover will be contained in the elements of $\mathcal{B}_U$, and so as $X$ is $T_2$, closed sets of compact sets are compact.}  Take a star-refinement $\mathcal{C}\in \widetilde{\mathcal{B}}_H$.  Once again, every element of $\mathcal{C}$ has compact closure.  By quasicompactness of $K$, there are finitely many $C_1,\ldots ,C_m\in \mathcal{C}$ that over $K$.  Define $C\coloneqq C_1\cup \cdots \cup C_m\in \mathcal{G}$.  Furthermore,
+As $X$ is $T_0$, it is uniformly-completely-$T_3$, and so we may uniformly-separated quasicompact sets from closed sets, and so there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_\Phi$ such that $\Star _{\mathcal{B}}(K)$ is disjoint from $\Star _{\mathcal{B}}(U^{\comp})$.  Because $X$ is a locally compact $T_2$ isogeneous space, by taking a star-refinement if necessary, we can without loss of generality assume that each element of $\mathcal{B}$ has compact closure (i.e.~is an element of $\mathcal{G}$).\footnote{Take any open set $U$ with compact closure (which exists by local compactness).  Then, $\mathcal{B}_U$ will be a cover whose elements are in $\mathcal{G}$.  Take a common star-refinement of this and $\mathcal{B}$.  The closures of elements of this new cover will be contained in the elements of $\mathcal{B}_U$, which themselves will be compact as closed sets of compact sets are compact.}  Take a star-refinement $\mathcal{C}\in \widetilde{\mathcal{B}}_{\Phi}$.  Once again, every element of $\mathcal{C}$ has compact closure.  By quasicompactness of $K$, there are finitely many $C_1,\ldots ,C_m\in \mathcal{C}$ that over $K$.  Define $C\coloneqq C_1\cup \cdots \cup C_m\in \mathcal{G}$.  Furthermore,
 \begin{equation}
 \Star _{\mathcal{C}}(C)\subseteq \Star _{\mathcal{B}}(K)\subseteq \Star _{\mathcal{B}}(U^{\comp})^{\comp}\subseteq U.
 \end{equation}
 Thus, we have shown that for $U\in \mathcal{G}$ and $K\subseteq U$ quasicompact, there is some $V_K\in \mathcal{G}$ with $K\subseteq V_K\Subset U$.  Thus, to finish the proof that it suffices to show that they agree on $Z(\mathcal{G})\cap \mathcal{G}$, it suffices to show that, for every $U,V\in \mathcal{G}$ with $U\Subset V$, there is some $W\in Z(\mathcal{G})\cap \mathcal{G}$ with $U\Subset W\Subset V$.
 
-So, let $U,V\in \mathcal{G}$ with $U\Subset V$.
+So, let $U,V\in \mathcal{G}$ with $U\Subset V$.  We showed before that this implies that $\Cls (U)\subseteq V$.  Then, because we may uniformly separate quasicompact sets from closed sets in uniformly-completely-$T_3$ spaces, there is some uniform cover $\mathcal{B}\in \widetilde{\mathcal{B}}_{\Phi}$ such that $\Star _{\mathcal{B}}(\Cls (U))$ is disjoint from $\Star _{\mathcal{B}}(V^{\comp})$.  Define
+\begin{equation}
+W\coloneqq \Star _{\mathcal{B}}(\Cls (U)).
+\end{equation}
+$W$ is open as every element of $\mathcal{B}$ is open.  It also has compact closure as its closure is contained in $\Cls (U)$, which is compact (closed subsets of compact sets are compact in $T_2$ spaces).  By definition, we have that $U\Subset W$.  We check that also $W\Subset V$.  To show this, we show that $\Star _{\mathcal{B}}(W)\subseteq V$.  So, let $B\in \mathcal{B}$ intersect $W$.  We proceed by contradiction:  suppose that $B$ intersects $V^{\comp}$.  Then, it is contained in $\Star _{\mathcal{B}}(V^{\comp})$, which is disjoint from $W$:  a contradiction.  Thus, $U\Subset W\Subset V$ and $W\in \mathcal{G}$.  It remains to show that $W\in Z(\mathcal{G})$.  This, however, follows from the fact that that $W$ is measurable with respect to both $\meas$ and $\meas '$ (because it is open---see \cref{prp5.1.25}), the fact that it has finite measure for both $\meas$ and $\meas '$ (because its closure is quasicompact and the measure is regular), and \cref{prp5.1.39} (we can force $U_{\varepsilon}$ there to have compact closure by intersecting it with $V$).  This finally establishes \eqref{5.1.75}, and so finishes our proof that it suffices to show that $\meas$ and $\meas '$ agree on $\mathcal{G}\cap Z(\mathcal{G})$.
+
+For the rest of the proof, take note that everything we know about $\meas '$ is likewise true about $\meas$.  Therefore, everything we prove to be true about $\meas '$ will also be true about $\meas$.  Thus, hereafter, if we prove facts about either $\meas$ or $\meas '$, we shall prove them about $\meas '$---they are then automatically true about $\meas$.
+
+For $U\in \mathcal{G}\cap Z(\mathcal{G})$, every cover $\mathcal{B}_V$ has a finite subcover of $U$, and so just as we did for $K$ compact, we may define $(U:V)$ to be the the cardinality of the smallest such subcover.  We shall use this notation in a moment.
+
+\begin{exr}
+Let $U\in \mathcal{G}\cap Z(\mathcal{G})$.  Show that, for every $\varepsilon >0$, there is some open $U_\varepsilon$, such that
+\begin{equation}
+\meas '\left( \Star _{\mathcal{B}_{U_{\varepsilon}}}(U)-U\right) <\varepsilon 
+\end{equation}
+\end{exr}
+Now, fix $U_0\in Z(\mathcal{G})\cap \mathcal{G}$ and let $U$ open be arbitrary.
+\begin{exr}
+Show that there is some $U'\Subset U$ such that, for all $V$ sufficiently small (with respect to $\Subset$),
+\begin{equation}
+\frac{\meas '(U_0)}{\meas '(U)}\leq \frac{(U_0':V)}{(U':V)}
+\end{equation}
+whenever $\Star _{\mathcal{B}_{U'}}(U_0)\subseteq U_0'$.
+\begin{rmk}
+Hint:  See (10.2) in \cite{Howes}.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Show that there is some $U''\Subset U'$ such that, for all $V$ sufficiently small (with respect to $\Subset$),
+\begin{equation}
+\frac{\meas '(U_0)}{\meas '(U'')}\geq \frac{(U_0':V)}{(U':V)}
+\end{equation}
+whenever $\Star _{\mathcal{B}_{U'}}(U_0')\subseteq U_0$.
+\begin{rmk}
+Hint:  See (10.3) in \cite{Howes}.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Combine the last three exercises to show that $\meas '$ and $\meas$ agree on $\mathcal{G}\cap Z(\mathcal{G})$ up to a scalar multiple.
+\begin{rmk}
+Hint:  You should be able to combine these results to get an expression for $\meas '(U_0)$ that, besides factors of $\meas '(U'')$ and $\meas '(U')$, will be completely independent of $\meas '$.  As explained above, everything true of $\meas '$ must also be true of $\meas$, and so, we will have the same expression for $\meas$, with exception of the fact that the factors $\meas '(U')$ and $\meas '(U'')$ will be different.
+\end{rmk}
+\end{exr}
 \end{proof}
 \end{savenotes}
 \end{thm}
+Dayyyuuuummmm.  That was a hard theorem.  Probably the hardest in these notes.  But holy jesus was it worth it.  Check out this epic definition.
+\begin{dfn}[Lebesgue measure]\label{LebesgueMeasure}
+\emph{Lebesgue measure}\index{Lebesgue measure} $\meas$ on $\R ^d$ is the haar measure with respect to the symmetry group of all isometries\footnote{An isometry is an isomorphism in the category of metric spaces.  Concretely, this means that $\metric[f(x_1)][f(x_2)]=\metric[x_1][x_2]$.  In the case of $\R ^d$, all rotations, reflections, and translations are isometries.  (In fact, one can show, though we will not, that these generate all isometries.)} such that $\meas ([0,1]\times \cdots \times [0,1])=1$.
+\begin{rmk}
+You have to check that the group of isometries actually generate a uniform base for $\R ^d$ via \eqref{5.1.28}, but this is actually really trivial, because the isometric image of an $\varepsilon$-ball is---gasp---another $\varepsilon$-ball!
+\end{rmk}
+\begin{rmk}
+This is actually much better than defining lebesgue measure to be `classical' haar measure (i.e.~haar measure with respect to the topological group structure).  With this definition we \emph{automatically} get that lebesgue measure is invariant under rotations for free, whereas with the ``classical'' definition, this requires some work.
+\end{rmk}
+\begin{rmk}
+Besides using haar measure to define lebesgue measure, it is also common to use something called \emph{Carath\'{e}odory's Extension Theorem}, which, while not that bad, has the problem that it lacks a uniqueness result.\footnote{At least in general.  I think in certain nice cases it can be made to work.}  Moreover, carath\'{e}odory doesn't give us a uniform measure---it actually just gives us an outer-measure.  We would then have to go through by hand and check that the measure defined in this way is finite on quasicompact sets, inner-regular on open sets, outer-regular, has a uniformly-measurable base, is uniformly-additive, is invariant under translation, is invariant under rotation, is invariant under reflection, and that translations, rotations, and reflections actually give us all the isometries.  Ew.  The theory is just so much prettier when all of this hard work is done for us by \emph{one} result, instead of by fifty-bajillion separate ones.
+\end{rmk}
+\end{dfn}
+
+We can even define counting measure using the \nameref{HaarHowesTheorem}.\footnote{Though this is a bit like nuking the planet to `swat' a fly.}
+\begin{dfn}
+Let $X$ be a set equipped with the discrete uniformity and take $H\coloneqq \Aut _{\Set}(X)$ to be the group of all bijections from $X$ to itself.  Then, 
+\begin{equation}
+\{ \mathcal{B}_{\{ x_0\}}:x_0\in X\}\coloneqq \left\{ \{ h(\{ x_0\} ):h\in H\} \right\} =\left\{ \left\{ \{ x\} :x\in X\right\} \right\} \footnote{This is the uniform base which has a single cover, namely, the cover by singletons.  I say this because what is going on here is actually very easy, even though the notation may be a bit hard to parse.}
+\end{equation}
+is a uniform base, and so, because $\mathcal{B}\coloneqq \{ \{ x_0\} :x_0\in X\}$ is a base for this topology, by \cref{exr5.1.48}, $\coord{X,H}$ is an isogeneous space.  Therefore, by the \nameref{HaarHowesTheorem}, there is a unique isogeneous measure $\meas$, the \emph{counting measure}, on $X$ such that $\meas (\{ x_0\} )=1$.
+\end{dfn}
+
+\section{The integral}
+
+As you know, the integral is `supposed' to be the ``area under the curve''.  The functions we will be integrating will take values in the reals, and so the integral will spit out a real number.  This is probably nothing new to you.  What is almost certainly new to you, however, is that now the \emph{domains} of the functions we will be integrating will be regular measure spaces.\footnote{You can do things much more generally than this, but for us,there is no need.  As a rule, it is usually best to do things in the nicest theory that encompasses every example you're interested in, and for us, we will not be interested in measures that are not regular (except perhaps when it comes to counter-examples).}  That is, we will be integrating functions $f:X\rightarrow \R$, for $X$ a uniform measure space.  We will then simply define the integral to be the measure of the set\footnote{At least when $f$ is nonnegative---we'll have to work just a teensy bit harder to take the `signed area' if the function is negative somewhere.}
+\begin{equation}
+\left\{ \coord{x,y}\in X\times \R :0<y<f(x)\right\} .
+\end{equation}
+To do this, of course, we must first define a measure on $X\times \R$.
+
+\subsection{The product measure}
+
+\begin{dfn}[Product measure]
+Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be regular measure spaces.  The \emph{product measure}, $\meas _1\times \meas _2:2^{X_1\times X_2}\rightarrow [0,\infty ]$, on $X_1\times X_2$ is defined by
+\begin{equation}
+\begin{split}
+[\meas _1\times \meas _2](K_1\times K_2) & \coloneqq \meas _1(K_1)\meas _2(K_2)\text{ for }K_1\subseteq X_1,\ K_2\subseteq X_2\text{ quasicompact} \\
+[\meas _1\times \meas _2](U) & \coloneqq \sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_1^k\times K_2^k):\right. \\
+& \qquad \left. K_1^k\subseteq X_1,\ K_2^k\subseteq X_2\text{ quasicompact},\right. \\
+& \qquad \left. \left\{ K_1^k\times K_2^k:0\leq k\leq m\right\} \text{ is disjoint}, \bigcup _{k=0}^mK_1^k\times K_2^k\subseteq U,\ m\in \N \right\} \\
+& \qquad \qquad \text{ for }U\subseteq X_1\times X_2\text{ open} \\
+[\meas _1\times \meas _2](S) & \coloneqq \inf \left\{ [\meas _1\times \meas _2](U):S\subseteq U,\ U\text{ open}\right\} .
+\end{split}
+\end{equation}
+\begin{rmk}
+So the formulas look ridiculous, but I promise, it's not that complicated.  The first thing says that the measure of a `rectangle' is the product of the measure of the sides---area is base times height.  The second thing says that we can approximate open sets from the inside with quasicompact sets of a special form (namely, finite disjoint unions of quasicompact rectangles)---essentially just inner regularity on opens.  And the third says that we can approximate arbitrary sets from the outside with opens---outer regularity.
+\end{rmk}
+\begin{exr}
+Show that this is a well-defined regular measure on $X_1\times X_2$.
+\end{exr}
+\end{dfn}
+\begin{prp}
+Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be uniform measure spaces, and let $S_1\subseteq X_1$ and $S_2\subseteq X_2$.  Then,
+\begin{equation}
+[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2).
+\end{equation}
+\begin{rmk}
+The point is that $S_1$ and $S_2$ do not have to be quasicompact (or open or whatever).
+\end{rmk}
+\begin{proof}
+We leave this as an exercise.
+\begin{exr}
+Prove the result yourself.
+\end{exr}
+\end{proof}
+\end{prp}
+
+The product of two isogeneous spaces is canonically an isogeneous spaces, and if they are both $T_0$ locally quasicompact, so too will the product be.  Hence, the \nameref{HaarHowesTheorem} tells us that the product will obtain a measure.  The question, then, is whether this measure agrees with the product measure as defined above.  Fortunately, the answer is in the affirmative.
+\begin{dfn}[Product isogeneous structure]
+Let $\coord{X_1,H_1}$ and $\coord{X_2,H_2}$ be two isogeneous structures.  Then, the \emph{product isogeneous structure}\index{Product isogeneous structure} on $X_1\times X_2$ is given by
+\begin{equation}
+H_1\times H_2\coloneqq \{ h_1\times h_2:h_1\in H_1,\ h_2\in H_2\},
+\end{equation}
+where $h_1\times h_2:X_1\times X_2\rightarrow X_1\times X_2$ is defined by
+\begin{equation}
+[h_1\times h_2](\coord{x_1,x_2})\coloneqq \coord{h_1(x_1),h_2(x_2)}.
+\end{equation}
+\begin{exr}
+Show that this in fact gives an isogeneous structure.
+\begin{rmk}
+In other words, you need to show that
+\begin{equation}
+\left\{ \mathcal{B}_{U_1\times U_2}\right\} 
+\end{equation}
+is a uniform base, where
+\begin{equation}
+\mathcal{B}_{U_1\times U_2}\coloneqq \{ h_1(U_1)\times h_2(U_2):h_1\in H_1,\ h_2\in H_2\} .
+\end{equation}
+\end{rmk}
+\end{exr}
+\end{dfn}
+\begin{prp}
+Let $\coord{X_1,H_1,\meas _1}$ and $\coord{X_2,H_2,\meas _2}$ be isogeneous measure with $\meas _1(K_1)=1=\meas _2(K_2)$.  Then, $\meas _1\times \meas _2$ is the haar measure on the product isogeneous space $X_1\times X_2$ that gives measure $1$ to $K_1\times K_2$.
+\begin{rmk}
+In particular, the product of lebesgue measure on $\R ^d$ with the product of lebesgue measure on $\R ^e$ is the lebesgue measure on $\R ^{d+e}$.
+\end{rmk}
+\begin{proof}
+We leaves this as an exercise.
+\begin{exr}
+Prove the result yourself.
+\end{exr}
+\end{proof}
+\end{prp}
+
+\subsection{Lebesgue measure}
+
+Before continuing on with integration, we prove some properties about lebesgue measure.  Knowing that lebesgue measure on $\R ^d$ is just the product of the lebesgue measure on $\R$ is actually incredibly useful, and so now that we know this, we take advantage of this fact.
+
+\begin{prp}
+The lebesgue measure of a point is $0$.
+\begin{proof}
+The argument is the exact same in $\R ^d$ as it is in $\R$, so we write down the argument in $\R$ and save us from some $\cdots$.
+
+The first thing to notice is that, by translation invariance, the measure of every point is the same.  Let us denote this measure by $M$
+
+Points are closed, and hence measurable, and so $\meas$ is additive on points.  Therefore, we have that
+\begin{equation}
+1=\meas ([0,1])\geq \meas \left( \bigcup _{x\in [0,1]\cap \Q}\{ x\} \right) =\sum _{x\in [0,1]\cap \Q}\meas (\{ x\} )=\sum _{m\in \N}M
+\end{equation}
+This equation forces $M=0$.
+\end{proof}
+\end{prp}
+\begin{crl}
+$\meas ([0,1)\times \cdots \times [0,1))=1$.
+\begin{rmk}
+Sets of the form
+\begin{equation}\label{5.2.16}
+[a_1,b_1)\times \cdots \times [a_d,b_d)
+\end{equation}
+are important in measure theory because, for example,
+\begin{equation}
+[0,2)=[0,1)\cup [1,2)
+\end{equation}
+is a \emph{disjoint} union.  If we tried replacing everything here with all open intervals we we would have that $(0,2)=(0,1)\cup (1,2)$, which is just plain false, and if we tried replacing everything here with all closed intervals the union would not be disjoint ($[0,1]$ and $[1,2]$ intersect at $1$).  The disjointness is important in measure theory of course because of additivity (on measurable sets).  Sets of the form \eqref{5.2.16} are \emph{half-open rectangles}\index{Half-open rectangles}.
+\end{rmk}
+\begin{proof}
+Now that we know that
+\begin{equation}
+\meas ([0,1)\times \cdots \times [0,1))=\meas ([0,1))\cdots \meas ([0,1)),
+\end{equation}
+it suffices to prove this result in $\R$.
+
+That it is true in $\R$ follows from the fact that
+\begin{equation}
+1=\meas ([0,1])=\meas ([0,1))+\meas (\{ 1\} )=\meas ([0,1)).
+\end{equation}
+\end{proof}
+\end{crl}
+\begin{prp}
+$\meas ([a_1,b_1]\times \cdots [a_d,b_d])=(b_1-a_1)\cdots (b_d-a_d)$.
+\begin{proof}
+Now that we know that it is a product measure, it suffices to show the one-dimensional case, and so we prove that $\meas ([a,b])=b-a$.
+
+By translation invariance, it suffices to show that $\meas ([0,b])=b$.
+
+Because the measure of points is $0$, it suffices to show that $\meas ([0,b))=b$.
+
+\begin{exr}
+Show that $\meas ([0,m))=m$ for $m\in \N$.
+\end{exr}
+\begin{exr}
+Show that $\meas ([0,\frac{p}{q}))=\frac{p}{q}$ for $p,q\in \Z ^+$.
+\end{exr}
+Then, we have that
+\begin{equation}
+q\meas ([0,q)) \leq \meas ([0,b))\leq \meas ([0,r))=r
+\end{equation}
+for all $p,q\in \Q ^+$ with $q\leq b\leq r$.  It follows that $\meas ([0,b))=b$.
+\end{proof}
+\end{prp}
+\begin{exr}
+Show that any open set in $\R ^d$ can be written at the countable disjoint union of half-open rectangles.
+\end{exr}
+\begin{exr}\label{exr5.2.28}
+Let $X$ be a regular measure space and for $S\subseteq X\times \R ^d$ and $a\in \R$, define
+\begin{equation}
+aS\coloneqq \left\{ \coord{x,ay}:\coord{x,y}\in S\right\} ,
+\end{equation}
+where $x\in X$ and $y\in \R ^d$.  Show that
+\begin{equation}
+\meas (aS)=\abs{a}^d\meas (S).
+\end{equation}
+\begin{rmk}
+Prove it for $\R ^d$ alone first (i.e.~if $X$ is just a point, so that $X\times \R ^d=\R ^d$).  For this case, prove it for $S$ open using the previous exercise and the fact that we already know it is true for half-open rectangles.  Then prove it in general for $\R ^d$ by outer-regularity.  Then generalize this to the case $X\times \R ^d$ for $X$ not-necessarily a point using the definition of product measures.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Let $T:\R ^d\rightarrow \R ^d$ be a linear transformation and let $S\subseteq \R ^d$.  Show that
+\begin{equation}
+\meas (T(S))=\abs{\det (T)}\meas (S).
+\end{equation}
+\begin{rmk}
+Hint:  Recall your matrix decompositions from linear algebra and use the fact that we already know (by Haar-Howe) that lebesgue measure is invariant under isometries together with the result of the previous exercise.
+\end{rmk}
+\end{exr}
+\begin{exr}\label{exr5.2.33}
+Show that countable sets have $0$ measure.
+\begin{rmk}
+In particular, $\Q$ has $0$ measure!
+\end{rmk}
+\end{exr}
+\begin{exm}[An uncountable set of zero measure---the Cantor Set]
+\begin{savenotes}
+Let $L\in \R ^+$ be less than $1$.
+
+Define $C_0\coloneqq [0,1]$.  Define $C_1$ to be $C_0$ with the `middle' open interval of length $L$ removed, that is
+\begin{equation}
+C_1\coloneqq C_0\setminus (\tfrac{1}{2}-\tfrac{1}{2}L,\tfrac{1}{2}+\tfrac{1}{2}L)=[0,\tfrac{1}{2}-\tfrac{1}{2}L]\cup [\tfrac{1}{2}+\tfrac{1}{2}L,1].
+\end{equation}
+Thus, $C_1$ is the disjoint union of two-intervals of length $\frac{1}{2}(1-L)$.  Now from each of these intervals remove the middle open interval of length $L\cdot \left( \frac{1}{2}(1-L)\right) =\frac{1}{2}(L-L^2)$.\footnote{You should think of $L$ as the `fraction' of the interval that you remove at each step.}  This is $C_2$.  That is,
+\begin{equation}
+\begin{split}
+C_2 & \coloneqq C_1\setminus \left( \left( \tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)-\frac{1}{4}(L-L^2),\tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)+\frac{1}{4}(L-L^2)\right) \right. \\
+& \qquad \left. \cup \left( \tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)-\frac{1}{4}(L-L^2),\tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)+\frac{1}{4}(L-L^2)\right) \right) \\
+& =\left[ 0,\tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)-\frac{1}{4}(L-L^2)\right] \\
+& \qquad \cup \left[ \tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)+\frac{1}{4}(L-L^2),\tfrac{1}{2}-\tfrac{1}{2}L]\right] \\
+& \qquad \cup \left[ \tfrac{1}{2}+\tfrac{1}{2}L,\tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)-\frac{1}{4}(L-L^2)\right] \\
+& \qquad \cup \left[ \tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)+\frac{1}{4}(L-L^2),1\right] .
+\end{split}
+\end{equation}
+Continue this process inductively, at each step removing the `middle' open intervals of length $\frac{1}{2^{k-1}}L$ to define $C_k$.  Finally, define
+\begin{equation}
+C\coloneqq \bigcap _{k=0}^\infty C_k.\footnote{At this point, as I haven't had a chance to add in my own picture of this, I highly suggest you google it to find a picture.}
+\end{equation}
+$C$ is the \emph{Cantor Set}\index{Cantor Set}.\footnote{Actually, the `classical' Cantor Set is the case $L=\frac{1}{3}$.}
+
+$C_0$ is the disjoint union of $1$ closed interval of length $L_0\coloneqq 1$.
+
+$C_1$ is the disjoint union of $2$ closed intervals of length 
+\begin{equation}
+L_1\coloneqq \frac{1}{2}(L_0-L\cdot L_0)=\frac{1}{2}(1-L)
+\end{equation}
+
+$C_2$ is the disjoint union of $4$ closed intervals of length
+\begin{equation}
+L_2\coloneqq \frac{1}{2}(L_1-L\cdot L_1)\footnote{The way to think about this is as follows:  You take the intervals of length $L_1$, you remove the fraction $L$ of that length from the middle to obtain a set made of two pieces of total length $L_1-L\cdot L_1$, so that each half itself is of length $\frac{1}{2}(L_1-L\cdot L_1)$.} =\frac{1}{4}(1-L)^2
+\end{equation}
+
+$C_3$ is the disjoint union of $8$ closed intervals of length
+\begin{equation}
+L_3\coloneqq \frac{1}{2}(L_2-L\cdot L_2)=\frac{1}{8}(1-L)^3.
+\end{equation}
+By now, hopefully you see the pattern, which you could prove by induction if you really wanted:  $C_k$ is the disjoint union of $2^k$ closed intervals of length $\left( \frac{1-L}{2}\right) ^k$.  Thus, in general, we have that
+\begin{equation}
+\meas (C_k)=(1-L)^k.
+\end{equation}
+By \cref{exr5.1.29} then, it follows that
+\begin{equation}
+\meas (C)=\lim _k(1-L)^k=0.
+\end{equation}
+
+It remains to show that $C$ is uncountable.  We do this in two steps.
+\begin{exr}
+Show that every point of $C$ is an accumulation point.
+\end{exr}
+\begin{exr}
+Show that a nonempty closed subset of $\R$ that has the property that every point is an accumulation point is uncountable.
+\end{exr}
+\end{savenotes}
+\end{exm}
+\begin{exm}[A set with empty interior of positive measure---the Cantor-Smith-Volterra Set]
+\begin{exr}
+Modify construction of the Cantor Set starting with $C_0\coloneqq [0,1]$ again, but upon constructing $C_k$ from $C_{k-1}$, you remove the middle open interval $\frac{1}{4^k}$ from the middle of each closed interval of $C_{k-1}$.  The resulting set is the \emph{Cantor-Smith-Volterra Set}\index{Cantor-Smith-Volterra Set}.  Show that it has measure $\frac{1}{2}$, but has empty-interior.
+\end{exr}
+\begin{rmk}
+The Cantor-Smith-Volterra Set is still uncountable of course, just as the Cantor Set likewise had empty-interior.  It's just that it's not surprising for a set with empty interior to have measure $0$---what is surprising however is a set with empty interior of \emph{positive measure} with empty-interior.  Similarly, it's not surprising for a uncountable set to have positive measure---what is surprising is an uncountable set of \emph{measure zero}0.
+\end{rmk}
+\end{exm}
+\begin{exm}[A set that is not measurable]\begin{savenotes}\footnote{Construction adapted from \cite[pg.~407]{Pugh}.}\label{exm5.2.47}
+
+Define $\q :\R \rightarrow [0,1)$ by $\q (x)\coloneqq x-\lfloor x\rfloor ]$.  In other words, this is just the ``fractional part'' of the real number (intuitively, you drop of the integer in front of its decimal expansion).  Note that $1$ gets sent to $0$, and so, if you like, you can think of the image as a circle, with $1$ `glued-to' $0$, if this helps your intuition.
+
+Now fix $\theta \in \Q ^{\comp}$ and define $R:\R \rightarrow \R$ by $R(x)\coloneqq x+\theta$.\footnote{The ``R'' is for ``rotation'' because in the `circle' picture, this will correspond to a rotation by angle $t$.}  For $x_1,x_2\in \R$, define $x_1\sim x_2$ iff there is some $m\in \Z$ such that $x_1=R^m(x_2)\coloneqq x_2+m\theta$.
+\begin{exr}
+Show that $\sim$ is an equivalence relation on $\R$.
+\end{exr}
+Denote by $O_x$ the equivalence class of $x\in \R$ with respect to $\sim$.\footnote{The ``O'' is for ``orbit''---you can imagine the point $x$ ``orbiting'' around the circle as you apply $R$ to it over-and-over.}
+\begin{exr}
+Show that $\q (O_x)$ is dense in $[0,1)$.
+\begin{rmk}
+Hint:  This is why we needed $\theta$ to be \emph{irrational}.
+\end{rmk}
+\end{exr}
+
+Now, let $N\subseteq \R$ be any set which contains exactly one point from each equivalence class with respect to $\sim$.  We claim that $\q (N)\subseteq [0,1)$ is not measurable.  We proceed by contradiction:  suppose that $\q (N)$ is measurable.
+\begin{exr}
+Use the fact that $\sim$ is an equivalence relation to show that $\q (R^m(N))$ and $\q (R^n(N))$ are disjoint iff $m\neq n$.
+\begin{rmk}
+Hint:  See \cref{prpA.1.12}---equivalence classes form a partition of the set.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Show that
+\begin{equation}
+[0,1)=\bigcup _{m\in \Z}\q (R^m(N))
+\end{equation}
+\begin{rmk}
+Hint:  Once again, uses the fact that equivalence classes form a partition.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Let $S\subseteq \R$.  Show that $\q (S)$ is measurable iff $\q (R(S))$ is measurable.
+\end{exr}
+\begin{exr}
+Let $S\subseteq \R$.  Show that $\meas (\q (S))=\meas (\q (R(S)))$.
+\end{exr}
+Thus, these exercises give us that
+\begin{equation}
+[0,1)=\bigcup _{m\in \Z}\q (R^m(N))
+\end{equation}
+is a disjoint union of measurable sets, all of which have the same measure $M\coloneqq \q (N)$.  If $M=0$, then, by additivity, we have $\meas ([0,1))=0$:  a contradiction.  On the other hand, if $M>0$, by additivity again, we have $\meas ([0,1))=\infty$:  a contradiction.  Therefore, it cannot be the case that $N$ is measurable.
+\end{savenotes}
+\end{exm}
+\begin{exm}[Two disjoint sets $S,T$ with $\meas (S\cup T)\neq \meas (S)+\meas (T)$]\label{exm5.2.56}
+Let $N$ be as in the previous example.  We showed there that it was not measurable.  Therefore, there must exist some $S\subseteq \R$ such that
+\begin{equation}
+\meas \left( (S\cap N)\cup (S\cap N^{\comp})\right) =\meas (S)\neq \meas (S\cap N)+\meas (S\cap N^{\comp}).
+\end{equation}
+\end{exm}
+
+\subsection{The integral}
+
+An important type of function in measure theory are \emph{characteristic} functions.
+\begin{dfn}[Characteristic function]
+Let $X$ be a set and let $S\subseteq X$.  Then, the \emph{characteristic function}\index{Characteristic function} of $S$, $\chi _S:X\rightarrow \{ 0,1\}$\index[notation]{$\chi _S$}, is defined by
+\begin{equation}
+\chi _S(x)\coloneqq \begin{cases}1 & \text{if }x\in S \\ 0 & \text{if }x\notin S\end{cases}.
+\end{equation}
+\begin{rmk}
+The reason that characteristic functions are important in measure theory is because the integral of $\chi _S$ will turn-out to simply be $\meas (S)$.  In particular, \emph{if you know the integral, you know the measure}.
+\end{rmk}
+\begin{rmk}
+We have seen a characteristic function before---the \nameref{DirichletFunction} is the characteristic function of $\Q \subseteq \R$.
+\end{rmk}
+\begin{rmk}
+You might say that the lebesgue integral is to characteristic functions as the riemann integral is to rectangles---one can define the lebesgue integral (though we will not) by approximating functions with characteristic functions,\footnote{Well, actually finite linear combinations of characteristic functions, the so-called \emph{simple functions}\index{Simple function}.} just as one defines the riemann integral by approximating functions with rectangles (aka (scalar multiples of) characteristic functions of intervals).\footnote{I actually find this approach a bit messy, but it's just yet more evidence that the lebesgue integral is hardly more difficult than the riemann integral---it's the same fucking thing with arbitrary (measurable) sets instead of intervals.}
+\end{rmk}
+\end{dfn}
+In principle, we can integrate \emph{any} function.\footnote{Literally.  If you already know what it means for a function to be measurable, you don't even need this to be the case in order to integrate it.}  The `problem' with this, of course, is that the integral will not satisfy certain properties we would like it to (e.g.~$\int \dif x\, [f(x)+g(x)]=\int \dif x\, f(x)+\int \dif x\, g(x)$) if we don't restrict the functions we integrate.  Thus, just as we had a notion of measurability for sets, so too do we have a notion of \emph{measurability} for functions.
+\begin{dfn}[Measurable (function)]\label{MeasurableFunction}
+Let $X$ be an outer-measure space and let $f:X\rightarrow \R _0$ be a function.  Then, $f$ is \emph{measurable}\index{Measurable (function)} iff
+\begin{equation}\label{5.2.60}
+\{ \coord{x,y}\in X\times \R :0<y<f(x)\} \text{ and }\{ \coord{x,y}\in X\times \R :y<f(x)<0\}
+\end{equation}
+are measurable.
+\begin{rmk}
+Of course, the sets in \eqref{5.2.60} are just `the area under the curve' (one for the nonnegative part of $f$ and one for the nonpositive part of $f$), and so the integral will wind up being the measure of the first minus the measure of the second.  Thus, a function is measurable iff the two sets needed to define its integral are measurable.
+\end{rmk}
+\begin{rmk}
+Warning:  There is no `measurable' category---compositions of measurable functions need not be measurable.  In fact, it need not be the case that the composite of a measurable function with a continuous function need be measurable---see the following example.
+\end{rmk}
+\end{dfn}
+\begin{prp}
+Let $\coord{X,\meas}$ be a regular measure space and let $f:X\rightarrow \R$ be continuous.  Then, $f$ is measurable.
+\begin{proof}
+We show that $\{ \coord{x,y}\in X\times \R :0<y<f(x)\}$ is open.  The proof that
+\end{proof}
+\end{prp}
+\begin{thm}[Integral]\label{Integral}
+\begin{savenotes}
+Let $\coord{X,\meas}$ be a regular measure space.\footnote{The restriction to regular measure spaces is essentially only because we have only defined the product measure for regular measure spaces.  Besides that, however, regularity of the measure is not used anywhere crucially in the definition.}  Then, there is a unique function $\mathrm{I}:\Mor _{\AlE}(X,[0,\infty ])\rightarrow [0,\infty ]$, the \emph{integral}, such that
+\begin{enumerate}
+\item (Normalization)\label{Integral.Normalization} $\mathrm{I}(\chi _S)=\meas (S)$;
+\item (Subdditivity)\label{Integral.Additivity} $\mathrm{I}(f+g)\leq \mathrm{I}(f)+\mathrm{I}(g)$;
+\item (Nonnegative-homogeneity)\label{Integral.NonnegativeHomogeneity} $\mathrm{I}(af)=a\mathrm{I}(f)$ for $a\geq 0$;\footnote{Of course, when we extend the definition of the integral to not-necessarily-nonnegative functions, this will be true for \emph{all} $a\in \R$, but for the time being, we require that $a\geq 0$ so that $af$ itself is nonnegative.} and
+\item (Lebesgue's Monotone Convergence Theorem)\label{Integral.LebesguesMonotoneConvergenceTheorem}\index{Lebesgue's Monotone Convergence Theorem} whenever $m\mapsto f_m$ is a nondecreasing sequence functions then
+\begin{equation}
+\lim _m\mathrm{I}(f_m)\leq \mathrm{I}(\lim _mf).\footnote{Note that $\lim _mf(x)$ \emph{always} exists, by the usual \nameref{MonotoneConvergenceTheorem}---either it is bounded, in which case it converges in $\R$, or it is unbounded, in which case it converges to $\infty$.  (I lied a bit\textellipsis as it is only nondecreasing almost-everywhere, then the limit exists only almost-everywhere.}
+\end{equation}
+\end{enumerate}
+Furthermore, every inequality becomes an inequality if all functions involved are measurable.  Moreover,
+\begin{equation}
+\int _X\dif \meas (x)\, f(x)\coloneqq \mathrm{I}(f)=[\meas \times \meas _{\mathrm{L}}]\left( \left\{ \coord{x,y}\in X\times \R :0<f(x)<y\right\} \right) .\footnote{$\meas _{\mathrm{L}}$ is lebesgue measure, simply to distinguish it from the measure on $X$.}
+\end{equation}
+\begin{rmk}
+Holy shit this is sexy.  First of all, we are characterizing the integral uniquely via certain properties it satisfies, and then furthermore, it turns out that this unique such function is simply given by \emph{the `area' under the curve}.  What do you think of that, Riemann?\footnote{Seriously, people actually claim that the lebesgue integral is not ``geometric''.  Da fuq?  Can someone please explain to me how limits of partitions of sums of areas of rectangles is more geometric than the area under the curve?}
+\end{rmk}
+\begin{rmk}
+Because $\mathrm{I}$ is defined on $\Mor _{\AlE}(X,\R _0^+)$, it is implicit that if $f(x)=g(x)$ almost-everywhere, then $\mathrm{I}(f)=\mathrm{I}(g)$.  In particular, the \emph{integral of the \nameref{DirichletFunction} is $0$}!\footnote{Another way to see this is from \ref{Integral.Normalization} and the fact that $\meas _{\mathrm{L}}(\Q )=0$ because $\Q$ is countable---see \cref{exr5.2.33}.}
+\end{rmk}
+\begin{rmk}
+I happen to prefer to put the $\dif x$ in front of the integral,\footnote{For two reasons:  (i) it tells you immediately what the variable you are integrating with respect to is (just a slight convenience, especially when the integrand is complicated) and (ii) it is more analogous to how we write the derivative---no one writes $\dif f(x)/\dif x$---people write $\frac{\dif}{\dif x}f(x)$.} but don't let that confuse you---the meaning is just the same as $\int f(x)\dif x$.
+\end{rmk}
+\begin{rmk}
+If the measure is clear from context, we may just simply write $\dif x$ instead of $\dif \meas (x)$.
+\end{rmk}
+\begin{rmk}
+I can imagine someone in the pro-riemann camp right about now going ``Holy shit, Jonny, are you fucking crazy!?  First, you require a seven-and-a-half page theorem, a third of the proof of which is relegated to exercises, just to \emph{define} lebesgue measure,  in addition to over twenty pages of measure theory just to get to the definition of the integral, and all the while you expect your students to be fluent with the basics of uniform spaces!?''  Yeah.  Sounds about right.  So what's your point?  That math is hard?  If you don't like it, Berkeley has a Women's Studies department that I'm sure would be more than happy to listen to you bitch and moan.\footnote{Disclaimer:  I'm exaggerating my opinions for the purpose of humor.  A more serious rebuttal is that this is a straw-man against the lebesgue integral because I didn't actually need to do all this to get to the integral.  The point was that I \emph{wanted} to do a lot more along the way than just run to the definition of the integral as fast as possible.  If you really wanted to, you could probably define it within two pages of starting the chapter:  lebesgue measure is the infimum the sum of the measures of all countable coverings of the set by rectangles, and then the integral is the area under the curve.  Done.  (Note:  Of course, this only works if your functions are defined on $\R$.  You'll also have to work harder of course if you want to actually \emph{prove} things about this definition, but the same would go for the riemann integral as well.)}
+\end{rmk}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~377]{Pugh}.}
+\Step{Introduce notation}
+As we will be making use of the set quite a bit, it will be useful to introduce the notation
+\begin{equation}
+\Gamma _f\coloneqq \left\{ \coord{x,y}\in X\times \R :0<y<f(x)\right\} .
+\end{equation}
+
+\Step{Define $\mathrm{I}$}
+Let $f:X\rightarrow \R _0^+$ and define
+\begin{equation}
+\mathrm{I}(f)\coloneqq [\meas \times \meas _{\mathrm{L}}]\left( \left\{ \coord{x,y}\in X\times \R :f(x)\leq y\right\} \right) .
+\end{equation}
+
+\Step{Show that $\mathrm{I}(\chi _S)=\meas (S)$}
+\begin{equation}
+\Gamma _{\chi _S}\coloneqq \left\{ \coord{x,y}\in X\times \R :\chi _S(x)\leq y\right\} =S\times [0,1]
+\end{equation}
+and so
+\begin{equation}
+\mathrm{I}(\chi _S)\coloneqq [\meas \times \meas _{\mathrm{L}}](\Gamma _{\chi _S})=\meas (S)\cdot 1=\meas (S).
+\end{equation}
+
+\Step{Show that $\mathrm{I}$ is subadditive}
+To show that $\mathrm{I}(f+g)\leq \mathrm{I}(f)+\mathrm{I}(g)$, by subadditivity of the measure, it suffices to show that $\mathrm{I}(f+g)\subseteq \mathrm{I}(f)\cup \mathrm{I}(g)$.
+
+For $f:X\rightarrow \R _0^+$, define $\tau _f:X\times \R \rightarrow X\times \R$ by
+\begin{equation}
+\tau _f(\coord{x,y})\coloneqq \coord{x,f(x)+y}.
+\end{equation}
+Then, if we can show that
+\begin{equation}
+[\meas \times \meas _{\mathrm{L}}](\tau _f(\Gamma _g))
+\end{equation}
+
+\Step{Show that $\mathrm{I}$ is nonnegative homogeneous}
+Note that
+\begin{equation}
+\Gamma _{af}\coloneqq \left\{ \coord{x,y}\in X\times \R :af(x)\leq y\right\} =\left\{ \coord{x,ay}\in X\times \R :f(x)\leq y\right\} =a\Gamma _f.
+\end{equation}
+Then, it follows from \cref{exr5.2.28} that
+\begin{equation}
+\mathrm{I}(af)\coloneqq \meas (\Gamma _{af})=\meas (a\Gamma _f)=a\meas (\Gamma _f)=a\mathrm{I}(f).
+\end{equation}
+
+\Step{Prove Lebesgue's Monotone Convergence Theorem}
+Let us define $f_\infty :X\rightarrow [0,\infty ]$ by $f_\infty (x)\coloneqq \lim _mf(x)$.  For almost every $x\in X$, the sequence $m\mapsto f_m(x)$ is nondecreasing, and so by the usual \nameref{MonotoneConvergenceTheorem}, this limit exists in $[0,\infty ]$\footnote{If the seqeucne is bounded, the \nameref{MonotoneConvergenceTheorem} tells us it converges in $\R$.  Otherwise, it converges to $\infty$.} for almost every $x$, and so defines a function $f_\infty \in \Mor _{\AlE}(X,[0,\infty ])$.  For all the points where we do not have monotonicity, we may without loss of generality take $f_\infty$ to be infinite there.  This gives us that
+\begin{equation}
+\Gamma _{f_m}\subseteq \Gamma _{f_\infty}
+\end{equation}
+for all $m$, and hence
+\begin{equation}
+\mathrm{I}(f_m)\coloneqq [\meas \times \meas_{\mathrm{L}}](\Gamma _{f_m})\leq [\meas \times \meas _{\mathrm{L}}(f_\infty)=\mathrm{I}(f_\infty )\coloneqq \mathrm{I}(\lim _mf_m).
+\end{equation}
+Taking the limit, we get
+\begin{equation}
+\lim _m\mathrm{I}(f_m)\leq \mathrm{I}(\lim _mf_m).
+\end{equation}
+
+\Step{Show uniqueness}
+
+\Step{Show we have equality if functions are measurable}
+\end{proof}
+\end{savenotes}
+\end{thm}
+This gives us the integral for nonnegative functions.  We now extend the definition of the integral to any (integrable) real-valued function.  Before we do so, we will decompose a function into its positive and negative parts.
+\begin{dfn}
+Let $X$ be a set and let $f:X\rightarrow \R$ be a function.  Then, we write
+\begin{equation}
+f_+\coloneqq \max \{ f,0\} \text{ and }f_-\coloneqq -\min \{ f,0\} .
+\end{equation}\index[notation]{$f_+$}\index[notation]{$f_-$}
+\begin{rmk}
+That is, $f_+$ is equal to $f$ if $f$ is positive and $0$ otherwise; likewise, $f_-$ is equal to $f$ if $-f$ is negative and $0$ otherwise.
+\end{rmk}
+\begin{rmk}
+Note that \emph{always} $f_+,f_-\geq 0$.
+\end{rmk}
+\begin{rmk}
+Also note that $f=f_+-f_-$ and $\abs{f}=f_++f_-$.
+\end{rmk}
+\end{dfn}
+\begin{dfn}[Integrable]
+$f:X\rightarrow \R$ is \emph{integrable}\index{Integrable} iff both $\int \dif \meas (x)\, f_+(x)$ and $\int \dif \meas (x)\, f_-(x)$ are finite, in which case we define\footnote{Note that the first part above was only for $f$ \emph{nonnegative}.  This part is to extend the definition of the integral for all real-values functions.}
+\begin{equation}
+\int \dif \meas (x)\, f\coloneqq \int \dif \meas (x)\, f_+(x)-\int \dif \meas (x)\, f_-(x).
+\end{equation}
+\end{dfn}

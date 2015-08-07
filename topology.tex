@@ -420,7 +420,7 @@ Let $X$ be as in \cref{exm4.2.8x} ($\R$ with the cocountable topology) and defin
 \begin{equation}
 f(x)\coloneqq \begin{cases}1 & \text{if }x\in \Q \\ -1 & \text{if }x\in \Q ^{\comp}\end{cases}.
 \end{equation}
-(Note that this is just the Dirichlet Function (\cref{exmDirichletFunction})!).
+(Note that this is just the Dirichlet Function (\cref{DirichletFunction})!).
 
 This function is certainly not continuous because, for example, the preimage of $\{ -1\}$ is not closed.  On the other hand, because every convergent sequence is eventually constant, the condition that $x_\lambda \neq x$ in the definition of a limit (\cref{dfnLimitOfAFunction}), $f$ vacuously satisfies the continuity condition for sequences.
 \end{exm}
@@ -645,7 +645,7 @@ Show \ref{enmKelleysFilterConvergenceAxioms.i}.
 \begin{exr}
 Show \ref{enmKelleysFilterConvergenceAxioms.ii}.  Hint:  Check out \cref{prp3.3.95}.
 \end{exr}
-Let $I$ be a directed set, for each $i\in I$ let $\mathcal{F}^i$ be a filter converging to $x^i\in X$, and suppose that $\mathcal{F}_{i\mapsto x^i}$ converges to $x^\infty$.  By \cref{prp4.3.6}, $i\mapsto x^i$ converges to $x^\infty$.  To show that $\mathcal{F}_\infty$ converges to $x^\infty$, it suffices to show that every open neighborhood of $U$ is an element of $\mathcal{F}_\infty$.  So, let $U$ be an open neighborhood of $x^\infty$.  Then, as $\mathcal{F}_{i\mapsto x^i}$ converges to $x^\infty$, it follows that there is some $V\in \mathcal{F}_{i\mapsto x^i}$ such that $V\subseteq U$.  As $i\mapsto x^i$ is eventually contained in $V$, there is some $i_0\in I$ such that, whenever $i\geq i_0$, it follows that $x^i\in V\subseteq U$.  Thus, for $i$ sufficiently large, $U$ is an open neighborhood of $x^i$.  But then, because $\mathcal{F}^i$ converges to $x^i$, it follows that there is some $F^i\in \mathcal{F}^i$ such that $F^i\subseteq U$, and so $U\in \mathcal{F}_{\infty}$ as desired.
+Let $I$ be a directed set, for each $i\in I$ let $\mathcal{F}^i$ be a filter converging to $x^i\in X$, and suppose that $\mathcal{F}_{i\mapsto x^i}$ converges to $x^\infty$.  By \cref{prp4.3.6}, $i\mapsto x^i$ converges to $x^\infty$.  To show that $\mathcal{F}_\infty$ converges to $x^\infty$, it suffices to show that every open neighborhood of $x^\infty$ is an element of $\mathcal{F}_\infty$.  So, let $U$ be an open neighborhood of $x^\infty$.  Then, as $\mathcal{F}_{i\mapsto x^i}$ converges to $x^\infty$, it follows that there is some $V\in \mathcal{F}_{i\mapsto x^i}$ such that $V\subseteq U$.  As $i\mapsto x^i$ is eventually contained in $V$, there is some $i_0\in I$ such that, whenever $i\geq i_0$, it follows that $x^i\in V\subseteq U$.  Thus, for $i$ sufficiently large, $U$ is an open neighborhood of $x^i$.  But then, because $\mathcal{F}^i$ converges to $x^i$, it follows that there is some $F^i\in \mathcal{F}^i$ such that $F^i\subseteq U$, and so $U\in \mathcal{F}_{\infty}$ as desired.
 \end{proof}
 \end{savenotes}
 \end{prp}
@@ -1283,7 +1283,7 @@ Define $X\coloneqq \{ x_1,x_2,x_3\}$ and
 \begin{equation}
 \mathcal{U}\coloneqq \left\{ \emptyset ,X,\{ x_1\} ,\{ x_3\} ,\{ x_1,x_3\} \right\} .
 \end{equation}
-Then, $\{ x_1\}$ is a neighborhood of $x_1$, $\{ x_3\}$ is a neighborhood of $x_3$, and these two neighborhoods are disjoint, so that $x_1$ and $x_3$ are separated by neighborhoods.  On the other hand, $x_1$ only has three neighborhoods:  $\{ x_1\}$, $\{ x_1,x_3\}$, and all of $X$.  The latter two must intersect every neighborhood of $x_3$ and the first is not closed because $\{ x_1\} ^{\comp}=\{ x_2,x_3\}$ is not open.  Therefore, we cannot separate $x_1$ and $x_3$ with \emph{closed} neighborhoods.
+Then, $\{ x_1\}$ is a neighborhood of $x_1$, $\{ x_3\}$ is a neighborhood of $x_3$, and these two neighborhoods are disjoint, so that $x_1$ and $x_3$ are separated by neighborhoods.  On the other hand, $x_1$ only has three neighborhoods:  $\{ x_1\}$, $\{ x_1,x_3\}$, and all of $X$.  The latter must intersect every neighborhood of $x_3$ and the former is not closed because $\{ x_1\} ^{\comp}=\{ x_2,x_3\}$ is not open.  Therefore, we cannot separate $x_1$ and $x_3$ with \emph{closed} neighborhoods.
 \end{exm}
 There is an equivalent, alternative way to think about being separated by closed neighborhoods that you may find useful.
 \begin{prp}\label{prp4.5.13}
@@ -1864,7 +1864,7 @@ Let $\{ r_m:m\in \N \}$ be an enumeration of the rationals in $[0,1]$ with $r_0=
 
 First of all, define $U_1\coloneqq C_2^{\comp}$.  Then, $U_1$ is an open neighborhood of $C_1$, and so there is some other open neighborhood $U_0$ of $C_1$ such that $C_1\subseteq U_0\subseteq \Cls (U_0)\subseteq U_1$.
 
-Suppose that we have defined $U_{r_0},\ldots U_{r_m}$ such that $\Cls (U_p)\subseteq U_q$ if $r<q$ for $r,q\in \{ r_0,\ldots ,r_m\}$.  We wish to define $U_{m+1}$ so that this property still remains to be true.  As there are only finitely many rational numbers in $\{ r_0,\ldots ,r_m\}$ there is a largest $p_0\in \{ r_0,\ldots ,r_m\}$ with $p_0<r_{m+1}$ and similarly there is a smallest $q_0\in \{ r_0,\ldots ,r_m$ with $r_{m+1}<q_0$.  Take $U_{r_{m+1}}$ so that
+Suppose that we have defined $U_{r_0},\ldots U_{r_m}$ such that $\Cls (U_p)\subseteq U_q$ if $r<q$ for $r,q\in \{ r_0,\ldots ,r_m\}$.  We wish to define $U_{m+1}$ so that this property still remains to be true.  As there are only finitely many rational numbers in $\{ r_0,\ldots ,r_m\}$ there is a largest $p_0\in \{ r_0,\ldots ,r_m\}$ with $p_0<r_{m+1}$ and similarly there is a smallest $q_0\in \{ r_0,\ldots ,r_m\}$ with $r_{m+1}<q_0$.  Take $U_{r_{m+1}}$ so that
 \begin{equation}
 \Cls (U_{p_0})\subseteq U_{r_{m+1}}\subseteq U_{q_0}.
 \end{equation}
@@ -1993,7 +1993,7 @@ You'll recall from calculus that the classical statement of the Intermediate Val
 Let $f:[a,b]\rightarrow \R$ be continuous.  Then, for all $y$ between $f(a)$ and $f(b)$ (inclusive), there exists $x\in [a,b]$ such that $f(x)=y$.
 \end{textequation}
 \end{footnoteequation}
-We will see that the proper way to interpret this statement is that the image of $f$ is connected, so that if the image contains $f(a)$ and $f(b)$ (which it does by definition), then it must contain everything in-between s well.  Of course, in order to make this precise, we have to first define what it means to be connected.
+We will see that the proper way to interpret this statement is that the image of $f$ is connected, so that if the image contains $f(a)$ and $f(b)$ (which it does by definition), then it must contain everything in-between as well.  Of course, in order to make this precise, we have to first define what it means to be connected.
 \begin{dfn}[Connected and disconnected]\label{Connected}
 Let $X$ be a topological space.  Then, $X$ is \emph{disconnected}\index{Disconnected} iff there exist disjoint nonempty open sets $U,V\subset X$ such that $X=U\cup V$.  $X$ is \emph{connected}\index{Connected} iff it is not disconnected.  A subset $S$ of $X$ is connected iff it is connected in its subspace topology.
 \begin{rmk}
@@ -2024,7 +2024,7 @@ so that
 \begin{equation}
 U=U_V\cup U_W
 \end{equation}
-for all $U\in \mathcal{U}$.  As $U$ is connected, it follows that, for each $U$, either $U_V$ or $U_W$ is empty.  However, we know that $x_0\in U_V$, and so in fact, we must have that $U_W=\empty$ for all $U\in \mathcal{U}$, which in turn implies that $W=\emptyset$:  a contradiction.
+for all $U\in \mathcal{U}$.  As $U$ is connected, it follows that, for each $U$, either $U_V$ or $U_W$ is empty.  However, we know that $x_0\in U_V$, and so in fact, we must have that $U_W=\emptyset$ for all $U\in \mathcal{U}$, which in turn implies that $W=\emptyset$:  a contradiction.
 \end{proof}
 \end{prp}
 \begin{dfn}[Connected component]
@@ -2168,4 +2168,31 @@ By the \nameref{HeineBorelTheorem} (\cref{HeineBorelTheorem}), $[a,b]$ is quasic
 In fact, we may as well just combine the classical statements into one.
 \begin{crl}[Classical Intermediate-Extreme Value Theorem]\label{ClassicalIntermediateExtremeValueTheorem}\index{Classical Intermediate-Extreme Value Theorem}
 Let $f:[a,b]\rightarrow \R$ be continuous.  Then, $f([a,b])$ is a closed, bounded, interval.
-\end{crl}i
+\end{crl}
+
+\section{Local properties}
+
+For most topological properties, there is a ``local'' version.
+\begin{mdf}[Locally XYZ]\label{LocallyXYZ}
+A topological space is \emph{locally XYZ}\index{Locally XYZ} iff each point has a neighborhood base consisting of sets that are XYZ.
+\end{mdf}
+Of particular importance are the notions of local connectedness, local quasicompactness, and locally (completely/perfectly)-$T_a$.
+\begin{exr}
+Show that if a space is $T_2$ then it is locally $T_2$.  Find a counter-example to show that converse is false.
+\end{exr}
+\begin{exr}
+Show that if a space is locally quasicompact and $T_2$, then it is locally compact.  Find a counter-example to show the converse is false.
+\end{exr}
+The following is the result related to locally quasicompactness that will be used in the proof of \nameref{HaarHowesTheorem}.
+\begin{prp}\label{prp5.2.4}
+Let $X$ be a locally compact space, let $K\subseteq X$ be quasicompact, and let $U\subseteq X$ contain $X$.  Then, there is an open set $V\subseteq X$ with compact closure such that
+\begin{equation}
+K\subseteq V\subseteq \Cls (V)\subseteq U.
+\end{equation}
+\begin{proof}
+We leave this as an exercise.
+\begin{exr}
+Complete the proof yourself.
+\end{exr}
+\end{proof}
+\end{prp}

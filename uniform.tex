@@ -111,7 +111,7 @@ so in this case $U$ intersects $U_0$ iff $f(U)$ intersects $f(U_0)$.  Hence,
 \begin{equation}
 \begin{split}
 f(\Star _{\mathcal{U}}(U)) & =f\left( \bigcup _{U'\in \mathcal{U}\st U'\cap U\neq \emptyset}U'\right) =\footnote{\cref{exrA.1.30}\ref{enmA.1.30.iii}}\bigcup _{U'\in \mathcal{U}\st U'\cap U\neq \emptyset}f(U') \\
-& \subseteq \footnote{Here we are using the fact that $U$ intersects $U_0$ implies that $f(U)$ intersects $f(U_0)$.  Also note that we have equality here if $f$ is surjective and $f^{-1}(f(S))=S$.}\bigcup _{U'\in \mathcal{U}\st f(U')\cap f(U)\neq \emptyset}f(U')=\Star _{f(\mathcal{U})}(U).
+& \subseteq \footnote{Here we are using the fact that $U$ intersects $U_0$ implies that $f(U)$ intersects $f(U_0)$.  Also note that we have equality here if $f$ is surjective and $f^{-1}(f(S))=S$.}\bigcup _{U'\in \mathcal{U}\st f(U')\cap f(U)\neq \emptyset}f(U')=\Star _{f(\mathcal{U})}f(U).
 \end{split}
 \end{equation}
 \end{proof}
@@ -159,9 +159,9 @@ Let $f:X\rightarrow Y$ be a function, let $\mathcal{U}$ be a cover of $X$, and $
 \begin{equation}
 f(\mathcal{U})\coloneqq \{ f(U):U\in \mathcal{U}\} .
 \end{equation}
-The \emph{preimage} of $\mathcal{V}$, $f^{-1}(\mathcal{V}$\index[notation]{$f^{-1}(\mathcal{V})$}, is defined by
+The \emph{preimage} of $\mathcal{V}$, $f^{-1}(\mathcal{V})$\index[notation]{$f^{-1}(\mathcal{V})$}, is defined by
 \begin{equation}
-f^{-1}(\mathcal{V})\coloneqq \{ f^{-1}(V):V\in V\in \mathcal{V}\} .
+f^{-1}(\mathcal{V})\coloneqq \{ f^{-1}(V):V\in \mathcal{V}\} .
 \end{equation}
 \begin{rmk}
 We needed to make these definitions because, technically speaking, we only defined the image an preimage of \emph{subsets} of $X$ and $Y$ respectively.  As $\mathcal{U}$ and $\mathcal{V}$ are subsets of $2^X$ and $2^Y$ respectively, not $X$ and $Y$, to talk about their `usual' image and preimage, we would need to have a function from $2^X$ to $2^Y$.\footnote{Actually, given a function $f:X\rightarrow Y$, we obtain a function from $2^X$ to $2^Y$ \emph{and} a function from $2^Y$ to $2^X$---$f:2^X\rightarrow 2^Y$ (the function that sends a set to its image) and $f^{-1}:2^Y\rightarrow 2^X$ (the function that sends a set to its preimage) respectively.  The preimage of a cover is the image of the cover with respect to the preimage function $f^{-1}:2^Y\rightarrow 2^X$.  Likewise, the image of a cover is the image of the cover with respect to the image function $f:2^X\rightarrow 2^Y$.}  In particular, note that the definition of the preimage of a cover is \emph{not} $\{ U\in 2^X:f(U)\in \mathcal{V}\}$.
@@ -220,7 +220,7 @@ Note that the cover $\{ X\}$ is an element of every uniformity.  This follows fr
 \end{dfn}
 Of incredible importance is that uniformities \emph{define} a canonical topology.  Thus, we can think of uniform spaces as topological spaces with \emph{extra structure}.
 \begin{prp}[Uniform topology]\label{UniformTopology}
-Let $\coord{X,\widetilde{\mathcal{X}}}$ be a uniform space.  Then, for $x\in X$,
+Let $\coord{X,\widetilde{\mathcal{U}}}$ be a uniform space.  Then, for $x\in X$,
 \begin{equation}
 \mathcal{B}_x\coloneqq \left\{ \Star _{\mathcal{U}}(x):\mathcal{U}\in \widetilde{\mathcal{U}}\right\}
 \end{equation}
@@ -337,7 +337,7 @@ $(\Leftarrow )$ Suppose that for every $\mathcal{B}\in \widetilde{\mathcal{B}}$,
 \end{prp}
 We will also want to check whether a function is uniformly-continuous by simply looking at a uniform base.
 \begin{prp}\label{prpB.3.4}
-Let $f:(X,\widetilde{\mathcal{U}})\rightarrow (Y,\widetilde{\mathcal{V}})$ be a function between uniform spaces and let $\widetilde{\mathcal{C}}$ be a uniform base for $\widetilde{\mathcal{V}}$.  Then, $f$ is uniformly-continuous iff $f^{-1}(\mathcal{C})\in \mathcal{U}$ for each $\mathcal{C}\in \widetilde{\mathcal{C}}$.
+Let $f:(X,\widetilde{\mathcal{U}})\rightarrow (Y,\widetilde{\mathcal{V}})$ be a function between uniform spaces and let $\widetilde{\mathcal{C}}$ be a uniform base for $\widetilde{\mathcal{V}}$.  Then, $f$ is uniformly-continuous iff $f^{-1}(\mathcal{C})\in \widetilde{\mathcal{U}}$ for each $\mathcal{C}\in \widetilde{\mathcal{C}}$.
 \begin{proof}
 $(\Rightarrow )$ There is nothing to check (because every open cover in a uniform base is itself a uniform cover).
 
@@ -390,10 +390,10 @@ With topological spaces, we could define a topology by specifying the closure or
 \begin{prp}[Initial uniformity]\label{InitialUniformity}
 Let $X$ be a set, let $\mathcal{Y}$ be an indexed collection of uniform spaces, and for each $Y\in \mathcal{Y}$ let $f_Y:X\rightarrow Y$ be a function.  Then, there exists a unique uniformity $\widetilde{\mathcal{U}}$ on $X$, the \emph{initial uniformity} with respect to $\{ f_Y:Y\in \mathcal{Y}\}$, such that
 \begin{enumerate}
-\item $f_Y:X\rightarrow Y$ is uniformly-continuous with repsect to $\widetilde{\mathcal{U}}$ for all $Y\in \mathcal{Y}$; and
+\item $f_Y:X\rightarrow Y$ is uniformly-continuous with respect to $\widetilde{\mathcal{U}}$ for all $Y\in \mathcal{Y}$; and
 \item if $\widetilde{\mathcal{U}}'$ is another uniformity for which each $f_Y$ is uniformly-continuous, then $\widetilde{\mathcal{U}}\subseteq \widetilde{\mathcal{U}}'$.  Furthermore, if $\widetilde{\mathcal{S}}_Y$ generates the uniformity on $Y$, then the collection
 \begin{equation}
-\{ f_Y^{-1}(\mathcal{U}):Y\in \mathcal{Y},\ \mathcal{U}\in \widetilde{\mathcal{S}}\}
+\{ f_Y^{-1}(\mathcal{U}):Y\in \mathcal{Y},\ \mathcal{U}\in \widetilde{\mathcal{S}}_Y\}
 \end{equation}
 generates $\widetilde{\mathcal{U}}$.
 \end{enumerate}
@@ -429,14 +429,14 @@ Prove this result, using the proof of \cref{prp3.4.6} (the analogous result for 
 \end{prp}
 And just as we had with topological spaces, there is a `dual' version of the initial uniformity.
 \begin{prp}[Final uniformity]\label{FinalUniformity}
-Let $X$ be a set, let $\mathcal{Y}$ be an indexed collection of uniform spaces, and for each $Y\in Y$ let $f_Y:Y\rightarrow X$ be a function.  Then, there exists a unique uniformity $\widetilde{\mathcal{U}}$ on $X$, the \emph{final uniformity}\index{Final uniformity} with respect to $\{ f_Y:Y\in \mathcal{Y}\}$, such that
+Let $X$ be a set, let $\mathcal{Y}$ be an indexed collection of uniform spaces, and for each $Y\in \mathcal{Y}$ let $f_Y:Y\rightarrow X$ be a function.  Then, there exists a unique uniformity $\widetilde{\mathcal{U}}$ on $X$, the \emph{final uniformity}\index{Final uniformity} with respect to $\{ f_Y:Y\in \mathcal{Y}\}$, such that
 \begin{enumerate}
 \item $f_Y:Y\rightarrow X$ is uniformly-continuous with respect to $\widetilde{\mathcal{U}}$; and
 \item if $\widetilde{\mathcal{U}}'$ is another uniformity for which each $f_Y$ is uniformly-continuous, then $\widetilde{\mathcal{U}}\supseteq \widetilde{\mathcal{U}}'$.
 \end{enumerate}
 Furthermore,
 \begin{equation}
-\widetilde{\mathcal{U}}=\{ \mathcal{U}\text{ a cover of }X:f_Y^{-1}(\mathcal{U})\text{ is a uniform cover for all }Y\in \mathcal{U}\text{.}\} .
+\widetilde{\mathcal{U}}=\{ \mathcal{U}\text{ a cover of }X:f_Y^{-1}(\mathcal{U})\text{ is a uniform cover for all }Y\in \mathcal{Y}\text{.}\} .
 \end{equation}
 \begin{rmk}
 In other words, the final uniformity is the largest uniformity for which each $f_Y$ is uniformly-continuous.
@@ -470,7 +470,7 @@ Let $f:X\rightarrow Y$ be a continuous function between uniform spaces and let $
 Ideally we would have presented this result shortly after giving the definition of uniformly-continuous functions, however, we do technically need the notion of the subspace uniformity to state this result.
 \end{rmk}
 \begin{proof}
-Let $\mathcal{V}$ be a uniform cover of $Y$.  We would like to show that $f^{-1}(\mathcal{V})\wedge \{ K\}$ is a uniform-cover of $K$.  To do this, by upward-closedness, it suffices to find a uniform-cover of $K$ which star-refines $f^{-1}(\mathcal{V})\wedge \{ K\}$.
+Let $\mathcal{V}$ be a uniform cover of $Y$.  We would like to show that $\restr{f}{K}^{-1}(\mathcal{V})=f^{-1}(\mathcal{V})\wedge \{ K\}$ is a uniform-cover of $K$.  To do this, by upward-closedness, it suffices to find a uniform-cover of $K$ which star-refines $f^{-1}(\mathcal{V})\wedge \{ K\}$.
 
 $f^{-1}(\mathcal{V})$, while not necessarily a uniform cover of $X$, will certainly be an open cover, and in particular will be an open cover of $K$.  So, for $x\in K$, let $V_x\in \mathcal{V}$ be such that $x\in f^{-1}(V_x)$.  Then, choose a uniform cover $\mathcal{U}_x$ of $X$ such that
 \begin{equation}
@@ -533,7 +533,7 @@ Define $f:\R \rightarrow \R$ by $f(x)\coloneqq x^2$.  Of course $f$ is continuou
 
 On the other hand, we show that $f$ does not satisfy the condition given in the previous exercise.  Take $\varepsilon \coloneqq 1$.  Then, if $f$ were uniformly-continuous, there should be some $\delta >0$ such that
 \begin{equation}
-\left\{ x^2:\abs{x-x_0}<\delta \right\} \subseteq \left\{ x\in \R :\abs{x-x_0^2}<1\right\} 
+\left\{ x^2:\abs{x-x_0}<\delta \right\} \eqqcolon f(B_\delta (x_0))\subseteq B_{\varepsilon}(f(x_0))\coloneqq\left\{ x\in \R :\abs{x-x_0^2}<1\right\} 
 \end{equation}
 for all $x_0\in \R$.  However, $(x_0+\frac{1}{2}\delta )^2$ is an element of the left-hand side, but
 \begin{equation}
@@ -603,7 +603,7 @@ We already know from \cref{exm4.4.3} that each $\metric _K$ is a semimetric on $
 As $\mathcal{D}$ clearly contains more than one element (at least so long as $X$ contains more than one point), you might think that this shows that this cannot be a metric space.  However, the real question is \emph{is it uniformly-homeomorphic} to a metric space?\footnote{Of course, this doesn't quite make sense yet as we have not put a uniformity on semimetric spaces.}  While not a proof, it is clear that it should not be as, unless $X$ is quasicompact itself, no element of $\mathcal{D}$ will actually be a metric.
 \end{exm}
 
-It's worth nothing that, in a metric space, for every closed subset, the distance (as defined below in \eqref{4.8.50} from a point to the closed subset is a continuous function.
+It's worth noting that, in a metric space, for every closed subset, the distance (as defined below in \eqref{4.8.50} from a point to the closed subset is a continuous function.
 \begin{prp}\label{prp4.8.49}
 Let $\coord{X,\metric}$ be a metric space and let $C\subseteq X$.  Then, the function $\dist _C:X\rightarrow \R$ defined by
 \begin{equation}\label{4.8.50}
@@ -648,11 +648,11 @@ Now that we've gotten that out of the way, we are ready to equip semimetric spac
 \begin{savenotes}
 Let $(X,\mathcal{D})$ be a semimetric space, and equip $X$ with the uniformity generated by the uniform base defined by
 \begin{equation}\label{B.11}
-\widetilde{\mathcal{B}}_{\mathcal{D}}\coloneqq \left\{ U_{\varepsilon _1,\ldots ,\varepsilon _n}^{\metric _1,\ldots ,\metric _m}:m\in \Z ^+;\ \metric _1,\ldots ,\metric _m\in \mathcal{D};\ \varepsilon _1,\ldots ,\varepsilon _m>0\right\} ,\index[notation]{$\widetilde{\mathcal{U}}_{\mathcal{D}}$}
+\widetilde{\mathcal{B}}_{\mathcal{D}}\coloneqq \left\{ U_{\varepsilon _1,\ldots ,\varepsilon _m}^{\metric _1,\ldots ,\metric _m}:m\in \Z ^+;\ \metric _1,\ldots ,\metric _m\in \mathcal{D};\ \varepsilon _1,\ldots ,\varepsilon _m>0\right\} ,\index[notation]{$\widetilde{\mathcal{U}}_{\mathcal{D}}$}
 \end{equation}
 where
 \begin{equation}\label{1.12}
-\mathcal{B}_{\varepsilon _1,\ldots ,\varepsilon _n}^{\metric _1,\ldots ,\metric _m}\coloneqq \left\{ B_{\varepsilon _1,\ldots ,\varepsilon _n}^{\metric _1,\ldots ,\metric _m}(x):x\in X\right\}
+\mathcal{B}_{\varepsilon _1,\ldots ,\varepsilon _m}^{\metric _1,\ldots ,\metric _m}\coloneqq \left\{ B_{\varepsilon _1,\ldots ,\varepsilon _m}^{\metric _1,\ldots ,\metric _m}(x):x\in X\right\}
 \end{equation}
 and
 \begin{equation}\label{1.13}
@@ -955,7 +955,7 @@ Pointwise addition and pointwise scalar multiplication gives $A$ the structure o
 \begin{equation}
 \norm[f]_K\coloneqq \sup _{x\in K}\{ \abs{f(x)}\} 
 \end{equation}
-then gives $A$ the structure of a seminormed algebra.  It is thus canonically a uniform space (and in turn a topological space).  If $X$ itself is quasicompact, convergence in $\Mor _{\Top}(X,\R )$ is called \emph{uniform convergence}\index{Uniform convergence}.\footnote{Despite the name and the context in which we're presenting it, uniform convergence actually has nothing to do with uniform spaces per se (in contrast to uniform continuity, for example).  $\Mor _{\Top}(X,\R )$ has a topology, and hence a notion of convergence, which we happen to call ``uniform convergence''.  In particular, we only needed to equip $\Mor _{\Top}(X,\R )$ with a topology to define uniform convergence.  The reason we waited until the chapter on uniform spaces, of course, is because $\Mor _{\Top}(X,\R )$ obtains is topology from a family of semimetrics (or in the case $X$ is quasicompact, just a single metric), not because of any direct connection with uniform convergence and uniform spaces.}  Thus, in the general case, people refer to convergence in the topological space $\Mor _{\Top}(X,\R )$ as \emph{uniform convergence on quasicompact subsets}.
+then gives $A$ the structure of a seminormed algebra.  It is thus canonically a uniform space (and in turn a topological space).  If $X$ itself is quasicompact, convergence in $\Mor _{\Top}(X,\R )$ is called \emph{uniform convergence}\index{Uniform convergence}.\footnote{Despite the name and the context in which we're presenting it, uniform convergence actually has nothing to do with uniform spaces per se (in contrast to uniform continuity, for example).  $\Mor _{\Top}(X,\R )$ has a topology, and hence a notion of convergence, which we happen to call ``uniform convergence''.  In particular, we only needed to equip $\Mor _{\Top}(X,\R )$ with a topology to define uniform convergence.  The reason we waited until the chapter on uniform spaces, of course, is because $\Mor _{\Top}(X,\R )$ obtains its topology from a family of semimetrics (or in the case $X$ is quasicompact, just a single metric), not because of any direct connection with uniform convergence and uniform spaces.}  Thus, in the general case, people refer to convergence in the topological space $\Mor _{\Top}(X,\R )$ as \emph{uniform convergence on quasicompact subsets}.
 
 The reason the case $X$ quasicompact is special is because, in this case, it is actually isomorphic (in the category of seminormed algebras) to a normed algebra.
 \begin{exr}
@@ -1360,7 +1360,7 @@ Let $f_m:[0,1]\rightarrow \R$ be defined by $f_m(x)\coloneqq x^m$.  Then, of cou
 which is clearly not continuous.
 \end{exm}
 \begin{exm}[A discontinuous function that is continuous on every quasicompact subset]\label{exm4.5.12}
-Take $X\coloneqq \R$ and equip it with our good old-buddy, the cocountable topology.  We claim that a subset of $X$ is quasicompact iff it is finite.  Finite subsets are always quasicompact.  On the other hand, take $K\subseteq X$ infinite.  Then, there is in particular a countably-infinite subset $\{ x_0,x_1,x_2,\ldots \} \subseteq K$.  Define $C_m\coloneqq \{ x_k:k\geq m\}$ and $\mathcal{C}\coloneqq \{ C_m:m\in \N \}$.  Then, $\mathcal{C}$ is a collection of closed subsets of $X$.  Furthermore, the intersection of any finitely many of them intersects $K$.  On the other hand, the intersection of all of them is empty.  Therefore, $K$ is not quasicompact.  In particular, $X$ is \emph{not} quasicompactly-generated.
+Take $X\coloneqq \R$ and equip it with our good old-buddy, the cocountable topology.  We claim that a subset of $X$ is quasicompact iff it is finite.  Finite subsets are always quasicompact.  On the other hand, take $K\subseteq X$ infinite.  Then, there is in particular a countably-infinite subset $\{ x_0,x_1,x_2,\ldots \} \subseteq K$.  Define $C_m\coloneqq \{ x_k:k\geq m\}$ and $\mathcal{C}\coloneqq \{ C_m:m\in \N \}$.  Then, $\mathcal{C}$ is a collection of closed subsets of $X$.  Furthermore, the intersection of any finitely many of them intersects $K$.  On the other hand, the intersection of all of them is empty.  Therefore, $K$ is not quasicompact.  In particular, $X$ is \emph{not} quasicompactly-generated.\footnote{Finite subsets of $X$ are discrete, and so from what we just showed, it follows that all quasicompact subsets of $X$ are discrete.  Therefore, $S\cap K$ is always open in $K$, regardless of whether $S$ is open or not.}
 
 Now let $f:X\rightarrow \R$ be any discontinuous function.  For example, the Dirichlet Function is discontinuous with respect to the cocountable topology (because $\Q ^{\comp}$ is not closed).  On the other hand, finite subsets of $X$ are discrete, and so $f$ restricted to finite subsets must be continuous.
 \end{exm}
