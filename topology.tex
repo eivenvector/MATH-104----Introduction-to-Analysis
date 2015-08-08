@@ -210,7 +210,7 @@ Let $f:X\rightarrow Y$ be a function between topological spaces.  Then, $f$ is a
 \begin{exr}
 Show that a function is a homeomorphism iff (i) it is bijective, (ii) it is continuous, and (iii) its inverse is continuous.
 \end{exr}
-\begin{exr}
+\begin{exr}\label{exr3.1.34}
 Find an example of a function that is bijective and continuous, but not a homeomorphism.
 \begin{rmk}
 Contrast this with, for example, isomorphisms in $\Grp$.  It follows immediately from the definition that a function between groups is an isomorphism in $\Grp$ iff (i) it is bijective, (ii) it is a homomorphism, and (iii) its inverse is a homomorphism.  However, by \cref{exrA.2.11x}, if the original function is a homomorphism, then we get that its inverse is a homomorphism for free, so we only need to actually check (i) and (ii).
@@ -234,6 +234,21 @@ What is an example of a function that is (i) bijective, (ii) continuous, but (ii
 Note the contrast with isomorphisms in the category $\Ring$, for example.  If a function between rings is a bijective homomorphism, then its inverse is automatically a homomorphism.
 \end{rmk}
 \end{exr}
+
+There is a useful result that is applicable in general whenever you want to check that a ``piece-wise'' function is continuous.
+\begin{prp}[Pasting Lemma]\index{Pasting Lemma}\label{PastingLemma}
+Let $X$ and $Y$ be topological spaces, let $C_1,C_2\subseteq X$ be closed, and let $f_1:C_1\rightarrow Y$ and $f_2:C_2\rightarrow Y$ be continuous.  Then, if $\restr{f_1}{C_1\cap C_2}=\restr{f_2}{C_1\cap C_2}$, then the function $f:C_1\cup C_2\rightarrow Y$ defined by
+\begin{equation}
+f(x)\coloneqq \begin{cases}f_1(x) & \text{if }x\in C_1 \\ f_2(x) & \text{if }x\in C_2\end{cases}
+\end{equation}
+is well-defined and continuous.
+\begin{proof}
+We leave this as an exercise.
+\begin{exr}
+Prove this yourself.
+\end{exr}
+\end{proof}
+\end{prp}
 
 \subsection{Some motivation}
 
@@ -1496,8 +1511,12 @@ Thus, by \nameref{TychnoffsTheorem} (\cref{TychnoffsTheorem}), an arbitrary prod
 \begin{exr}\label{exr4.6.39}
 Show that quasicompact subsets (which are in fact compact by \cref{exr4.6.37}) of a $T_2$ space can be separated by neighborhoods.
 \end{exr}
+Hopefully you found an example in \cref{exr3.1.34} of a continuous bijective function that was not a homeomorphism.  In certain special cases, however, you can immediately make this deduction.
+\begin{exr}\label{exr3.6.46}
+Show that continuous injective function from a quasicompact space into a $T_2$ space is a homeomorphism onto its image.
+\end{exr}
 \begin{exm}[A space that is $T_1$ but not $T_2$]
-Let $X$ be as in \cref{exm4.2.8x}, that is the real numbers with the cocountable topology.  By definition, countable sets are closed (along with all of $X$ of course), and so certainly points are closed, and so $X$ is $T_1$.  On the other hand, any open neighborhood of $0$, for example, must intersect any open neighborhood of $1$, for example, because both of these neighborhoods have countable complements and so, by the uncountability of $\R$, must intersection.
+Let $X$ be as in \cref{exm4.2.8x}, that is the real numbers with the cocountable topology.  By definition, countable sets are closed (along with all of $X$ of course), and so certainly points are closed, and so $X$ is $T_1$.  On the other hand, any open neighborhood of $0$, must intersect any open neighborhood of $1$,  because both of these neighborhoods have countable complements and so, by the uncountability of $\R$, must intersect.
 \end{exm}
 
 Here is where the consistency of the terminology breaks-down.  If you guessed that the term $T_3$ refers to spaces in which any two distinct points are separated by closed neighborhoods, you'd be wrong.  Unfortunately, it seems that the term $T_3$ was already taken (we'll see what it means in a bit) when someone went to write this definition down, and so it is called $T_{2\frac{1}{2}}$.

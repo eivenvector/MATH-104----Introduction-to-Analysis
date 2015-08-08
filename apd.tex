@@ -409,7 +409,7 @@ Let $\sim$ be an equivalence relation on a set $X$ and let $x_1,x_2\in X$.  Then
 If $x_1\sim x_2$ we are done, so suppose that this is not the case.  We wish to show that $[x_1]_\sim$ is disjoint from $[x_2]_\sim$, so suppose that this is not the case.  Then, there is some $x_3\in X$ with $x_1\sim x_3$ and $x_3\sim x_2$.  Then, by transitivity $x_1\sim x_2$:  a contradiction.  Thus, it must be the case that $[x_1]_\sim$ is disjoint from $[x_2]_\sim$.
 \end{proof}
 \end{prp}
-\begin{crl}
+\begin{crl}\label{crlA.1.13}
 Let $X$ be a set and let $\sim$ be an equivalence relation on $X$.  Then, the collection $\mathcal{X}\coloneqq \left\{ [x]_\sim :x\in X\right\}$ is a partition of $X$.
 \begin{proof}
 The previous proposition, \cref{prpA.1.12}, tells us that $\mathcal{X}$ has property \cref{A.1.11.2} of the definition of a partition, \cref{dfnA.1.11}.  Property \cref{A.1.11.1} follows from the fact that $x\in [x]_\sim$, so that indeed
@@ -914,12 +914,12 @@ Let $f:A\rightarrow B$ be a morphism in a category.  Then, the \emph{domain}\ind
 Of course, these terms generalize the notions of domain and codomain for sets.
 \end{rmk}
 \end{dfn}
-\begin{dfn}[Endomorphisms]
+\begin{dfn}[Endomorphism]\label{Endomorphism}
 Let $\mathcal{C}$ be a category and let $A\in \mathcal{C}_0$.  Then, an \emph{endomorphism}\index{Endomorphism} is a morphism $f\in \Mor _{\mathcal{C}}(A,A)$.  We write $\End _{\mathcal{C}}(A)\coloneqq \Mor _{\mathcal{C}}(A,A)$\index[notation]{$\End _{\mathcal{C}}(A)$} for the collection of endomorphisms on $A$.
 \end{dfn}
 In other words, ``endomorphism'' is just a fancy name for a morphism with the same domain and co-domain.
 
-\begin{dfn}[Isomorphism]
+\begin{dfn}[Isomorphism]\label{Isomorphism}
 Let $f:A\rightarrow B$ be a morphism in a category.  Then, $f$ is an \emph{isomorphism}\index{Isomorphism} iff it is invertible, i.e., iff there is a morphism $g:B\rightarrow A$ such that $g\circ f=\id _A$ and $f\circ g=\id _B$.  In this case, $g$ is an \emph{inverse} of $f$.  The collection of all isomorphisms from $A$ to $B$ is denoted by $\Iso _{\mathcal{C}}(A,B)$\index[notation]{$\Iso _{\mathcal{C}}(A,B)$}.
 \end{dfn}
 \begin{exr}[Inverses are unique]
