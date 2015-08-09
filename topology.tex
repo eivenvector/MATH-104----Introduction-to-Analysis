@@ -1107,11 +1107,9 @@ All of this follows from the definition of the final topology and its characteri
 \subsection{The product topology}
 
 The product topology is the canonical topology we put on a cartesian-product of topological spaces $X\times Y$.  While we do technically use this in places, we use it in ways where we could have gotten-away with not speaking of the product topology per se (for example, the product topology on $\R \times \R$ is the same as the topology defined by $\varepsilon$-balls).  The real reason we go to the trouble of talking about the product topology explicitly is for the proof of producing a \emph{counter-example} to the statement
-\begin{footnoteequation}
 \begin{textequation}
 A space is quasicompact iff every net has a convergent \emph{strict} subnet.\footnote{In case you're skimming and didn't read the context, this statement is \emph{false}.}
 \end{textequation}
-\end{footnoteequation}
 We mentioned when we defined subnets (\cref{Subnet}) that the notion of a strict subnet was the more obvious ``naive'' notion (that is, you just take terms from the original net, subject to the only condition that your indices get arbitrarily large), but that this ``naive'' notion was insufficient because it didn't allow us to prove certain theorems.  They key result, that spaces are quasicompact iff every net has a convergent subnet (\cref{prp4.2.31}), was precisely the example of a theorem we had in mind.
 
 In brief, the counter-example will be
@@ -1943,15 +1941,13 @@ The preimage of $0$ is $C_1$ is closed and the preimage of $1$ is $C_2$ is close
 We summarize what we have covered so far in this section.
 
 First of all, there are several levels of separation between two different objects in a space
-\begin{footnoteequation}
 \begin{equation}
 \begin{split}
-\text{Distinct} & \Leftarrow \footnote{A two-point space with the indiscrete topology---see \cref{exm4.5.2}.}\text{Topologically-distinguishable}\Leftarrow \footnote{A two-point space with precisely one of the points open---see \cref{exm4.5.3}.}\text{Separated}\Leftarrow \footnote{A certain three-point space---see \cref{exm4.5.8}.}\text{Separated by neighborhoods} \\
-& \qquad \Leftarrow \footnote{Another three-point space---see \cref{exm4.5.11}.}\text{Separated by closed neighborhoods} \Leftarrow \footnote{The Arens Square---see \cref{ArensSquare}.}\text{Completely-separated} \\
-& \qquad \qquad \Leftarrow \footnote{The Uncountable Fort Space---see \cref{UncountableFortSpace}.}\text{Perfectly-separated}
+\text{Distinct} & \Leftarrow \footnote{A two-point space with the indiscrete topology---see \cref{exm4.5.2}.}\text{Topologically-distinguishable}\Leftarrow \footnote{A two-point space with precisely one of the points open---see \cref{exm4.5.3}.}\text{Separated} \\
+& \qquad \Leftarrow \footnote{A certain three-point space---see \cref{exm4.5.8}.}\text{Separated by neighborhoods}\Leftarrow \footnote{Another three-point space---see \cref{exm4.5.11}.}\text{Separated by closed neighborhoods} \\
+& \qquad \qquad \Leftarrow \footnote{The Arens Square---see \cref{ArensSquare}.}\text{Completely-separated}\Leftarrow \footnote{The Uncountable Fort Space---see \cref{UncountableFortSpace}.}\text{Perfectly-separated}
 \end{split}
 \end{equation}
-\end{footnoteequation}
 The arrows indicated implication of course, and all these implications are strict, as indicated by the examples referenced in the footnotes.
 
 There are three `families' of separation axioms of spaces:  (i) separation of pairs of points, (ii) separation of closed sets from points, and (iii) and separation of disjoint closed sets.
@@ -1989,7 +1985,6 @@ And similarly for the third family:
 \end{enumerate}
 
 We now illustrate how all these axioms are related to each other.  All implications are strict (unless otherwise indicated by a $\Leftrightarrow$), in which case the offending counter-example is given in the indicated footnote.  Perhaps the only real surprise\footnote{That's not to say that the counter-examples are easy---they're not (in fact, some of them are \emph{really fucking hard}, like, among-the-most-difficult-things-in-the-notes hard)---but rather that you probably expect that some counter-example exists, even if incredibly exotic.} is the equivalence of $T_{4\frac{1}{2}}$ and completely-$T_4$:  \nameref{UrysohnsLemma} (\cref{UrysohnsLemma}).\footnote{Though perhaps it's worth nothing that $T_{k\frac{1}{2}}$ is equivalent to completely-$T_k$ for $k=3,4$ but \emph{not} $k=2$.}
-\begin{footnoteequation}
 \begin{equation}\label{4.6.105}
 \begin{tikzcd}
 T_0 & & & & \\
@@ -2000,18 +1995,15 @@ T_{2\tfrac{1}{2}} \ar[u,Rightarrow,"\footnote{The Simplified Arens Square---see 
 \text{Perfectly-}T_2 \ar[u,Rightarrow,"\footnote{The Uncountable Fort Space--see \cref{UncountableFortSpace}.}"] & & \text{Perfectly-}T_3 \ar[ll,Rightarrow,"\footnote{$\R$ wit the cocountable extension topology---see \cref{CocountableExtensionTopology}.}"] \ar[u,Rightarrow,"\footnote{The Uncountable Fort Space---see \cref{UncountableFortSpace}.}"] & & \text{Perfectly-}T_4 \ar[ll,Rightarrow,"\footnote{Niemytzki's Tangent Disk Topology---see \cref{NiemytzkisTangentDiskTopology}.}"] \ar[u,Rightarrow,"\footnote{The Uncountable Fort Space---see \cref{UncountableFortSpace}.}"]
 \end{tikzcd}.
 \end{equation}
-\end{footnoteequation}
 
 \section{The Intermediate and Extreme Value Theorems}
 
 \subsection{Connectedness and the Intermediate Value Theorem}
 
 You'll recall from calculus that the classical statement of the Intermediate Value Theorem is
-\begin{footnoteequation}
 \begin{textequation}
 Let $f:[a,b]\rightarrow \R$ be continuous.  Then, for all $y$ between $f(a)$ and $f(b)$ (inclusive), there exists $x\in [a,b]$ such that $f(x)=y$.
 \end{textequation}
-\end{footnoteequation}
 We will see that the proper way to interpret this statement is that the image of $f$ is connected, so that if the image contains $f(a)$ and $f(b)$ (which it does by definition), then it must contain everything in-between as well.  Of course, in order to make this precise, we have to first define what it means to be connected.
 \begin{dfn}[Connected and disconnected]\label{Connected}
 Let $X$ be a topological space.  Then, $X$ is \emph{disconnected}\index{Disconnected} iff there exist disjoint nonempty open sets $U,V\subset X$ such that $X=U\cup V$.  $X$ is \emph{connected}\index{Connected} iff it is not disconnected.  A subset $S$ of $X$ is connected iff it is connected in its subspace topology.

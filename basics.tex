@@ -1515,6 +1515,7 @@ Let $S\subseteq \R$.  Then, there exists a unique set $\Int (S)\subseteq \R$\ind
 Sometimes people denote the interior by $S\degree$.  We prefer the notation $\Int (S)$ for essentially the same reasons as we prefer the notation $\Cls (S)$.
 \end{rmk}
 \begin{proof}
+We leave this as an exercise.
 \begin{exr}
 Complete this proof by yourself, using the dual proof for the closure as guidance.
 \end{exr}
@@ -1587,6 +1588,7 @@ Let $S,T\subseteq \R$.  Then,
 \item $\Int (S\cap T)=\Int (S)\cap \Int (T)$.
 \end{enumerate}
 \begin{proof}
+We leave this as an exercise.
 \begin{exr}
 Complete this proof yourself, using the dual proof for the closure as guidance.
 \end{exr}
@@ -1634,7 +1636,7 @@ $(\Rightarrow )$
 Suppose that $S$ is closed and bounded.  Let $\mathcal{U}$ be an open cover of $S$.  We proceed by contradiction:  suppose that $\mathcal{U}$ has no finite subcover.
 
 \Step{Construct a sequence of nonincreasing closed intervals whose lengths go to $0$ and whose intersection with $S$ has no finite subcover}
-Let $M>0$ be such that $S\subseteq [-M,M]$.  Then, at least one of $[-M,0]\cap S$ and $[0,M]\cap S$ must not have a finite subcover of $\mathcal{U}$, because if they both did, then the cover of $[-M,0]\cap S$ together with the cover of $[0,M]\cap S$ would comprise a finite subcover of $S$.  Without loss of generality, assume that $[0,M]\cap S$ has no finite subcover.  Then, by exactly the same logic, either $[0,\frac{M}{2}]\cap S$ or $[\frac{M}{2},M]\cap S$ has no finite subcover.  Proceeding inductively, we obtain a nonincreasing sequence of closed intervals $I_0\supseteq I_1\supseteq I_2\supseteq \cdots$ such that (i) $I_k\cap S$ has no finite subcover and (ii) the lengths of the intervals converges to $0$.
+Let $M>0$ be such that $S\subseteq [-M,M]$.  Then, at least one of $[-M,0]\cap S$ and $[0,M]\cap S$ must not have a finite subcover of $\mathcal{U}$, because if they both did, then the cover of $[-M,0]\cap S$ together with the cover of $[0,M]\cap S$ would comprise a finite subcover of $S$.  Without loss of generality, assume that $[0,M]\cap S$ has no finite subcover.  Then, by exactly the same logic, either $\left[ 0,\frac{M}{2}\right] \cap S$ or $\left[ \frac{M}{2},M\right] \cap S$ has no finite subcover.  Proceeding inductively, we obtain a nonincreasing sequence of closed intervals $I_0\supseteq I_1\supseteq I_2\supseteq \cdots$ such that (i) $I_k\cap S$ has no finite subcover and (ii) the lengths of the intervals converges to $0$.
 
 \Step{Construct an element in $S\cap \bigcap _{k\in \N}I_k$}
 Note that, as $I_k\cap S$ has no finite subcover, in particular, it cannot be empty (otherwise any subset of $\mathcal{U}$ would cover it).  So, let $x_k\in I_k\cap S$.  Because the lengths of the intervals go to $0$, $m\mapsto x_m$ is a cauchy sequence, and hence converges to some $x_\infty \in \R$.  As $S$ is closed, we have in addition that $x_\infty \in S$.  We wish to show that in addition $x_\infty \in I_k$ for all $k$.  Write $I_k=[a_k,b_k]$ for $a_k\leq b_k$.  We wish to show that $a_k\leq x_\infty \leq b_k$.  We show just $x_\infty \leq b_k$ (the other inequality is similar).  We proceed by contradiction:  suppose that there is some $b_{k_0}$ such that $x_\infty >b_{k_0}$.  Then, there is some $m_0$ such that, whenever $m\geq m_0$, it follows that $x_m>b_{k_0}$.  However, for $m$ at least as large as $k_0$, we need $x_m\in I_m\subseteq I_{k_0}$, so that $x_m\leq b_{k_0}$:  a contradiction.  Therefore, $x_\infty \leq b_k$ for all $k$, and so $x_\infty \in I_k$ for all $k$.

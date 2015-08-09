@@ -548,24 +548,24 @@ Hint:  We have already encountered a counter-example that will do the trick.
 \begin{prp}\label{prp5.1.61}
 Let $\meas$ be a regular measure on a $T_0$ uniform space.  Then, the following are equivalent.
 \begin{enumerate}
-\item $\meas$ is topologically-additive.
-\item $\meas$ is uniformly-additive.
-\item $\meas$ is borel.
+\item \label{enm5.1.61.i}$\meas$ is topologically-additive.
+\item \label{enm5.1.61.ii}$\meas$ is uniformly-additive.
+\item \label{enm5.1.61.iii}$\meas$ is borel.
 \end{enumerate}
 \begin{proof}
 Let $X$ be the $T_0$ uniform space that $\meas$ is a regular measure on.
 
 \blankline
 \noindent
-$((i)\Leftrightarrow (iii))$ $T_0$ uniform spaces are $T_2$.  Therefore, by \cref{exr5.1.56,prp5.1.57}, topological-additivity is equivalent to being borel.
+$(\text{\ref{enm5.1.61.i}}\Leftrightarrow \text{\ref{enm5.1.61.iii}})$ $T_0$ uniform spaces are $T_2$.  Therefore, by \cref{exr5.1.56,prp5.1.57}, topological-additivity is equivalent to being borel.
 
 \blankline
 \noindent
-$((i)\Rightarrow (ii))$ Suppose that $\meas$ is topologically additive.  Let $S,T\subseteq X$ be uniformly-separated.  Then, $S$ and $T$ are separated by neighborhoods, and so $\meas (S\cup T)=\meas (S)+\meas (T)$.  Thus, $\meas$ is uniformly-additive.
+$(\text{\ref{enm5.1.61.i}}\Rightarrow \text{\ref{enm5.1.61.ii}})$ Suppose that $\meas$ is topologically additive.  Let $S,T\subseteq X$ be uniformly-separated.  Then, $S$ and $T$ are separated by neighborhoods, and so $\meas (S\cup T)=\meas (S)+\meas (T)$.  Thus, $\meas$ is uniformly-additive.
 
 \blankline
 \noindent
-$((ii)\Rightarrow (i))$ Suppose that $\meas$ is uniformly-additive.  Let $S,T\subseteq X$  be separated by neighborhoods.  By definition, we want to show that $\meas (S\cup T)=\meas (S)+\meas (T)$.  By subadditivity, it suffices to show that $\meas (S\cup T)\geq \meas (S)+\meas (T)$.  If either one of the sets has infinite measure, then this inequality reads $\infty \geq \infty$, and so is automatically satisfied.  Thus, we may as well without loss of generality assume that $\meas (S),\meas (T)$ is finite.  Then, by outer-regularity, for every $\varepsilon >0$, there is an open set $W_{\varepsilon}$ with $S\cup T\subseteq W_{\varepsilon}$ and
+$(\text{\ref{enm5.1.61.ii}}\Rightarrow \text{\ref{enm5.1.61.i}})$ Suppose that $\meas$ is uniformly-additive.  Let $S,T\subseteq X$  be separated by neighborhoods.  By definition, we want to show that $\meas (S\cup T)=\meas (S)+\meas (T)$.  By subadditivity, it suffices to show that $\meas (S\cup T)\geq \meas (S)+\meas (T)$.  If either one of the sets has infinite measure, then this inequality reads $\infty \geq \infty$, and so is automatically satisfied.  Thus, we may as well without loss of generality assume that $\meas (S),\meas (T)$ is finite.  Then, by outer-regularity, for every $\varepsilon >0$, there is an open set $W_{\varepsilon}$ with $S\cup T\subseteq W_{\varepsilon}$ and
 \begin{equation}
 \meas (S\cup T)\leq \meas (W_{\varepsilon})<\meas (S\cup T)+\varepsilon .
 \end{equation}
@@ -851,7 +851,10 @@ So, let $U,V\in \mathcal{U}$ be open sets containing $S$ and $T$ respectively wh
 \end{equation}
 Let us replace $U$ and $V$ by $U\cap W$ and $V\cap W$---upon doing so, it will still be the case that $U,V\in \mathcal{U}$, it will still be the case that $S\subseteq U$ and $T\subseteq V$, and it will still be the case that $U$ and $V$ are uniformly-separated, but now we will also have that $\meas (U\cup V)\leq \meas (W)$.  Now we have
 \begin{equation}
-\meas (W)<\meas (S\cup T)+\varepsilon \leq \meas (S)+\meas (T)+\varepsilon \leq \meas (U)+\meas (V)+\varepsilon =\meas (U\cup V)+\varepsilon \leq \meas (W)+\varepsilon .
+\begin{split}
+\meas (W) & <\meas (S\cup T)+\varepsilon \leq \meas (S)+\meas (T)+\varepsilon \leq \meas (U)+\meas (V)+\varepsilon =\meas (U\cup V)+\varepsilon \\
+& \leq \meas (W)+\varepsilon .
+\end{split}
 \end{equation}
 Thus, we do indeed have that
 \begin{equation}
@@ -1047,7 +1050,11 @@ Do the case where one has finite positive measure and one has infinite measure.
 Do the case where one has zero measure and the other has finite positive measure.
 \end{exr}
 
-Finally, consider the case where both $0<\meas (U_1),\meas (U_2)<\infty$.  Let $\min \{ \meas _1(U_1),\meas _2(U_2)\} >\varepsilon >0$ and choose $K_i\subseteq U_i$ quasicompact so that
+Finally, consider the case where both $0<\meas (U_1),\meas (U_2)<\infty$.  Let
+\begin{equation}
+\min \{ \meas _1(U_1),\meas _2(U_2)\} >\varepsilon >0
+\end{equation}
+and choose $K_i\subseteq U_i$ quasicompact so that
 \begin{equation}
 \meas _i(K_i)\leq \meas _i(U_i)<\meas (K_i)+\varepsilon .
 \end{equation}
@@ -1093,7 +1100,7 @@ Prove the result yourself.
 \end{exr}
 \end{proof}
 \end{prp}
-When we finally get to the integral (\cref{Integral}), we will take our domain to be a topological measure space.  The reason for doing so is that this will allow us to prove that the area under the curve satisfies certain desirable properties (e.g.~$\int _X\dif \meas (x)\, [f(x)+g(x)]=\int _X\dif \meas (x)\, f(x)+\int _X\dif \meas (x)\, g(x)$ for $f,g$ borel (see \cref{IntegrableFunction})).  I haven't had the time to look for counter-examples to show that it is strictly necessary to restrict our domain to be a topological measure space, but it certainly is a convenient assumption (and not unnatural) that doesn't rule out any examples of interest.\footnote{If you know of any examples of outer-measure spaces that are not topological measure spaces upon which one wants to do integration, please let me know.}  A crucial fact about topological measure spaces that we will make use of when the time comes is that the product of two topological measure spaces is a topological measures space.
+When we finally get to the integral (\cref{Integral}), we will take our domain to be a topological measure space.  The reason for doing so is that this will allow us to prove that the area under the curve satisfies certain desirable properties (e.g.~$\int _X\dif \meas (x)\, [f(x)+g(x)]=\int _X\dif \meas (x)\, f(x)+\int _X\dif \meas (x)\, g(x)$ for $f,g$ borel\footnote{See \cref{IntegrableFunction} for the definition of ``borel''.}.  I haven't had the time to look for counter-examples to show that it is strictly necessary to restrict our domain to be a topological measure space, but it certainly is a convenient assumption (and not unnatural) that doesn't rule out any examples of interest.\footnote{If you know of any examples of outer-measure spaces that are not topological measure spaces upon which one wants to do integration, please let me know.}  A crucial fact about topological measure spaces that we will make use of when the time comes is that the product of two topological measure spaces is a topological measures space.
 \begin{prp}
 Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be topological measure spaces.  Then, $\coord{X_1\times X_2,\meas _1\times \meas _2}$ is a topological measure space.
 \begin{proof}
@@ -1306,6 +1313,7 @@ Show that a nonempty closed subset of $\R$ that has the property that every poin
 \end{savenotes}
 \end{exm}
 \begin{exm}[A set with empty interior of positive measure---the Cantor-Smith-Volterra Set]\label{CantorSmithVolterraSet}
+We leave this as an exercise.
 \begin{exr}
 Modify construction of the Cantor Set starting with $C_0\coloneqq [0,1]$ again, but upon constructing $C_k$ from $C_{k-1}$, you remove the middle open interval $\frac{1}{4^k}$ from the middle of each closed interval of $C_{k-1}$.  The resulting set is the \emph{Cantor-Smith-Volterra Set}\index{Cantor-Smith-Volterra Set}.  Show that it has measure $\frac{1}{2}$, but has empty-interior.
 \end{exr}
@@ -1382,9 +1390,9 @@ is a disjoint union.
 
 We proceed by contradiction:  suppose that every subset of $S$ is measurable.  Then, the previous equality implies that
 \begin{equation}
-\meas (S)=\sum _{r\in \Q}\meas (S\cap (r+N))=
+\meas (S)=\sum _{r\in \Q}\meas (S\cap (r+N))
 \end{equation}
-We show that $\meas (S\cap (r+N))=0$, which will gives us that $\meas (S)=0$:  a contradiction.
+We show that $\meas (S\cap (r+N))=0$ for all $r\in \Q$, which will gives us that $\meas (S)=0$:  a contradiction.
 
 As $\meas (S\cap (r+N))<\infty$ and $\R$ is inner-regular on measurable sets of finite measure (see \cref{InnerRegularFinite}), it suffices to show that every quasicompact subset of $S\cap (r+N)$ has measure $0$.  So, let $K\subseteq S\cap (r+N)$ be quasicompact.
 
@@ -1396,8 +1404,8 @@ As $K\subseteq r+N$, this is a disjoint union, and so we have
 \begin{equation}
 \meas (H)=\sum _{s\in \Q \cap [0,1]}\meas (s+K)=\footnote{By translation invariance.}\sum _{s\in \Q \cap [0,1]}\meas (K).
 \end{equation}
-$H$ is bounded, and so have finite measure.  Thus, the above equality forces $\meas (K)=0$, and we are done.
-\end{proof}.
+$H$ is bounded, and so has finite measure.  Thus, the above equality forces $\meas (K)=0$, and we are done.
+\end{proof}
 \end{prp}
 
 We mentioned awhile ago in the definition of measurable functions (\cref{MeasurableFunction}) the existence of a uniform-homeomorphism of $\R$ that preserves neither measurability not measure $0$.  It is time we return to this.

@@ -101,7 +101,7 @@
 %\usepackage{polyglossia}
 %\setdefaultlanguage{english}
 
-\usepackage{microtype} % Slightly tweak font spacing for aesthetics.  Needs to be loaded after fonts
+\usepackage[tracking=true]{microtype} % Slightly tweak font spacing for aesthetics.  Needs to be loaded after fonts
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -224,88 +224,6 @@
 \newpage
 \fi}
 \makeatother
-%----------------------------------------------------------------------------------------
-%	DEFINITION OF COLORED BOXES
-%----------------------------------------------------------------------------------------
-
-\RequirePackage{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
-
-% Theorem box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-backgroundcolor=black!5,
-linecolor=ocre,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-innerbottommargin=5pt,
-roundcorner=1pt]{tBox}
-
-% Exercise box	  
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-backgroundcolor=ocre!10,
-linecolor=ocre,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-innerbottommargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt]{eBox}	
-
-% Definition box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-linecolor=ocre,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=0pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt,
-innerbottommargin=0pt]{dBox}	
-
-% Corollary box
-\newmdenv[skipabove=7pt,
-skipbelow=7pt,
-rightline=false,
-leftline=true,
-topline=false,
-bottomline=false,
-linecolor=gray,
-backgroundcolor=black!5,
-innerleftmargin=5pt,
-innerrightmargin=5pt,
-innertopmargin=5pt,
-leftmargin=0cm,
-rightmargin=0cm,
-linewidth=4pt,
-innerbottommargin=5pt]{cBox}
-
-% Footnotes in equation box
-\newmdenv[skipabove=0pt,
-skipbelow=\baselineskip ,
-rightline=false,
-leftline=false,
-topline=false,
-bottomline=false,
-innerleftmargin=0pt,
-innerrightmargin=0pt,
-innertopmargin=0pt,
-innerbottommargin=0pt,
-leftmargin=0pt,
-rightmargin=0pt]{footnoteequation}
 
 
 %----------------------------------------------------------------------------------------
@@ -538,52 +456,54 @@ addtohook={%
 \renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
 \makeatother
 
+\RequirePackage{tcolorbox} % Required for creating the theorem, definition, exercise and corollary boxes
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
 
 % Defines the theorem text style for each type of theorem to one of the three styles above.
 \theoremstyle{ocrenumbox}
 
-\newtheorem{theoremT}[equation]{Theorem}
-\crefname{theoremT}{Theorem}{Theorems}
+\newtheorem{thm}[equation]{Theorem}
+\crefname{thm}{Theorem}{Theorems}
+\tcolorboxenvironment{thm}{enhanced,enforce breakable,colback=black!5,colframe=ocre,boxrule=1pt}
 
-\newtheorem{exerciseT}[equation]{Exercise}
-\crefname{exerciseT}{Exercise}{Exercises}
+\newtheorem{exr}[equation]{Exercise}
+\crefname{exr}{Exercise}{Exercises}
+\tcolorboxenvironment{exr}{enhanced,enforce breakable,colback=ocre!10,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
 \theoremstyle{blacknumex}
 
-\newtheorem{exampleT}[equation]{Example}
-\crefname{exampleT}{Example}{Examples}
+\newtheorem{exm}[equation]{Example}
+\crefname{exm}{Example}{Examples}
+\tcolorboxenvironment{exm}{enhanced,enforce breakable,colback=white,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
 \theoremstyle{blacknumbox}
 
-\newtheorem{definitionT}[equation]{Definition}
-\crefname{definitionT}{Definition}{Definitions}
+\newtheorem{dfn}[equation]{Definition}
+\crefname{dfn}{Definition}{Definitions}
+\tcolorboxenvironment{dfn}{enhanced,enforce breakable,colback=white,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
-\newtheorem{metaDefinitionT}[equation]{Meta-definition}
-\crefname{metaDefinitionT}{Meta-definition}{Meta-definitions}
+\newtheorem{mdf}[equation]{Meta-definition}
+\crefname{mdf}{Meta-definition}{Meta-definitions}
+\tcolorboxenvironment{mdf}{enhanced,enforce breakable,colback=white,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
 \theoremstyle{ocrenum}
 
-\newtheorem{corollaryT}[equation]{Corollary}
-\crefname{corollaryT}{Corollary}{Corollaries}
+\newtheorem{crl}[equation]{Corollary}
+\crefname{crl}{Corollary}{Corollaries}
+\tcolorboxenvironment{crl}{enhanced,enforce breakable,colback=black!5,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
-\newtheorem{lemmaT}[equation]{Lemma}
-\crefname{lemmaT}{Lemma}{Lemmas}
+\newtheorem{lma}[equation]{Lemma}
+\crefname{lma}{Lemma}{Lemmas}
+\tcolorboxenvironment{lma}{enhanced,enforce breakable,colback=black!5,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
-\newtheorem{propositionT}[equation]{Proposition}
-\crefname{propositionT}{Proposition}{Propositions}
+\newtheorem{prp}[equation]{Proposition}
+\crefname{prp}{Proposition}{Propositions}
+\tcolorboxenvironment{prp}{enhanced,enforce breakable,colback=black!5,colframe=ocre,boxrule=0pt,leftrule=4pt,sharp corners}
 
 \crefname{subsection}{Subsection}{Subsections}
 
-% Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
-
-\newenvironment{thm}{\begin{tBox}\begin{theoremT}}{\end{theoremT}\end{tBox}}
-\newenvironment{exr}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}				  
-\newenvironment{dfn}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
-\newenvironment{mdf}{\begin{dBox}\begin{metaDefinitionT}}{\end{metaDefinitionT}\end{dBox}}
-\newenvironment{exm}{\begin{dBox}\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}\end{dBox}}		
-\newenvironment{crl}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
-\newenvironment{lma}{\begin{cBox}\begin{lemmaT}}{\end{lemmaT}\end{cBox}}
-\newenvironment{prp}{\begin{cBox}\begin{propositionT}}{\end{propositionT}\end{cBox}}
+\tcolorboxenvironment{equation}{blank,top=-8pt}
 
 
 %----------------------------------------------------------------------------------------
