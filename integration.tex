@@ -59,7 +59,6 @@ Let $f:\coord{X,\meas}\rightarrow Y$ be a function on an outer-measure space.  T
 Whenever $X$ is equipped with a measure, \emph{all relations on $\Mor _{\Set}(X,Y)$ are defined only up to measure zero}.  For example, if we write $f=g$, what we really mean is that $\meas \left( \{ x\in X:f(x)\neq g(x)\} \right) =0$.  Similarly, if we write $f\leq g$, what we really mean is that $\meas \left( \{ x\in X:f(x)\not \leq g(x)\} \right) =0$.  Etc..  A fancier way of putting this, is that we work in the \emph{almost-everywhere category}.
 \end{displayquote}
 \begin{exm}[The almost-everywhere category]\index{Almost-everywhere category}
-\begin{savenotes}
 The almost-everywhere category is the category $\AlE$ whose collection of objects $\AlE _0$ is the collection of all outer-measure spaces, for every outer-meausre space $X$ and outer-meausre space $Y$ the collection of morphisms from $X$ to $Y$, $\Mor _{\AlE}(X,Y)$, is the quotient set $\Mor _{\Set}(X,Y)/\sim$, where $f\sim g$ iff $f$ and $g$ are equal almost everywhere, composition is given by ordinary function composition\footnote{One must check well-definedness---see below}, and the identities of the category are the (equivalence classes) of the identity functions.
 \begin{exr}
 Check that $\sim$ is an equivalence relation.
@@ -81,7 +80,6 @@ Note that we didn't even need to make use of the fact that $f_2(x)=g_2(x)$ for a
 \end{rmk}
 \end{proof}
 \end{prp}
-\end{savenotes}
 \end{exm}
 \begin{exm}[The zero measure]\label{ZeroMeasure}
 Let $X$ be a set and define $\meas :2^X\rightarrow [0,\infty ]$ by $\meas (S)\coloneqq 0$.  How terribly interesting.
@@ -141,7 +139,6 @@ Show that if $\meas (M)=0$, then all subsets of $M$ are measurable.
 \end{exr}
 
 \begin{thm}[Carath\'{e}odory's Theorem]\index{Carath\'{e}odory's Theorem}\label{CaratheodorysTheorem}
-\begin{savenotes}
 Let $\meas :2^X\rightarrow [0,\infty ]$ be an outer-measure.  Then,
 \begin{enumerate}
 \item \label{CaratheodorysTheorem.i}$\meas$ is additive on the collection of measurable sets;
@@ -227,7 +224,6 @@ Let $N$ and $S$ be as in the previous step and take $S\coloneqq N$.  Then, by \e
 \end{equation}
 The other inequality is automatic from subadditivity, and so indeed, we have equality.
 \end{proof}
-\end{savenotes}
 \end{thm}
 Just as we have a notion of measurable set, so too do we have a notion of measurable \emph{function}
 \begin{dfn}[Measurable (function)]\label{MeasurableFunction}
@@ -342,11 +338,26 @@ Consider the counting measure on $\R$.  The set $[0,1]$ is quasicompact, but has
 
 In general topology, I really dislike imposing unnecessary countability assumptions.  On the other hand, countability is something fundamental in measure theory, simply because of the conditions of additivity and subadditivity---see \cref{OuterMeasure}.  Furthermore, as explained there, we \emph{don't want} any stronger additivity assumptions.  Thus, in the context of \emph{measures} on topological spaces, it makes sense to impose countability conditions on our spaces.  This leads us to the following definition.
 \begin{dfn}[$\sigma$-quasicompact]\label{SigmaQuasicompact}
-A topological space is \emph{$\sigma$-quasicompact} iff it is the countable union of quasicompact sets.
+A topological space is \emph{$\sigma$-quasicompact}\index{$\sigma$-quasicompact} iff it is the countable union of quasicompact sets.  A topological space is \emph{$\sigma$-compact}\index{$\sigma$-compact} iff it is the countable union of compact sets.
+\begin{rmk}
+Recall that compact is synonymous (by definition) with $T_2$ and quasicompact.  In particular, compact sets are \emph{closed} (and so measurable for borel measurs).
+\end{rmk}
 \end{dfn}
+\begin{exr}\label{SigmaProductSigma}
+Show that the product of $\sigma$-quasicompact spaces is $\sigma$-quasicompact.  Show that the product of $\sigma$-compact spaces is $\sigma$-compact.
+\end{exr}
 \begin{dfn}[Topological measure space]\label{TopologicalMeasureSpace}
-A \emph{topological measure space}\index{Topological measure space} is a $\sigma$-quasicompact topological space equipped with a regular borel measure.
+A \emph{topological measure space}\index{Topological measure space} is a $\sigma$-compact topological space equipped with a regular borel measure.
 \end{dfn}
+\begin{exr}\label{SigmaFinite}
+Show that a topological measure space can be written as the countable \emph{disjoint} union of measurable sets of finite measure.
+\begin{rmk}
+By regularity and $\sigma$-compactness, you by definition have that topological measure spaces can be written as the countable union of measurable sets of finite measure.  It is your job to turn that union into a disjoint one.
+\end{rmk}
+\begin{rmk}
+I told you once upon a time not to forget a trick.  You haven't forgotten it, have you?
+\end{rmk}
+\end{exr}
 The following is nice characterization of measurability in topological measure spaces.  It is arguably the reason why we give the conditions ``$\sigma$-quasicompact, regular, borel'' a name in the first place.
 \begin{prp}\label{prp5.1.39}
 Let $\coord{X,\meas}$ be a topological measure space and $S\subseteq X$.  Then, $S$ is measurable iff for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
@@ -354,7 +365,7 @@ Let $\coord{X,\meas}$ be a topological measure space and $S\subseteq X$.  Then, 
 C_{\varepsilon}\subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
 \end{equation}
 \begin{proof}
-Write $X=\bigcup _{m\in \N}K_m$ for $K_m\subseteq X$ quasicompact.
+Write $X=\bigcup _{m\in \N}K_m$ for $K_m\subseteq X$ compact.
 
 \blankline
 \noindent
@@ -362,7 +373,7 @@ $(\Rightarrow )$  Suppose that $S$ is measurable.  Define $S_m\coloneqq S\cap K_
 \begin{equation}
 \meas (S_m)\leq \meas (U_m)<\meas (S_m)+\frac{\varepsilon}{2^m}.
 \end{equation}
-Because $S$ is measurable, it in turn follows that\footnote{See \cref{exr5.1.21}.}
+Because $S$ is measurable, it in turn follows that\footnote{See \cref{exr5.1.21}.  We are also using here the fact that $K_m$ is measurable, because it is compact, hence closed, and the measure is borel (by hypothesis).}
 \begin{equation}
 \meas (U_m-S_m)<\frac{\varepsilon}{2^m}.
 \end{equation}
@@ -376,7 +387,10 @@ Applying this same logic to $S^{\comp}$, we can find an open set $V$ containing 
 \end{equation}
 Then, $V^{\comp}$ is of course a closed subset of $S$ and
 \begin{equation}
-\meas (U\setminus V^{\comp})=\meas (U\cap V)\leq \meas (U\cap V\cap S)+\meas (U\cap V\cap S^{\comp})\leq \meas (V\setminus S^{\comp})+\meas (U\setminus S)<4\varepsilon .
+\begin{split}
+\meas (U\setminus V^{\comp}) & =\meas (U\cap V)\leq \meas (U\cap V\cap S)+\meas (U\cap V\cap S^{\comp}) \\
+& \leq \meas (V\setminus S^{\comp})+\meas (U\setminus S)<4\varepsilon .
+\end{split}
 \end{equation}
 
 \blankline
@@ -392,6 +406,8 @@ C\coloneqq \bigcup _{m\in \N}C_m.
 $C$ is measurable because it is the countable union of closed sets, which are measurable because, by hypothesis, the measure in borel.  On the other hand, $\meas (S\setminus C)<2\varepsilon$.  As $\varepsilon$ is arbitrary, it follows that $\meas (S\setminus C)=0$, and so $S\setminus C$ is measurable.  Therefore, $S=C\cup (S\setminus C)$ is measurable.
 \end{proof}
 \end{prp}
+Furthermore, in topological measure spaces, \emph{every} set is measurable up to sets of measure $0$.
+
 Before moving onto discussion of measures on uniform spaces, we have one more adjective that is used to describe outer-measures on topological spaces.
 \begin{dfn}[Topological-additivity]\label{TopologicalAdditivity}
 Let $X$ be a topological space and let $\meas$ be an outer-measure on $X$.  Then, $\meas$ is \emph{topologically-additive}\index{Topologically-additive} iff whenever $S,T\subseteq X$ are separated by neighborhoods, it follows that $\meas (S\cup T)=\meas (S)+\meas (T)$.
@@ -448,7 +464,7 @@ As $\varepsilon$ is arbitrary, we have that $\meas (A)\geq \meas (A\cap U)+\meas
 \end{prp}
 By definition, regularity requires inner-regularity in open sets.  In certain nice cases, however, we also get inner-regularity on measurable sets of finite measure.
 \begin{prp}\label{InnerRegularFinite}
-Let $\coord{X,\meas}$ be a $T_2$ topological measure space.  Then, $\meas$ is inner-regular on measurable sets of finite measure.
+Let $\coord{X,\meas}$ be a topological measure space.  Then, $\meas$ is inner-regular on measurable sets of finite measure.
 \begin{proof}
 Write $X=\bigcup _{m\in \N}K_m$ for $K_m$ quasicompact.  Let $S\subseteq X$ be measurable and of finite measure.  Define $S_m\coloneqq S\cap K_m$.  As $X$ is $T_2$, $K$ is closed.  Because $X$ is $T_2$, $\meas$ is borel, and so closed sets are measurable.  Thus, $K$ is measurable, and so $S_m$ is measurable.
     
@@ -473,12 +489,40 @@ Let $X$ be a topological space that can be written as the countable union of qua
 \begin{rmk}
 This condition, that every set of infinite measure has a subset of finite positive measure is sometimes called \emph{semifinite}\index{Semifinite}.
 \end{rmk}
+\begin{rmk}
+In particular, topological measure spaces are semi-finite.
+\end{rmk}
 \begin{proof}
 Suppose that $\meas (S)=\infty$.  Write $X=\bigcup _{m\in \N}K_m$ for $K_m$ quasicompact.  Define $S_m\coloneqq S\cap K_m$.  As $K_m$ is quasicompact, it has finite measure, and so $S_m$ has finite measure.  We also have that
 \begin{equation}
 \infty =\meas (S)=\meas \left( \bigcup _{m\in \N}S_m\right) \leq \sum _{m\in \N}\meas (S_m),
 \end{equation}
 which means that the measure of at least some $S_m$ is strictly positive.
+\end{proof}
+\end{prp}
+\begin{prp}\label{ModuloZero}
+Let $\coord{X,\meas}$ be a topological measure space and let $S\subseteq X$.  Then, there is some $M\subseteq X$ measurable with $\meas (S\cap M^{\comp})+\meas (S^{\comp}\cap M)=0$.
+\begin{rmk}
+In the `venn diagram' of $S$ and $M$, $S\cap M^{\comp}\cup S^{\comp}\cap M$ is everything outside of $S\cap M$.  We are saying that, in particular, this set has measure $0$.  This is what we mean when we say that \emph{every} set is measurable `modulo' a set of measure $0$.
+\end{rmk}
+\begin{proof}
+Write $X=\bigcup _{m\in \N}K_m$ for $K_m\subseteq X$ quasicompact.  Define $S_m\coloneqq S\cap K_m$.  Let $\varepsilon >0$.  Let $U_m\subseteq X$ be open with $S_m\subseteq U_m$ and $\meas (U_m)-\meas (S_m)<\frac{\varepsilon}{2^m}$.  Then, let $L_m\subseteq U_m$ be quasicompact and such that $\meas (U_m\setminus L_m)<\frac{\varepsilon}{2^m}$.\footnote{Here, we implicitly using the fact that $L_m,U_m$ are measurable.}  Define $M\coloneqq \bigcup _{m\in \N}L_m$.  As a countable union of measurable sets, $M$ is measurable.  For convenience, let us also write $U\coloneqq \bigcup _{m\in \N}U_m$, so that we have
+\begin{equation}
+\meas (U\setminus L)\leq \sum _{m\in \N}\meas (U_m\setminus L_m)=2\varepsilon .
+\end{equation}
+We similarly have that
+\begin{equation}
+\meas (U\setminus S)<2\varepsilon .
+\end{equation}
+From these, we have
+\begin{equation}
+\meas (S\cap M^{\comp})\leq \meas (U\setminus L)<2\varepsilon ,
+\end{equation}
+which gives $\meas (S\cap M^{\comp})=0$.  On the other hand, we also have
+\begin{equation}
+\meas (S^{\comp}\cap M)\leq \meas (U\setminus S)<2\varepsilon ,
+\end{equation}
+which likewise gives us that $\meas (S^{\comp}\cap M)=0$, and we are done.
 \end{proof}
 \end{prp}
 
@@ -626,8 +670,8 @@ Before finally moving on to the \nameref{HaarHowesTheorem}, let us briefly summa
 \begin{enumerate}
 \item Borel means that open sets are measurable---see \cref{BorelMeasure}.
 \item Regular means quasicompact sets have finite measure, inner-regularity on opens, and outer-regularity on everything---see \cref{RegularMeasure}.
-\item A topological space is $\sigma$-quasicompact iff it is the countable union of quasicompact sets---see \cref{SigmaQuasicompact}.
-\item A topological measure space is a $\sigma$-quasicompact topological space equipped with a regular borel measure---see \cref{TopologicalMeasureSpace}.
+\item A topological space is $\sigma$-(quasi)compact iff it is the countable union of (quasi)compact sets---see \cref{SigmaQuasicompact}.
+\item A topological measure space is a $\sigma$-compact topological space equipped with a regular borel measure---see \cref{TopologicalMeasureSpace}.
 \item Topological-additivity means that the measure is additive on two sets which are separated by neighborhoods---see \cref{TopologicalAdditivity}.
 \item Uniform-additivity means that the measure is additive on two sets which are uniformly-separated---see \cref{UniformAdditivity}.
 \item Neither regular topologically-additive nor regular uniformly-additive measures need be borel (\cref{exm5.1.43}), but in fact for $T_2$ spaces this is equivalent to being borel---see \cref{prp5.1.57,prp5.1.25}.
@@ -700,7 +744,6 @@ In other words, the symmetries of the isogeneous space preserve measurability (i
 
 And finally now the key result that will allow us to define basically every measure we work with in these notes (and much more).
 \begin{thm}[Haar-Howes Theorem]\index{The Haar-Howes Theorem}\label{HaarHowesTheorem}
-\begin{savenotes}
 Let $\coord{X,\Phi}$ be a $T_0$ locally quasicompact\footnote{Hence locally compact as $T_0$ implies uniformly-completely-$T_3$ implies $T_2$ and subspaces of $T_2$ spaces are $T_2$.} isogeneous space and let $K\subseteq X$ be quasicompact with nonempty interior.. Then, there exists a unique isogeneous $\meas$ on $X$ such that $\meas (K)=1$.
 \begin{rmk}
 You should think of $K$ has a set with which we can `compare' all other sets to get a ``measure'' of `size'.  The condition that it be quasicompact you can think of the condition that the measure of $K$ be finite, and the condition that it have nonempty interior you can think of the condition that the measure of $K$ be positive.  If $\meas (K)$ is neither infinite nor zero, then we can `normalize' to get $\meas (K)=1$.
@@ -794,7 +837,7 @@ Complete the proof yourself.
 \end{exr}
 \end{proof}
 \end{lma}
-Having (hopefully) proved the lemma, we now show subadditivity for \emph{open} sets.  (We will then prove subadditivity in general.)  So, let $\{ U_m:m\in \N \}$ be a countable collection of open sets of X.  Let $K\subseteq \bigcup _{m\in \N}U_m$.  Then, there is some $m_K\in \N$ such that $K\subseteq \bigcup _{k=1}^{m_K}U_k$.  By applying this lemma inductively then, we may find quasicompact sets $K_1,\ldots ,K_m$ such that (i) $K_k\subseteq U_k$ for $1\leq k\leq m$ and $K=\bigcup _{k=1}^mK_k$.  Using the fact that we have already proved finite `subadditivity' (of $\mathrm{H}$) for quasicompact sets (\cref{Haar.5}), we find that
+Having (hopefully) proved the lemma, we now show subadditivity for \emph{open} sets.  (We will then prove subadditivity in general.)  So, let $\{ U_m:m\in \N \}$ be a countable collection of open sets of X.  Let $K\subseteq \bigcup _{m\in \N}U_m$.  Then, there is some $m_K\in \N$ such that $K\subseteq \bigcup _{k=1}^{m_K}U_k$.  By applying this lemma inductively then, we may find quasicompact sets $K_1,\ldots ,K_m$ such that (i) $K_k\subseteq U_k$ for $0\leq k\leq m$ and $K=\bigcup _{k=1}^mK_k$.  Using the fact that we have already proved finite `subadditivity' (of $\mathrm{H}$) for quasicompact sets (\cref{Haar.5}), we find that
 \begin{equation}
 \mathrm{H}(K)\leq \sum _{k=1}^m\mathrm{H}(K_k)\leq \sum _{k=1}^m\meas (U_k)\leq \sum _{m\in \N}\meas (U_m).
 \end{equation}
@@ -950,7 +993,6 @@ Hint:  You should be able to combine these results to get an expression for $\me
 \end{rmk}
 \end{exr}
 \end{proof}
-\end{savenotes}
 \end{thm}
 Dayyyuuuummmm.  That was a hard theorem.  Probably the hardest in these notes.  But holy jesus was it worth it.  Check out this epic definition.
 \begin{dfn}[Lebesgue measure]\label{LebesgueMeasure}
@@ -985,11 +1027,10 @@ To do this, of course, we must first define a measure on $X\times \R$.
 
 \subsection{The product measure}
 
-\begin{dfn}[Product measure]
-Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be regular measure spaces.  The \emph{product measure}, $\meas _1\times \meas _2:2^{X_1\times X_2}\rightarrow [0,\infty ]$, on $X_1\times X_2$ is defined by
+\begin{thm}[Product measure]
+Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be topological measure spaces.  Then, there exists a unique regular borel measure $\meas _1\times \meas _2$\index[notation]{$\meas _1\times \meas _2$} on $X_1\times X_2$, the \emph{product measure}\index{Product measure}, such that $[\meas _1\times \meas _2](K_1\times K_2)=\meas _1(K_1)\meas _2(K_2)$ for $K_i\subseteq X_i$ quasicompact.  Furthermore, it satisfies (i) $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for all $S_i\subseteq X_i$ arbitrary\footnote{That is, you assume that `area is base times height' for \emph{quasicompact} rectangles, and you then you get that `area is base times height' for \emph{all} rectangles.  That's right:  you don't even need measurability.} and (ii)
 \begin{equation}
 \begin{split}
-[\meas _1\times \meas _2](K_1\times K_2) & \coloneqq \meas _1(K_1)\meas _2(K_2)\text{ for }K_1\subseteq X_1,\ K_2\subseteq X_2\text{ quasicompact} \\
 [\meas _1\times \meas _2](U) & \coloneqq \sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_{1,k}\times K_{2,k}):\right. \\
 & \qquad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
 & \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
@@ -997,12 +1038,15 @@ Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be regular measure spaces.
 [\meas _1\times \meas _2](S) & \coloneqq \inf \left\{ [\meas _1\times \meas _2](U):S\subseteq U,\ U\text{ open}\right\} .
 \end{split}
 \end{equation}
-\begin{prp}
-\begin{savenotes}
-This is a well-defined regular measure on $X_1\times X_2$.
+\begin{rmk}
+You (hopefully) showed in \cref{SigmaProductSigma} that the product of two $\sigma$-compact spaces and $\sigma$-compact.  It thus follows that $\coord{X_1\times X_2,\meas _1\times \meas _2}$ is likewise a topological measure space.
+\end{rmk}
+\begin{rmk}
+So the formulas look ridiculous, but I promise, it's not that complicated.  The first thing says that the measure of a `rectangle' is the product of the measure of the sides---area is base times height.  The second thing says that we can approximate open sets from the inside with quasicompact sets of a special form (namely, finite disjoint unions of quasicompact rectangles)---essentially just inner regularity on opens.  And the third says that we can approximate arbitrary sets from the outside with opens---outer regularity.
+\end{rmk}
 \begin{proof}
-\Step{Introduce notation}
-To help make notation more convenient, let us write
+\Step{Define $\meas _1\times \meas _2$}
+We define
 \begin{equation}
 \begin{split}
 \meas _{\mathrm{K}}(K_1\times K_2) & \coloneqq \meas _1(K_1)\meas _2(K_2)\text{ for }K_1\subseteq X_1,\ K_2\subseteq X_2\text{ quasicompact} \\
@@ -1013,7 +1057,7 @@ To help make notation more convenient, let us write
 [\meas _1\times \meas _2](S) & \coloneqq \inf \{ \meas _{\mathrm{U}}(U):S\subseteq U,\ U\text{ open}\} .
 \end{split}
 \end{equation}
-We introduce this separate notation because we do not know yet that they all agree.  Once we show that $\meas _1\times \meas _2$ is well-defined, we shall denote everything by $\meas _1\times \meas _2$.
+We will eventually show that all these formulas agree in the case that more than one applies to a give set (e.g.~the second and third both apply to any open set).  After which time, we shall simply denote $\meas _1\times \meas _2$ for everything.
 
 \Step{Show that $\meas _1\times \meas _2$ is nondecreasing}
 \begin{exr}
@@ -1037,7 +1081,7 @@ Let us now do the case where one has measure $0$ and one has infinite measure.  
 \begin{equation}
 \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U_1\times U_2,
 \end{equation}
-we must have that $K_{1,k}\subseteq U_1$ for all $1\leq k\leq m$,\footnote{Okay, you caught me.  This is not necessarily true if $K_{2,k}=\emptyset$.  Congratulations.  Would you like a cookie?} which forces $\meas _1(K_{1,k})=0$, and so in turn it forces
+we must have that $K_{1,k}\subseteq U_1$ for all $0\leq k\leq m$,\footnote{Okay, you caught me.  This is not necessarily true if $K_{2,k}=\emptyset$.  Congratulations.  Would you like a cookie?} which forces $\meas _1(K_{1,k})=0$, and so in turn it forces
 \begin{equation}
 \sum _{k=0}^m\meas _{\mathrm{K}}(K_{1,k}\times K_{2,k})=0,
 \end{equation}
@@ -1046,77 +1090,198 @@ and hence $\meas _{\mathrm{U}}(U_1\times U_2)=0=\meas _1(U_1)\meas _2(U_2)$.
 \begin{exr}
 Do the case where one has finite positive measure and one has infinite measure.
 \end{exr}
+
 \begin{exr}
 Do the case where one has zero measure and the other has finite positive measure.
 \end{exr}
 
 Finally, consider the case where both $0<\meas (U_1),\meas (U_2)<\infty$.  Let
 \begin{equation}
-\min \{ \meas _1(U_1),\meas _2(U_2)\} >\varepsilon >0
+(\meas _1(U_1)+\meas _2(U_2))\cdot \min \{ \meas _1(U_1),\meas _2(U_2)\} >\varepsilon >0
 \end{equation}
 and choose $K_i\subseteq U_i$ quasicompact so that
 \begin{equation}
-\meas _i(K_i)\leq \meas _i(U_i)<\meas (K_i)+\varepsilon .
+\meas _i(K_i)\leq \meas _i(U_i)<\meas (K_i)+\frac{\varepsilon}{\meas _1(U_2)+\meas _2(U_2)}.
 \end{equation}
 Then,
 \begin{equation}
-\meas _1(U_1)\meas _2\meas _1(K_1)\meas _2(K_2)>(\meas _1(U_1)-\varepsilon )(\meas _2(U_2)-\varepsilon )
+\begin{split}
+\meas _1(U_1)\meas _2(U_2) & \geq \meas _1(K_1)\meas _2(K_2) \\
+& >\left( \meas _1(U_1)-\frac{\varepsilon}{\meas _1(U_2)+\meas _2(U_2)}\right) \left( \meas _2(U_2)-\frac{\varepsilon}{\meas _1(U_1)+\meas _2(U_2)}\right) \\
+& =\meas _1(U_1)\meas _2(U_2)-\varepsilon +\frac{\varepsilon ^2}{(\meas _1(U_1)+\meas _2(U_2))^2}>\meas _1(U_1)\meas _2(U_2)-\varepsilon ,
+\end{split}
 \end{equation}
+whence it follows that $\meas _{\mathrm{U}}(U_1\times U_2)=\meas _1(U_1)\meas _2(U_2)$.
 
-We now check that $\meas _1\times \meas _2$ is well-defined.  Let $S\subseteq X_1\times X_2$ be open.  We must show that $[\meas _1\times \meas _2](S)=\meas _{\mathrm{U}}(S)$.  Of course, $\meas _{\mathrm{U}}(S)\in \{ \meas _{\mathrm{U}}(U):S\subseteq U,\ U\text{ open}\}$, which gives us that $[\meas _1\times \meas _2](S)\leq \meas _{\mathrm{U}}(S)$.  On the other hand, because $\meas _{\mathrm{U}}$ is nondecreasing on open sets, we have that $\meas _{\mathrm{U}}(S)$ is a lower-bound for $\{ \meas _{\mathrm{U}}(U):S\subseteq U,\ U\text{ open}\}$, which gives us the other inequality.
+\Step{Show that $[\meas _1\times \meas _2](U)=\meas _{\mathrm{U}}(U)$}
+Let $S\subseteq X_1\times X_2$ be open.  We must show that $[\meas _1\times \meas _2](S)=\meas _{\mathrm{U}}(S)$.  Of course, $\meas _{\mathrm{U}}(S)\in \{ \meas _{\mathrm{U}}(U):S\subseteq U,\ U\text{ open}\}$, which gives us that $[\meas _1\times \meas _2](S)\leq \meas _{\mathrm{U}}(S)$.  On the other hand, because $\meas _{\mathrm{U}}$ is nondecreasing on open sets, we have that $\meas _{\mathrm{U}}(S)$ is a lower-bound for $\{ \meas _{\mathrm{U}}(U):S\subseteq U,\ U\text{ open}\}$, which gives us the other inequality.
 
-Now suppose that $S=K_1\times K_2$ for $K_i\subseteq X_i$ quasicompact.  We must show that $[\meas _1\times \meas _2](S)=\meas _{\mathrm{K}}(S)$.  Let $\varepsilon >0$.  Because $\meas _i$ is regular, there is some open $U_i\subseteq X_i$ with $K_i\subseteq U_i$ and
+\Step{Show that $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S)$ for $\meas (S_i)<\infty$}\label{stpProductMeasure.5}
+In particular, this will show that $[\meas _1\times \meas _2](K_1\times K_2)=\meas _{\mathrm{K}}(K_1\times K_2)$ for $K_i\subseteq X_i$ quasicompact.  Let $S_i\subseteq X_i$ with $\meas _i(S_i)<\infty$.  We want to show that $[\meas _1\times \meas _2](S)=\meas _1(S_1)\meas _2(S_2)$.  In other words, we want to show that
 \begin{equation}
-\meas _i(K_i)\leq \meas _i(U_i)<\meas _i(K_i)+\varepsilon .
+\meas _1(S_1)\meas _2(S_2)=\inf \{ \meas _{\mathrm{U}}(U):S_1\times S_2\subseteq U,\ U\text{ open}\} .
 \end{equation}
-\end{proof}
-\end{savenotes}
-\end{prp}
-\begin{exr}\label{exr5.2.4}
-Show that this is a well-defined regular measure on $X_1\times X_2$.
-\begin{rmk}
-For example, if $S$ is open, you must check that both the second and third formulas agree.
-\end{rmk}
-\end{exr}
-\begin{rmk}
-So the formulas look ridiculous, but I promise, it's not that complicated.  The first thing says that the measure of a `rectangle' is the product of the measure of the sides---area is base times height.  The second thing says that we can approximate open sets from the inside with quasicompact sets of a special form (namely, finite disjoint unions of quasicompact rectangles)---essentially just inner regularity on opens.  And the third says that we can approximate arbitrary sets from the outside with opens---outer regularity.
-\end{rmk}
-\begin{rmk}
-In particular, \emph{product measures are uniquely determined by the measures of quasicompact subsets of $X_1$ and $X_2$}.
-\end{rmk}
-\end{dfn}
-\begin{prp}
-Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be regular measure spaces, and let $S_1\subseteq X_1$ and $S_2\subseteq X_2$.  Then,
+Let $\varepsilon >0$.  Choose $\delta >0$ such that $\delta (\meas _1(S_1)+\meas _2(S_2))+\delta ^2<\varepsilon$.  Because $\meas _i$ is regular, there is some open $U_i\subseteq X_i$ with $K_i\subseteq U_i$ and
 \begin{equation}
-[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2).
+\meas _i(S_i)\leq \meas _i(U_i)<\meas _i(S_i)+\delta .
 \end{equation}
-\begin{rmk}
-The point is that $S_1$ and $S_2$ do not have to be quasicompact (or open or whatever).
-\end{rmk}
-\begin{proof}
-We leave this as an exercise.
+Then, $S_1\times S_2\subseteq U_1\times U_2$, $U_1\times U_2$ is open, and
+\begin{equation}
+\begin{split}
+\meas _1(S_1)\meas _2(S_2) & \leq \meas _1(U_1)\meas _2(U_2)=\meas _{\mathrm{U}}(U_1\times U_2) \\
+& <\meas _1(S_1)\meas _2(S_2)+\delta (\meas _1(S_1)+\meas _2(S_2))+\delta ^2 \\
+& <\meas _1(S_1)\meas _2(S_2)+\varepsilon ,
+\end{split}
+\end{equation}
+whence it follows that $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$.
+
+\Step{Show that $\meas _{\mathrm{U}}(K_1\times K_2)=\meas _{\mathrm{K}}(K_1\times K_2)$}
+Now suppose that $U\coloneqq K_1\times K_2$ is open for $K_i\subseteq X_i$ quasicompact.  We must show that $\meas _{\mathrm{K}}(U)=\meas _{\mathrm{U}}(U)$.  That is, we must show that $\meas _{\mathrm{U}}(U)=\meas _1(K_1)\meas _2(K_2)$.  However, from the definition of $\meas _{\mathrm{U}}$ as a supremum, we have that $\meas _{\mathrm{U}}(U)\geq \meas _1(K_1)\meas _2(K_2)$.  To show the other inequality, let
+\begin{equation}
+\bigcup _{k=0}^mK_{1,m}\times K_{2,m}\subseteq K_1\times K_2
+\end{equation}
+be a disjoint union for $K_{i,k}\subseteq X_i$ quasicompact.\footnote{Imagine a finite disjoint union of rectangles contained inside another big rectangle.}  We need to show that
+\begin{equation}
+\sum _{k=1}^m\meas _1(K_{1,k})\meas _2(K_{2,k})\leq \meas _1(K_1)\meas _2(K_2).
+\end{equation}
+$K_{i,k}\subseteq K_i$ for $0\leq k\leq m$, and so
+\begin{equation}
+\left( \bigcup _{k=0}^mK_{1,k}\right) \times \left( \bigcup _{k=0}^mK_{2,k}\right) \subseteq K_1\times K_2.\footnote{This is the statement that the `bounding rectangle' of the union of rectangles will still be contained inside the big rectangle.}
+\end{equation}
+Now, here is where the notation becomes atrocious, but the idea is only a little bit tricky.  The intuition is that we break-up the bounding rectangle into a grid of smaller rectangles so that each of the original rectangles is a disjoint union of the `grid' rectangles.  Let $S\subseteq \{ 1,\ldots ,k-1,k,\ldots ,m\} \eqqcolon \mathcal{S}_k$ and define
+\begin{equation}
+K_{i,k,S}\coloneqq K_{i,k}\cap \bigcap _{l\in S_k}K_{i,l}\cap \bigcap _{l\notin S_k}K_{i.l}^{\comp},
+\end{equation}
+so that
+\begin{equation}
+K_{i,k}=\bigcup _{S\subseteq \mathcal{S}_k}K_{i,k,S}
+\end{equation}
+and
+\begin{equation}
+L_i\coloneqq \bigcup _{k=0}^mK_{i,k}=\bigcup _{k=1}^m\bigcup _{S\subseteq \mathcal{S}_k}K_{i,k,S}
+\end{equation}
+are \emph{disjoint} unions.  Then, we have that
+\begin{equation}
+\begin{split}
+\sum _{k=0}^m\meas _1(K_{1,k})\meas _2(K_{2,k}) & =\sum _{k=0}^m\left( \sum _{S\subseteq \mathcal{S}_k}\meas _1(K_{1,k,S})\right) \left( \sum _{S\subseteq \mathcal{S}_k}\meas _2(K_{2,k,S})\right) \\
+& \leq \left( \sum _{k=0}^m\sum _{S\subseteq \mathcal{S}_k}\meas _1(K_{1,k,S})\right) \left( \sum _{k=0}^m\sum _{S\subseteq \mathcal{S}_k}\meas _2(K_{2,k,S})\right) \\
+& =\meas _1(L_1)\meas _2(L_2)\leq \meas _1(K_1)\meas _2(K_2),
+\end{split}
+\end{equation}
+as was to be shown.
+
+\Step{Show that $\meas _1\times \meas _2$ is an outer-measure}
+That $[\meas _1\times \meas _2](\emptyset )=0$ follows immediately from the definition.  We already showed that it is nondecreasing.
 \begin{exr}
-Prove the result yourself.
+Check that $\meas _1\times \meas _2$ is subadditive.
+\end{exr}
+
+\Step{Show that $\meas _1\times \meas _2$ is regular}
+That it is outer-regular follows immediately from the definition.\footnote{Indeed, the definition was designed for the purpose of being regular.}  Inner-regularity also follows quite easily.
+\begin{equation}
+\begin{split}
+[\meas _1\times \meas _2](U) & \coloneqq \sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_{1,k}\times K_{2,k}):\right. \\
+& \qquad \qquad \left. K_{1,k}\subseteq X_1,\right. \\
+& \qquad \qquad \left. K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
+& \qquad \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
+& \qquad \qquad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \\
+& \leq \sup \{ [\meas _1\times \meas _2](K):K\subseteq U,\ K\text{ quasicompact}\} \leq \footnote{Because $\meas _1\times \meas _2$ is nondecreasing.}[\meas _1\times \meas _2](U),
+\end{split}
+\end{equation}
+and so all of these inequalities must be equalities.  We now check that it is finite on quasicompact sets.  Let $K\subseteq X_1\times X_2$ be quasicompact.  Define $K_i\coloneqq \pi _i(K)\subseteq X_i$.  This is quasicompact by the \nameref{ExtremeValueTheorem}, and so $\meas _i(K_i)<\infty$.  However, $K\subseteq K_1\times K_2$, and hence $[\meas _1\times \meas _2](K)\leq \meas _1(K_1)\meas _2(K_2)<\infty$.
+
+\Step{Show that $\meas _1\times \meas _2$ is additive on finite disjoint unions of quasicompact rectangles}
+Let $K_{i,k}\subseteq X_i$ be quasicompact for $0\leq k\leq m$ be such that $\bigcup _{k=0}^mK_{1,k}\times K_{2,k}$ is a disjoint union.  We wish to show that
+\begin{equation}
+[\meas _1\times \meas _2]\left( \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\right) =\sum _{k=0}^m\meas _1(K_{1,k})\meas _2(K_{2,k}).
+\end{equation}
+The $\leq$ equality follows from subadditivity.  To show the other inequality, let $\varepsilon >0$ and let $U\subseteq X_1\times X_2$ be open and such that
+\begin{equation}
+\bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U\text{ and }[\meas _1\times \meas _2](U)<[\meas _1\times \meas _2]\left( \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\right) +\varepsilon .
+\end{equation}
+Then,
+\begin{equation}
+[\meas _1\times \meas _2]\left( \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\right) >[\meas _1\times \meas _2](U)-\varepsilon \geq \sum _{k=0}^m\meas _1(K_{1,k})\meas _2(K_{2,k}),
+\end{equation}
+which gives us the other inequality.
+
+\Step{Show that $\meas _1\times \meas _2$ is borel}
+Let $U\subseteq X_1\times X_2$ be open.  By inner-regularity, modulo a set of measure $0$, we can write $U$ as a countable union of quasicompact that are finite disjoint unions of rectangles of the form $K_1\times K_2$ for $K_i\subseteq X_i$ quasicompact.  As sets of measure $0$ are measurable and countable unions of measurable sets are measurable, it thus suffices to show that $K_1\times K_2$ is measurable for $K_i\subseteq X_i$ quasicompact.
+
+So, let $S\subseteq X_1\times X_2$ be arbitrary.  We wish to show that
+\begin{equation}
+[\meas _1\times \meas _2](S)\geq [\meas _1\times \meas _2](S\cap (K_1\times K_2))+[\meas _1\times \meas _2](S\cap (K_1\times K_2)^{\comp}).
+\end{equation}
+First note that this holds for $S=L_1\times L_2$, $L_i\subseteq X_i$ quasicompact, by the previous step:
+\begin{equation}
+\begin{split}
+L_1\times L_2 & =\left( (L_1\cap K_1)\cup (L_1\cap K_1^{\comp})\right) \times \left( (L_2\cap K_2)\cup ( L_2\cap K_2^{\comp})\right) \\
+& =(L_1\cap K_1)\times (L_2\cap K_2) \\
+& \qquad \cup (L_1\cap K_1)\times (L_2\cap K_2^{\comp}) \\
+& \qquad \cup (L_1\cap K_1^{\comp})\times (L_2\cap K_2) \\
+& \qquad \cup (L_1\cap K_1^{\comp})\times (L_2\cap K_2^{\comp}) \\
+& =\left( (L_1\times L_2)\cap (K_1\times K_2)\right) \\
+& \qquad \cup \left( (L_1\times L_2)\cap \left( (K_1^{\comp}\times K_2)\cup (K_1\times K_2^{\comp})\cup (K_1^{\comp}\times K_2^{\comp})\right) \right) \\
+& =\left( (L_1\times L_2)\cap (K_1\times K_2)\right) \cup \left( (L_1\times L_2)\cap (K_1\times K_2)^{\comp}\right) .
+\end{split}
+\end{equation}
+If $[\meas _1\times \meas _2](S)=\infty$, we are done, so we may as well assume that $[\meas _1\times \meas _2](S)<\infty$.  Let $\varepsilon >0$.  Let $U\subseteq X_1\times X_2$ be open and such that (i) $S\subseteq U$ and (ii) $[\meas _1\times \meas _2](S)>[\meas _1\times \meas _2](U)-\varepsilon$.  Because the space is $T_2$, $K_1\times K_2$ is closed, and so $U\cap (K_1\times K_2)^{\comp}$ is open.  Therefore, there is a disjoint union
+\begin{equation}
+\bigcup _{k=0}^mL_{1,k}\times L_{2,k}\subseteq U\cap (K_1\times K_2)^{\comp}
+\end{equation}
+for $L_{i,k}\subseteq X_i$ quasicompact such that
+\begin{equation}
+[\meas _1\times \meas _2](U\cap (K_1\times K_2)^{\comp})-\varepsilon <\sum _{k=0}^m[\meas _1\times \meas _2](L_{1,k}\times L_{2,k}).
+\end{equation}
+Similarly, there is a disjoint union
+\begin{equation}
+\bigcup _{k=0}^nM_{1,k}\times M_{2,k}\subseteq U\cap \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\right) ^{\comp}
+\end{equation}
+for $M_{i,k}\subseteq X_i$ quasicompact such that
+\begin{equation}
+[\meas _1\times \meas _2]\left( U\cap \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\right) ^{\comp}\right) -\varepsilon <\sum _{k=0}^n[\meas _1\times \meas _2](M_{1,k}\times M_{2,k}).
+\end{equation}
+Hence,
+\begin{equation}
+\begin{split}
+[\meas _1\times \meas _2](S) & >[\meas _1\times \meas _2](U)-\varepsilon \geq \meas \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\cup \bigcup _{k=0}^nM_{1,k}\times M_{2,k}\right) -\varepsilon \\
+& =\footnote{By the previous step, because these two collections of rectangles are disjoint.}\sum _{k=0}^m[\meas _1\times \meas _2](L_{1,k}\times L_{2,k})+\sum _{k=0}^n[\meas _1\times \meas _2](M_{1,k}\times M_{2,k})-\varepsilon \\
+& >\meas \left( U\cap (K_1\times K_2)^{\comp}\right) +\meas \left( U\cap \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\right) ^{\comp}\right) -3\varepsilon \geq [\meas _1\times \meas _2](U\cap (K_1\times K_2)^{\comp})+[\meas _1\times \meas _2](U\cap (K_1\times K_2))-3\varepsilon \\
+& \geq [\meas _1\times \meas _2](S\cap (K_1\times K_2)^{\comp})+[\meas _1\times \meas _2](S\cap (K_1\times K_2)).
+\end{split}
+\end{equation}
+
+\Step{Show uniqueness}
+To show that two regular measures agree, by outer-regularity, it suffices to show that they agree on on open sets.  By inner-regularity, to show this, it suffices to show that
+\begin{equation}
+\begin{split}
+\sup \{ \meas (K):K\subseteq U,\ K\text{ quasicompact}\} & =\sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_{1,k}\times K_{2,k}):\right. \\
+& \qquad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
+& \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
+& \qquad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \footnote{Here, $\meas$ denotes \emph{any} regular borel measure on $X_1\times X_2$ such that $\meas (K_1\times K_2)=\meas _1(K_1)\meas _2(K_2)$ for $K_i\subseteq X_i$ quasicompact.}
+\end{split}
+\end{equation}
+The left-hand side is automatically at least as large as the right-hand side because the set inside the $\sup$s on the left-hand side is a superset of the set inside the $\sup$ right-hand side.  On the other hand, for $K\subseteq X_1\times X_2$ quasicompact, $K_i\coloneqq \pi _i(K)$ is quasicompact by the \nameref{ExtremeValueTheorem}, and as $K\subseteq K_1\times K_2$, we have that $\meas (K)\leq \meas _1(K_1)\meas _2(K_2)$, which showed that the left-hand side is no larger than the right-hand side, which gives equality.
+
+\Step{Show that $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for $S_i\subseteq X_i$}
+We have actually already done the case where $\meas _i(S_i)<\infty$---see \cref{stpProductMeasure.5}.  We first prove this for $S_i$ measurable.  We then do the general case by using the fact that, in topological measure spaces, every set is measurable up to a set of measure $0$ (\cref{ModuloZero}).
+
+\begin{exr}
+Show that $X_1\times X_2=\bigcup _{m\in \N}M_{1,m}\times M_{2,m}$ is the countable disjoint union of measurable rectangles of finite measure.
+\end{exr}
+\begin{exr}
+Use this together with the fact that we already know that $[\meas _1\times \meas _2](F_1\times F_2)=\meas _1(F_1)\meas _2(F_2)$ for set of \emph{finite} measure to finish the proof that $[\meas _1\times \meas _2](S_1\times S_2)=\infty$.
+\end{exr}
+
+\begin{exr}
+Now show that $[\meas _1\times \meas _2](S_1\times S_2)=0$ if $S_1,S_2$ are both measurable, one of which has measure $0$.
+\end{exr}
+
+\begin{exr}
+Finally, show that $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for \emph{arbitrary} $S_1,S_2$, using \cref{ModuloZero} as explained at the beginning of this step.
 \end{exr}
 \end{proof}
-\end{prp}
-When we finally get to the integral (\cref{Integral}), we will take our domain to be a topological measure space.  The reason for doing so is that this will allow us to prove that the area under the curve satisfies certain desirable properties (e.g.~$\int _X\dif \meas (x)\, [f(x)+g(x)]=\int _X\dif \meas (x)\, f(x)+\int _X\dif \meas (x)\, g(x)$ for $f,g$ borel\footnote{See \cref{IntegrableFunction} for the definition of ``borel''.}.  I haven't had the time to look for counter-examples to show that it is strictly necessary to restrict our domain to be a topological measure space, but it certainly is a convenient assumption (and not unnatural) that doesn't rule out any examples of interest.\footnote{If you know of any examples of outer-measure spaces that are not topological measure spaces upon which one wants to do integration, please let me know.}  A crucial fact about topological measure spaces that we will make use of when the time comes is that the product of two topological measure spaces is a topological measures space.
-\begin{prp}
-Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be topological measure spaces.  Then, $\coord{X_1\times X_2,\meas _1\times \meas _2}$ is a topological measure space.
-\begin{proof}
-We need to show that (i) $X_1\times X_2$ is $\sigma$-quasicompact, (ii) $\meas _1\times \meas _2$ is regular, and (iii) $\meas _1\times \meas _2$ is borel.
-
-Write $X_1=\bigcup _{m\in \N}K_{1,m}$ and $X_2=\bigcup _{m\in \N}K_{2,m}$ for $K_{i,m}\subseteq X_i$ quasicompact.  Then,
-\begin{equation}
-X_1\times X_2=\bigcup _{m,n\in \N}K_{1,m}\times K_{2,n},
-\end{equation}
-and so $X_1\times X_2$ is $\sigma$-quasicompact.
-
-That $\meas _1\times \meas _2$ is regular is part of the definition of the product measure---see \cref{exr5.2.4}.
-
-We must check that $\meas _1\times \meas _2$ is borel.  So, let $U\subseteq X_1\times X_2$ be open.  Define $U_{m,n}\coloneqq U\cap (K_{1,m}\times K_{2,n})$.  As $U=\bigcup _{m,n}U_{m,n}$, by \nameref{CaratheodorysTheorem}, it suffices to show that each $U_{m,n}$ is measurable.
-\end{proof}
-\end{prp}
+\end{thm}
 
 The product of two isogeneous spaces is canonically an isogeneous spaces, and if they are both $T_0$ locally quasicompact, so too will the product be.  Hence, the \nameref{HaarHowesTheorem} tells us that the product will obtain a measure.  The question, then, is whether this measure agrees with the product measure as defined above.  Fortunately, the answer is in the affirmative.
 \begin{dfn}[Product isogeneous structure]
@@ -1254,7 +1419,6 @@ In particular, $\Q$ has $0$ measure!
 \end{rmk}
 \end{exr}
 \begin{exm}[An uncountable set of zero measure---the Cantor Set]\label{CantorSet}
-\begin{savenotes}
 Let $L\in \R ^+$ be less than $1$.
 
 Define $C_0\coloneqq [0,1]$.  Define $C_1$ to be $C_0$ with the `middle' open interval of length $L$ removed, that is
@@ -1310,7 +1474,6 @@ Show that every point of $C$ is an accumulation point.
 \begin{exr}
 Show that a nonempty closed subset of $\R$ that has the property that every point is an accumulation point is uncountable.
 \end{exr}
-\end{savenotes}
 \end{exm}
 \begin{exm}[A set with empty interior of positive measure---the Cantor-Smith-Volterra Set]\label{CantorSmithVolterraSet}
 We leave this as an exercise.
@@ -1321,7 +1484,7 @@ Modify construction of the Cantor Set starting with $C_0\coloneqq [0,1]$ again, 
 The Cantor-Smith-Volterra Set is still uncountable of course, just as the Cantor Set likewise had empty-interior.  It's just that it's not surprising for a set with empty interior to have measure $0$---what is surprising however is a set with empty interior of \emph{positive measure} with empty-interior.  Similarly, it's not surprising for a uncountable set to have positive measure---what is surprising is an uncountable set of \emph{measure zero}0.
 \end{rmk}
 \end{exm}
-\begin{exm}[A set that is not measurable]\begin{savenotes}\footnote{Construction adapted from \cite[pg.~407]{Pugh}.}\label{exm5.2.47}
+\begin{exm}[A set that is not measurable]\footnote{Construction adapted from \cite[pg.~407]{Pugh}.}\label{exm5.2.47}
 
 Define $\q :\R \rightarrow [0,1)$ by $\q (x)\coloneqq x-\lfloor x\rfloor ]$.  In other words, this is just the ``fractional part'' of the real number (intuitively, you drop of the integer in front of its decimal expansion).  Note that $1$ gets sent to $0$, and so, if you like, you can think of the image as a circle, with $1$ `glued-to' $0$, if this helps your intuition.
 
@@ -1364,7 +1527,6 @@ Thus, these exercises give us that
 [0,1)=\bigcup _{m\in \Z}\q (R^m(N))
 \end{equation}
 is a disjoint union of measurable sets, all of which have the same measure $M\coloneqq \q (N)$.  If $M=0$, then, by additivity, we have $\meas ([0,1))=0$:  a contradiction.  On the other hand, if $M>0$, by additivity again, we have $\meas ([0,1))=\infty$:  a contradiction.  Therefore, it cannot be the case that $N$ is measurable.
-\end{savenotes}
 \end{exm}
 \begin{exm}[Two disjoint sets $S,T$ with $\meas (S\cup T)\neq \meas (S)+\meas (T)$]\label{exm5.2.56}
 Let $N$ be as in the previous example.  We showed there that it was not measurable.  Therefore, there must exist some $S\subseteq \R$ such that
@@ -1410,7 +1572,6 @@ $H$ is bounded, and so has finite measure.  Thus, the above equality forces $\me
 
 We mentioned awhile ago in the definition of measurable functions (\cref{MeasurableFunction}) the existence of a uniform-homeomorphism of $\R$ that preserves neither measurability not measure $0$.  It is time we return to this.
 \begin{exm}[A uniform-homeomorphism of $\R$ that preserves neither measurability nor measure $0$---the Cantor Function]\index{Cantor Function}\label{CantorFunction}
-\begin{savenotes}
 We first define a uniformly-continuous function $f:[0,1]\rightarrow [0,1]$.  This function will be nondecreasing, and so $g\coloneqq f+\id _{[0,1]}:[0,1]\rightarrow [0,2]$ will be increasing, and hence injective.  It will turn out that $f(0)=0$ and $f(1)=1$, and so we will then extend $g$ to all of $\R$ `periodically', that is, defining it to be $g(x-1)+2$ for $x\in [1,2]$, etc..\footnote{Of course, we have to shift the graph up to maintain continuity.} 
 \begin{rmk}
 $f$ is the \emph{Devil's Staircase}\index{Devil's Staircase}, and $g$ is the \emph{Cantor Function}.\footnote{Some people use both these terms to refer to $f$.  I prefer this convention so that each has its own name.}
@@ -1493,7 +1654,6 @@ Recall that each $D_m$ is a disjoint union of open intervals.  As $f$ is constan
 Thus, $\meas (g(C))=1$, despite the fact that $\meas (C)=0$.
 
 Every subset of $\R$ of positive measure contains a nonmeasurable set (\cref{prp5.2.58}), so let $N\subseteq g(C)$ be some such set.  Then, $g^{-1}(N)\subseteq C$ is measurable because it has measure $0$.
-\end{savenotes}
 \end{exm}
 
 \subsection{The integral}
@@ -1549,8 +1709,7 @@ Also note that $f=f_+-f_-$ and $\abs{f}=f_++f_-$.
 \end{rmk}
 \end{dfn}
 \begin{thm}[Integral]\label{Integral}
-\begin{savenotes}
-Let $\coord{X,\meas}$ be a topological measure space.\footnote{Recall that this means that (i) $X$ is $\sigma$-quasicompact, (ii) $\meas$ is regular, and (iii) $\meas$ is borel.}  Then, there is a unique function $\mathrm{I}:\Bor _0^+\rightarrow [0,\infty ]$, the \emph{integral}, such that
+Let $\coord{X,\meas}$ be a topological measure space.\footnote{Recall that this means that (i) $X$ is $\sigma$-compact, (ii) $\meas$ is regular, and (iii) $\meas$ is borel.}  Then, there is a unique function $\mathrm{I}:\Bor _0^+\rightarrow [0,\infty ]$, the \emph{integral}, such that
 \begin{enumerate}
 \item (Normalization)\label{Integral.Normalization} $\mathrm{I}(\chi _S)=\meas (S)$;
 \item (Additivity)\label{Integral.Additivity} $\mathrm{I}(f+g)=\mathrm{I}(f)+\mathrm{I}(g)$;
@@ -1674,5 +1833,4 @@ Taking the limit, we get
 
 \Step{Show we have equality if functions are measurable}
 \end{proof}
-\end{savenotes}
 \end{thm}

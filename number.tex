@@ -90,7 +90,6 @@ Define
 In words, $0$ is the cardinality of the empty set and $1$ is the cardinality of the set that contains the empty set and only the empty set.
 \end{dfn}
 \begin{prp}\label{prpA.1.16}
-\begin{savenotes}
 $(\K ,+,\cdot ,0,1)$ is an integral crig.\footnote{Of course, $\K$ is not actually a set, but we don't care about this.  See the remark in \cref{sbsA.1.1} \nameref{sbsA.1.1}.}
 \begin{proof}
 We simply need to verify the properties of the definition of a crig, \cref{dfnA.1.33} (and also check that it is integral, \cref{dfnA.1.69}).  We first check that $+$ is associative, so let $m,n,o\in \N$ and write $m=\abs{M},n=\abs{N},o=\abs{O}$ for sets $M$, $N$, and $O$.  Then,
@@ -115,7 +114,6 @@ To show that $\K$ is a crig, there is one final property to check.  What is it? 
 
 To show that $\K$ is integral, suppose that $mn=0$.  Then, there must be a bijection between $M\times N$ and the empty-set, which implies that $M\times N$ is empty.  But if neither $M$ nor $N$ is empty, then $M\times N$ will be nonempty.  Thus, we must have that either $M$ or $N$ is empty, or equivalently, that either $m=0$ or $n=0$, so that $\K$ is integral.
 \end{proof}
-\end{savenotes}
 \end{prp}
 
 Now we must check that addition and multiplication restrict to operations on the collection of finitely cardinalities, namely, $\N$.  This amounts to showing that the sum and product of finite cardinalities are both finite.
@@ -438,7 +436,6 @@ We thus would like to find a set with algebraic structure (which will turn out t
 To understand what it means to be a cring $Z$ that contains $\N$ is quite easy, but how does one make sense of the statement that $Z$ is the `simplest' cring with this property?  The precise sense in which $Z$ should be the simplest cring which contains $\N$ is, if $Z'$ is any other cring which contains $\N$, then $Z'$ contains $Z$ as well.  That is, $Z$ is contained in every cring which contains $\N$.
 
 \begin{thm}[Integers]\label{Integers}
-\begin{savenotes}
 There exists a totally-ordered integral cring $\Z$\index[notation]{$\Z$}, the \emph{integers}\index{Integers}, such that
 \begin{enumerate}
 \item \label{enm1.2.1.1}$\Z$ contains $\N$ as a subpreordered rig;\footnote{When we say that $\Z$ contains $\N$ as a subpreordered rig, what we \emph{actually} mean is that there is an injective morphism of preordered-rigs $\N \hookrightarrow \Z$.  In particular, it need not literally be the case that $\N$ is a subset of $\Z$ (just an isomorphic copy of $\N$).} and
@@ -534,7 +531,6 @@ Let $Z'$ be a totally-ordered integral cring which contains $\N$.  As $Z'$ conta
 \Step{Show that $\Z$ is unique up to isomorphism}
 Let $Z$ be some other totally-ordered cring that satisfies the two properties \ref{enm1.2.1.1} and \ref{enm1.2.1.2}.  As $Z$ contains $\N$ and $\Z$ possesses property \ref{enm1.2.1.2}, it follows that $Z$ contains $\Z$.  On the other hand, as $\Z$ contains $\N$ and $Z$ possesses property \ref{enm1.2.1.2}, it likewise follows that $\Z$ contains $Z$.  As $\Z$ contains $Z$ and $Z$ contains $\Z$, and furthermore, because these copies are \emph{unique}, it must be the case that $\Z =Z$.\footnote{We say that $\Z$ is unique \emph{up to isomorphism} because in fact all we can say is that $Z$ contains an \emph{isomorphic copy} of $\Z$.  We abused language and said just ``$\Z$'' instead of ``isomorphic copy of $\Z$''.  This abuse of language is very common in mathematics.  Indeed, you should usually be thinking of two things which are isomorphic as, for all intents and purpose, the same exact thing.}
 \end{proof}
-\end{savenotes}
 \end{thm}
 
 You will notice a common theme through these notes, and indeed, throughout all of mathematics:  if ever we want something that isn't there, throw it in.  For example, we had the natural numbers, but wanted additive inverses, and so we came up with $\Z$ by just `adjoining' the additive inverses of all the elements of $\N$.  Similarly, we want multiplicative inverses, and so by throwing them in, we obtain $\Q$.  Doing the same with limits gives us $\R$, and in turn doing the same with roots of polynomials gives us $\C$.  If you've read the appendix, you may have seen already something vaguely similar (cf.~the paragraph containing \eqref{A.1.1} and what follows).  We wrote down the definition of a set-like thing, but then realized that it cannot be a set (this is Russel's Paradox).  To get around this, instead of working with things that are strictly sets, we work in a larger `universe' that contains proper classes as well:  you might say that we `throw in' the proper classes alongside sets.
@@ -781,7 +777,6 @@ Compare this with the analogous theorems for $\Z$ and $\Q$, \cref{Integers,Ratio
 As you might have guessed, this is also a special case of a more general construction, which takes partially-ordered sets to \emph{complete} partially-ordered sets, known as the \emph{Dedekind-MacNeille completion}\index{Dedekind-MacNeille completion}.  Be careful, however:  in general the arithmetic operations do not extend to the Dedekind-MacNeille completion; see \cref{exm3.2.13}.
 \end{rmk}
 \begin{proof}
-\begin{savenotes}
 \Step{Define $\R$ as a set}
 Define
 \begin{equation}
@@ -954,7 +949,6 @@ where on the right-hande side, $D_x$ is regarded as a subset of $\R$ and the sup
 \begin{exr}
 Show that $\phi$ is an isomorphism of preordered fields.
 \end{exr}
-\end{savenotes}
 \end{proof}
 \end{thm}
 \begin{dfn}[Irrational numbers]

@@ -201,7 +201,6 @@ For some reason, people tend to write $\lim _{h\to 0}$ in this definition instea
 \end{rmk}
 \end{dfn}
 \begin{dfn}[Derivative (of a function)]\label{Derivative}
-\begin{savenotes}
 Let $S\subseteq \R ^d$, let $f:S\rightarrow \R$ and let $x\in \Int (S)$.  Then, $f$ is \emph{differentiable}\index{Differentiable} at $x$ iff
 \begin{enumerate}
 \item $\D _vf(x)$ exists for all $v\in \tangent{\R ^d}{x}$; and
@@ -248,7 +247,6 @@ w^b\nabla _b(v^a\nabla _af)=w^bw^a\nabla _b\nabla _af.
 \begin{rmk}
 If all higher derivatives of $f$ exist, then $f$ is \emph{infinitely-differentiable}\index{Infinitely-differentiable}.  If all higher derivatives of $f$ exist \emph{and} they are continuous, then $f$ is \emph{smooth}\index{Smooth}.\footnote{Yes, there is a difference.  In fact, infinitely-differentiable functions need not even be continuous---see \cref{exm6.2.15}.}
 \end{rmk}
-\end{savenotes}
 \end{dfn}
 \begin{exm}[A function which is g\^{a}teaux differentiable but not differentiable]\footnote{This example comes from Ted Shifrin's \href{http://math.stackexchange.com/questions/694486/show-that-the-directional-derivative-is-linear-by-definition}{math.stackexchange answer}.}\label{exm6.2.10}
 In other words, we seek a function all of whose directional derivatives exist at a point, but for which the map $v\mapsto \D _vf(x)$ is not linear.
@@ -508,7 +506,6 @@ Find an example a function that is continuous but not differentiable.
 \end{exr}
 As a matter of fact, you can even find continuous functions which \emph{aren't differentiable anywhere}!
 \begin{exm}[A continuous function that is nowhere-differentiable]\footnote{Proof adapted from \cite{Coleman}.}\label{exm6.3.4}
-\begin{savenotes}
 Define $f_0:[0,1]\rightarrow \R$ by
 \begin{equation}
 f_0(x)\coloneqq \begin{cases}x & \text{if }x\in [0,\tfrac{1}{2}] \\ 1-x & \text{if }x\in [\tfrac{1}{2},1]\end{cases}
@@ -586,7 +583,6 @@ Thus,
 \Delta _m\coloneqq \frac{f(x+\epsilon _m)-f(x)}{\epsilon _m}=\sum _{k=0}^m\frac{f_k(x+\epsilon _m)-f_k(x)}{\epsilon _k}.
 \end{equation}
 By \eqref{5.3.11}, each term in this sum is $\pm 1$, so that the difference quotient $\frac{f(x+\epsilon _m)-f(x)}{\epsilon _m}$ is an integer.  Let $n_m^+$ denote the number of $+1$s that appear in this finite sum and similarly let $n_m^-$ denote the number of $-1$s that appear in this sum, so that $\Delta _m=n_m^+-n_m^-$ and $m=n_m^++n_m^-$.  Hence, $\Delta _m=m-2n_m^-$.  Thus, the parity of $\Delta _m$ is constant, and so cannot converge.  Thus, this limit, the derivative, does not exist at $x$.
-\end{savenotes}
 \end{exm}
 
 It is often said that a function on a closed interval that has a continuous derivative is lipschitz-continuous.  One should be careful, however, because in our language, this is \emph{not} true.

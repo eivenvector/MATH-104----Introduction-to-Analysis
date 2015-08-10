@@ -629,7 +629,6 @@ Suppose that $\mathcal{F}_{\mu \mapsto x_{\lambda _\mu}}$ is a filtering of $\ma
 
 In the next section, we present several new ways of defining topologies.  One of these ways will be by defining what it means for filters to converge, and so present here as theorems the results that will be used as axioms.
 \begin{prp}[Kelley's Filter Convergence Axioms]\index{Kelley's Filter Convergence Axioms}\label{KelleysFilterConvergenceAxioms}
-\begin{savenotes}
 Let $X$ be a topological space.  Then,
 \begin{enumerate}
 \item \label{enmKelleysFilterConvergenceAxioms.i}$\mathcal{P}_x$ converges to $x$, where $\mathcal{P}_x\coloneqq \left\{ U\subseteq X:x\in U\right\}$;\footnote{``P'' is for \emph{principal}, the etymology being from the use of the word ``principal'' in the context of ideals in ring theory (to the best of my knowledge anyways).}
@@ -658,11 +657,13 @@ We ask you to prove \ref{enmKelleysFilterConvergenceAxioms.i} and \ref{enmKelley
 Show \ref{enmKelleysFilterConvergenceAxioms.i}.
 \end{exr}
 \begin{exr}
-Show \ref{enmKelleysFilterConvergenceAxioms.ii}.  Hint:  Check out \cref{prp3.3.95}.
+Show \ref{enmKelleysFilterConvergenceAxioms.ii}.
+\begin{rmk}
+Hint:  Check out \cref{prp3.3.95}.
+\end{rmk}
 \end{exr}
 Let $I$ be a directed set, for each $i\in I$ let $\mathcal{F}^i$ be a filter converging to $x^i\in X$, and suppose that $\mathcal{F}_{i\mapsto x^i}$ converges to $x^\infty$.  By \cref{prp4.3.6}, $i\mapsto x^i$ converges to $x^\infty$.  To show that $\mathcal{F}_\infty$ converges to $x^\infty$, it suffices to show that every open neighborhood of $x^\infty$ is an element of $\mathcal{F}_\infty$.  So, let $U$ be an open neighborhood of $x^\infty$.  Then, as $\mathcal{F}_{i\mapsto x^i}$ converges to $x^\infty$, it follows that there is some $V\in \mathcal{F}_{i\mapsto x^i}$ such that $V\subseteq U$.  As $i\mapsto x^i$ is eventually contained in $V$, there is some $i_0\in I$ such that, whenever $i\geq i_0$, it follows that $x^i\in V\subseteq U$.  Thus, for $i$ sufficiently large, $U$ is an open neighborhood of $x^i$.  But then, because $\mathcal{F}^i$ converges to $x^i$, it follows that there is some $F^i\in \mathcal{F}^i$ such that $F^i\subseteq U$, and so $U\in \mathcal{F}_{\infty}$ as desired.
 \end{proof}
-\end{savenotes}
 \end{prp}
 
 \section{Equivalent definitions of topological spaces}
@@ -910,7 +911,6 @@ Complete the proof yourself, using the proof of \cref{prp3.4.22} as a guide.
 
 The following two results define a topology on a set by simply `declaring' that a collection of functions be continuous.  This is similar in nature to how we defined a topology with a generating collection (\cref{GeneratingCollection})---in this case, we started with a collection of subsets, and simply `declared' them to be open.
 \begin{prp}[Initial topology]\label{InitialTopology}
-\begin{savenotes}
 Let $X$ be a set, let $\mathcal{Y}$ be an indexed collection of topological spaces, and for each $Y\in \mathcal{Y}$ let $f_Y:X\rightarrow Y$ be a function.  Then, there exists a unique topology  $\mathcal{U}$ on $X$, the \emph{initial topology}\index{Initial topology} with respect to $\{ f_Y:Y\in \mathcal{Y}\}$, such that
 \begin{enumerate}
 \item $f_Y:X\rightarrow Y$ is continuous with respect to $\mathcal{U}$ for all $Y\in \mathcal{Y}$; and
@@ -950,7 +950,6 @@ As every element of $\mathcal{S}$ is open, it is certainly the case that each $f
 Show that the initial topology is unique.
 \end{exr}
 \end{proof}
-\end{savenotes}
 \end{prp}
 There is a nice characterization of convergence in initial topologies.
 \begin{prp}\label{prp4.4.5}
@@ -989,7 +988,6 @@ Uniqueness follows from the uniqueness in the previous proposition.
 
 There is a `dual' version of the initial topology, in which the functions map \emph{into} the set on which we would like to define a topology.
 \begin{prp}[Final topology]\label{FinalTopology}
-\begin{savenotes}
 Let $X$ be a set, let $\mathcal{Y}$ be an indexed collection of topological spaces, and for each $Y\in \mathcal{Y}$ let $f_Y:Y\rightarrow X$ be a function.  Then, there exists a unique topology $\mathcal{U}$ on $X$, the \emph{final topology}\index{Final topology} with respect to $\{ f_Y:Y\in \mathcal{Y}\}$, such that
 \begin{enumerate}
 \item $f_Y:Y\rightarrow X$ is continuous with respect to $\mathcal{U}$ for all $Y\in \mathcal{Y}$; and
@@ -1024,7 +1022,6 @@ Of course every $f_Y$ is continuous with respect to $\mathcal{U}$ as, by definit
 Show that the final topology is unique.
 \end{exr}
 \end{proof}
-\end{savenotes}
 \end{prp}
 There is likewise a `dual' result to \cref{prp3.4.6} which tells us when continuous functions \emph{on} a space equipped with a final topology are continuous.
 \begin{prp}\label{prp3.4.34x}
@@ -1120,7 +1117,6 @@ that is, an uncountable product (precisely, a product over the power set of $\N$
 
 So before we do anything else then, we must first define the product topology.
 \begin{prp}[Product topology]\label{ProductTopology}
-\begin{savenotes}
 Let $\mathcal{X}$ be an indexed collection of topological spaces.  Then, there exists a unique topology, the \emph{product topology}\index{Product topology}, on $\prod _{X\in \mathcal{X}}X$, that has the property that a function into $\prod _{X\in \mathcal{X}}X$ is continuous iff each component of the function is continuous.  Furthermore, the product topology is the initial topology with respect to $\{ \pi _X:X\in \mathcal{X}\}$.\footnote{Recall (\cref{CartesianProductCollection}) that $\pi _X:\prod _{X\in \mathcal{X}}X\rightarrow X$ is just the projection.}  In particular, if $\mathcal{S}_X$ is a generating collection for the topology on $X\in \mathcal{X}$, then the collection
 \begin{equation}\label{4.5.4x}
 \{ \pi _X^{-1}(U):U\in \mathcal{S}_X\}
@@ -1147,7 +1143,6 @@ Unless otherwise stated, products of topological spaces are always equipped with
 \begin{proof}
 All of this follows from the definition of the initial topology, its characterization in terms of continuity of functions into initial topologies, and the defining result of generating collections (\cref{InitialTopology,prp3.4.6,GeneratingCollection}).
 \end{proof}
-\end{savenotes}
 \end{prp}
 We mentioned in the remarks of this theorem that if you take as a base sets of the form $\prod _{X\in \mathcal{X}}S_X$ (with $S_X\neq X$ \emph{for all $X\in \mathcal{X}$} permissible), then you will lose the property that a function into the product is continuous iff each of its components is.  We now present a counter-example.
 \begin{exm}[A discontinuous function into the box topology with each component continuous]\label{exm4.5.20}
@@ -1175,8 +1170,14 @@ In other words, nets converge to an element in a product iff every component con
 As the product topology on $\prod _{X\in \mathcal{X}}X$ is the initial topology with respect to the projections, $\{ \pi _X:X\in \mathcal{X}\}$, this result follows from \cref{prp4.4.5}.
 \end{proof}
 \end{crl}
+\begin{exr}[Projections are open]\label{ProjectionsAreOpen}
+Let $\mathcal{X}$ be an indexed collection of topological spaces, let $X\in \mathcal{X}$, and let $U\subseteq \prod _{X\in \mathcal{X}}X$ be open.  Show that $\pi _X(U)\subseteq X$ is open.
+\begin{rmk}
+Functions that have the property that the image of open sets are open are \emph{open functions}\index{Open function}.
+\end{rmk}
+\end{exr}
 
-Now that we have defined the product topology, we prove a relatively deep recent concerning quasicompactness of products which will allow us to produce the desired counter-example.
+Now that we have defined the product topology, we prove a relatively deep result concerning quasicompactness of products which will allow us to produce the desired counter-example.
 \begin{thm}[Tychnoff's Theorem]\index{Tychnoff's Theorem}\label{TychnoffsTheorem}
 Let $\mathcal{X}$ be a collection of quasicompact spaces.  Then, $\prod _{X\in \mathcal{X}}X$ is quasicompact.
 \begin{proof}\footnote{Proof adapted from \cite[pg.~143]{Kelley}.}
@@ -1219,7 +1220,6 @@ a contradiction.  As both possibilities resulted in a contradiction, this itself
 
 Our inclusion of the disjoint-union topology is mostly because of its obvious duality to the product topology---it feels incomplete not to include it.  On the other hand, while in principle, being completely dual to the product topology, it should be no more or less difficult work with, in practice it seems that it is \emph{much} easier to get a handle on, and so probably doesn't deserve as in-depth a treatment.
 \begin{prp}[Disjoint-union topology]\label{DisjointUnionTopology}
-\begin{savenotes}
 Let $\mathcal{X}$ be an indexed collection of topological spaces.  Then, there exists a unique topology, the \emph{disjoint-union topology}\index{disjoint-union topology}, on $\coprod _{X\in \mathcal{X}}X$, that has the property that a function defined on $\coprod _{X\in \mathcal{X}}X$ is continuous iff its restriction to each component is continuous.  Furthermore, the disjoint-union topology is the final topology with respect to $\{ \iota _X:X\in \mathcal{X}\}$.\footnote{Recall (\cref{DisjointUnionCollection}) that $\iota _X:X\rightarrow \coprod _{X\in \mathcal{X}}X$ is just the inclusion.}  In particular, a set $U\subseteq \coprod _{X\in \mathcal{X}}X$ is open iff $U\cap \iota _X(X)$ is open for all $X\in \mathcal{X}$.
 is a base for the product topology.
 \begin{rmk}
@@ -1228,7 +1228,6 @@ Unless otherwise stated, disjoint-unions of topological spaces are always equipp
 \begin{proof}
 All of this follows from the definition of the final topology and its characterization in terms of continuity of functions defined on final topologies (\cref{FinalTopology,prp3.4.34x}).
 \end{proof}
-\end{savenotes}
 \end{prp}
 
 \section{Separation Axioms}\label{sct4.5}

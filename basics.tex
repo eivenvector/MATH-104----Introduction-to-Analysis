@@ -174,14 +174,12 @@ This might seem like it is obvious, but it is in fact not true of all totally-or
 \subsubsection{Polynomial crings and a totally-ordered field which is not archimedean}
 
 \begin{dfn}[Polynomial cring]
-\begin{savenotes}
 Let $R$ be a totally-ordered cring, denote by $R[x]$ the set of all polynomials with coefficients in $R$, let $+$ and $\cdot$ on $R[x]$ be addition and multiplication of polynomials, and define $p>0$ iff the leading coefficient of $p$ is greater than $0$ in $R$.\footnote{Recall that this is enough to define a total-order by \cref{exr1.1.41}.} 
 \begin{exr}
 Show that $\left( R[x],+,0,-,\cdot ,1,\leq \right)$ is a totally-ordered cring.  What is $0\in R[x]$?  What is $1\in R[x]$?
 \end{exr}
 \noindent
 $R[x]$ is the \emph{polynomial cring}\index{Polynomial cring} with coefficients in $R$.  The \emph{degree}\index{Degree (of a polynomial)} of a polynomial $p$, denoted by $\deg (p)$\index[notation]{$\deg (p)$}, is the highest power of $x$ that appears in $p$ with nonzero coefficient.
-\end{savenotes}
 \end{dfn}
 \begin{exr}
 Show that the following statements are true.
@@ -447,7 +445,6 @@ From this, it follows that $\left\{ a_m:m\in \N ]\right\} \subseteq B_{r_0}(a_\i
 
 Ideally, the content in this subsubsection would have been discussed very soon after defining a limit itself, however, we will use the fact that convergent nets are eventually bounded.  We could have proved this, then done the Algebraic and Order Limit Theorems, but when we would have wound-up essentially proving the same theorem twice (because cauchy nets are eventually bounded as well).  We decided to just postpone these results to a slightly less-than-maximally-coherent location in the notes instead.
 \begin{prp}[Algebraic Limit Theorems]\index{Algebraic Limit Theorems}\label{AlgebraicLimitTheorems}
-\begin{savenotes}
 Let $\lambda \mapsto a_\lambda$ and $\lambda \mapsto b_\lambda$ be two nets\footnote{The common index is supposed to indicate that the two nets have the same domain.} which converge to $a_\infty,b_\infty\in \R$ respectively, and let $\alpha \in \R$.  Then,
 \begin{enumerate}
 \item \label{enmAlgebraicLimitTheorems.i}$\lim (a_\lambda +b_\lambda )=a_\infty+b_\infty$,
@@ -483,7 +480,6 @@ As $\frac{1}{M^2}\varepsilon$ is just as arbitrary as $\varepsilon$ (this uses t
 Prove \ref{enmAlgebraicLimitTheorems.iv}.
 \end{exr}
 \end{proof}
-\end{savenotes}
 \end{prp}
 \begin{exr}[Order Limit Theorem]\index{Order Limit Theorem}\label{exr3.3.30}
 Let $\lambda \mapsto a_\lambda$ and $\lambda \mapsto b_\lambda$ be two convergent nets and suppose that it is eventually the case that $a_\lambda \leq b_\lambda$.  Show that $\lim _\lambda a_\lambda \leq \lim _\lambda b_\lambda$.
@@ -1626,7 +1622,6 @@ Let $S\subseteq \R$ and let $\mathcal{U}\subseteq 2^{\R}$.  Then, $\mathcal{U}$ 
 And now of course we had better check that this condition properly characterizes ``closed and bounded'' in the real numbers, as desired.
 \begin{thm}[Heine-Borel Theorem]\index{Heine-Borel Theorem}\label{HeineBorelTheorem}
 Let $S\subseteq \R$.  Then, $S$ is closed and bounded iff it is quasicompact.
-\begin{savenotes}
 \begin{rmk}
 This is equally true in $\R ^d$, but fails to hold in general topological spaces (for one thing, ``boundedness'' does not make sense in arbitrary topological spaces).  It will not even hold in $T_2$ topological spaces in which the notion of boundedness makes sense.
 \end{rmk}
@@ -1663,14 +1658,12 @@ Let $\lambda \mapsto x_\lambda \in S$ be a net converging to $x_\infty \in \R$. 
 \end{equation}
 and so in particular, $x_{\lambda _0}\notin B_{\varepsilon _{s_k}}(s_k)$, a contradiction of the fact that $\left\{ B_{\varepsilon _{s_1}}(s_1),\ldots ,B_{\varepsilon _{s_m}}(s_m)\right\}$ is a cover of $S$.  Therefore, $\lim _\lambda x_\lambda =x_\infty \in S$, and we are done.
 \end{proof}
-\end{savenotes}
 \end{thm}
 
 \subsubsection{Equivalent formulations of quasicompactness}
 
 If for some reason you find the definition of quasicompactness in terms of open covers off-putting, there are a couple of other equivalent formulations of the concept that we present in this section.  In contrast to the \nameref{HeineBorelTheorem}, these characterizations of quasicompactness do generalize to arbitrary topological spaces.
 \begin{prp}\label{prp3.4.58}
-\begin{savenotes}
 Let $K\subseteq \R$ and let $\mathcal{C}$ be a collection of closed subsets of $\R$.  Then, $K$ is quasicompact iff whenever every finite intersection of elements of $\mathcal{C}$ intersects $K$, the entire intersection $\bigcap _{C\in \mathcal{C}}C$ also intersects $K$.
 \begin{proof}
 $(\Rightarrow )$ Suppose that $K$ is quasicompact.  Let $\mathcal{C}$ be a collection of closed subsets of $\R$ that has the property that the intersection of any finite number of elements of $\mathcal{C}$ intersects $K$.  We proceed by contradiction:  suppose that $\bigcap _{C\in \mathcal{C}}C$ does not intersect $K$.  Then, $\left( \bigcap _{C\in \mathcal{C}}C\right) ^{\comp}=\bigcup _{C\in \mathcal{C}}C^{\comp}$ contains $K$,\footnote{Recall De Morgan's Laws (\cref{DeMorgansLaws}).} and therefore the collection $\mathcal{U}:=\left\{ C^{\comp}:C\in \mathcal{C}\right\}$ constitutes an open cover of $K$.  Because $K$ is quasicompact, it follows that there is some finite subcover $C_1^{\comp}\cup \cdots \cup C_m^{\comp}\supseteq K$.  But then $C_1\cap \cdots \cap C_m$ does not intersect $K$:  a contradiction.  Therefore, $\bigcap _{C\in \mathcal{C}}C$ intersects $K$.
@@ -1682,7 +1675,6 @@ $(\Leftarrow )$
 Prove the converse.
 \end{exr}
 \end{proof}
-\end{savenotes}
 \end{prp}
 \begin{thm}\label{prp3.4.56}
 Let $K\subseteq \R$.  Then, $K$ is quasicompact iff every net $\lambda \mapsto a_\lambda \in K$ has a subnet that converges to a limit in $K$.
