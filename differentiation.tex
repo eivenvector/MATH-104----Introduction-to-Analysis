@@ -183,6 +183,8 @@ It's just an assignment of a tensor to every point in $\R ^d$.  For example, a v
 \end{rmk}
 \end{dfn}
 
+\subsection{The definition itself}
+
 Finally, with this (hopefully elucidating) notation in hand, we can define the derivative.
 \begin{dfn}[Directional derivative]\label{DirectionalDerivative}
 Let $S\subseteq \R ^d$, let $f:S\rightarrow \R$, let $x\in \Int (S)$, and let $v\in \tangent{\R ^d}{x}$.  Then, the \emph{directional derivative}\index{directional derivative} of $f$ at $x$ in the direction $v$, $\D _vf(x)$\index[notation]{$\D _vf(x)$}, is defined by
@@ -197,14 +199,15 @@ The expression inside the limit on the right-hand side of \eqref{DifferenceQuoti
 Note that we \emph{only} define the derivative at points on the interior of the domain.  The reason we do this is because otherwise we cannot guarantee that $x+\varepsilon v$ is in the domain of $f$ for even a single $\varepsilon >0$, so that $f(x+\epsilon v)$ does not make sense, in which case it is nonsensical to ask whether the limit of the difference quotient exists or not.
 \end{rmk}
 \begin{rmk}
-For some reason, people tend to write $\lim _{h\to 0}$ in this definition instead of $\lim _{\epsilon \to 0}$.  Not sure why.  $\epsilon$ is used for `small' numbers everywhere else in analysis.  Moreover, what happens if your function is called $h$ (not that uncommon of a name for a function)?  What are you doing to do?  Write $h(x+hv)$?  Ew.  Maybe you object ``But $\epsilon$ can't be negative!  That's against the rules!''.  No.  $\varepsilon$ is typically taken to be positive, but I am not writing that\textellipsis I am writing ``$\epsilon$''.  The distinction is deliberate---$\varepsilon$ is used to indicate a `small' positive number and $\epsilon$ is used to indicate a `small' (not-necessarily-positive) number.\footnote{I do not guarantee that I will never break this convention.}  If you think the difference between these symbols is hard to notice, I recommend you increase your \TeX nichal skills\footnote{Or get glasses.} (one is ``\texttt{\textbackslash varepsilon}'' and the other is ``\texttt{\textbackslash epsilon}'')\footnote{Actually, if you're really \TeX nichal, you might have noticed that this itself is a slight lie---because of font issues, I had to `steal' \texttt{\textbackslash epsilonup} from the \texttt{newpx} package.}.
+For some reason, people tend to write $\lim _{h\to 0}$ in this definition instead of $\lim _{\epsilon \to 0}$.  Not sure why.  $\epsilon$ is used for `small' numbers everywhere else in analysis.  Moreover, what happens if your function is called $h$ (not that uncommon of a name for a function)?  What are you going to do?  Write $h(x+hv)$?  Ew.  Maybe you object ``But $\epsilon$ can't be negative!  That's against the rules!''.  No.  $\varepsilon$ is typically taken to be positive, but I am not writing that\textellipsis I am writing ``$\epsilon$''.  The distinction is deliberate---$\varepsilon$ is used to indicate a `small' positive number and $\epsilon$ is used to indicate a `small' (not-necessarily-positive) number.\footnote{I do not guarantee that I will never break this convention.}  If you think the difference between these symbols is hard to notice, I recommend you increase your \TeX nichal skills\footnote{Or get glasses.} (one is ``\texttt{\textbackslash varepsilon}'' and the other is ``\texttt{\textbackslash epsilon}'')\footnote{Actually, if you're really \TeX nichal, you might have noticed that this itself is a slight lie---because of font issues, I had to `steal' \texttt{\textbackslash epsilonup} from the \texttt{newpx} package.}.
 \end{rmk}
 \end{dfn}
 \begin{dfn}[Derivative (of a function)]\label{Derivative}
 Let $S\subseteq \R ^d$, let $f:S\rightarrow \R$ and let $x\in \Int (S)$.  Then, $f$ is \emph{differentiable}\index{Differentiable} at $x$ iff
 \begin{enumerate}
-\item $\D _vf(x)$ exists for all $v\in \tangent{\R ^d}{x}$; and
-\item the map $\tangent{\R ^d}{x}\ni v\mapsto \D _vf(x)$ is linear.
+\item $\D _vf(x)$ exists for all $v\in \tangent{\R ^d}{x}$;
+\item the map $\tangent{\R ^d}{x}\ni v\mapsto \D _vf(x)$ is linear; and
+\item the map $\tangent{\R ^d}{x}\ni v \mapsto \D _vf(x)$ is continuous.\footnote{Actually, in finite dimensions, continuity follows from linearity for free (though we will not check this).  We state this explicitly because you will want to do so when you generalize to infinite dimensions, where you won't get continuity for free.}
 \end{enumerate}
 In this case, we write
 \begin{equation}
@@ -212,7 +215,7 @@ v^a\nabla _af(x)\coloneqq \D _vf(x)
 \end{equation}
 \index[notation]{$v^a\nabla _af(x)$} to indicate the linearity.  If $f$ is differentiable at $x$ for all $x\in \Int (S)$, then $f$ is differentiable (on $S$).
 \begin{rmk}
-Warning:  This is \emph{not} the universally accepted definition of differentiability.  This is (almost) what is referred to as \emph{g\^{a}teau differentiability}\index{G\^{a}teau differentiable} as opposed to a stronger definition called \emph{fr\'{e}chet differentiability}\index{Fr\'{e}chet differentiable}.  We say ``almost'' because we \emph{require that the map $v^a\mapsto \nabla _af(x)$ be linear}, whereas g\^{a}teaux differentiability merely requires the existence of $\D _vf(x)$ for all $v\in \tangent{\R ^d}{x}$.  (Thus, our definition is slightly stronger.)  We chose this definition because it is easier and, IMHO, more natural, than fr\'{e}chet differentiability.\footnote{We certainly need the map $v\mapsto \D _vf(x)$ to be linear if we are to do tensor calculus (otherwise the derivative itself won't be a tensor).}  That being said, it does have its pathologies.  Of particular note is that \emph{there are differentiable functions that are not continuous}---see \cref{exm6.2.15}.  Fortunately, this cannot happen in one-dimension---see \cref{prp6.5.1}.
+Warning:  This is \emph{not} the universally accepted definition of differentiability.  This is (almost) what is referred to as \emph{g\^{a}teau differentiability}\index{G\^{a}teau differentiable} as opposed to a stronger definition called \emph{fr\'{e}chet differentiability}\index{Fr\'{e}chet differentiable}.  We say ``almost'' because we \emph{require that the map $v^a\mapsto v^a\nabla _af(x)$ be linear (and continuous)}, whereas g\^{a}teaux differentiability merely requires the existence of $\D _vf(x)$ for all $v\in \tangent{\R ^d}{x}$.  (Thus, our definition is slightly stronger.)  We chose this definition because it is easier and, IMHO, more natural, than fr\'{e}chet differentiability.\footnote{We certainly need the map $v\mapsto \D _vf(x)$ to be linear if we are to do tensor calculus (otherwise the derivative itself won't be a tensor).}  That being said, it does have its pathologies.  Of particular note is that \emph{there are differentiable functions that are not continuous}---see \cref{exm6.2.15}.  Fortunately, this cannot happen in one-dimension---see \cref{prp6.5.1}.
 \end{rmk}
 \begin{rmk}
 Of course, there exist examples in which the directional derivative is \emph{not} linear (otherwise we would not have made this an assumption)---see the following example (\cref{exm6.2.10}).  In particular, if we say that $f$ is differentiable at $x$, then \emph{we are assuming the directional derivative is linear}, not only that it exists.
@@ -240,7 +243,7 @@ Perhaps more accurate notation would have been $[v^a\nabla _af](x)$, that is, $v
 \begin{rmk}
 Suppose that $f$ is differentiable.  Then, $v^a\nabla _af$ itself is a function on all of $\R ^d$, and so we may differentiate\footnote{If the limit exists, of course} this as well to obtain
 \begin{equation}
-w^b\nabla _b(v^a\nabla _af)=w^bw^a\nabla _b\nabla _af.
+w^b\nabla _b(v^a\nabla _af)=w^bv^a\nabla _b\nabla _af.
 \end{equation}
 (Warning:  This equality will not hold in general if $v^a$ is a nonconstant function of $x$.)  Just as $\nabla _af(x)$ defined a covector on $\tangent{\R ^d}{x}$, so to does $\nabla _b\nabla _af(x)$ define a covariant $2$-tensor on $\tangent{\R ^d}{x}$.\footnote{Note that a covariant $2$-tensor is an element of $\tangent{\R ^d}{x}^\dagger \otimes \tangent{\R ^d}{x}^\dagger$.  When we say it is a ``covariant $2$-tensor \emph{on} $\tangent{\R ^d}{x}$'', this is what we mean---it's neither a (real-valued) function nor an element of $\tangent{\R ^d}{x}$.}
 \end{rmk}
@@ -294,7 +297,7 @@ The gradient, divergence, curl, and laplacian from multivariable calculus are al
 
 Throughout this example, let $f$ be a smooth function on $\R ^d$ and let $v^a$ be a vector field on $\R ^d$. 
 
-The \emph{gradient} if $f$ is simply $\nabla _af$.  You've already seen this guy.
+The \emph{gradient} of $f$ is simply $\nabla _af$.  You've already seen this guy.
 
 The \emph{divergence}\index{Divergence} of $v^a$ is $\nabla _av^a$.  Note how in multivariable calculus you might write this as $\vec{\nabla}\cdot \vec{v}$, the `dot product' of the gradient with the vector field $\vec{v}$.  The index contraction here hopefully makes obvious how this is the divergence that you know and (maybe) love.
 
@@ -303,7 +306,243 @@ The \emph{curl} is trickier, but this is not surprising, as it was trickier than
 The \emph{laplacian}\index{Laplacian} of a function is the divergence of the gradient---literally (modulo the raising of an index), that is, the laplacian of $f$ is $\nabla _a\nabla ^af$.
 \end{exm}
 
-\section{Tools for calculation}
+\section{Calculus}
+
+\subsection{The Mean Value Theorem}
+
+One of the most important theorems of traditional calculus is of course the \emph{Mean Value Theorem}.  We first prove a couple of results, important in their own right, leading up to it.
+\begin{dfn}[Local extrema]\label{LocalExtrema}
+Let $f:X\rightarrow \R$ be a function from a topological space into $\R$ and let $x_0\in X$.  Then, $x_0$ is a \emph{local maximum}\index{Local maximum} of $f$ iff there is some open neighborhood $U$ of $x_0$ such that (i) $f(x_0)=\sup _{x\in U}\{ f(x)\}$ and (ii) $x_0$ is the \emph{unique} such point.\footnote{So for example, constant functions have no local maxima.}  $x_0$ is a \emph{local minimum}\index{Local minimum} of $f$ iff there is some open neighborhood $U$ of $x_0$ such that (i) $f(x_0)=\inf _{x\in U}\{ f(x)\}$ and (ii) $x_0$ is the \emph{unique} such point.  $x_0$ is a \emph{local extremum}\index{Local extremum} of $f$ iff it is either a local maximum or a local minimum.
+\end{dfn}
+\begin{prp}[First Derivative Test]\index{First Derivative Test}\label{FirstDerivativeTest}
+Let $S\subseteq \R ^d$, $f:S\rightarrow \R$ and let $x_0\in \R ^d$.  Then, if $f$ is differentiable at $x_0$ and $x_0$ is a local extremum of $f$, then $\nabla _af(x)=0$.
+\begin{rmk}
+Sometimes this is also referred to as \emph{Fermat's theorem}\index{Fermat's theorem}.  Evidently, it was not the last result of his life.
+\end{rmk}
+\begin{proof}
+Suppose that $f$ is differentiable at $x_0$ and $x_0$ is a local extremum of $f$.  Let $U$ be an open neighborhood about $x_0$ so that $x_0$ is either a maximum or minimum in $U$.  We proceed by contradiction:  suppose that $\nabla _af(x_0)\neq 0$.  Then, there is some $v^a\in \tangent{\R ^d}{x_0}$ such that $v^a\nabla _af(x_0)\neq 0$.  Without loss of generality, suppose that $v^a\nabla _af(x_0)>0$.  Then, there is some $h>0$ such that $x_0+hv,x_0-hv\in U$ and
+\begin{equation}
+\frac{f(x_0+hv)-f(x_0)}{h}\eqqcolon K>0\text{ and }\frac{f(x_0-hv)-f(x_0)}{-h}\eqqcolon L>0,
+\end{equation}
+and so
+\begin{equation}
+f(x_0+hv)=f(x_0)+hK>f(x_0)\text{ and }f(x_0-hv)=f(x_0)-hL<f(x_0),
+\end{equation}
+so that $f(x_0)$ can be neither a maximum nor a minimum in $U$:  a contradiction.
+\end{proof}
+\end{prp}
+
+\begin{thm}[Mean Value Theorem]\index{Mean Value Theorem}\label{MeanValueTheorem}
+Let $f:[a,b]\rightarrow \R$ be continuous and differentiable.\footnote{Recall that (see the definition, \cref{Derivative}) a function being differentiable means that it is differentiable on its interior (we only defined the derivative for interior points).  Thus, while it may be the case that differentiability at a point implies continuity at a point, saying that $f$ is differentiable here only implies continuity on the interior of the domain, $(a,b)$.  But in fact, we \emph{do} need continuity on all of $[a,b]$---see the next example.}  Then, there is some $c\in (a,b)$ such that
+\begin{equation}
+\tfrac{\dif}{\dif x}f(x)=\frac{f(b)-f(a)}{b-a}.
+\end{equation}
+\begin{rmk}
+The right-hand side of this equation is called the \emph{average slope}\index{Average slope} of $f$ on $[a,b]$.
+\end{rmk}
+\begin{rmk}
+This essentially does not generalize at all to higher dimensions.  It just fails outright if you increase the dimension of the codomain---see \cref{exm6.4.8}.  On the other hand, there is the question of what should the statement of the Mean Value Theorem even be if you increase the dimension of the domain---what is the average slope over a square, for example?  What you can do is state the result in terms of curves between points in $\R ^d$, but this is really just the one-dimensional statement here for the composition of the function with the curve (which of course itself is a function from a closed interval in $\R$ to $\R ^d$).
+\end{rmk}
+\begin{proof}
+Define $g:[a,b]\rightarrow \R$ by
+\begin{equation}
+g(x)\coloneqq f(x)-\left( \frac{f(b)-f(a)}{b-a}\right) (x-a).
+\end{equation}
+The first thing to notice is that we want to find some $c\in (a,b)$ such that $\frac{\dif}{\dif x}g(c)=0$.
+
+$g$ is continuous on $[a,b]$, and therefore, by the \nameref{ExtremeValueTheorem}, attains a maximum and a minimum somewhere on $[a,b]$.  Suppose that both the maximum and minimum were achieved at the endpoints.  As $g(a)=f(a)$ and $g(b)=f(a)$, this would imply that $f(a)$ was both a minimum and a maximum for $g$ on $[a,b]$, which in turn would imply that $g$ is constant on $[a,b]$.  In particular, $\frac{\dif}{\dif x}g(c)=0$ for any $c\in (a,b)$.  On the other hand, if at least one of the maximum and the minimum where attained at $c\in (a,b)$, then it would be a local extremum, and so by the \nameref{FirstDerivativeTest}, we would have that $\frac{\dif}{\dif x}g(c)=0$.
+\end{proof}
+\end{thm}
+
+\begin{exm}[A function which is differentiable on ${[a,b]}$ for which the \nameref{MeanValueTheorem} fails]
+Define $f:[0,1]\rightarrow \R$ by
+\begin{equation}
+f(x)\coloneqq \begin{cases}0 & \text{if }x=0 \\ 1 & \text{otherwise}\end{cases}.
+\end{equation}
+$f$ is differentiable on $[0,1]$ because its derivative exists at every point in the interior of $[0,1]$ (it is always $0$ of course).  On the other hand, the average slope of this function is $\frac{1-0}{1-0}=1$.
+\end{exm}
+\begin{exm}[A function continuous and differentiable on ${[a,b]}$ into $\R ^2$ for which the \nameref{MeanValueTheorem} fails]\label{exm6.4.8}
+Define $f_1,f_2:[-1,1]\rightarrow \R$ by
+\begin{equation}
+f_1(x)\coloneqq x^2\text{ and }f_2(x)\coloneqq x^3
+\end{equation}
+and $f:[-1,1]\rightarrow \R ^2$ by
+\begin{equation}
+f(x)\coloneqq \coord{f_1(x),f_2(x)}.
+\end{equation}
+We show there is no $c\in (-1,1)$ such that
+\begin{equation}\label{6.4.10}
+\frac{\dif}{\dif x}f(c)=\frac{f(1)-f(-1)}{1-(-1)}.
+\end{equation}
+$f_1(-1)=1$ and $f_1(1)=1$, and on the other hand, $f_2(-1)=-1$ and $f_2(1)=1$.  Therefore, the right-hand side of this equation becomes
+\begin{equation}
+\frac{f(1)-f(-1)}{1-(-1)}=\coord{0,1}.
+\end{equation}
+If \eqref{6.4.10} were to hold, then we must have that $f_1'(c)=0$, which forces $c=0$.  But then, $f_2'(c)=0\neq 1$.
+\end{exm}
+
+\begin{exr}
+Let $f:[a,b]\rightarrow \R$ be continuous and differentiable.  Show that the following are true.
+\begin{enumerate}
+\item If $\frac{\dif}{\dif x}f(c)=0$ for all $c\in (a,b)$, then $f$ is constant on $[a,b]$.
+\item if $\frac{\dif}{\dif x}f(c)>0$ for all $c\in (a,b)$, then $f$ is increasing on $[a,b]$.
+\item If $\frac{\dif}{\dif x}f(c)<0$ for all $c\in (a,b)$, then $f$ is decreasing on $[a,b]$.
+\end{enumerate}
+\end{exr}
+\begin{exr}
+Let $f:[a,b]\rightarrow \R$ and let $c\in (a,b)$.  Then, if $f$ is differentiable at $c$ and $\frac{\dif}{\dif x}f(c)>0$, is $f$ necessarily increasing in a neighborhood of $c$?
+\end{exr}
+Be careful though:  we can deduce nothing if the derivative is positive at a point alone.
+\begin{exm}[A point at which the derivative is positive but has no neighborhood in which the function is increasing]
+Define $f:\R \rightarrow \R$ by
+\begin{equation}
+f(x)\coloneqq \begin{cases}x-\tfrac{1}{4} & \text{if }x\in \Q \\ x^2 & \text{if }x\in \Q ^{\comp}\end{cases}.
+\end{equation}
+We first show that the derivative at $\frac{1}{2}$ is $1$.
+\begin{equation}
+\frac{f(\tfrac{1}{2}+\epsilon )-f(\tfrac{1}{2})}{\epsilon}=\begin{cases}\frac{\left( (\tfrac{1}{2}+\epsilon )-\tfrac{1}{4}\right) -\tfrac{1}{4}}{\epsilon} & \text{if }\epsilon \in \Q \\ \frac{\left( \tfrac{1}{2}+\epsilon \right) ^2-\tfrac{1}{4}}{\epsilon} & \text{if }x\in \Q ^{\comp}\end{cases}=\begin{cases}1 & \text{if }\epsilon \in \Q \\ 1+\epsilon & \text{if }\epsilon \in \Q ^{\comp}\end{cases}.
+\end{equation}
+Hence, we do indeed have that
+\begin{equation}
+\lim _{\epsilon \to 0}\frac{f(\tfrac{1}{2}+\epsilon )-f(\tfrac{1}{2})}{\epsilon}=1>0.
+\end{equation}
+On the other hand, let $U$ be any open neighborhood of $\frac{1}{2}$ and let $\varepsilon >0$ be \emph{rational} and such that $\varepsilon +\frac{1}{2}\in U$.  Now choose $0<\delta <\varepsilon$ \emph{irrational} and such that $\delta +\delta ^2>\varepsilon$.  Then, despite the fact that $\frac{1}{2}+\delta <\frac{1}{2}+\varepsilon$, we nevertheless have that
+\begin{equation}
+f(\tfrac{1}{2}+\delta )=(\tfrac{1}{2}+\delta )^2=\tfrac{1}{4}+\delta +\delta ^2>\tfrac{1}{4}+\varepsilon =f(\tfrac{1}{4}+\varepsilon ).
+\end{equation}
+\end{exm}
+
+\subsection{The Fundamental Theorem of Calculus}
+
+So there is this theorem.  It's kind of important.  Maybe you've even heard of it.  It's called the \emph{Fundamental Theorem of Calculus} and it asserts that
+\begin{equation}
+f(x)=\int _a^x\dif x\, \tfrac{\dif}{\dif x}f(x).
+\end{equation}
+Well, sort of.  If we're not careful about what we mean, this can completely fail..  That's right---your calculus teachers \emph{lied to you}.  You should sue them.\footnote{I'm exaggerating for dramatic effect.  (So dramatic, isn't it?)  When you first took calculus, the idea that a derivative would be defined only almost-everywhere was probably just not a thing.}
+\begin{exm}[A uniformly-continuous function on {$[0,1]$} that is $0$ at $0$, $1$ at $1$, but whose derivative is $0$ almost everywhere---the Devil's Staircase]
+We've see this bad boy before---see \cref{CantorFunction}.\footnote{There, it was used to generate an example of a uniform-homemorphism of $\R$ that preserves neither measurability not measure $0$.}  The construction is relatively long, and so we don't repeat it here, but if it helps you remember, it's that function which is constant on the components of the complement of the Cantor Set in $[0,1]$.  In fact, as the Cantor Set has measure $0$, it follows from this fact that the derivative of the Devil's Staircase is $0$ almost-everywhere.  Hence, on one hand we have that $\int _0^1\dif x\, \frac{\dif}{\dif x}f(x)=0$, but on the other hand we have $f(1)-f(0)=1$.  Turns-out that a lot can happen on a set of measure $0$!
+
+In fact, you can modify this by adding $x$ to obtain a \emph{uniform-homeomorphism} (the Cantor Function---see the same example, \cref{CantorFunction}) which has derivative $1$ almost-everywhere, but yet goes from $0$ to \emph{not} $1$, but $2$, on $[0,1]$.  The point is, you can have \emph{ridiculously nice} functions for which the Fundamental Theorem of Calculus fails.
+\end{exm}
+Actually, this shouldn't come as that much of a surprise.\footnote{By now, you should pretty much expect many things that seem to be completely reasonable to be utterly false.  For example, check-out the function that is infinitely-differentiable but not continuous---\cref{exm6.2.15}.}  For one thing, pretty much everything you integrate in standard calculus classes is a polynomial, a trig function, an exponential function, a inverse of one of these, or a function formed from these by addition multiplication etc..  That is, you only deal with incredibly nice functions all the time.  While the Devil's Staircase is actually relatively nice as far as all continuous functions go (it's uniformly-continuous), it certainly isn't smooth everywhere.
+
+Also, it's worth mentioning that we cheated a bit for these counter-examples:  the Devil's Staircase is \emph{not} differentiable on $[0,1]$---it is only differentiable almost-everywhere.  It's important that we allow this, however.  Remember, we want to go \emph{both} ways:  given an integrable function, we want to use the integral to (hopefully) generate a function that is an antiderivative\footnote{That is, a function that has the property that when you differentiate it, you get back the original function.}; and conversely given a differentiable function, we want to use the integral to (hopefully) recover the original function as the integral of the derivative.  The point is that, in one of these cases, the input is an integrable function, in which case things only matter \emph{up to measure zero}.
+
+In the direction in which your `'input' is a differentiable function, of course, there is (seemingly) nothing to worry about because we are a priori assuming that the function is differentiable \emph{everywhere} (not just almost-everywhere), and in this case, we have the following.
+\begin{thm}[The Fundamental Theorem of Calculus---Part I]\index{Fundamental Theorem of Calculus}\label{FTCI}
+Let $f:[a,b]\rightarrow \R$ be continuous and differentiable and let $x\in [a,b]$.  Then, if $t\mapsto \frac{\dif}{\dif t}f(t)$ is integrable on $(a,b)$, then
+\begin{equation}
+f(x)=\int _a^x\dif t\, \tfrac{\dif}{\dif t}f(t).
+\end{equation}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~149]{BigRudin}.}
+Suppose that $x\mapsto \frac{\dif}{\dif x}f(x)$ is integrable on $(a,b)$.  Without loss of generality, assume that $x=b$.  Let $\varepsilon >0$.  Then, by \nameref{CaratheodoryVitaliTheorem} (\cref{CaratheodoryVitaliTheorem}), there is a lower-semicontinuous function $g:(a,b)\rightarrow \R$ such that (i) $\frac{\dif}{\dif t}f\leq g$ and (ii)
+\begin{equation}
+\int _a^b\dif t\, g(t)<\int _a^b\dif t\, \tfrac{\dif}{\dif t}f(t)+\varepsilon .
+\end{equation}
+By replacing $g$ with $g+\delta$ for sufficiently small $\delta$, we may without loss of generality assume that $\frac{\dif}{\dif t}f<g$.  For $\eta >0$, define $F_\eta :[a,b]\rightarrow \R$ by
+\begin{equation}\label{Rudin3}
+F_\eta (x)\coloneqq \int _a^x\dif t\, g(t)-f(x)+f(a)+\eta (x-a).
+\end{equation}
+By lower-semicontinuity and the definition of the derivative, for each $x\in [a,b)$, there is some $\delta _x>0$ such that
+\begin{equation}
+g(t)>\tfrac{\dif}{\dif t}f(x)\text{ and }\frac{f(t)-f(x)}{t-x}<\tfrac{\dif}{\dif }f(x)+eta
+\end{equation}
+for all $t\in (x,x+\delta _x)$.  Thus, for $t\in (x,x+\delta _x$, we have
+\begin{equation}\begin{split}
+F_\eta (t)-F_\eta (x) & =\int _x^t\dif s\, g(s)-[f(t)-f(x)]+\eta (t-x) \\
+& >(t-x)\tfrac{\dif}{\dif t}f(x)-(t-x)\left[ \tfrac{\dif}{\dif t}f(x)+\eta \right] +\eta (t-x)=0.
+\end{split}
+\end{equation}
+Define $x_\eta \coloneqq \sup \{ t\in [a,b]:F_\eta (t)=0\}$.  By continuity, $F_\eta (x_\eta )=0$,   It then follows from the previous inequality that $F_\eta (b)\geq 0$.  As $\eta$ is arbitrary, it follows \eqref{Rudin3} that
+\begin{equation}
+f(b)-f(a)\leq \int _a^b\dif t\, g(t)<\int _a^b\dif t\tfrac{\dif}{\dif t}f(t)+\varepsilon ,
+\end{equation}
+and so
+\begin{equation}
+f(b)-f(a)\leq \int _a^b\dif t\, \tfrac{\dif}{\dif t}f(t).
+\end{equation}
+Replacing everywhere in this argument $f$ with $-f$ gives us
+\begin{equation}
+-f(b)-(-f(a))\leq -\int _a^b\dif t\, \tfrac{\dif}{\dif t}f(t).
+\end{equation}
+Combining these two inequalities, we obtain
+\begin{equation}
+f(b)-f(a)=\int _a^b\dif t\, \tfrac{\dif}{\dif t}f(t)
+\end{equation}
+\end{proof}
+\end{thm}
+The other direction, that is, is the derivative of an integral the original function, is arguably a bit subtler because our `input' is a priori only defined up to a set of measure $0$.  Thus, if $F(x)\coloneqq \int _a^x\, \dit t\, f(t)$, we could never hope to have that $\frac{\dif}{\dif x}F(x)=f(x)$ for \emph{all} $x$,\footnote{Take any function $f$, any point $x\in \R$, and any `value' $y\in \R$---you can redefine $f$ to be equal to $y$ at $x$, and you will have no effect on its integral.} but we can only hope this to be true almost everywhere.  Fortunately enough, this much is true.
+\begin{thm}[The Fundamental Theorem of Calculus---Part II]\index{Fundamental Theorem of Calculus}\label{FTCI}
+Let $f:[a,b]\rightarrow \R$ be integrable.  Then,
+\begin{equation}
+\frac{\dif}{\dif x}\int _a^x\dif t\, f(t)=f(x)
+\end{equation}
+for almost-all $x\in [a,b]$.
+\begin{proof}
+We leave this an an exercise for the reader.
+\begin{exr}
+Prove this yourself.
+\begin{rmk}
+Hint:  This is definitely in the category of ``This really shouldn't be an exercise, but it is anyways because Jonny ran out of time.''.  Pugh (\cite{Pugh}) actually proves something stronger than this on pg.~396, so your hint is to look there.
+\end{rmk}
+\end{exr}
+\end{proof}
+\end{thm}
+
+\subsection{The exponential function}
+
+So, we've proven several properties about how to manipulate derivatives, but what is there to differentiate?  Polynomials?  That's no fun.  Let's find a function even easier to differentiate.  In fact, let's see if we can find a function that is equal to its own derivative
+\begin{equation}
+\tfrac{\dif}{\dif x}f(x)=f(x).
+\end{equation}
+Don't be a smart-ass---zero doesn't count.  Of course, you already know the answer---or so you think you do.  Can you define $\exp (x)$?  For what it's worth, you do have the tools to do so at this point, but it's quite likely that someone told you once upon a time that $\e \approx 2.718\ldots $ and then $\exp (x)\coloneqq \e ^x$.  If it's not clear to you at this point that this is just complete and utter nonsense, then apparently I'm not very good at writing mathematical exposition.\footnote{Or maybe you're just stupid.  (Disclaimer:  That was a joke.)}  What you could do, however, is define $\exp$ by its power-series, $\exp (x)\coloneqq \sum _{m\in M}\frac{x^m}{m!}$, but where did that formula come from?  Your ass?  No.  The proper way to define the exponential function is that it is the unique function from $\R$ to $\R$ that (i) is equal to its own derivative and (ii) is $1$ at $0$.\footnote{The unique function that that is equal to its own derivative and is equal to $0$ at $0$ is the function that is everywhere $0$.  $1$ is the next most obvious choice, as opposed to, say $\sqrt{\uppi}$.}  Of course, as always, we can't just go around asserting things like this exist willy-nilly.  Who can even comprehend the chaos that might ensue?  We must \emph{prove} that such a thing exists, and that only one such thing exists.  The theorem that does this for us (and a whole lot more) is Picard's Existence Theorem.
+\begin{thm}[Picard's Existence Theorem]\index{Picard's Existence Theorem}\label{PicardsExistenceTheorem}
+Let $F:\R \times \R \rightarrow \R$ be a function such that
+\begin{enumerate}
+\item for each fixed $y\in \R$, the map $x\mapsto F(x,y)$ is continuous; and
+\item for each fixed $x\in \R$, the map $y\mapsto F(x,y)$ is lipschitz-continuous,\footnote{The definition is in \cref{BoundedMap} in case you've forgotten (or just plain missed it).}
+\end{enumerate}
+and let $\coord{x_0,y_0}\in \R \times \R$.  Then, for some $\varepsilon _0$, there is a unique function $f:(x_0-\varepsilon _0,x_0+\varepsilon _0)\rightarrow \R$ such that
+\begin{equation}
+\frac{\dif}{\dif x}f(x)=F\left( x,f(x)\right) \text{ and }f(x_0)=y_0.
+\end{equation}
+Furthermore, if for each fixed $x\in \R$, the map $y\mapsto F(x,y)$ is linear, then we may extend $f$ uniquely to a function on all of $\R$.
+\begin{rmk}
+Picard's theorem is about the existence and uniqueness of solutions to \emph{differential equations}.  The $F$ is supposed to be thought of as the differential equation itself, or at least everything in the differential equation that does not contain a derivative.  For example, in our case of primary interest ($\frac{\dif}{\dif x}f(x)=f(x)$), $F$ will be just $F(x,y)\coloneqq y$.
+\end{rmk}
+\begin{rmk}
+The ``there exists some $\varepsilon _0$'' business is a result of the fact that we may not be able to find a solution to the differential equation on all of $\R$---in general, we can only do so on a neighborhood of where we started ($x=x_0$).  For example, consider the differential equation $\frac{\dif}{\dif x}f(x)=-f(x)^2$ (so for $F(x,y)\coloneqq -y^2$) with initial value $x_0=1=y_0$.  The unique solution will be $f(x)=\frac{1}{x}$, which you cannot extend past $0$ (so that $\varepsilon _0=1$ is the best we can do).
+\end{rmk}
+\end{thm}
+The firepower of Picard allows us to define the exponential function.
+\begin{dfn}[Exponential function]\label{ExponentialFunction}
+The \emph{exponential function}\index{Exponential function}, $\exp$\index[notation]{$\exp$}, is the unique function $\exp :\R \rightarrow \R$ such that (i) $\frac{\dif}{\dif x}\exp (x)=\exp (x)$ and (ii) $\exp (0)=1$.
+\end{dfn}
+\begin{exr}
+Show that $\lim _{x\to \infty}\exp (x)=\infty$ and $\lim _{x\to -\infty}x^m\exp (x)=0$ for all $m\in \N$.
+\end{exr}
+
+Cool, so now we have a function that is its own derivative.  What about a function that is \emph{minus} its own derivative.  Well, now that we have $\exp$ in hand, this is actually really easy.
+\begin{exr}
+Show that $x\mapsto \exp (-x)$ is the unique function from $\R$ to $\R$ such that (i) is equal to minus its derivative and (ii) is equal to $0$ at $1$.
+\end{exr}
+
+What about second derivatives?  Well, of course, we $\exp$ is equal to its own second derivative.  That's easy.  But what about a function that is equal to \emph{minus} its own second derivative?  If we wanted to play the same trick as before, we would need to consider the function $x\mapsto \exp (\alpha x)$ for some number $\alpha$ with $\alpha ^2=-1$, but that's just craziness.  Only looney-toons would ever think about such nonsense.\footnote{But seriously:  why is there no \emph{real} number whose square is $-1$?}  Looks like we're just going to have to come up with a new name for such a function.  ``Cosine'' sounds rad.  Let's call it that.
+\begin{dfn}[Cosine and sine]
+The \emph{cosine function}\index{Cosine function}, $\cos$\index[notation]{$\cos$}, is the unique function $\cos :\R \rightarrow \R$ such that (i) $\frac{\dif ^2}{\dif x^2}\cos (x)=-\cos (x)$, (ii) $\cos (0)=1$, and (iii) $\frac{\dif}{\dif x}\cos (0)=0$.
+
+The \emph{sine function}\index{Sine function}, $\sin$\index[notation]{$\sin$}, is the unique function $\sin :\R \rightarrow \R$ such that (i) $\frac{\dif ^2}{\dif x^2}\sin (x)=-\sin (x)$, (ii) $\sin (0)=0$, and (iii) $\frac{\dif}{\dif x}\sin (0)=1$.
+\begin{rmk}
+In the case of $\exp$, because it was defined by a differential equation of \emph{first}-order, only one initial condition was required to uniquely specify it.  In contrast, however, there is \emph{more} than one function equal to minus its own second-derivative (and is $1$ at $0$).  To uniquely specify the function, you must also specify its first-derivative.  $\sin$ and $\cos$ are ``essentially everything'' in the sense that any other function that is equal to minus its own second derivative can be written as a linear combination of these (and furthermore, you can figure out what that linear combination should be by looking at initial conditions at $0$).
+\end{rmk}
+\end{dfn}
+\begin{exr}
+Show that $\frac{\dif}{\dif x}\sin =\cos$ and $\frac{\dif}{\dif \cos}=-\sin$.
+\end{exr}
+
+In terms of finding functions that are equal to their own derivatives or minus their own derivatives, we are essentially done.  $\exp$ always works for finding functions equal to its own $n^{\text{th}}$ derivative, and if you want a function equal to \emph{minus} its own $n^{\text{th}}$ derivative, $x\mapsto \exp (-x)$ will work for $n$ odd, and $\cos$ and $\sin$ will work for $n$ even.
+
+\subsection{Tools for calculation}
 
 And now we come to the results which you are probably most familiar with from calculus.
 \begin{prp}[Algebraic Derivative Theorems]\index{Algebraic Derivative Theorems}\label{AlgebraicDerivativeTheorems}
@@ -369,58 +608,7 @@ but of course this is just the very definition of the derivative.
 \end{proof}
 \end{prp}
 
-\section{The exponential function}
-
-So, we've proven several properties about how to manipulate derivatives, but what is there to differentiate?  Polynomials?  That's no fun.  Let's find a function even easier to differentiate.  In fact, let's see if we can find a function that is equal to its own derivative
-\begin{equation}
-\tfrac{\dif}{\dif x}f(x)=f(x).
-\end{equation}
-Don't be a smart-ass---zero doesn't count.  Of course, you already know the answer---or so you think you do.  Can you define $\exp (x)$?  For what it's worth, you do have the tools to do so at this point, but it's quite likely that someone told you once upon a time that $\e \approx 2.718\ldots $ and then $\exp (x)\coloneqq \e ^x$.  If it's not clear to you at this point that this is just complete and utter nonsense, then apparently I'm not very good at writing mathematical exposition.\footnote{Or maybe you're just stupid.  (Disclaimer:  That was a joke.)}  What you could do, however, is define $\exp$ by its power-series, $\exp (x)\coloneqq \sum _{m\in M}\frac{x^m}{m!}$, but where did that formula come from?  Your ass?  No.  The proper way to define the exponential function is that it is the unique function from $\R$ to $\R$ that (i) is equal to its own derivative and (ii) is $1$ at $0$.\footnote{The unique function that that is equal to its own derivative and is equal to $0$ at $0$ is the function that is everywhere $0$.  $1$ is the next most obvious choice, as opposed to, say $\sqrt{\uppi}$.}  Of course, as always, we can't just go around asserting things like this exist willy-nilly.  Who can even comprehend the chaos that might ensue?  We must \emph{prove} that such a thing exists, and that only one such thing exists.  The theorem that does this for us (and a whole lot more) is Picard's Existence Theorem.
-\begin{thm}[Picard's Existence Theorem]\index{Picard's Existence Theorem}\label{PicardsExistenceTheorem}
-Let $F:\R \times \R \rightarrow \R$ be a function such that
-\begin{enumerate}
-\item for each fixed $y\in \R$, the map $x\mapsto F(x,y)$ is continuous; and
-\item for each fixed $x\in \R$, the map $y\mapsto F(x,y)$ is lipschitz-continuous,\footnote{The definition is in \cref{BoundedMap} in case you've forgotten (or just plain missed it).}
-\end{enumerate}
-and let $\coord{x_0,y_0}\in \R \times \R$.  Then, for some $\varepsilon _0$, there is a unique function $f:(x_0-\varepsilon _0,x_0+\varepsilon _0)\rightarrow \R$ such that
-\begin{equation}
-\frac{\dif}{\dif x}f(x)=F\left( x,f(x)\right) \text{ and }f(x_0)=y_0.
-\end{equation}
-Furthermore, if for each fixed $x\in \R$, the map $y\mapsto F(x,y)$ is linear, then we may extend $f$ uniquely to a function on all of $\R$.
-\begin{rmk}
-Picard's theorem is about the existence and uniqueness of solutions to \emph{differential equations}.  The $F$ is supposed to be thought of as the differential equation itself, or at least everything in the differential equation that does not contain a derivative.  For example, in our case of primary interest ($\frac{\dif}{\dif x}f(x)=f(x)$), $F$ will be just $F(x,y)\coloneqq y$.
-\end{rmk}
-\begin{rmk}
-The ``there exists some $\varepsilon _0$'' business is a result of the fact that we may not be able to find a solution to the differential equation on all of $\R$---in general, we can only do so on a neighborhood of where we started ($x=x_0$).  For example, consider the differential equation $\frac{\dif}{\dif x}f(x)=-f(x)^2$ (so for $F(x,y)\coloneqq -y^2$) with initial value $x_0=1=y_0$.  The unique solution will be $f(x)=\frac{1}{x}$, which you cannot extend past $0$ (so that $\varepsilon _0=1$ is the best we can do).
-\end{rmk}
-\end{thm}
-The firepower of Picard allows us to define the exponential function.
-\begin{dfn}[Exponential function]\label{ExponentialFunction}
-The \emph{exponential function}\index{Exponential function}, $\exp$\index[notation]{$\exp$}, is the unique function $\exp :\R \rightarrow \R$ such that (i) $\frac{\dif}{\dif x}\exp (x)=\exp (x)$ and (ii) $\exp (0)=1$.
-\end{dfn}
-\begin{exr}
-Show that $\lim _{x\to \infty}\exp (x)=\infty$ and $\lim _{x\to -\infty}x^m\exp (x)=0$ for all $m\in \N$.
-\end{exr}
-
-Cool, so now we have a function that is its own derivative.  What about a function that is \emph{minus} its own derivative.  Well, now that we have $\exp$ in hand, this is actually really easy.
-\begin{exr}
-Show that $x\mapsto \exp (-x)$ is the unique function from $\R$ to $\R$ such that (i) is equal to minus its derivative and (ii) is equal to $0$ at $1$.
-\end{exr}
-
-What about second derivatives?  Well, of course, we $\exp$ is equal to its own second derivative.  That's easy.  But what about a function that is equal to \emph{minus} its own second derivative?  If we wanted to play the same trick as before, we would need to consider the function $x\mapsto \exp (\alpha x)$ for some number $\alpha$ with $\alpha ^2=-1$, but that's just craziness.  Only looney-toons would ever think about such nonsense.\footnote{But seriously:  why is there no \emph{real} number whose square is $-1$?}  Looks like we're just going to have to come up with a new name for such a function.  ``Cosine'' sounds rad.  Let's call it that.
-\begin{dfn}[Cosine and sine]
-The \emph{cosine function}\index{Cosine function}, $\cos$\index[notation]{$\cos$}, is the unique function $\cos :\R \rightarrow \R$ such that (i) $\frac{\dif ^2}{\dif x^2}\cos (x)=-\cos (x)$, (ii) $\cos (0)=1$, and (iii) $\frac{\dif}{\dif x}\cos (0)=0$.
-
-The \emph{sine function}\index{Sine function}, $\sin$\index[notation]{$\sin$}, is the unique function $\sin :\R \rightarrow \R$ such that (i) $\frac{\dif ^2}{\dif x^2}\sin (x)=-\sin (x)$, (ii) $\sin (0)=0$, and (iii) $\frac{\dif}{\dif x}\sin (0)=1$.
-\begin{rmk}
-In the case of $\exp$, because it was defined by a differential equation of \emph{first}-order, only one initial condition was required to uniquely specify it.  In contrast, however, there is \emph{more} than one function equal to minus its own second-derivative (and is $1$ at $0$).  To uniquely specify the function, you must also specify its first-derivative.  $\sin$ and $\cos$ are ``essentially everything'' in the sense that any other function that is equal to minus its own second derivative can be written as a linear combination of these (and furthermore, you can figure out what that linear combination should be by looking at initial conditions at $0$).
-\end{rmk}
-\end{dfn}
-
-In terms of finding functions that are equal to their own derivatives or minus their own derivatives, we are essentially done.  $\exp$ always works for finding functions equal to its own $n^{\text{th}}$ derivative, and if you want a function equal to \emph{minus} its own $n^{\text{th}}$ derivative, $x\mapsto \exp (-x)$ will work for $n$ odd, and $\cos$ and $\sin$ will work for $n$ even.
-
 \section{Differentiability and continuity}
-
 
 Having defined the exponential function, we can now tie-up a loose-end from before.
 \begin{exm}[A function which is infinitely-differentiable but not continuous]\footnote{This comes from \cite[pg.~116]{Gelbaum}.}\label{exm6.2.15}
@@ -608,110 +796,6 @@ The derivative (as a function on the tangent space) is itself continuous (hence 
 \begin{exr}
 Show that the map $\tangent{\R ^d}{x}\ni v^a\mapsto v^a\nabla _af(x)\in \R$ is continuous\footnote{Recall that $\tangent{\R ^d}{x}$ is a \emph{metric} vector space, with the metric being the dot product.  This metric induces a norm (the usual euclidean norm), which in turn induces a metric, which in turn induces a uniformity, which in turn induces a topology.} if $f$ is differentiable at $x$.
 \end{exr}
-
-\section{The Mean Value Theorem}
-
-One of the most important theorems of traditional calculus is of course the \emph{Mean Value Theorem}.  We first prove a couple of results, important in their own right, leading up to it.
-\begin{dfn}[Local extrema]\label{LocalExtrema}
-Let $f:X\rightarrow \R$ be a function from a topological space into $\R$ and let $x_0\in X$.  Then, $x_0$ is a \emph{local maximum}\index{Local maximum} of $f$ iff there is some open neighborhood $U$ of $x_0$ such that (i) $f(x_0)=\sup _{x\in U}\{ f(x)\}$ and (ii) $x_0$ is the \emph{unique} such point.\footnote{So for example, constant functions have no local maxima.}  $x_0$ is a \emph{local minimum}\index{Local minimum} of $f$ iff there is some open neighborhood $U$ of $x_0$ such that (i) $f(x_0)=\inf _{x\in U}\{ f(x)\}$ and (ii) $x_0$ is the \emph{unique} such point.  $x_0$ is a \emph{local extremum}\index{Local extremum} of $f$ iff it is either a local maximum or a local minimum.
-\end{dfn}
-\begin{prp}[First Derivative Test]\index{First Derivative Test}\label{FirstDerivativeTest}
-Let $S\subseteq \R ^d$, $f:S\rightarrow \R$ and let $x_0\in \R ^d$.  Then, if $f$ is differentiable at $x_0$ and $x_0$ is a local extremum of $f$, then $\nabla _af(x)=0$.
-\begin{rmk}
-Sometimes this is also referred to as \emph{Fermat's theorem}\index{Fermat's theorem}.  Evidently, it was not the last result of his life.
-\end{rmk}
-\begin{proof}
-Suppose that $f$ is differentiable at $x_0$ and $x_0$ is a local extremum of $f$.  Let $U$ be an open neighborhood about $x_0$ so that $x_0$ is either a maximum or minimum in $U$.  We proceed by contradiction:  suppose that $\nabla _af(x_0)\neq 0$.  Then, there is some $v^a\in \tangent{\R ^d}{x_0}$ such that $v^a\nabla _af(x_0)\neq 0$.  Without loss of generality, suppose that $v^a\nabla _af(x_0)>0$.  Then, there is some $h>0$ such that $x_0+hv,x_0-hv\in U$ and
-\begin{equation}
-\frac{f(x_0+hv)-f(x_0)}{h}\eqqcolon K>0\text{ and }\frac{f(x_0-hv)-f(x_0)}{-h}\eqqcolon L>0,
-\end{equation}
-and so
-\begin{equation}
-f(x_0+hv)=f(x_0)+hK>f(x_0)\text{ and }f(x_0-hv)=f(x_0)-hL<f(x_0),
-\end{equation}
-so that $f(x_0)$ can be neither a maximum nor a minimum in $U$:  a contradiction.
-\end{proof}
-\end{prp}
-
-\begin{thm}[Mean Value Theorem]\index{Mean Value Theorem}\label{MeanValueTheorem}
-Let $f:[a,b]\rightarrow \R$ be continuous and differentiable.\footnote{Recall that (see the definition, \cref{Derivative}) a function being differentiable means that it is differentiable on its interior (we only defined the derivative for interior points).  Thus, while it may be the case that differentiability at a point implies continuity at a point, saying that $f$ is differentiable here only implies continuity on the interior of the domain, $(a,b)$.  But in fact, we \emph{do} need continuity on all of $[a,b]$---see the next example.}  Then, there is some $c\in (a,b)$ such that
-\begin{equation}
-\tfrac{\dif}{\dif x}f(x)=\frac{f(b)-f(a)}{b-a}.
-\end{equation}
-\begin{rmk}
-The right-hand side of this equation is called the \emph{average slope}\index{Average slope} of $f$ on $[a,b]$.
-\end{rmk}
-\begin{rmk}
-This essentially does not generalize at all to higher dimensions.  It just fails outright if you increase the dimension of the codomain---see \cref{exm6.4.8}.  On the other hand, there is the question of what should the statement of the Mean Value Theorem even be if you increase the dimension of the domain---what is the average slope over a square, for example?  What you can do is state the result in terms of curves between points in $\R ^d$, but this is really just the one-dimensional statement here for the composition of the function with the curve (which of course itself is a function from a closed interval in $\R$ to $\R ^d$).
-\end{rmk}
-\begin{proof}
-Define $g:[a,b]\rightarrow \R$ by
-\begin{equation}
-g(x)\coloneqq f(x)-\left( \frac{f(b)-f(a)}{b-a}\right) (x-a).
-\end{equation}
-The first thing to notice is that we want to find some $c\in (a,b)$ such that $\frac{\dif}{\dif x}g(c)=0$.
-
-$g$ is continuous on $[a,b]$, and therefore, by the \nameref{ExtremeValueTheorem}, attains a maximum and a minimum somewhere on $[a,b]$.  Suppose that both the maximum and minimum were achieved at the endpoints.  As $g(a)=f(a)$ and $g(b)=f(a)$, this would imply that $f(a)$ was both a minimum and a maximum for $g$ on $[a,b]$, which in turn would imply that $g$ is constant on $[a,b]$.  In particular, $\frac{\dif}{\dif x}g(c)=0$ for any $c\in (a,b)$.  On the other hand, if at least one of the maximum and the minimum where attained at $c\in (a,b)$, then it would be a local extremum, and so by the \nameref{FirstDerivativeTest}, we would have that $\frac{\dif}{\dif x}g(c)=0$.
-\end{proof}
-\end{thm}
-
-\begin{exm}[A function which is differentiable on ${[a,b]}$ for which the \nameref{MeanValueTheorem} fails]
-Define $f:[0,1]\rightarrow \R$ by
-\begin{equation}
-f(x)\coloneqq \begin{cases}0 & \text{if }x=0 \\ 1 & \text{otherwise}\end{cases}.
-\end{equation}
-$f$ is differentiable on $[0,1]$ because its derivative exists at every point in the interior of $[0,1]$ (it is always $0$ of course).  On the other hand, the average slope of this function is $\frac{1-0}{1-0}=1$.
-\end{exm}
-\begin{exm}[A function continuous and differentiable on ${[a,b]}$ into $\R ^2$ for which the \nameref{MeanValueTheorem} fails]\label{exm6.4.8}
-Define $f_1,f_2:[-1,1]\rightarrow \R$ by
-\begin{equation}
-f_1(x)\coloneqq x^2\text{ and }f_2(x)\coloneqq x^3
-\end{equation}
-and $f:[-1,1]\rightarrow \R ^2$ by
-\begin{equation}
-f(x)\coloneqq \coord{f_1(x),f_2(x)}.
-\end{equation}
-We show there is no $c\in (-1,1)$ such that
-\begin{equation}\label{6.4.10}
-\frac{\dif}{\dif x}f(c)=\frac{f(1)-f(-1)}{1-(-1)}.
-\end{equation}
-$f_1(-1)=1$ and $f_1(1)=1$, and on the other hand, $f_2(-1)=-1$ and $f_2(1)=1$.  Therefore, the right-hand side of this equation becomes
-\begin{equation}
-\frac{f(1)-f(-1)}{1-(-1)}=\coord{0,1}.
-\end{equation}
-If \eqref{6.4.10} were to hold, then we must have that $f_1'(c)=0$, which forces $c=0$.  But then, $f_2'(c)=0\neq 1$.
-\end{exm}
-
-\begin{exr}
-Let $f:[a,b]\rightarrow \R$ be continuous and differentiable.  Show that the following are true.
-\begin{enumerate}
-\item If $\frac{\dif}{\dif x}f(c)=0$ for all $c\in (a,b)$, then $f$ is constant on $[a,b]$.
-\item if $\frac{\dif}{\dif x}f(c)>0$ for all $c\in (a,b)$, then $f$ is increasing on $[a,b]$.
-\item If $\frac{\dif}{\dif x}f(c)<0$ for all $c\in (a,b)$, then $f$ is decreasing on $[a,b]$.
-\end{enumerate}
-\end{exr}
-\begin{exr}
-Let $f:[a,b]\rightarrow \R$ and let $c\in (a,b)$.  Then, if $f$ is differentiable at $c$ and $\frac{\dif}{\dif x}f(c)>0$, is $f$ necessarily increasing in a neighborhood of $c$?
-\end{exr}
-Be careful though:  we can deduce nothing if the derivative is positive at a point alone.
-\begin{exm}[A point at which the derivative is positive but has no neighborhood in which the function is increasing]
-Define $f:\R \rightarrow \R$ by
-\begin{equation}
-f(x)\coloneqq \begin{cases}x-\tfrac{1}{4} & \text{if }x\in \Q \\ x^2 & \text{if }x\in \Q ^{\comp}\end{cases}.
-\end{equation}
-We first show that the derivative at $\frac{1}{2}$ is $1$.
-\begin{equation}
-\frac{f(\tfrac{1}{2}+\epsilon )-f(\tfrac{1}{2})}{\epsilon}=\begin{cases}\frac{\left( (\tfrac{1}{2}+\epsilon )-\tfrac{1}{4}\right) -\tfrac{1}{4}}{\epsilon} & \text{if }\epsilon \in \Q \\ \frac{\left( \tfrac{1}{2}+\epsilon \right) ^2-\tfrac{1}{4}}{\epsilon} & \text{if }x\in \Q ^{\comp}\end{cases}=\begin{cases}1 & \text{if }\epsilon \in \Q \\ 1+\epsilon & \text{if }\epsilon \in \Q ^{\comp}\end{cases}.
-\end{equation}
-Hence, we do indeed have that
-\begin{equation}
-\lim _{\epsilon \to 0}\frac{f(\tfrac{1}{2}+\epsilon )-f(\tfrac{1}{2})}{\epsilon}=1>0.
-\end{equation}
-On the other hand, let $U$ be any open neighborhood of $\frac{1}{2}$ and let $\varepsilon >0$ be \emph{rational} and such that $\varepsilon +\frac{1}{2}\in U$.  Now choose $0<\delta <\varepsilon$ \emph{irrational} and such that $\delta +\delta ^2>\varepsilon$.  Then, despite the fact that $\frac{1}{2}+\delta <\frac{1}{2}+\varepsilon$, we nevertheless have that
-\begin{equation}
-f(\tfrac{1}{2}+\delta )=(\tfrac{1}{2}+\delta )^2=\tfrac{1}{4}+\delta +\delta ^2>\tfrac{1}{4}+\varepsilon =f(\tfrac{1}{4}+\varepsilon ).
-\end{equation}
-\end{exm}
 
 \section{The Inverse Function Theorem}
 

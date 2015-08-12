@@ -358,38 +358,38 @@ By regularity and $\sigma$-compactness, you by definition have that topological 
 I told you once upon a time not to forget a trick.  You haven't forgotten it, have you?
 \end{rmk}
 \end{exr}
-The following is nice characterization of measurability in topological measure spaces.  It is arguably the reason why we give the conditions ``$\sigma$-quasicompact, regular, borel'' a name in the first place.
+The following is nice characterization of measurability in topological measure spaces.  It is arguably the reason why we give the conditions ``$\sigma$-compact, regular, borel'' a name in the first place.
 \begin{prp}\label{prp5.1.39}
-Let $\coord{X,\meas}$ be a topological measure space and $S\subseteq X$.  Then, $S$ is measurable iff for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
+Let $\coord{X,\meas}$ be a topological measure space and $M\subseteq X$.  Then, $M$ is measurable iff for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
 \begin{equation}
-C_{\varepsilon}\subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
+C_{\varepsilon}\subseteq M\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
 \end{equation}
 \begin{proof}
 Write $X=\bigcup _{m\in \N}K_m$ for $K_m\subseteq X$ compact.
 
 \blankline
 \noindent
-$(\Rightarrow )$  Suppose that $S$ is measurable.  Define $S_m\coloneqq S\cap K_m$.  As $S_m\subseteq K_m$, $S_m$ has finite measure because $\meas$ is regular.  Let $\varepsilon >0$.  By outer-regularity, there is some open $U_m$ containing $S_m$ such that
+$(\Rightarrow )$  Suppose that $M$ is measurable.  Define $M_m\coloneqq M\cap K_m$.  As $M_m\subseteq K_m$, $M_m$ has finite measure because $\meas$ is regular.  Let $\varepsilon >0$.  By outer-regularity, there is some open $U_m$ containing $M_m$ such that
 \begin{equation}
-\meas (S_m)\leq \meas (U_m)<\meas (S_m)+\frac{\varepsilon}{2^m}.
+\meas (M_m)\leq \meas (U_m)<\meas (M_m)+\frac{\varepsilon}{2^m}.
 \end{equation}
-Because $S$ is measurable, it in turn follows that\footnote{See \cref{exr5.1.21}.  We are also using here the fact that $K_m$ is measurable, because it is compact, hence closed, and the measure is borel (by hypothesis).}
+Because $M$ is measurable, it in turn follows that\footnote{See \cref{exr5.1.21}.  We are also using here the fact that $K_m$ is measurable, because it is compact, hence closed, and the measure is borel (by hypothesis).}
 \begin{equation}
-\meas (U_m-S_m)<\frac{\varepsilon}{2^m}.
+\meas (U_m-M_m)<\frac{\varepsilon}{2^m}.
 \end{equation}
 Define $U\coloneqq \bigcup _{m\in \N}U_m$.  Then,
 \begin{equation}
-\meas (U\setminus S)\leq \sum _{m\in \N}\meas (U_m-S_m)<2\varepsilon .
+\meas (U\setminus M)\leq \sum _{m\in \N}\meas (U_m-S_m)<2\varepsilon .
 \end{equation}
-Applying this same logic to $S^{\comp}$, we can find an open set $V$ containing $S^{\comp}$ such that
+Applying this same logic to $M^{\comp}$, we can find an open set $V$ containing $M^{\comp}$ such that
 \begin{equation}
-\meas (V\setminus S^{\comp })<2\varepsilon .
+\meas (V\setminus M^{\comp })<2\varepsilon .
 \end{equation}
 Then, $V^{\comp}$ is of course a closed subset of $S$ and
 \begin{equation}
 \begin{split}
-\meas (U\setminus V^{\comp}) & =\meas (U\cap V)\leq \meas (U\cap V\cap S)+\meas (U\cap V\cap S^{\comp}) \\
-& \leq \meas (V\setminus S^{\comp})+\meas (U\setminus S)<4\varepsilon .
+\meas (U\setminus V^{\comp}) & =\meas (U\cap V)\leq \meas (U\cap V\cap M)+\meas (U\cap V\cap M^{\comp}) \\
+& \leq \meas (V\setminus M^{\comp})+\meas (U\setminus S)<4\varepsilon .
 \end{split}
 \end{equation}
 
@@ -397,16 +397,15 @@ Then, $V^{\comp}$ is of course a closed subset of $S$ and
 \noindent
 $(\Leftarrow )$ Suppose that for every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
 \begin{equation}
-C_{\varepsilon}\subseteq S\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
+C_{\varepsilon}\subseteq M\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
 \end{equation}
 For $\varepsilon \coloneqq \frac{1}{2^m}$, let $C_m\subseteq S$ be closed and such that $\meas (S\setminus C_m)<\frac{\varepsilon}{2^m}$.  Define
 \begin{equation}
 C\coloneqq \bigcup _{m\in \N}C_m.
 \end{equation}
-$C$ is measurable because it is the countable union of closed sets, which are measurable because, by hypothesis, the measure in borel.  On the other hand, $\meas (S\setminus C)<2\varepsilon$.  As $\varepsilon$ is arbitrary, it follows that $\meas (S\setminus C)=0$, and so $S\setminus C$ is measurable.  Therefore, $S=C\cup (S\setminus C)$ is measurable.
+$C$ is measurable because it is the countable union of closed sets, which are measurable because, by hypothesis, the measure in borel.  On the other hand, $\meas (S\setminus C)<2\varepsilon$.  As $\varepsilon$ is arbitrary, it follows that $\meas (M\setminus C)=0$, and so $S\setminus C$ is measurable.  Therefore, $M=C\cup (M\setminus C)$ is measurable.
 \end{proof}
 \end{prp}
-Furthermore, in topological measure spaces, \emph{every} set is measurable up to sets of measure $0$.
 
 Before moving onto discussion of measures on uniform spaces, we have one more adjective that is used to describe outer-measures on topological spaces.
 \begin{dfn}[Topological-additivity]\label{TopologicalAdditivity}
@@ -500,6 +499,7 @@ Suppose that $\meas (S)=\infty$.  Write $X=\bigcup _{m\in \N}K_m$ for $K_m$ quas
 which means that the measure of at least some $S_m$ is strictly positive.
 \end{proof}
 \end{prp}
+Another important fact about topological measure spaces is that every set is measurable `up to sets of measure $0$'.
 \begin{prp}\label{ModuloZero}
 Let $\coord{X,\meas}$ be a topological measure space and let $S\subseteq X$.  Then, there is some $M\subseteq X$ measurable with $\meas (S\cap M^{\comp})+\meas (S^{\comp}\cap M)=0$.
 \begin{rmk}
@@ -525,6 +525,41 @@ which gives $\meas (S\cap M^{\comp})=0$.  On the other hand, we also have
 which likewise gives us that $\meas (S^{\comp}\cap M)=0$, and we are done.
 \end{proof}
 \end{prp}
+We can use this to give us yet another characterization of measurability in topological measure spaces.  For convenience, we collect it together with our previous characterization (\cref{prp5.1.39}).
+\begin{thm}\label{MeasurableTopologicalMeasureSpace}
+Let $\coord{X,\meas}$ be a topological measure space and $M\subseteq X$.  Then, the following are equivalent.
+\begin{enumerate}
+\item \label{MeasurableTopologicalMeasureSpace.i}$M$ is measurable.
+\item \label{MeasurableTopologicalMeasureSpace.ii}For every $\varepsilon >0$, there is an open set $U_{\varepsilon}$ and a closed set $C_{\varepsilon}$ such that
+\begin{equation}
+C_{\varepsilon}\subseteq M\subseteq U_{\varepsilon}\text{ and }\meas (U_{\varepsilon}\setminus C_{\varepsilon})<\varepsilon .
+\end{equation}
+\item \label{MeasurableTopologicalMeasureSpace.iii}For every measurable set $S\subseteq X$ of finite measure,
+\begin{equation}
+\meas (S)=\meas (S\cap M)+\meas (S\cap M^{\comp}).
+\end{equation}
+\end{enumerate}
+\begin{rmk}
+The last condition of course just says that we have to verify the usual condition of measurability (see \cref{MeasurableSet}) for \emph{$S$ measurable and of finite measure}.
+\end{rmk}
+\begin{proof}
+We have already shown that \ref{MeasurableTopologicalMeasureSpace.i} and \ref{MeasurableTopologicalMeasureSpace.ii} are equivalent in \cref{prp5.1.39}.  Furthermore, \ref{MeasurableTopologicalMeasureSpace.i} implies \ref{MeasurableTopologicalMeasureSpace.iii} immediately from the definition.  Thus, it suffices to show \ref{MeasurableTopologicalMeasureSpace.iii} implies \ref{MeasurableTopologicalMeasureSpace.i}.
+
+Let $S\subseteq X$ be \emph{arbitrary} and let $B\subseteq X$ be measurable and such that $\meas (S\cap B^{\comp})+\meas (S^{\comp}\cap B)=0$ (by the previous result).  By \cref{SigmaFinite}, write $B=\bigcup _{m\in \N}B_m$ as a countable disjoint union of measurable sets of measure $0$.  Then, it follows from the hypothesis that
+\begin{equation}
+\meas (B)=\meas (B\cap M)+\meas (B\cap M^{\comp}).
+\end{equation}
+Then,
+\begin{equation}
+\begin{split}
+\meas (S) & \geq \meas (S\cap B)=\meas (S\cap B)+\meas (S^{\comp}\cap B)\geq \meas (B)=\meas (B\cap M)+\meas (B\cap M^{\comp}) \\
+& \geq \meas (B\cap S\cap M)+\meas (B\cap S\cap M^{\comp}) \\
+& =\meas (B\cap S\cap M)+\meas (B^{\comp}\cap S\cap M)+\meas (B\cap S\cap M^{\comp})+\meas (B^{\comp}\cap S\cap M^{\comp}) \\
+& \geq \meas (S\cap M)+\meas (S\cap M^{\comp}).
+\end{split}
+\end{equation}
+\end{proof}
+\end{thm}
 
 One might expect that nonempty open sets have positive measure in topological measure spaces.  This is not true.
 \begin{exm}[An outer-measure on $\R$ for which $\coord{\R ,\meas}$ is a topological measure space, but is not strictly-positive---the dirac measure]\footnote{\emph{Stricty-positive}\index{Strictly-positive (measure)} means just that---that every nonempty open set has positive measure.  The term here presumably comes from the dirac delta function.}\index{Dirac measure}
@@ -953,7 +988,7 @@ So, let $U,V\in \mathcal{G}$ with $U\Subset V$.  We showed before that this impl
 \begin{equation}
 W\coloneqq \Star _{\mathcal{B}}(\Cls (U)).
 \end{equation}
-$W$ is open as every element of $\mathcal{B}$ is open.  It also has compact closure as its closure is contained in $\Cls (U)$, which is compact (closed subsets of compact sets are compact in $T_2$ spaces).  By definition, we have that $U\Subset W$.  We check that also $W\Subset V$.  To show this, we show that $\Star _{\mathcal{B}}(W)\subseteq V$.  So, let $B\in \mathcal{B}$ intersect $W$.  We proceed by contradiction:  suppose that $B$ intersects $V^{\comp}$.  Then, it is contained in $\Star _{\mathcal{B}}(V^{\comp})$, which is disjoint from $W$:  a contradiction.  Thus, $U\Subset W\Subset V$ and $W\in \mathcal{G}$.  It remains to show that $W\in Z(\mathcal{G})$.  This, however, follows from the fact that that $W$ is measurable with respect to both $\meas$ and $\meas '$ (because it is open---see \cref{prp5.1.25}), the fact that it has finite measure for both $\meas$ and $\meas '$ (because its closure is quasicompact and the measure is regular), and \cref{prp5.1.39} (we can force $U_{\varepsilon}$ there to have compact closure by intersecting it with $V$).  This finally establishes \eqref{5.1.75}, and so finishes our proof that it suffices to show that $\meas$ and $\meas '$ agree on $\mathcal{G}\cap Z(\mathcal{G})$.
+$W$ is open as every element of $\mathcal{B}$ is open.  It also has compact closure as its closure is contained in $\Cls (U)$, which is compact (closed subsets of compact sets are compact in $T_2$ spaces).  By definition, we have that $U\Subset W$.  We check that also $W\Subset V$.  To show this, we show that $\Star _{\mathcal{B}}(W)\subseteq V$.  So, let $B\in \mathcal{B}$ intersect $W$.  We proceed by contradiction:  suppose that $B$ intersects $V^{\comp}$.  Then, it is contained in $\Star _{\mathcal{B}}(V^{\comp})$, which is disjoint from $W$:  a contradiction.  Thus, $U\Subset W\Subset V$ and $W\in \mathcal{G}$.  It remains to show that $W\in Z(\mathcal{G})$.  This, however, follows from the fact that that $W$ is measurable with respect to both $\meas$ and $\meas '$ (because it is open---see \cref{prp5.1.25}), the fact that it has finite measure for both $\meas$ and $\meas '$ (because its closure is quasicompact and the measure is regular), and \cref{MeasurableTopologicalMeasureSpace} (we can force $U_{\varepsilon}$ there to have compact closure by intersecting it with $V$).  This finally establishes \eqref{5.1.75}, and so finishes our proof that it suffices to show that $\meas$ and $\meas '$ agree on $\mathcal{G}\cap Z(\mathcal{G})$.
 
 For the rest of the proof, take note that everything we know about $\meas '$ is likewise true about $\meas$.  Therefore, everything we prove to be true about $\meas '$ will also be true about $\meas$.  Thus, hereafter, if we prove facts about either $\meas$ or $\meas '$, we shall prove them about $\meas '$---they are then automatically true about $\meas$.
 
@@ -1027,22 +1062,35 @@ To do this, of course, we must first define a measure on $X\times \R$.
 
 \subsection{The product measure}
 
+The product measure is---you guessed it---a measure on the product.  As the integral is the `area under the curve' and the `area under the curve' is a subset of $X\times [0,\infty ]$ (for $f:X\rightarrow [0,\infty ]$), it is necessary for our development to put a measure on $X\times [0,\infty ]$.\footnote{Of course, you don't \emph{have} to do things this way, and indeed, this is not how it's usually done.  Doing things the other way, however, is arguably one reason why people think the lebesgue integral is ``not geomeric''.  On the other hand, I can't believe anybody would argue that the `area under the curve' is not geometric---this is in fact how we explain things to high school students, after all.}
 \begin{thm}[Product measure]
-Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be topological measure spaces.  Then, there exists a unique regular borel measure $\meas _1\times \meas _2$\index[notation]{$\meas _1\times \meas _2$} on $X_1\times X_2$, the \emph{product measure}\index{Product measure}, such that $[\meas _1\times \meas _2](K_1\times K_2)=\meas _1(K_1)\meas _2(K_2)$ for $K_i\subseteq X_i$ quasicompact.  Furthermore, it satisfies (i) $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for all $S_i\subseteq X_i$ arbitrary\footnote{That is, you assume that `area is base times height' for \emph{quasicompact} rectangles, and you then you get that `area is base times height' for \emph{all} rectangles.  That's right:  you don't even need measurability.} and (ii)
-\begin{equation}
+Let $\coord{X_1,\meas _1}$ and $\coord{X_2,\meas _2}$ be topological measure spaces.  Then, there exists a unique regular borel measure $\meas _1\times \meas _2$\index[notation]{$\meas _1\times \meas _2$} on $X_1\times X_2$, the \emph{product measure}\index{Product measure}, such that $[\meas _1\times \meas _2](K_1\times K_2)=\meas _1(K_1)\meas _2(K_2)$ for $K_i\subseteq X_i$ quasicompact.  Furthermore, it satisfies
+\begin{enumerate}
+\item $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for all $S_i\subseteq X_i$\footnote{That is, you assume that `area is base times height' for \emph{quasicompact} rectangles, and you then you get that `area is base times height' for \emph{all} rectangles---you don't even need measurability.};
+\item
+\begin{equation}\label{RectangleInnerRegularity}
 \begin{split}
-[\meas _1\times \meas _2](U) & \coloneqq \sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_{1,k}\times K_{2,k}):\right. \\
-& \qquad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
-& \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
-& \qquad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \text{ for }U\subseteq X_1\times X_2\text{ open} \\
-[\meas _1\times \meas _2](S) & \coloneqq \inf \left\{ [\meas _1\times \meas _2](U):S\subseteq U,\ U\text{ open}\right\} .
+[\meas _1\times \meas _2](U) & \coloneqq \sup \left\{ \sum _{k=0}^m\meas _1(K_{1,k})\meas _2(K_{2,k}):\right. \\
+& \quad \left. K_{i,k}\subseteq X_i\text{ quasicompact},\right. \\
+& \quad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
+& \quad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \text{ for }U\subseteq X_1\times X_2\text{ open} \\
+[\meas _1\times \meas _2](S) & \coloneqq \inf \left\{ [\meas _1\times \meas _2](U):S\subseteq U,\ U\text{ open}\right\} ;
 \end{split}
 \end{equation}
+and
+\item
+\begin{equation}\label{RectangleOuterRegularity}
+\begin{split}
+\meas (S) & =\inf \left\{ \sum _{m\in \N}\meas _1(U_{1,m})\meas _2(U_{2,m}):U_{i,m}\subseteq X_i\text{ open},\right. \\
+& \qquad \qquad \left. S\subseteq \bigcup _{m\in \N}U_{1,m}\times U_{2,m}\right\} .
+\end{split}
+\end{equation}
+\end{enumerate}
 \begin{rmk}
-You (hopefully) showed in \cref{SigmaProductSigma} that the product of two $\sigma$-compact spaces and $\sigma$-compact.  It thus follows that $\coord{X_1\times X_2,\meas _1\times \meas _2}$ is likewise a topological measure space.
+So that formulas look ridiculous, but I promise, it's not that complicated.  The first simply says that we can approximate open sets from the inside with compact sets of a special form (namely, finite disjoint unions of compact rectangles)---essentially just a nice version of inner-regularity.  The second simply says that we can approximate \emph{any} set from the outside with open sets of a special form (namely, countable unions of open rectangles)---essentially just a nice version of outer-regularity.  Perhaps one thing to note is that in we do not need to require disjointness explicitly in \eqref{RectangleOuterRegularity}---not having disjointness makes the sum larger, and so the infimum doesn't care about these cases, so to speak.
 \end{rmk}
 \begin{rmk}
-So the formulas look ridiculous, but I promise, it's not that complicated.  The first thing says that the measure of a `rectangle' is the product of the measure of the sides---area is base times height.  The second thing says that we can approximate open sets from the inside with quasicompact sets of a special form (namely, finite disjoint unions of quasicompact rectangles)---essentially just inner regularity on opens.  And the third says that we can approximate arbitrary sets from the outside with opens---outer regularity.
+You (hopefully) showed in \cref{SigmaProductSigma} that the product of two $\sigma$-compact spaces is $\sigma$-compact.  It thus follows that $\coord{X_1\times X_2,\meas _1\times \meas _2}$ is likewise a topological measure space.
 \end{rmk}
 \begin{proof}
 \Step{Define $\meas _1\times \meas _2$}
@@ -1051,9 +1099,9 @@ We define
 \begin{split}
 \meas _{\mathrm{K}}(K_1\times K_2) & \coloneqq \meas _1(K_1)\meas _2(K_2)\text{ for }K_1\subseteq X_1,\ K_2\subseteq X_2\text{ quasicompact} \\
 \meas _{\mathrm{U}}(U) & \coloneqq \sup \left\{ \sum _{k=0}^m\meas _K(K_{1,k}\times K_{2,k}):\right. \\
-& \qquad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
-& \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
-& \qquad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \text{ for }U\subseteq X_1\times X_2\text{ open} \\
+& \quad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
+& \quad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
+& \quad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \text{ for }U\subseteq X_1\times X_2\text{ open} \\
 [\meas _1\times \meas _2](S) & \coloneqq \inf \{ \meas _{\mathrm{U}}(U):S\subseteq U,\ U\text{ open}\} .
 \end{split}
 \end{equation}
@@ -1107,8 +1155,10 @@ Then,
 \begin{equation}
 \begin{split}
 \meas _1(U_1)\meas _2(U_2) & \geq \meas _1(K_1)\meas _2(K_2) \\
-& >\left( \meas _1(U_1)-\frac{\varepsilon}{\meas _1(U_2)+\meas _2(U_2)}\right) \left( \meas _2(U_2)-\frac{\varepsilon}{\meas _1(U_1)+\meas _2(U_2)}\right) \\
-& =\meas _1(U_1)\meas _2(U_2)-\varepsilon +\frac{\varepsilon ^2}{(\meas _1(U_1)+\meas _2(U_2))^2}>\meas _1(U_1)\meas _2(U_2)-\varepsilon ,
+& >\left( \meas _1(U_1)-\frac{\varepsilon}{\meas _1(U_2)+\meas _2(U_2)}\right) \\
+& \quad \cdot \left( \meas _2(U_2)-\frac{\varepsilon}{\meas _1(U_1)+\meas _2(U_2)}\right) \\
+& =\meas _1(U_1)\meas _2(U_2)-\varepsilon +\frac{\varepsilon ^2}{(\meas _1(U_1)+\meas _2(U_2))^2} \\
+& >\meas _1(U_1)\meas _2(U_2)-\varepsilon ,
 \end{split}
 \end{equation}
 whence it follows that $\meas _{\mathrm{U}}(U_1\times U_2)=\meas _1(U_1)\meas _2(U_2)$.
@@ -1181,10 +1231,10 @@ That it is outer-regular follows immediately from the definition.\footnote{Indee
 \begin{equation}
 \begin{split}
 [\meas _1\times \meas _2](U) & \coloneqq \sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_{1,k}\times K_{2,k}):\right. \\
-& \qquad \qquad \left. K_{1,k}\subseteq X_1,\right. \\
-& \qquad \qquad \left. K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
-& \qquad \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
-& \qquad \qquad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \\
+& \quad \quad \left. K_{1,k}\subseteq X_1,\right. \\
+& \quad \quad \left. K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
+& \quad \quad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
+& \quad \quad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \\
 & \leq \sup \{ [\meas _1\times \meas _2](K):K\subseteq U,\ K\text{ quasicompact}\} \leq \footnote{Because $\meas _1\times \meas _2$ is nondecreasing.}[\meas _1\times \meas _2](U),
 \end{split}
 \end{equation}
@@ -1217,11 +1267,11 @@ First note that this holds for $S=L_1\times L_2$, $L_i\subseteq X_i$ quasicompac
 \begin{split}
 L_1\times L_2 & =\left( (L_1\cap K_1)\cup (L_1\cap K_1^{\comp})\right) \times \left( (L_2\cap K_2)\cup ( L_2\cap K_2^{\comp})\right) \\
 & =(L_1\cap K_1)\times (L_2\cap K_2) \\
-& \qquad \cup (L_1\cap K_1)\times (L_2\cap K_2^{\comp}) \\
-& \qquad \cup (L_1\cap K_1^{\comp})\times (L_2\cap K_2) \\
-& \qquad \cup (L_1\cap K_1^{\comp})\times (L_2\cap K_2^{\comp}) \\
+& \quad \cup (L_1\cap K_1)\times (L_2\cap K_2^{\comp}) \\
+& \quad \cup (L_1\cap K_1^{\comp})\times (L_2\cap K_2) \\
+& \quad \cup (L_1\cap K_1^{\comp})\times (L_2\cap K_2^{\comp}) \\
 & =\left( (L_1\times L_2)\cap (K_1\times K_2)\right) \\
-& \qquad \cup \left( (L_1\times L_2)\cap \left( (K_1^{\comp}\times K_2)\cup (K_1\times K_2^{\comp})\cup (K_1^{\comp}\times K_2^{\comp})\right) \right) \\
+& \quad \cup \left( (L_1\times L_2)\cap \left( (K_1^{\comp}\times K_2)\cup (K_1\times K_2^{\comp})\cup (K_1^{\comp}\times K_2^{\comp})\right) \right) \\
 & =\left( (L_1\times L_2)\cap (K_1\times K_2)\right) \cup \left( (L_1\times L_2)\cap (K_1\times K_2)^{\comp}\right) .
 \end{split}
 \end{equation}
@@ -1246,7 +1296,8 @@ Hence,
 \begin{split}
 [\meas _1\times \meas _2](S) & >[\meas _1\times \meas _2](U)-\varepsilon \geq \meas \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\cup \bigcup _{k=0}^nM_{1,k}\times M_{2,k}\right) -\varepsilon \\
 & =\footnote{By the previous step, because these two collections of rectangles are disjoint.}\sum _{k=0}^m[\meas _1\times \meas _2](L_{1,k}\times L_{2,k})+\sum _{k=0}^n[\meas _1\times \meas _2](M_{1,k}\times M_{2,k})-\varepsilon \\
-& >\meas \left( U\cap (K_1\times K_2)^{\comp}\right) +\meas \left( U\cap \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\right) ^{\comp}\right) -3\varepsilon \geq [\meas _1\times \meas _2](U\cap (K_1\times K_2)^{\comp})+[\meas _1\times \meas _2](U\cap (K_1\times K_2))-3\varepsilon \\
+& >\meas \left( U\cap (K_1\times K_2)^{\comp}\right) +\meas \left( U\cap \left( \bigcup _{k=0}^mL_{1,k}\times L_{2,k}\right) ^{\comp}\right) -3\varepsilon \\
+& \geq [\meas _1\times \meas _2](U\cap (K_1\times K_2)^{\comp})+[\meas _1\times \meas _2](U\cap (K_1\times K_2))-3\varepsilon \\
 & \geq [\meas _1\times \meas _2](S\cap (K_1\times K_2)^{\comp})+[\meas _1\times \meas _2](S\cap (K_1\times K_2)).
 \end{split}
 \end{equation}
@@ -1256,9 +1307,9 @@ To show that two regular measures agree, by outer-regularity, it suffices to sho
 \begin{equation}
 \begin{split}
 \sup \{ \meas (K):K\subseteq U,\ K\text{ quasicompact}\} & =\sup \left\{ \sum _{k=0}^m[\meas _1\times \meas _2](K_{1,k}\times K_{2,k}):\right. \\
-& \qquad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
-& \qquad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
-& \qquad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \footnote{Here, $\meas$ denotes \emph{any} regular borel measure on $X_1\times X_2$ such that $\meas (K_1\times K_2)=\meas _1(K_1)\meas _2(K_2)$ for $K_i\subseteq X_i$ quasicompact.}
+& \quad \left. K_{1,k}\subseteq X_1,\ K_{2,k}\subseteq X_2\text{ quasicompact},\right. \\
+& \quad \left. \left\{ K_{1,k}\times K_{2,k}:0\leq k\leq m\right\} \text{ is disjoint},\right. \\
+& \quad \left. \bigcup _{k=0}^mK_{1,k}\times K_{2,k}\subseteq U,\ m\in \N \right\} \footnote{Here, $\meas$ denotes \emph{any} regular borel measure on $X_1\times X_2$ such that $\meas (K_1\times K_2)=\meas _1(K_1)\meas _2(K_2)$ for $K_i\subseteq X_i$ quasicompact.}
 \end{split}
 \end{equation}
 The left-hand side is automatically at least as large as the right-hand side because the set inside the $\sup$s on the left-hand side is a superset of the set inside the $\sup$ right-hand side.  On the other hand, for $K\subseteq X_1\times X_2$ quasicompact, $K_i\coloneqq \pi _i(K)$ is quasicompact by the \nameref{ExtremeValueTheorem}, and as $K\subseteq K_1\times K_2$, we have that $\meas (K)\leq \meas _1(K_1)\meas _2(K_2)$, which showed that the left-hand side is no larger than the right-hand side, which gives equality.
@@ -1266,9 +1317,7 @@ The left-hand side is automatically at least as large as the right-hand side bec
 \Step{Show that $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for $S_i\subseteq X_i$}
 We have actually already done the case where $\meas _i(S_i)<\infty$---see \cref{stpProductMeasure.5}.  We first prove this for $S_i$ measurable.  We then do the general case by using the fact that, in topological measure spaces, every set is measurable up to a set of measure $0$ (\cref{ModuloZero}).
 
-\begin{exr}
-Show that $X_1\times X_2=\bigcup _{m\in \N}M_{1,m}\times M_{2,m}$ is the countable disjoint union of measurable rectangles of finite measure.
-\end{exr}
+By \cref{SigmaFinite}, write $X_1\times X_2=\bigcup _{m\in \N}M_{1,m}\times M_{2,m}$ as the countable disjoint union of measurable rectangles of finite measure.
 \begin{exr}
 Use this together with the fact that we already know that $[\meas _1\times \meas _2](F_1\times F_2)=\meas _1(F_1)\meas _2(F_2)$ for set of \emph{finite} measure to finish the proof that $[\meas _1\times \meas _2](S_1\times S_2)=\infty$.
 \end{exr}
@@ -1279,6 +1328,17 @@ Now show that $[\meas _1\times \meas _2](S_1\times S_2)=0$ if $S_1,S_2$ are both
 
 \begin{exr}
 Finally, show that $[\meas _1\times \meas _2](S_1\times S_2)=\meas _1(S_1)\meas _2(S_2)$ for \emph{arbitrary} $S_1,S_2$, using \cref{ModuloZero} as explained at the beginning of this step.
+\end{exr}
+
+\Step{Show `rectangle outer-regularity'}
+Finally, we seek to show \eqref{RectangleOuterRegularity}.  By outer-regularity, it suffices to show that we can approximate open sets with covers of open rectangles.  To show this, we show that open sets can be approximated with countable covers of (not-necessarily-open) rectangles.  If we can do this, then by $\sigma$-compactness, we can approximate open sets with countable covers of (not-necessarily-open) rectangles of \emph{finite measure}.  By outer-regularity of $X_1$ and $X_2$, we will be able to approximate each of these rectangles by open rectangles, which will give us finally that we can approximate open sets with countable covers by open rectangles, which will complete the proof.  Thus, we seek to show that we can approximate open sets with countable covers of (not-necessarily-open) rectangles.  To show this, it suffices to show that every open set can be written as the countable disjoint union of rectangles.
+
+So, let $U\subseteq X_1\times X_2$ be open.  For each $\coord{x_1,x_2}\in U$, let $U_{1,x_1,x_2}\times U_{2,x_1,x_2}\subseteq U$ contain $\coord{x_1,x_2}$.  By $\sigma$-compactness, $U$ can be written as the union of countably-many of these.  Changing up notation a bit, let us this write
+\begin{equation}
+U=\bigcup _{m\in \N}U_{1,m}\times U_{2,m}.
+\end{equation}
+\begin{exr}
+Finish the proof by writing $U$ as a \emph{disjoint} union of countably many rectangles.
 \end{exr}
 \end{proof}
 \end{thm}
@@ -1429,11 +1489,11 @@ Thus, $C_1$ is the disjoint union of two-intervals of length $\frac{1}{2}(1-L)$.
 \begin{equation}
 \begin{split}
 C_2 & \coloneqq C_1\setminus \left( \left( \tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)-\frac{1}{4}(L-L^2),\tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)+\frac{1}{4}(L-L^2)\right) \right. \\
-& \qquad \left. \cup \left( \tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)-\frac{1}{4}(L-L^2),\tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)+\frac{1}{4}(L-L^2)\right) \right) \\
+& \quad \left. \cup \left( \tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)-\frac{1}{4}(L-L^2),\tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)+\frac{1}{4}(L-L^2)\right) \right) \\
 & =\left[ 0,\tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)-\frac{1}{4}(L-L^2)\right] \\
-& \qquad \cup \left[ \tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)+\frac{1}{4}(L-L^2),\tfrac{1}{2}-\tfrac{1}{2}L]\right] \\
-& \qquad \cup \left[ \tfrac{1}{2}+\tfrac{1}{2}L,\tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)-\frac{1}{4}(L-L^2)\right] \\
-& \qquad \cup \left[ \tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)+\frac{1}{4}(L-L^2),1\right] .
+& \quad \cup \left[ \tfrac{1}{2}\cdot (\tfrac{1}{2}-\tfrac{1}{2}L)+\frac{1}{4}(L-L^2),\tfrac{1}{2}-\tfrac{1}{2}L]\right] \\
+& \quad \cup \left[ \tfrac{1}{2}+\tfrac{1}{2}L,\tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)-\frac{1}{4}(L-L^2)\right] \\
+& \quad \cup \left[ \tfrac{1}{2}\cdot (\tfrac{1}{2}+\tfrac{1}{2}L+1)+\frac{1}{4}(L-L^2),1\right] .
 \end{split}
 \end{equation}
 Continue this process inductively, at each step removing the `middle' open intervals of length $\frac{1}{2^{k-1}}L$ to define $C_k$.  Finally, define
@@ -1572,12 +1632,12 @@ $H$ is bounded, and so has finite measure.  Thus, the above equality forces $\me
 
 We mentioned awhile ago in the definition of measurable functions (\cref{MeasurableFunction}) the existence of a uniform-homeomorphism of $\R$ that preserves neither measurability not measure $0$.  It is time we return to this.
 \begin{exm}[A uniform-homeomorphism of $\R$ that preserves neither measurability nor measure $0$---the Cantor Function]\index{Cantor Function}\label{CantorFunction}
-We first define a uniformly-continuous function $f:[0,1]\rightarrow [0,1]$.  This function will be nondecreasing, and so $g\coloneqq f+\id _{[0,1]}:[0,1]\rightarrow [0,2]$ will be increasing, and hence injective.  It will turn out that $f(0)=0$ and $f(1)=1$, and so we will then extend $g$ to all of $\R$ `periodically', that is, defining it to be $g(x-1)+2$ for $x\in [1,2]$, etc..\footnote{Of course, we have to shift the graph up to maintain continuity.} 
+We first define a uniformly-continuous function $f:[0,1]\rightarrow [0,1]$.  This function will be nondecreasing, and so $g\coloneqq f+\id _{[0,1]}:[0,1]\rightarrow [0,2]$ will be increasing, and hence injective.  It will turn out that $f(0)=0$ and $f(1)=1$, and so we will then extend $g$ to all of $\R$ `periodically', defining $g(x)$ to be $g(x-1)+2$ for $x\in [1,2]$, etc..\footnote{Of course, we have to shift the graph up to maintain continuity.} 
 \begin{rmk}
 $f$ is the \emph{Devil's Staircase}\index{Devil's Staircase}, and $g$ is the \emph{Cantor Function}.\footnote{Some people use both these terms to refer to $f$.  I prefer this convention so that each has its own name.}
 \end{rmk}
 
-We define $f:[0,1]\rightarrow [0,1]$ as the uniform limit of a sequence of continuous functions.  It will then be continuous because $\Mor _{\Top}([0,1],\R )$ is complete, and hence uniformly-continuous because $[0,1]$ is quasicompact.  We then must check that $f$ is nondecreasing.  Once we do so, we will have that $g$ is increasing, and hence injective.  Then, because $[0,1]$ is quasicompact and $[0,1]$ is $T_2$, we will have that its inverse is continuous (\cref{exr3.6.46} does this for us), and hence uniformly-continuous, and hence a uniform-homeomorphism.  Extending $g$ `periodically' has no effect on this.
+We define $f:[0,1]\rightarrow [0,1]$ as the uniform limit of a sequence of continuous functions.  It will then be continuous because $\Mor _{\Top}([0,1],\R )$ is complete, and hence uniformly-continuous because $[0,1]$ is quasicompact.  We then must check that $f$ is nondecreasing.  Once we do so, we will have that $g$ is increasing, and hence injective.  Then, because the domain $[0,1]$ is quasicompact and the codomain $[0,2]$ is $T_2$, we will have that its inverse is continuous (\cref{exr3.6.46} does this for us), and hence uniformly-continuous, and hence a uniform-homeomorphism.  Extending $g$ `periodically' has no effect on this.
 
 So, let us get started.\footnote{It will probably help to find a picture on this internet of what this is supposed to look like.  (Sorry.  Making diagrams takes awhile and I have not had the time.)  Let $C_m$ denote the `$m^{\text{th}}$ step' in the construction of the Cantor Set (see \cref{CantorSet}).  In words, $f_m$ is supposed to be the function that is constant $[0,1]\setminus C_m$ and increases linearly on the intervals that remain in $C_m$.}  Define $f_0:[0,1]\rightarrow [0,1]$ to be the identity function.  We define $f_m:[0,1]\rightarrow \R$ for $m>0$ recursively:
 \begin{equation}\label{5.2.22}
@@ -1636,13 +1696,13 @@ Thus, by the induction hypothesis,
 \norm[f_{m+1}-f_m]\leq \tfrac{1}{2}\norm[f_m-f_{m-1}]=\left( \frac{1}{2}\right) ^{m+1}.
 \end{equation}
 
-We may now define $f\coloneqq \lim _mf\in \End _{\Top}([0,1])$.  You showed that each $f_m$ is nondecreasing, and so, as limits preserve inequalities, $f$ itself is nondecreasing.  Now define $g\coloneqq f+\id _{[0,1]}$.  As described at the beginning of the example, $g:[0,1]\rightarrow [0,1]$ is a uniform-homeomorphism.
+We may now define $f\coloneqq \lim _mf\in \End _{\Top}([0,1])$.  You showed that each $f_m$ is nondecreasing, and so, as limits preserve inequalities, $f$ itself is nondecreasing.  Now define $g(x)\coloneqq f(x)+x$.  As described at the beginning of the example, $g:[0,1]\rightarrow [0,1]$ is a uniform-homeomorphism.
 
-We now show that $g$ preserves neither measurability nor measure $0$.  Let $C\subset [0,1]$ denote the ($L=\tfrac{1}{3}$) \nameref{CantorSet} and let $C_m$ denote the set defined in the $m^{\text{th}}$ step of the construction of the \nameref{CantorSet}---see \cref{CantorSet} if you don't know what we're referring to.  For convenience of notation, define $D_m\coloneqq [0,1]\setminus C_m$ and $D\coloneqq [0,1]\setminus C$.
+We now show that $g$ preserves neither measurability nor measure $0$.  Let $C\subset [0,1]$ denote the ($L=\tfrac{1}{3}$) Cantor and let $C_m$ denote the set defined in the $m^{\text{th}}$ step of the construction of the Cantor Set---see \cref{CantorSet} if you don't know what we're referring to.  For convenience of notation, define $D_m\coloneqq [0,1]\setminus C_m$ and $D\coloneqq [0,1]\setminus C$.
 \begin{exr}
-Show that $\restr{f_k}{D_m}=\restr{f_m}{D_m}$ is constant on each component of $D_m$ for all $k\geq m$.  In particular, the image of $f_k$ on $D_m$ is finite for all $k\geq m$.
+Show that $\restr{f_k}{D_m}=\restr{f_m}{D_m}$ is constant\footnote{Note that this constant will depend on the component.} on each component of $D_m$ for all $k\geq m$.  In particular, the image of $f_k$ on $D_m$ is finite for all $k\geq m$.
 \begin{rmk}
-Though it's perhaps not clear from the formulas, the $f_m$s were defined so that precisely this is true---even though $f(0)=0$ and $f(1)=1$, $f$ does all of increasing on a set of measure $0$, namely the \nameref{CantorSet}.
+Though it's perhaps not clear from the formulas, the $f_m$s were defined so that precisely this is true:  even though $f(0)=0$ and $f(1)=1$, $f$ does all of increasing on a set of measure $0$, namely the Cantor Set.
 \end{rmk}
 \end{exr}
 From this, it follows that $f$ itself is constant on each component of $D$.
@@ -1658,12 +1718,16 @@ Every subset of $\R$ of positive measure contains a nonmeasurable set (\cref{prp
 
 \subsection{The integral}
 
+
+\subsubsection{Characteristic, simple, borel, and integrable functions}
+
 An important type of function in measure theory are \emph{characteristic} functions.
-\begin{dfn}[Characteristic function]
+\begin{dfn}[Characteristic functions and simple functions]
 Let $X$ be a set and let $S\subseteq X$.  Then, the \emph{characteristic function}\index{Characteristic function} of $S$, $\chi _S:X\rightarrow \{ 0,1\}$\index[notation]{$\chi _S$}, is defined by
 \begin{equation}
 \chi _S(x)\coloneqq \begin{cases}1 & \text{if }x\in S \\ 0 & \text{if }x\notin S\end{cases}.
 \end{equation}
+A \emph{simple function}\index{Simple function} is a finite nonnegative linear combination of characteristic functions.
 \begin{rmk}
 The reason that characteristic functions are important in measure theory is because the integral of $\chi _S$ will turn-out to simply be $\meas (S)$.  In particular, \emph{if you know the integral, you know the measure}.
 \end{rmk}
@@ -1674,7 +1738,8 @@ We have seen a characteristic function before---the \nameref{DirichletFunction} 
 You might say that the lebesgue integral is to characteristic functions as the riemann integral is to rectangles---one can define the lebesgue integral (though we will not) by approximating functions with characteristic functions,\footnote{Well, actually finite linear combinations of characteristic functions, the so-called \emph{simple functions}\index{Simple function}.} just as one defines the riemann integral by approximating functions with rectangles (aka (scalar multiples of) characteristic functions of intervals).\footnote{I actually find this approach a bit messy, but it's just yet more evidence that the lebesgue integral is hardly more difficult than the riemann integral---it's the same fucking thing with arbitrary (measurable) sets instead of intervals.}
 \end{rmk}
 \end{dfn}
-In principle, we can integrate \emph{any} function.\footnote{Literally.  If you already know what it means for a function to be measurable, you don't even need this to be the case in order to integrate it.}  The `problem' with this, of course, is that the integral will not satisfy certain properties we would like it to (e.g.~$\int \dif x\, [f(x)+g(x)]=\int \dif x\, f(x)+\int \dif x\, g(x)$) if we don't restrict the functions we integrate.
+In principle, we can integrate \emph{any} function.\footnote{Literally.  If you already know what it means for a function to be measurable, you don't even need this to be the case in order to integrate it.}  The `problem' with this, of course, is that the integral will not satisfy certain properties we would like it to (e.g.~$\int \dif x\, [f(x)+g(x)]=\int \dif x\, f(x)+\int \dif x\, g(x)$) if we don't restrict the functions we integrate.  This brings us to the definition of \emph{borel} functions.
+
 \begin{dfn}[Borel and integrable]\label{IntegrableFunction}
 Let $X$ be an outer-measure space and let $f:X\rightarrow [-\infty ,\infty ]$ be a function.  Then, $f$ is \emph{borel}\index{Borel (function)} iff
 \begin{equation}\label{5.2.60}
@@ -1682,7 +1747,13 @@ Let $X$ be an outer-measure space and let $f:X\rightarrow [-\infty ,\infty ]$ be
 \end{equation}
 are measurable.  If furthermore they have finite measure, then $f$ is \emph{integrable}\index{Integrable (function)}.
 \begin{rmk}
+We explain the reason the term ``borel'' is used here in \cref{BorelIsBorel} below.
+\end{rmk}
+\begin{rmk}
 The collection of all (equivalence classes of) borel functions on $X$ in $\Mor _{\AlE}(X,[-\infty ,\infty ])$ is denoted $\Bor (X)$\index[notation]{$\Bor (X)$}.  The collection of all nonnegative borel functions on $X$ is denoted $\Bor _0^+(X)$\index[notation]{$\Bor _0^+(X)$}.
+\end{rmk}
+\begin{rmk}
+If every we say a net of functions in $\Bor (X)$ \emph{converges}, we mean that it converges pointwise for almost-every $x\in X$.  You can even apply \nameref{KelleysConvergenceTheorem} to have this define a topology on $\Bor (X)$, but this isn't terribly useful.  For example, the integral will not be continuous with respect to this topology---see \cref{MonotoneCounterexample}.  For us, it will essentially just be used as concise language---it's easier to say just ``converges'' than ``converges pointwise almost-everywhere'' all the time.  (In fact, the same goes for $\Mor _{\AlE}(X,[-\infty ,\infty ])$.)
 \end{rmk}
 \begin{rmk}
 There is a symbol for the integrable functions on $X$ as well (namely ``$L^1$''), but we shall wait to discuss this further until we encounter the $L^p$ spaces.
@@ -1691,6 +1762,153 @@ There is a symbol for the integrable functions on $X$ as well (namely ``$L^1$'')
 Of course, the sets in \eqref{5.2.60} are just `the area under the curve' (one for the nonnegative part of $f$ and one for the nonpositive part of $f$), and so the integral will wind up being the measure of the first minus the measure of the second.  Thus, a function is borel iff the two sets needed to define its integral are measurable, and is integrable if the measure of these sets are finite (so that one can subtract them to define the integral).
 \end{rmk}
 \end{dfn}
+It is most convenient to work with
+\begin{equation}
+\left\{ \coord{x,y}\in X\times [0,\infty ]:y<f(x)\right\} ,
+\end{equation}
+for similar reasons as it is more convenient to work with $[a,b)$ than it is $[a,b]$, but it actually makes no difference, as we now check.
+\begin{prp}
+Let $\coord{X,\meas}$ be a topological measure space and let $f\in \Mor _{\AlE}(X,[0,\infty ])$.  Then,
+\begin{equation}
+\left\{ \coord{x,y}\in X\times [0,\infty ]:y<f(x)\right\}
+\end{equation}
+is measurable iff
+\begin{equation}
+\left\{ \coord{x,y}\in X\times [0,\infty ]:f(x)\leq y\right\} 
+\end{equation}
+is.  Furthermore, they both have the same measure.
+\begin{proof}
+We leave this as an exercise.
+\begin{exr}
+Prove the result yourself.
+\begin{rmk}
+Hint:  For the $\Rightarrow$ direction, consider the sequence $m\mapsto \left( 1+\frac{1}{m}\right) f$.  For the $\Leftarrow$ direction, consider the sequence $m\mapsto \left( 1-\frac{1}{m}\right) f$.
+\end{rmk}
+\end{exr}
+\end{proof}
+\end{prp}
+There is a very important characterization of borel functions.  In fact, this characterization is the reason borel functions are called  ``\emph{borel} functions''.
+\begin{prp}\label{BorelIsBorel}
+Let $\coord{X,\meas}$ be a topological measure space.  Then, $f\in \Bor (X)$ iff the preimage of every open set is measurable.
+\begin{rmk}
+As preimages preserves unions, intersections, and complements, it follows that the preimage of any borel set (see \cref{BorelMeasure}) will likewise be measurable.  This is why we call borel functions ``\emph{borel} funtions''.
+\end{rmk}
+\begin{rmk}
+A lot of authors call these \emph{measurable functions}.  This conflicts with other standard terminology (which we make use of---see \cref{MeasurableFunction}), and so I recommend you not use it.  There is a way to make this not inconsistent, but it's awkward:  when you have a function $f:\R \rightarrow \R$, for example, you simply declare that the ``measurable'' sets in the codomain are the borel sets but the ``measurable'' sets in the domain are all (lebesgue) measurable sets.  Ew.
+\end{rmk}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~384]{Pugh}.}
+$(\Rightarrow )$ Suppose that $f\in \Bor (X)$.  Let us write
+\begin{equation}
+\Gamma _f\coloneqq \{ \coord{x,y}\in X\times [0,\infty ]:f(x)\leq y\} .
+\end{equation}
+
+We first do the case where $f$ is bounded, say by $C\in [0,\infty )$, and is $0$ outside a set of finite measure $M\subseteq X$.  In this case, $[\meas \times \meas _{\mathrm{L}}](\Gamma _f)$ is finite,\footnote{$\meas _{\mathrm{L}}$ denotes lebesgue measure on $[0,\infty ]$, to distinguish it from the measure on $X$.} and so by inner-regularity, there is an increasing sequence of compact sets $K_0\subseteq K_1\subseteq K_2\subseteq \cdots \subseteq \Gamma _f$ such that $[\meas \times \meas _{\mathrm{L}}](\Gamma _f\setminus C)=0$,\footnote{We are implicitly using the fact that $\Gamma _f$ is measurable here.} where $C\coloneqq \bigcup _{m\in \N}K_m$.  Now, define $g_m,h_m:X\rightarrow [0,\infty ]$ by
+\begin{equation}
+g_m(x)\coloneqq \begin{cases}\sup _{\coord{x,y}\in K_m}\{ y\} & \text{if }K_m\cap (\{ x\} \times \R )\neq \emptyset \\ 0 & \text{if }K_m\cap (\{ x\} \times \R )=\emptyset \end{cases}
+\end{equation}
+and
+\begin{equation}
+h_m(x)\coloneqq \begin{cases}\inf _{\coord{x,y}\in (X\times \R )\setminus K_m}\{ y\} & \text{if }K_m\cap (\{ x\} \times \R )\neq \emptyset \\ 0 & \text{if }K_m\cap (\{ x\} \times \R )=\emptyset \end{cases}.
+\end{equation}
+Note that, as $K_m\subseteq \Gamma _f$, $g_m(x)<f(x)$ and $f(x)\leq h_m(x)$. Furthermore, for each fixed $x\in X$, the sequence $m\mapsto g_m(x)$ is nondecreasing, and so by the \nameref{MonotoneConvergenceTheorem}, we may define $g(x)\coloneqq \lim _mg_m(x)$.  Similarly, we may define $h(x)\coloneqq \lim _mh_m(x)$.
+\begin{exr}
+Show that the preimage under $g_m$ of every open set is measurable by showing that the preimage of $(-\infty ,b)$ is open for all $b\in \R$.  Show that the preimage under $h_m$ of every open set is measurable by showing that the preimage of $(a,\infty )$ is open for all $a\in \R$.
+\end{exr}
+\begin{exr}
+Use this to deduce that the preimage of every open set under both $g$ and $h$ measurable.
+\end{exr}
+\begin{exr}
+Show that $[\meas \times \meas _{\mathrm{L}}](\Gamma _{h-g})=0$.
+\end{exr}
+\begin{exr}
+Use this, together with the fact that the preimage of every open set under both $g$ and $h$ is measurable, to show that $g(x)=h(x)$ for almost every $x$.
+\end{exr}
+As $g\leq f\leq h$, it follows that $f$ itself is equal almost-everywhere to both $g$ and $h$.
+\begin{exr}
+Use the fact that $f=g$ in $\Bor _(X)$ and the fact that the preimage of every open set under $g$ is measurable to show that the preimage of every open set under $f$ is measurable.
+\end{exr}
+This complete the proof in the case that $f$ is bounded and vanishes outside a set of finite measure.
+
+We now do the proof for $f\in \Bor _0^+(X)$ be arbitrary.  Write $X=\bigcup _{m\in \N}M_m$ as the increasing union of measurable sets of finite measure, so that
+\begin{equation}
+X\times [0,\infty ]=\bigcup _{m\in \N}M_m\times [0,m)\cup \bigcup _{m\in \N}M_m\times \{ \infty \} .
+\end{equation}
+Thus,
+\begin{equation}
+\Gamma _f=\bigcup _{m\in \N}\Gamma _f\cap (M_m\times [0,m))\cup \bigcup _{m\in \N}\Gamma _f\cap (M_m\times \{ \infty \} ).
+\end{equation}
+Note that
+\begin{equation}
+\Gamma _f\cap (M_m\times [n,n+1))=\left\{ \coord{x,y}\in X\times [-\infty ,\infty ]:y<f(x),\ x\in M_m ,\ n\leq y<n+1\right\} =\Gamma _{f_m},
+\end{equation}
+where $f_m:X\rightarrow \R$ is defined by
+\begin{equation}
+f_m(x)\coloneqq \begin{cases}f(x) & \text{if }x\in M_m\text{ and }f(x)<m \\ m & \text{if }x\in M_m\text{ and }f(x)\geq m \\ 0 & \text{otherwise}\end{cases}.
+\end{equation}
+$\Gamma _{f_m}$ is measurable because $\Gamma _f$ is.  Furthermore, it is bounded and vanishes outside a set of measure $0$, and so the previous case applies, and we have that the preimage of open sets under $f_m$ is measurable.
+\begin{exr}
+Use this to show that the preimage of open sets under $f$ is measurable.
+\end{exr}
+
+Finally, for $f\in \Bor (X)$ arbitrary (not necessarily nonnegative), each of the nonnegative and nonpositive parts of $f$ are borel (by definition), and so the previous case shows that the preimage under either of these functions of open sets is measurable.  It then follows that the preimage under $f$ of open sets are measurable.
+
+\blankline
+\noindent
+$(\Leftarrow )$ Suppose that the preimage of every open set is measurable.  It follows that the preimage of half-open rectangles are measurable,\footnote{Why?} and so
+\begin{equation}
+\left\{ \coord{x,y}\in X\times [0,\infty ]:0\leq y<f(x)\right\} =\bigcup _{r\in \Q}f^{-1}([r,\infty ))\times [0,r)
+\end{equation}
+is measurable.  Similarly the `negative' version of this set is measurable too, and so $f$ is borel.
+\end{proof}
+\end{prp}
+
+\begin{prp}\label{SupInfBorelIsBorel}
+Let $\coord{X,\meas}$ be a topological measure space and let $\{ f_m:m\in \N \} \subseteq \Bor (X)$ be a countable collection of measurable functions.  Then, $x\mapsto \sup _{m\in \N}f_m(x)$ and $x\mapsto \inf _{m\in \N}f_m(x)$ are borel.
+\begin{proof}
+We leave this as an exercise.
+\begin{exr}
+Prove the result yourself.
+\end{exr}
+\end{proof}
+\end{prp}
+\begin{prp}\label{LimitBorelIsBorel}
+Let $\coord{X,\meas}$ be a topological measure space and let $\lambda \mapsto f_\lambda \in \Bor (X)$ converge to $f\in \Mor _{\AlE}(X,[-\infty ,\infty ])$.  Then, $f_\infty \in \Bor (X)$.
+\begin{rmk}
+If you want to be fancy about things, this is just the statement that $\Bor (X)\subseteq \Mor _{\AlE}(X,[-\infty ,\infty ])$ is \emph{closed} (with respect to the topology of almost-everywhere pointwise convergence).
+\end{rmk}
+\begin{proof}
+We leave this as an exercise.
+\begin{exr}
+Prove the result yourself.
+\begin{rmk}
+Hint:  Reduce it to the case where $\lambda \mapsto f_\lambda$ is a sequence.  Then, for a convergent sequence $m\mapsto f_m\in \Bor (X)$, define $g_m\coloneqq \inf _{k\geq m}f_k$.  $g_m$ is borel by the previous result.  Check that $g_m$ is nondecreasing and has the same limit as $m\mapsto f_m$.  Deduce that $\lim _mf_m$ is borel.
+\end{rmk}
+\end{exr}
+\end{proof}
+\end{prp}
+In the course of showing uniqueness of the integral, it will be important to know that we can approximate borel functions by finite linear combinations of characteristic functions.
+\begin{prp}\label{SimpleFunctionApproximation}
+Let $X$ be a topological measure space and let $f\in \Bor _0^+(X)$.  Then, there exists a nondecreasing sequence $m\mapsto s_m\in \Bor _0^+(X)$ of simple functions such that $\lim _ms_mf$ in $\Bor _0^+(X)$.
+\begin{proof}\footnote{Proof adapted from \cite[pg.~31]{Stein}.}
+Write $X=\bigcup _{m\in \N}K_m$ for $K_m\subseteq X$ compact.  Define $f_m:X\rightarrow [0,\infty ]$ by
+\begin{equation}
+f_m(x)\coloneqq \begin{cases}f(x) & \text{if }x\in K_m\text{ and }f(x)\leq m \\ m & \text{if }x\in K_m\text{ and }f(x)>m \\ 0 & \text{otherwise}\end{cases}.
+\end{equation}
+For $n\in \N$ and $0\leq o<mn$, define
+\begin{equation}
+S_{m,n,o}\coloneqq \left\{ x\in K_m:\tfrac{o}{m}<f_n(x)\leq \tfrac{o+1}{m}\right\} .
+\end{equation}
+Finally, define $s_m:X\rightarrow [0,\infty ]$ by
+\begin{equation}
+s_m\coloneqq \sum _{o=0}^{m^2}\tfrac{o}{m}\chi _{S_{m,m,o}}.
+\end{equation}
+\begin{exr}
+Show that $m\mapsto s_m$ is a nondecreasing sequence of borel simple functions converging pointwise to $f$
+\end{exr}
+\end{proof}
+\end{prp}
+
+\subsubsection{The integral itself}
 
 One last thing before we get to the integral---we decompose a function into its nonnegative and nonpositive parts.
 \begin{dfn}
@@ -1714,14 +1932,14 @@ Let $\coord{X,\meas}$ be a topological measure space.\footnote{Recall that this 
 \item (Normalization)\label{Integral.Normalization} $\mathrm{I}(\chi _S)=\meas (S)$;
 \item (Additivity)\label{Integral.Additivity} $\mathrm{I}(f+g)=\mathrm{I}(f)+\mathrm{I}(g)$;
 \item (Nonnegative-homogeneity)\label{Integral.NonnegativeHomogeneity} $\mathrm{I}(af)=a\mathrm{I}(f)$ for $a\geq 0$;\footnote{Of course, when we extend the definition of the integral to not-necessarily-nonnegative functions, this will be true for \emph{all} $a\in \R$, but for the time being, we require that $a\geq 0$ so that $af$ itself is nonnegative.} and
-\item (Lebesgue's Monotone Convergence Theorem)\label{Integral.LebesguesMonotoneConvergenceTheorem}\index{Lebesgue's Monotone Convergence Theorem} whenever $m\mapsto f_m$ is a nondecreasing sequence functions then
+\item (Lebesgue's Monotone Convergence Theorem)\label{Integral.LebesguesMonotoneConvergenceTheorem}\index{Lebesgue's Monotone Convergence Theorem} whenever $\lambda \mapsto f_\lambda$ is a nondecreasing net of functions then
 \begin{equation}
-\lim _m\mathrm{I}(f_m)=\mathrm{I}(\lim _mf).\footnote{Note that $\lim _mf(x)$ \emph{always} exists, by the usual \nameref{MonotoneConvergenceTheorem}---either it is bounded, in which case it converges in $\R$, or it is unbounded, in which case it converges to $\infty$.  (I lied a bit\textellipsis as it is only nondecreasing almost-everywhere, then the limit exists only almost-everywhere.}
+\lim _\lambda \mathrm{I}(f_\lambda )=\mathrm{I}(\lim _\lambda f).\footnote{Note that $\lim _\lambda f(x)$ \emph{always} exists, by the usual \nameref{MonotoneConvergenceTheorem}---either it is bounded, in which case it converges in $\R$, or it is unbounded, in which case it converges to $\infty$.  (I lied a bit\textellipsis as it is only nondecreasing almost-everywhere, then the limit exists only almost-everywhere.)  Furthermore, $f_\infty \in \Bor _0^\infty (X)$ (see \cref{LimitBorelIsBorel}), so that the integral is indeed defined for $f_\infty$.  (Of course, the measure of the area under the curve always makes sense, but we only consider it to be the integral for borel functions.)}
 \end{equation}
 \end{enumerate}
 Moreover,
 \begin{equation}
-\int _X\dif \meas (x)\, f(x)\coloneqq \mathrm{I}(f)=[\meas \times \meas _{\mathrm{L}}]\left( \left\{ \coord{x,y}\in X\times [0,\infty ]:f(x)<y\right\} \right) .\footnote{$\meas _{\mathrm{L}}$ is lebesgue measure, simply to distinguish it from the measure on $X$.  The strict $<$ as opposed to $\leq$ is crucial for making a couple of arguments easier, similar to how it is more convenient to work with $[a,b)$ than it is $[a,b]$.}
+\int _X\dif \meas (x)\, f(x)\coloneqq \mathrm{I}(f)=[\meas \times \meas _{\mathrm{L}}]\left( \left\{ \coord{x,y}\in X\times [0,\infty ]:y<f(x)\right\} \right) .\footnote{$\meas _{\mathrm{L}}$ is lebesgue measure, simply to distinguish it from the measure on $X$.  The strict $<$ as opposed to $\leq$ is crucial for making a couple of arguments easier, similar to how it is more convenient to work with $[a,b)$ than it is $[a,b]$.}
 \end{equation}\index[notation]{$\int _X\dif \meas (x)\, f(x)$}
 \begin{rmk}
 For $f:X\rightarrow [-\infty ,\infty ]$ integrable, we define
@@ -1741,6 +1959,9 @@ If $X=\R$ and $S=[a,b]$, we define
 \end{rmk}
 \begin{rmk}
 If the measure is clear from context, we may just simply write $\dif x$ instead of $\dif \meas (x)$.\index[notation]{$\int _X\dif x\, f(x)$}  We may even write $\int _X\dif \meas \, f$ or just $\int _Xf$ if `the variable of integration' is irrelevant.
+\end{rmk}
+\begin{rmk}
+Warning:  $\lim _\lambda \int _Xf_\lambda =\int _X\lim _\lambda f_\lambda$ can fail if the convergence is not monotone, or even if it is monotone \emph{decreasing}---see the \cref{MonotoneCounterexample}.
 \end{rmk}
 \begin{rmk}
 Damn this is sexy.  First of all, we are characterizing the integral uniquely via certain properties it satisfies, and then furthermore, it turns out that this unique such function is simply given by \emph{the `area' under the curve}.  What do you think of that, Riemann?\footnote{Seriously, people actually claim that the lebesgue integral is not ``geometric''.  Da fuq?  Can someone please explain to me how limits of partitions of sums of areas of rectangles is more geometric than the area under the curve?}
@@ -1779,7 +2000,7 @@ and so
 \end{equation}
 Hence,
 \begin{equation}
-[\meas \times \meas _{\mathrm{L}}](\Gamma _f)=[\meas \times \meas _{\mathrm{L}}](\Gamma _f\cap \Gamma _g)+[\meas \times \meas _{\mathrm{L}}(\Gamma _f\cap \Gamma _g^{\comp})=\meas \times \meas _{\mathrm{L}}[\Gamma _f\cap \Gamma _g).
+[\meas \times \meas _{\mathrm{L}}](\Gamma _f)=[\meas \times \meas _{\mathrm{L}}](\Gamma _f\cap \Gamma _g)+[\meas \times \meas _{\mathrm{L}}(\Gamma _f\cap \Gamma _g^{\comp})=[\meas \times \meas _{\mathrm{L}}](\Gamma _f\cap \Gamma _g).
 \end{equation}
 By $f\leftrightarrow g$ symmetry, we likewise have that $[\meas \times \meas _{\mathrm{L}}](\Gamma _g)=[\meas \times \meas _{\mathrm{L}}](\Gamma _f\cap \Gamma _g)$.  Combining this with the previous equality gives us that $\mathrm{I}(f)=\mathrm{I}(g)$.
 
@@ -1795,20 +2016,108 @@ and so
 \Step{Show that $\mathrm{I}$ is additive}
 We wish to show that $\mathrm{I}(f+g)=\mathrm{I}(f)+\mathrm{I}(g)$.  If either $f$ or $g$ is not integrable, then this is trivially satisfied as this equation then reads $\infty =\infty$.  Thus, without loss of generality, we may assume that $\mathrm{I}(f),\mathrm{I}(g)<\infty$.
 
-For $f:X\rightarrow [0,\infty ]$, define $\tau _f:X\times [0,\infty \rightarrow X\times [0,\infty ]$ by
+For $f:X\rightarrow [0,\infty ]$, define $\tau _f:X\times [0,\infty ]\rightarrow X\times [0,\infty ]$ by
 \begin{equation}
 \tau _f(\coord{x,y})\coloneqq \coord{x,f(x)+y}.
 \end{equation}
 This definition was made so that we have
-\begin{equation}
-\Gamma _{f+g}=\Gamma _f\cup \tau _f(\Gamma _g)=
+\begin{equation}\label{Pugh3}
+\Gamma _{f+g}=\Gamma _f\cup \tau _f(\Gamma _g)
 \end{equation}
-is a disjoint union.\footnote{This requires the use of the \emph{strict} inequality in the definition of $\Gamma _f$ and $\Gamma _g$.}  Thus, it suffices to show that (i) $\tau _f(M)$ is measurable if $M$ is and (ii) that $[\meas \times \meas _{\mathrm{L}}](\tau _f(M))=[\meas \times \meas _{\mathrm{L}}](M)$ for $M\subseteq X\times [0,\infty ]$ measurable.  To show this, we apply \cref{prp5.1.39} (sets in topological measure spaces are measurable iff you can approximate them with open and closed sets).
+is a disjoint union.\footnote{This requires the use of the \emph{strict} inequality in the definition of $\Gamma _f$ and $\Gamma _g$.}  Thus, it suffices to show that (i) $\tau _f(M)$ is measurable if $M$ is and (ii) that $[\meas \times \meas _{\mathrm{L}}](\tau _f(M))=[\meas \times \meas _{\mathrm{L}}](M)$ for $M\subseteq X\times [0,\infty ]$ measurable.  To show this, we apply \cref{MeasurableTopologicalMeasureSpace} (sets in topological measure spaces are measurable iff you can approximate them with open and closed sets---it is thus very important that the product measure is regular and borel).
+
+We prove this in stages.  First of all, take $M=M_X\times [0,b)$ for $M_X\subseteq X$ measurable.  Then,
+\begin{equation}
+M=\Gamma _g\text{ for }g\coloneqq b\chi _{M_X},
+\end{equation}
+and so we have that (by \eqref{Pugh3})
+\begin{equation}
+\Gamma _f\cup \tau _f(M)=\Gamma _{f+g}=\Gamma _{g+f}=M\cup \tau _g(\Gamma _f).
+\end{equation}
+Furthermore,
+\begin{equation}
+\begin{split}
+\tau _g(\Gamma _f) & =\tau _g\left( \{ \coord{x,y}\in \Gamma _f:x\in M\} \cup \{ \coord{x,y}\in \Gamma _f:x\notin M_X\} \right) \\
+& =\{ \coord{x,y+h}:\coord{x,y}\in \Gamma _f,\ x\in M_X\} \cup \{ \coord{x,y}\in \Gamma _f:x\notin M_X\} ,
+\end{split}
+\end{equation}
+and so by translation invariance (and the measurability of $M$), we have
+\begin{equation}
+[\meas \times \meas _{\mathrm{L}}](\tau _g(\Gamma _f))=[\meas \times \meas _{\mathrm{L}}](\Gamma _f),
+\end{equation}
+and hence
+\begin{equation}
+[\meas \times \meas _{\mathrm{L}}](\Gamma _f)+[\meas \times \meas _{\mathrm{L}}](\tau _f(M))=[\meas \times \meas _{\mathrm{L}}](M)+[\meas \times \meas _{\mathrm{L}}](\Gamma _f),
+\end{equation}
+which yields
+\begin{equation}
+[\meas \times \meas _{\mathrm{L}}](\tau _f(M))=[\meas \times \meas _{\mathrm{L}}](M).
+\end{equation}
+
+Now take $M=M_X\times [a,b)$.  Then,
+\begin{equation}
+M=\Gamma _g\setminus \Gamma _h\text{ for }g\coloneqq b\chi _{M_X}\text{ and }h\coloneqq a\chi _{M_X}.
+\end{equation}
+Now the fact that $[\meas \times \meas _{\mathrm{L}}](\tau _f(M))$ follows from the previous case.
+
+For the general case, let $M\subseteq X\times [0,\infty ]$ be arbitrary measurable.  Write $X=\bigcup _{m\in \N}R_m$ as the disjoint union of measurable sets of finite measure (this is an application of \cref{SigmaFinite}), and define $M_{m,n}\coloneqq M\cap (R_m\times [n,n+1))$ (as well as $M_{m,\infty}\coloneqq M\cap (R_m\times \{ \infty \} )$ if you really like, though this will not matter as everything here has measure $0$).  Then, $M$ is the disjoint union of $M_{m,n}$, and so it suffices to prove the result for subsets of $R_m\times [m,m+1)$.
+
+So, now, let us change notation, let $M_X\subseteq X$ be measurable of finite measure and take $M$ to be a measurable subset of $M_X\times [n,n+1)$.  Let $\varepsilon >0$.  By `rectangle outer-regularity' (see \eqref{RectangleOuterRegularity}), there is a countable cover of $M$ by open rectangles $\bigcup _{m\in \N}U_{1,m}\times U_{2,m}$ such that
+\begin{equation}
+\sum _{m\in \N}\meas (U_{1,m})\meas _{\mathrm{L}}(U_{2,m})<[\meas \times \meas _{\mathrm{L}}](M)+\varepsilon .
+\end{equation}
+Without loss of generality,\footnote{Why?} we may assume that each $U_{2,m}=[a_m,b_m)$, in which case the previous case applies, so that
+\begin{equation}
+\begin{split}
+[\meas \times \meas _{\mathrm{L}}](\tau _f(M))& \leq \sum _{m\in \N}[\meas \times \meas _{\mathrm{L}}](\tau _f(U_{1,m}\times U_{2,m}))=\sum _{m\in \N}[\meas \times \meas _{\mathrm{L}}](U_{1,m}\times U_{2,m}) \\
+& <[\meas \times \meas _{\mathrm{L}}](M)+\varepsilon ,
+\end{split}
+\end{equation}
+and so
+\begin{equation}
+[\meas \times \meas _{\mathrm{L}}](\tau _f(M))\leq [\meas \times \meas _{\mathrm{L}}](M).
+\end{equation}
+Similarly,
+\begin{equation}
+[\meas \times \meas _{\mathrm{L}}]\left( \tau _f\left( (M_X\times [n,n+1))\setminus M\right) \right) \leq [\meas \times \meas _{\mathrm{L}}]((M_X\times [n,n+1))\setminus M)
+\end{equation}
+Hence,
+\begin{equation}
+\begin{split}
+& [\meas \times \meas _{\mathrm{L}}](\tau _f(M)) & & \\
+& \quad +[\meas \times \meas _{\mathrm{L}}]\left( \tau _f\left( (M_X\times [n,n+1))\setminus M\right) \right) & & \leq [\meas \times \meas _{\mathrm{L}}](M) \\
+& & & \quad +[\meas \times \meas _{\mathrm{L}}]((M_X\times [n,n+1))\setminus M) \\
+& & & =[\meas \times \meas _{\mathrm{L}}](M_X\times [n,n+1)) \\
+& & & =[\meas \times \meas _{\mathrm{L}}](\tau _f(M_X\times [n,n+1)) \\
+& & & \leq [\meas \times \meas _{\mathrm{L}}](\tau _f(M)) \\
+& & & \quad +[\meas \times \meas _{\mathrm{L}}]\left( \tau _f(M_X\times [n,n+1))\setminus \tau _f(M)\right) \\
+& & & =[\meas \times \meas _{\mathrm{L}}](\tau _f(M)) \\
+& & & \quad +[\meas \times \meas _{\mathrm{L}}]\left( \tau _f\left( (M_X\times [n,n+1))\setminus M\right) \right) .
+\end{split}
+\end{equation}
+Thus, all of the inequalities must be inequalities, which in particular implies that
+\begin{equation}
+\begin{split}
+[\meas \times \meas _{\mathrm{L}}](\tau _f(M_X\times [n,n+1))) & =[\meas \times \meas _{\mathrm{L}}](\tau _f(M)) \\
+& \quad +[\meas \times \meas _{\mathrm{L}}]\left( \tau _f(M_X\times [n,n+1))\setminus \tau _f(M)\right) .
+\end{split}
+\end{equation}
+By our characterization of measurability in topological measure spaces (\cref{MeasurableTopologicalMeasureSpace}), this implies that $\tau _f(M)$ is measurable.  Hence,
+\begin{equation}
+\begin{split}
+0 & =[\meas \times \meas _{\mathrm{L}}](M_X\times [n,n+1))-[\meas \times \meas _{\mathrm{L}}](\tau _f(M_X\times [n,n+1))) \\
+& =\left( [\meas \times \meas _{\mathrm{L}}](M)+[\meas \times \meas _{\mathrm{L}}]((M_X\times [n,n+1))\setminus M)\right) \\
+& \quad -\left( [\meas \times \meas _{\mathrm{L}}](\tau _f(M))+[\meas \times \meas _{\mathrm{L}}](\tau _f(M_X\times [n,n+1))\setminus \tau _f(M))\right) \\
+& =\left( [\meas \times \meas _{\mathrm{L}}](M)-[\meas \times \meas _{\mathrm{L}}](\tau _f(M))\right) \\
+& \quad +\left( [\meas \times \meas _{\mathrm{L}}]((M_X\times [n,n+1))\setminus M)-[\meas \times \meas _{\mathrm{L}}]\left( \tau _f\left( (M_X\times [n,n+1))\setminus M\right) \right) \right) .
+\end{split}
+\end{equation}
+We already showed that $[\meas \times \meas _{\mathrm{L}}](M)\leq [\meas \times \meas _{\mathrm{L}}](\tau _f(M))$ (and similarly for the complement), so that both of these terms are nonnegative, and hence $0$.  This gives us $[\meas \times \meas _{\mathrm{L}}](\tau _f(M))=[\meas \times \meas _{\mathrm{L}}](M)$, as desired.
 
 \Step{Show that $\mathrm{I}$ is nonnegative homogeneous}
 Note that
 \begin{equation}
-\Gamma _{af}\coloneqq \left\{ \coord{x,y}\in X\times \R :af(x)<y\right\} =\left\{ \coord{x,ay}\in X\times \R :f(x)<y\right\} =a\Gamma _f.
+\Gamma _{af}\coloneqq \left\{ \coord{x,y}\in X\times \R :ay<f(x)\right\} =\left\{ \coord{x,ay}\in X\times \R :y<f(x)\right\} =a\Gamma _f.
 \end{equation}
 Then, it follows from \cref{exr5.2.28} that
 \begin{equation}
@@ -1816,21 +2125,210 @@ Then, it follows from \cref{exr5.2.28} that
 \end{equation}
 
 \Step{Prove Lebesgue's Monotone Convergence Theorem}
-Let us define $f_\infty :X\rightarrow [0,\infty ]$ by $f_\infty (x)\coloneqq \lim _mf(x)$.  For almost every $x\in X$, the sequence $m\mapsto f_m(x)$ is nondecreasing, and so by the usual \nameref{MonotoneConvergenceTheorem}, this limit exists in $[0,\infty ]$\footnote{If the seqeucne is bounded, the \nameref{MonotoneConvergenceTheorem} tells us it converges in $\R$.  Otherwise, it converges to $\infty$.} for almost every $x$, and so defines a function $f_\infty \in \Mor _{\AlE}(X,[0,\infty ])$.  For all the points where we do not have monotonicity, we may without loss of generality take $f_\infty$ to be infinite there.  This gives us that
+Let us define $f_\infty :X\rightarrow [0,\infty ]$ by $f_\infty (x)\coloneqq \lim _\lambda f(x)$.  For almost every $x\in X$, the sequence $\lambda \mapsto f_\lambda (x)$ is nondecreasing, and so by the usual \nameref{MonotoneConvergenceTheorem}, this limit exists in $[0,\infty ]$\footnote{If the net is eventually bounded, the \nameref{MonotoneConvergenceTheorem} tells us it converges in $\R$.  Otherwise, it converges to $\infty$.} for almost every $x$, and so defines a function $f_\infty \in \Mor _{\AlE}(X,[0,\infty ])$.  For all the points where we do not have monotonicity, we may without loss of generality take $f_\infty$ to be infinite there.  
+
+First of all, if $f_\infty (x)=\infty$ for all $x\in X$, we have that
 \begin{equation}
-\Gamma _{f_m}\subseteq \Gamma _{f_\infty}
+\lim _\lambda \int _X\dif \meas (x)\, f_\lambda (x)=\footnote{You caught me again:  this is false if $\meas (X)=0$.   Here's another cookie:  \emph{*gives cookie to reader*}.}\infty =\int _X\dif \meas (x)\, f_\infty (x).
+\end{equation}
+Otherwise, there is some $x_0\in X$ for which $f_\infty (x_0)<\infty$.
+
+Unfortunately,\footnote{Or fortunately, I suppose, depending on your perspective.} measure theory is an intrinsically countable subject, and so to apply the machinery we've developed, we must reduce the proof to the case of sequences.  To do this, we show that every subnet
+\begin{equation}
+\mu \mapsto \mathrm{I}(f_{\lambda _\mu})
+\end{equation}
+has in turn another subnet\footnote{Actually, a sub\emph{sequence}.}
+\begin{equation}
+\nu \mapsto \mathrm{I}(f_{\lambda _{\mu _\nu}})
+\end{equation}
+that converges to $\mathrm{I}(f_\infty )$.  As $f_\infty (x_0)<\infty$, for $\varepsilon \coloneqq \frac{1}{m}$, there is some $\lambda _{\mu _m}$ such that $f_\infty (x)-f_{\lambda _{\mu _m}}(x)<\frac{1}{m}$.  As subnets of convergent nets converge to the same thing, we still have that $m\mapsto f_{\lambda _{\mu _m}}(x)$ converges to $f_\infty (x)$ for all $x\in X$.  Define $f_m\coloneqq f_{\lambda _{\mu _m}}$.  We wish to show that
+\begin{equation}
+\lim _m\mathrm{I}(f_m)=\mathrm{I}(f_\infty ).
+\end{equation}
+However, note that
+\begin{equation}
+\Gamma _{f_m}\subseteq \Gamma _{f_{m+1}}\text{ and }\bigcup _{m\in \N}\Gamma _{f_m}=\Gamma _{f_\infty}
 \end{equation}
 for all $m$, and hence
 \begin{equation}
-\mathrm{I}(f_m)\coloneqq [\meas \times \meas_{\mathrm{L}}](\Gamma _{f_m})\leq [\meas \times \meas _{\mathrm{L}}(f_\infty)=\mathrm{I}(f_\infty )\coloneqq \mathrm{I}(\lim _mf_m).
+\mathrm{I}(f_m)\coloneqq [\meas \times \meas_{\mathrm{L}}](\Gamma _{f_m})\leq [\meas \times \meas _{\mathrm{L}}](f_\infty)=\mathrm{I}(f_\infty )\coloneqq \mathrm{I}(\lim _mf_m).
 \end{equation}
-Taking the limit, we get
+It then follows that
 \begin{equation}
-\lim _m\mathrm{I}(f_m)\leq \mathrm{I}(\lim _mf_m).
+\lim _m\mathrm{I}(f_m)=\mathrm{I}(f_\infty )
 \end{equation}
+by \cref{exr5.1.27}.\footnote{I find it fascinating how relatively trivial this is compared to additivity, despite this having a name attached to it and additivity practically taken for granted.  On the contrary:  Lebesgue's Monotone Convergence Theorem requires just basic theory of outer-measures---additivity on the other hand requires a reasonably well-developed theory of topological measure spaces!}
 
 \Step{Show uniqueness}
-
-\Step{Show we have equality if functions are measurable}
+Now, let $\mathrm{I}:\Bor _0^+(X)\rightarrow [0,\infty ]$ be an additive nonnegative-homogeneous map that satisfies Lebesgue's Monotone Convergence Theorem and $\mathrm{I}(\chi _S)=\meas (S)$.  It follows immediately that they agree on borel simple functions.  However, we already know (\cref{SimpleFunctionApproximation}) that \emph{any} borel function can be written as the limit monotone limit of simple functions, so that, by Lebesgue's Monotone Convergence Theorem, we actually have equality of $\mathrm{I}$ with the integral on \emph{all} borel functions.
 \end{proof}
 \end{thm}
+This result presents the properties of the integral which uniquely characterize it.  Of course, the integral satisfies many other properties as well.
+\begin{prp}[Triangle Inequality]\index{Triangle Inequality (integral)}\label{TriangleInequality}
+Let $\coord{X,\meas}$ be a topological measure space and let $f\in \Bor (X)$ be integrable.  Then,
+\begin{equation}
+\left| \int _X\dif \meas (x)\, f(x)\right| \leq \int _X\dif \meas (x)\, \left| f(x)\right| .
+\end{equation}
+\begin{proof}
+The proof is essentially just a result of the fact that $\abs{f}=f_++f_-$.  Using this, we have
+\begin{equation}
+\begin{split}
+\left| \int _X\dif \meas (x)\, f(x)\right| & \coloneqq \left| \int _X\dif \meas (x)\, f_+(x)-\int _X\dif \meas (x)\, f_-(x)\right| \\
+& \leq \int _X\dif \meas (x)\, f_+(x)+\int _X\dif \meas (x)\, f_-(x)=\int _X\dif \meas (x)\, \left| f(x)\right| .
+\end{split}
+\end{equation}
+\end{proof}
+\end{prp}
+
+\begin{exm}[A monotone sequence of functions which converges to $0$ whose integrals converge to $\infty$]\label{MonotoneCounterexample}
+This is actually quite easy.  Not even close to being exotic compared to some of the counter-examples we see.  For example, define $f_m:\R \rightarrow [0,\infty ]$ by $f_m\coloneqq \chi _{[m,\infty )}$.  Then, $\lim _mf_m(x)=0$ for all $x\in \R$, and so
+\begin{equation}
+\int _{\R}\dif x\, \lim _mf_m(x)=0.
+\end{equation}
+On the other hand, $\int _{\R}\dif x\, f_m(x)=\infty$ for all $m\in \N$, and so
+\begin{equation}
+\lim _m\int _{\R}\dif x\, \lim _mf_m(x)=\infty .
+\end{equation}
+\end{exm}
+Fortunately, however, we do have `commutation' of limits with integrals in cases more than just a nondecreasing sequence of functions.
+\begin{thm}[Dominated Convergence Theorem]\label{DominatedConvergenceTheorem}
+Let $\coord{X,\meas}$ be a topological measure space and $\lambda \mapsto f_\lambda \in \Bor (X)$ converge to $f_\infty \in \Bor (X)$.  Then, if there is some integrable $g\in \Bor _0^+(X)$ such that eventually $\abs{f_\lambda}\leq g$,\footnote{That is, $\abs{f_m(x)}\leq g(x)$ for almost every $x\in X$.} then
+\begin{equation}
+\lim _\lambda \int _X\dif \meas (x)\, \left| f_\lambda (x)-f_\infty (x)\right| =0.
+\end{equation}
+\begin{rmk}
+In particular, by the \nameref{TriangleInequality}, it follows that
+\begin{equation}
+\lim _\lambda \int _X\dif \meas (x)\, f_\lambda (x)=\int _X\dif \meas (x)\, \lim _\lambda f_\lambda (x).
+\end{equation}
+\end{rmk}
+\begin{rmk}
+Warning:  It is not enough that $f_\infty$ be integrable.\footnote{This is part of the conclusion, not part of the hypothesis}  Our example above, \cref{MonotoneCounterexample}, is a counter-example to this.  In fact, \emph{even if your space has finite measure, and every $f_m$ is integrable, and $f_\infty$ is integrable, this can still fail}.  See the following example.
+\end{rmk}
+\begin{rmk}
+It's worth noting that if you want to pull this shit with the riemann integral you need \emph{uniform convergence}.  Holy crap that's an inconveniently strong condition.
+\end{rmk}
+\begin{proof}
+We leave the proof as a series of exercises.
+\begin{exr}
+Reduce the proof to the case where each $f_\lambda \geq 0$.
+\end{exr}
+\begin{exr}
+Reduce the proof to the case of sequences $m\mapsto f_m$.
+\end{exr}
+\begin{exr}
+Define $g_m\coloneqq \inf _{k\geq m}f_k$ and $h_m\coloneqq \sup _{k\geq m}f_k$.\footnote{These are all borel functions by \cref{SupInfBorelIsBorel}.}  Show that
+\begin{equation}
+\lim _m\int _X\dif \meas (x)\, \left| g_m(x)-f_\infty (x)\right| =0=\lim _m\int _X\dif \meas (x)\, \left| h_m(x)-f_\infty (x)\right| .
+\end{equation}
+\begin{rmk}
+Hint:  Use the definition of the integral as the measure of the area under the curve.  Then apply your knowledge of measure theory.
+\end{rmk}
+\end{exr}
+\begin{exr}
+Use this to finish the proof.
+\end{exr}
+\end{proof}
+\end{thm}
+\begin{exm}[A sequence of integrable functions converging to an integrable function on a space of finite measure, but for which the limit of the integral is not the integral of the limit]
+For $m\in \N$, define $f_m:[0,1]\rightarrow \R$ by $f_m(x)\coloneqq (m+1)x^m$.  Then, $\lim _mf_m(x)=0$ almost everywhere, and so we have
+\begin{equation}
+\int _0^1\dif x\, \lim _mf_m(x)=0.
+\end{equation}
+On the other hand, we have that $\int _0^1\dif x\, f_m(x)=1$ for all $m\in \N$, and so
+\begin{equation}
+\lim _m\int _0^1\dif x\, f_m(x)=1
+\end{equation}
+\end{exm}
+\begin{prp}
+Let $\coord{X,\meas}$ be a topological measure space and let $f:X\rightarrow [-\infty ,\infty ]$ be integrable.  Then, for every $\varepsilon >0$, there is some $\delta >0$ such that, whenever $\meas (S)<\delta$ is measurable\footnote{The measurability hypothesis is needed so that the integral over $S$ is defined.  Recall that $\int _S\coloneqq \int _X\chi _S$, and so for this to be defined, we require that $S$ be borel, which requires that $S$ be measurable.}, it follows that $\int _S\dif \meas (x)\, \left| f(x)\right| <\varepsilon$.
+\begin{rmk}
+Note that `hidden' in the word ``integrable'' is the assumption that $\int _X\dif \meas (x)\, \abs{f(x)}|<\infty$.  Obviously this will not hold\footnote{Counter-example?} if the integral is not finite.
+\end{rmk}
+\begin{proof}
+For convenience, write $g\coloneqq \abs{f}$.  Let $\varepsilon >0$.  For $m\in \N$, define
+\begin{equation}
+M_m\coloneqq g^{-1}([0,m])
+\end{equation}
+Note that this is measurable because $g$ is borel (see \cref{BorelIsBorel}).  It follows that $g_m\coloneqq \restr{f}{M_m}$ is borel.  As $m\mapsto g_m$ is nondecreasing and converge to $g$ in $\Bor _0^+(X)$, it follows from Lebesgue's Monotone Convergence Theorem that
+\begin{equation}
+\lim _m\int _X\dif \meas (x)\, g_m(x)=\int _X\dif \meas (x)\, g(x).
+\end{equation}
+Thus, there is some $m_0\in \Z ^+$ such that, whenever $m\geq m_0$, it follows that
+\begin{equation}
+\int _X\dif \meas (x)\, \left[ g(x)-g_m(x)\right] <\varepsilon .
+\end{equation}
+Define $\delta \coloneqq \frac{\varepsilon}{m_0}$.  Now, let $S\subseteq X$ be such that $\meas (S)<\delta$.  Then,
+\begin{equation}
+\begin{split}
+\int _S\dif \meas (x)\, \abs{f(x)} & =\int _S\dif \meas (x)\, g(x)=\int _S\dif \meas (x)\, \left[ g(x)-g_{m_0}(x)\right] +\int _S\dif \meas (x)\, g_{m_0}(x) \\
+& \leq \footnote{Because $g_{m_0}$ is bounded by $m_0$.}\int _X\dif \meas (x)\, \left[ g(x)-g_{m_0}(x)\right] +m_0\meas (S)<\varepsilon +m_0\delta =2\varepsilon .
+\end{split}
+\end{equation}
+\end{proof}
+\end{prp}
+\begin{exr}
+Let $I\subseteq \R$ be an interval, let $f\in \Bor (I)$ be integrable, and let $a\in I$.  Show that the map $x\mapsto \int _a^x\dif \, tf(t)$ is uniformly-continuous.
+\end{exr}
+
+The following is an important result that we will need to prove the Fundamental Theorem of Calculus in the next chapter.  To state it, we will need to introduce a couple of definitions.
+\begin{dfn}[Upper-semicontinuity and lower-semicontinuity]\label{Semicontinuity}
+Let $f:X\rightarrow [-\infty ,\infty ]$ be a function on a topological space $X$ and let $x_0\in X$.  Then, $f$ is \emph{upper-semicontinuous}\index{Upper-semicontinuous} at $x_0$ iff for every $\varepsilon >0$, there is an open neighborhood $U$ of $x_0$ such that, whenever $x\in U$, it follows that $f(x)-f(x_0)<\varepsilon$.  $f$ is \index{Lower-semicontinuous} at $x_0$ iff for every $\varepsilon >0$, there is an open neighborhood $U$ of $x_0$ such that, whenever $x\in U$, it follows that $f(x_0)-f(x)<\varepsilon $.
+\begin{rmk}
+Upper-semicontinuity means that you can force $f(x)$ to be as close as you like to $f(x_0)$ \emph{from above} (by moving sufficiently close to $x_0$), but you have no control over what happens below---$f(x)$ can be arbitrarily negative in a neighborhood of $x_0$ and it will still be upper-semicontinuous.  Similarly, for lower-semicontinuous.
+\end{rmk}
+\end{dfn}
+\begin{thm}[Carath\'{e}odory-Vitali Theorem]\index{Carath\'{e}odory-Vitali Theorem}\label{CaratheodoryVitaliTheorem}
+Let $\coord{X,\meas}$ be a topological measure space and let $f\in \Bor (X)$ be integrable.  Then, for every $\varepsilon >0$, there are $u,v\in \Bor (X)$ such that
+\begin{enumerate}
+\item $u\leq f\leq v$;
+\item $u$ is upper-semicontinuous and bounded above;
+\item $v$ is lower-semicontinuous and bounded below; and
+\item
+\begin{equation}
+\int _X\dif \meas (x)\, [v(x)-u(x)]<\varepsilon .
+\end{equation}
+\end{enumerate}
+\begin{proof}\footnote{Proof adapted from \cite[pg.~56]{BigRudin}.}
+We first prove the case for $f$ nonnegative.
+
+Then, by \cref{SimpleFunctionApproximation}, there is an nondecreasing sequence $m\mapsto s_m$ of simple functions that converges to $f$ in $\Bor _0^+(X)$.  Then, as
+\begin{equation}
+s_m=(s_m-s_{m-1})+(s_{m-1}-s_{m-2})+\cdots +(s_1-s_0)+s_0,
+\end{equation}
+we can also write $f$ as a series of simple functions
+\begin{equation}
+f=\sum _{m\in \N}\alpha _m\chi _{M_m},
+\end{equation}
+for $\alpha _m>0$ and $M_m\subseteq X$ measurable.  Let $\varepsilon >0$, and by inner and outer-regularity let $K_m\subseteq M_m\subseteq U_m$ be such that $K_m$ is quasicompact, $U_m$ is open, and
+\begin{equation}
+\alpha _m\meas (U_m\setminus K_m)<\tfrac{\varepsilon}{2^m}.
+\end{equation}
+As $f$ was assumed to be integrable, it must be the case that
+\begin{equation}
+\sum _{m\in \N}\alpha _m\meas (M_m)=\int _X\dif \meas (x)\, f(x)
+\end{equation}
+converges, and so there is some $m_0\in \N$ such that
+\begin{equation}
+\sum _{m=m_0+1}^\infty \alpha _m\meas (M_m)<\varepsilon .
+\end{equation}
+Finally, define
+\begin{equation}
+v\coloneqq \sum _{m=0}^\infty \alpha _m\chi _{U_m}\text{ and }\sum _{m=0}^{m_0}\alpha _m\chi _{K_m}.
+\end{equation}
+\begin{exr}
+Show that $u$ and $v$ satisfy the desired properties.
+\end{exr}
+\begin{exr}
+Finish the proof by doing the general case by writing $f=f_+-f_-$.
+\end{exr}
+\end{proof}
+\end{thm}
+
+Finally, as I am required to teach you the riemann integral, I begrudgingly include a cop-out version just to say I taught it.
+\begin{dfn}[Riemann integrable]\label{RiemannIntegrable}
+Let $f:[a,b]\rightarrow \R$.  Then, $f$ is \emph{riemann integrable}\index{Riemann integrable} iff $f$ is bounded and continuous almost-everywhere.  In this case, its \emph{riemann integral}\index{Riemann integral} is defined to be $\int _a^b\dif x\, f(x)$.
+\begin{rmk}
+This is usually a theorem, but besides I think it's a waste of time to develop the riemann integral when the lebesgue integral does everything the riemann integral does (and much more), I include it as a definition just to say I did it.  Congratulations!  You now know the riemann integral!
+\emd{rmk}
+\end{dfn}
